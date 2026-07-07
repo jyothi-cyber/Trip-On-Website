@@ -206,10 +206,10 @@ header.header-scrolled {
   width: calc(100% - 80px);
   max-width: 1180px;
   margin: 0 auto;
-  background: #ffffff;
+  background: transparent;
   border-radius: var(--border-radius-xl);
   padding: 16px 28px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 
 .logo {
@@ -845,6 +845,47 @@ header.header-scrolled {
 
 .duration-nav-btn:hover {
   transform: translateY(-2px);
+}
+
+/* ===== REASONS TABS ===== */
+.reasons-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.reasons-tab-btn {
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-color);
+  background: transparent;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.reasons-tab-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: var(--accent-color);
+}
+
+.reasons-tab-btn.active {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 6px 18px rgba(14, 90, 54, 0.22);
+}
+
+/* Fade transition on image card and content column */
+.reasons-img-card,
+.reasons-content-column {
+  transition: opacity 0.22s ease;
 }
 
 /* ===== REASONS SECTION ===== */

@@ -208,12 +208,15 @@
   <section class="reasons section-padding">
     <div class="container">
       <h2 class="reasons-title">5 Reasons Why You Should <br>Visit <span class="highlight-underline">Bali</span></h2>
+
+      <!-- Reason Tabs — generated from SITE_CONTENT.reasons.tabs in script -->
+      <div class="reasons-tabs" id="reasons-tabs"></div>
       
       <div class="reasons-wrapper">
         <!-- Left Column: Image -->
         <div class="reasons-image-column">
           <div class="reasons-img-card">
-            <img src="assets/images/kuchipudi image.png" alt="Kuchipudi dancer">
+            <img id="reasons-img" src="assets/images/kuchipudi image.png" alt="Bali culture">
           </div>
         </div>
 
@@ -222,11 +225,11 @@
 
         <!-- Right Column: Content -->
         <div class="reasons-content-column">
-          <span class="reasons-tag">Festivals</span>
-          <h3>The Culture</h3>
-          <p class="reasons-copy">This is a mixture of Hindu, Muslim and Buddhist culture. These people live together very harmoniously. You can also visit the temples and mosques for a deeper understanding of their religions.</p>
+          <span class="reasons-tag" id="reasons-tag">Festivals</span>
+          <h3 id="reasons-heading">The Culture</h3>
+          <p class="reasons-copy" id="reasons-copy">This is a mixture of Hindu, Muslim and Buddhist culture. These people live together very harmoniously. You can also visit the temples and mosques for a deeper understanding of their religions.</p>
 
-          <div class="reasons-feature-list">
+          <div class="reasons-feature-list" id="reasons-feature-list">
             <div class="reasons-feature">Peace and Quiet</div>
             <div class="reasons-feature">Romantic Ambience</div>
             <div class="reasons-feature">Ease of Travel</div>
@@ -1021,6 +1024,293 @@
   </div>
 
   <script>
+    // ===== SITE CONTENT CONFIGURATION =====
+    // Edit all homepage text in this single object
+    const SITE_CONTENT = {
+      meta: {
+        title: "Trip On - Plan a Trip to Bali!",
+        description: "Plan your dream trip to Bali, Indonesia. Discover exotic destinations, custom packages, local culture, and top-tier guides with Trip On."
+      },
+      
+      hero: {
+        subtitle: "Seek Out",
+        title: "Plan A Trip To<br>Bali!",
+        tagline: "Experience the Great culture in the world.",
+        ctaText: "Chat Us On Whatsapp"
+      },
+      
+      adventure: {
+        title: "Let's go on an adventure",
+        subtitle: "See What You can do in Bali"
+      },
+      
+      duration: {
+        heading: "How many days you <br>planning to travel?"
+      },
+      
+      reasons: {
+        title: "5 Reasons Why You Should <br>Visit <span class=\"highlight-underline\">Bali</span>",
+        tabs: [
+          {
+            tag: "Festivals",
+            heading: "The Culture",
+            copy: "This is a mixture of Hindu, Muslim and Buddhist culture. These people live together very harmoniously. You can also visit the temples and mosques for a deeper understanding of their religions.",
+            features: ["Peace and Quiet", "Romantic Ambience", "Ease of Travel"],
+            img: "assets/images/kuchipudi image.png",
+            alt: "Bali culture"
+          },
+          {
+            tag: "Landscapes",
+            heading: "The Nature",
+            copy: "Bali is blessed with breathtaking natural scenery — from lush terraced rice paddies in Ubud to the volcanic peaks of Mount Batur. The island's diverse flora and serene countryside make it a paradise for nature lovers.",
+            features: ["Rice Terraces", "Volcanic Lakes", "Tropical Forests"],
+            img: "assets/images/ubud2.png",
+            alt: "Bali nature"
+          },
+          {
+            tag: "Coastline",
+            heading: "The Beaches",
+            copy: "With over 100 beaches, Bali offers everything from the lively shores of Kuta and Seminyak to the peaceful coves of Nusa Dua and the dramatic cliffs of Uluwatu. Perfect for surfing, sunsets, and relaxation.",
+            features: ["World-Class Surf", "Crystal Clear Water", "Stunning Sunsets"],
+            img: "assets/images/beach.png",
+            alt: "Bali beaches"
+          },
+          {
+            tag: "Cuisine",
+            heading: "The Food",
+            copy: "Balinese cuisine is a feast for the senses. From smoky satay and crispy suckling pig (Babi Guling) to aromatic nasi goreng and fresh tropical fruits — every meal is an adventure in flavour.",
+            features: ["Local Warungs", "Exotic Spices", "Tropical Fruits"],
+            img: "assets/images/indonesia.png",
+            alt: "Bali food"
+          },
+          {
+            tag: "Thrills",
+            heading: "The Adventure",
+            copy: "For thrill-seekers, Bali delivers in every direction. Trek the volcanic rim of Mount Batur at sunrise, white-water raft through jungle gorges, dive Nusa Penida's manta rays, or swing above the treetops in Ubud.",
+            features: ["Volcano Trekking", "White-Water Rafting", "Diving & Snorkelling"],
+            img: "assets/images/adventures.png",
+            alt: "Bali adventure"
+          }
+        ]
+      },
+      
+      packages: {
+        badge: "Popular Packages",
+        title: "Most Chosen Packages by Customers"
+      },
+      
+      testimonials: {
+        badge: "TESTIMONIAL",
+        title: "What Do They Say About Us?",
+        desc: "Of course we have to appreciate ourselves for planning purpose-driven trips for 100+ customers.",
+        reviewsCopy: "for more reviews"
+      },
+      
+      baliCallout: {
+        subtitle: "EXPLORE THE WONDERFULL OF",
+        title: "Bali, Indonesia",
+        cta: "View In 3D"
+      },
+      
+      banner: {
+        letsTravel: "Lets Travel",
+        familyTour: "Family Tour",
+        discount: "35% off",
+        body: "Whatever Your Summer Looks Like,<br>Bring Yourown Heat With Up To 35% Off Lumin Brand.",
+        cta: "Book A Trip"
+      },
+      
+      priority: {
+        badge: "Why Choose Us",
+        heading: "Finding your destination is our priority",
+        body: "With a collection of destinations that include stunning natural landscapes, vibrant cosmopolitan cities and enchanting tropical islands, we take you to the world's most stunning places.",
+        features: [
+          {
+            title: "Lots of choices",
+            body: "Thousands of the best destinations are ready to spoil your eyes."
+          },
+          {
+            title: "Easy Booking",
+            body: "No need to be complicated in ordering tickets order now with a few taps."
+          },
+          {
+            title: "Accommodation",
+            body: "They are many choices of interesting destinations to make stories on your trip."
+          },
+          {
+            title: "Best Tour Guide",
+            body: "Dont worry about traveling anywhere, our tour guide is ready to guide you anytime."
+          }
+        ]
+      },
+      
+      faq: {
+        title: "Frequently asked questions"
+      },
+      
+      blog: {
+        title: "Blogs All About Bali",
+        ctaText: "Want to know more!"
+      },
+      
+      subscribe: {
+        smallHeading: "SUPERCHARGE YOUR PLANNING POWERS",
+        title: "Subscribe to our <br>mail letters",
+        desc: "We send you offers and share most interesting facts on travelling"
+      },
+      
+      instagram: {
+        title: "Instagram",
+        subtitle: "Follow Us On @tripon"
+      },
+      
+      contactModal: {
+        title: "Contact Us",
+        subtitle: "Get in touch with our travel experts",
+        successTitle: "Message Sent Successfully!",
+        successMsg: "Our travel experts will contact you within 24 hours."
+      },
+      
+      panoramaModal: {
+        title: "Bali Interactive 3D Panorama",
+        subtitle: "Click and drag to rotate the view. Use the controls to zoom."
+      }
+    };
+
+    // Apply content to page elements
+    function applyContent() {
+      // Meta tags
+      document.title = SITE_CONTENT.meta.title;
+      document.querySelector('meta[name="description"]').setAttribute('content', SITE_CONTENT.meta.description);
+      
+      // Hero section
+      const heroSubtitle = document.querySelector('.hero-subtitle');
+      const heroTitle = document.querySelector('.hero-content h1');
+      const heroTagline = document.querySelector('.hero-tagline');
+      const heroCta = document.querySelector('.hero-cta');
+      if (heroSubtitle) heroSubtitle.textContent = SITE_CONTENT.hero.subtitle;
+      if (heroTitle) heroTitle.innerHTML = SITE_CONTENT.hero.title;
+      if (heroTagline) heroTagline.textContent = SITE_CONTENT.hero.tagline;
+      if (heroCta) {
+        const icon = heroCta.querySelector('i');
+        heroCta.innerHTML = '';
+        if (icon) heroCta.appendChild(icon.cloneNode(true));
+        heroCta.appendChild(document.createTextNode(SITE_CONTENT.hero.ctaText));
+      }
+      
+      // Adventure section
+      const adventureTitle = document.querySelector('.adventure .section-title');
+      const adventureSubtitle = document.querySelector('.adventure-subtitle');
+      if (adventureTitle) adventureTitle.textContent = SITE_CONTENT.adventure.title;
+      if (adventureSubtitle) adventureSubtitle.textContent = SITE_CONTENT.adventure.subtitle;
+      
+      // Duration section
+      const durationHeading = document.querySelector('.duration-copy h2');
+      if (durationHeading) durationHeading.innerHTML = SITE_CONTENT.duration.heading;
+      
+      // Reasons section
+      const reasonsTitle = document.querySelector('.reasons-title');
+      if (reasonsTitle) reasonsTitle.innerHTML = SITE_CONTENT.reasons.title;
+      
+      // Packages section
+      const packagesBadge = document.querySelector('.section-badge-popular');
+      const packagesTitle = document.querySelector('.packages .section-title');
+      if (packagesBadge) packagesBadge.textContent = SITE_CONTENT.packages.badge;
+      if (packagesTitle) packagesTitle.textContent = SITE_CONTENT.packages.title;
+      
+      // Testimonials section
+      const testimonialBadge = document.querySelector('.testimonial-badge');
+      const testimonialTitle = document.querySelector('.testimonials .section-title');
+      const testimonialDesc = document.querySelector('.testimonials .section-desc');
+      const testimonialCopy = document.querySelector('.testimonial-copy');
+      if (testimonialBadge) testimonialBadge.textContent = SITE_CONTENT.testimonials.badge;
+      if (testimonialTitle) testimonialTitle.textContent = SITE_CONTENT.testimonials.title;
+      if (testimonialDesc) testimonialDesc.textContent = SITE_CONTENT.testimonials.desc;
+      if (testimonialCopy) testimonialCopy.textContent = SITE_CONTENT.testimonials.reviewsCopy;
+      
+      // Bali Callout
+      const calloutSubtitle = document.querySelector('.callout-subtitle');
+      const calloutTitle = document.querySelector('.bali-callout-content h2');
+      const calloutCta = document.querySelector('.bali-callout-cta');
+      if (calloutSubtitle) calloutSubtitle.textContent = SITE_CONTENT.baliCallout.subtitle;
+      if (calloutTitle) calloutTitle.textContent = SITE_CONTENT.baliCallout.title;
+      if (calloutCta) calloutCta.textContent = SITE_CONTENT.baliCallout.cta;
+      
+      // Banner section
+      const letsTravel = document.querySelector('.lets-travel');
+      const familyTour = document.querySelector('.family-tour');
+      const discount = document.querySelector('.discount');
+      const bannerBody = document.querySelector('.banner-text-content p');
+      const bookBtn = document.querySelector('.book-btn');
+      if (letsTravel) letsTravel.textContent = SITE_CONTENT.banner.letsTravel;
+      if (familyTour) familyTour.textContent = SITE_CONTENT.banner.familyTour;
+      if (discount) discount.textContent = SITE_CONTENT.banner.discount;
+      if (bannerBody) bannerBody.innerHTML = SITE_CONTENT.banner.body;
+      if (bookBtn) bookBtn.textContent = SITE_CONTENT.banner.cta;
+      
+      // Priority section
+      const whyChooseBadge = document.querySelector('.why-choose-box');
+      const priorityHeading = document.querySelector('.priority-right h2');
+      const priorityBody = document.querySelector('.priority-right p');
+      if (whyChooseBadge) whyChooseBadge.textContent = SITE_CONTENT.priority.badge;
+      if (priorityHeading) priorityHeading.textContent = SITE_CONTENT.priority.heading;
+      if (priorityBody) priorityBody.textContent = SITE_CONTENT.priority.body;
+      
+      // Priority features
+      const featureBoxes = document.querySelectorAll('.feature-box');
+      featureBoxes.forEach((box, i) => {
+        if (SITE_CONTENT.priority.features[i]) {
+          const h3 = box.querySelector('h3');
+          const p = box.querySelector('p');
+          if (h3) h3.textContent = SITE_CONTENT.priority.features[i].title;
+          if (p) p.textContent = SITE_CONTENT.priority.features[i].body;
+        }
+      });
+      
+      // FAQ section
+      const faqTitle = document.querySelector('.faq-title');
+      if (faqTitle) faqTitle.textContent = SITE_CONTENT.faq.title;
+      
+      // Blog section
+      const blogTitle = document.querySelector('.blog-title');
+      const blogCta = document.querySelector('.blog-btn a');
+      if (blogTitle) blogTitle.textContent = SITE_CONTENT.blog.title;
+      if (blogCta) blogCta.textContent = SITE_CONTENT.blog.ctaText;
+      
+      // Subscribe section
+      const subscribeSmallHeading = document.querySelector('.subscribe-section .small-heading');
+      const subscribeTitle = document.querySelector('.subscribe-section .left-content h1');
+      const subscribeDesc = document.querySelector('.subscribe-section .description');
+      if (subscribeSmallHeading) subscribeSmallHeading.textContent = SITE_CONTENT.subscribe.smallHeading;
+      if (subscribeTitle) subscribeTitle.innerHTML = SITE_CONTENT.subscribe.title;
+      if (subscribeDesc) subscribeDesc.textContent = SITE_CONTENT.subscribe.desc;
+      
+      // Instagram section
+      const instagramTitle = document.querySelector('.instagram .heading h2');
+      const instagramSubtitle = document.querySelector('.instagram .heading p');
+      if (instagramTitle) instagramTitle.textContent = SITE_CONTENT.instagram.title;
+      if (instagramSubtitle) instagramSubtitle.textContent = SITE_CONTENT.instagram.subtitle;
+      
+      // Contact Modal
+      const contactModalTitle = document.querySelector('.contact-modal-header h2');
+      const contactModalSubtitle = document.querySelector('.contact-modal-header p');
+      const contactSuccessTitle = document.querySelector('.contact-success-msg h3');
+      const contactSuccessMsg = document.querySelector('.contact-success-msg p');
+      if (contactModalTitle) contactModalTitle.textContent = SITE_CONTENT.contactModal.title;
+      if (contactModalSubtitle) contactModalSubtitle.textContent = SITE_CONTENT.contactModal.subtitle;
+      if (contactSuccessTitle) contactSuccessTitle.textContent = SITE_CONTENT.contactModal.successTitle;
+      if (contactSuccessMsg) contactSuccessMsg.textContent = SITE_CONTENT.contactModal.successMsg;
+      
+      // Panorama Modal
+      const panoramaTitle = document.querySelector('.panorama-header h3');
+      const panoramaSubtitle = document.querySelector('.panorama-header p');
+      if (panoramaTitle) panoramaTitle.textContent = SITE_CONTENT.panoramaModal.title;
+      if (panoramaSubtitle) panoramaSubtitle.textContent = SITE_CONTENT.panoramaModal.subtitle;
+    }
+
+    // Apply content on page load
+    applyContent();
+
     // ===== SMOOTH SCROLLING =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -1651,6 +1941,57 @@
     document.getElementById('pano-rotate-right').addEventListener('click', () => {
       panoCurrentOffset -= 100;
       updatePanoView();
+    });
+
+    // ===== REASONS TABS =====
+    // Data is sourced from SITE_CONTENT.reasons.tabs above
+    const reasonsData = SITE_CONTENT.reasons.tabs;
+
+    // Build tab buttons from config
+    const reasonsTabsContainer = document.getElementById('reasons-tabs');
+    reasonsData.forEach((item, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'reasons-tab-btn' + (i === 0 ? ' active' : '');
+      btn.dataset.reason = i;
+      btn.textContent = item.heading;
+      reasonsTabsContainer.appendChild(btn);
+    });
+
+    const reasonsTabBtns = document.querySelectorAll('.reasons-tab-btn');
+    const reasonsImg     = document.getElementById('reasons-img');
+    const reasonsTag     = document.getElementById('reasons-tag');
+    const reasonsHeading = document.getElementById('reasons-heading');
+    const reasonsCopy    = document.getElementById('reasons-copy');
+    const reasonsFeatureList = document.getElementById('reasons-feature-list');
+
+    function switchReason(index) {
+      const data = reasonsData[index];
+      reasonsTabBtns.forEach((b, i) => b.classList.toggle('active', i === index));
+
+      // Fade out
+      const imgCard = document.querySelector('.reasons-img-card');
+      const contentCol = document.querySelector('.reasons-content-column');
+      imgCard.style.opacity = '0';
+      contentCol.style.opacity = '0';
+
+      setTimeout(() => {
+        reasonsImg.src     = data.img;
+        reasonsImg.alt     = data.alt;
+        reasonsTag.textContent     = data.tag;
+        reasonsHeading.textContent = data.heading;
+        reasonsCopy.textContent    = data.copy;
+        reasonsFeatureList.innerHTML = data.features
+          .map(f => `<div class="reasons-feature">${f}</div>`)
+          .join('');
+
+        // Fade in
+        imgCard.style.opacity = '1';
+        contentCol.style.opacity = '1';
+      }, 220);
+    }
+
+    reasonsTabBtns.forEach((btn, i) => {
+      btn.addEventListener('click', () => switchReason(i));
     });
 
     // ===== ESCAPE KEY HANDLER =====
