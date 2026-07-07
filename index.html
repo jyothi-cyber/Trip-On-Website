@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plan your dream trip to Bali, Indonesia. Discover exotic destinations, custom packages, local culture, and top-tier guides with Trip On.">
+  <title>Trip On - Plan a Trip to Bali!</title>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="site-header">
+    <div class="container nav-container">
+      <a href="#home" class="logo" id="main-logo" aria-label="Trip On home">
+        <img src="assets/images/tripon-logo.png" alt="Trip On logo" />
+      </a>
+      <nav class="nav-links" id="navbar-links" aria-label="Primary navigation">
+        <a href="#home">Bali</a>
+        <a href="#testimonials">People Reviews</a>
+        <a href="#packages">Packages</a>
+      </nav>
+      <button class="nav-btn" id="contact-us-btn">Contact Us</button>
+      <div class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+      <div class="mobile-menu-content">
+        <button class="mobile-close-btn" id="mobile-close-btn" aria-label="Close menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <nav class="mobile-nav-links">
+          <a href="#home">Bali</a>
+          <a href="#testimonials">People Reviews</a>
+          <a href="#packages">Packages</a>
+          <a href="#contact" class="mobile-contact-btn">Contact Us</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-subtitle">Seek Out</p>
+        <h1>Plan A Trip To<br>Bali!</h1>
+        <p class="hero-tagline">Experience the Great culture in the world.</p>
+        <a href="https://wa.me/?text=Hi%20Trip%20On%2C%20I%27d%20like%20to%20plan%20a%20trip%20to%20Bali" class="hero-cta" target="_blank" rel="noopener noreferrer" id="whatsapp-cta-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          Chat Us On Whatsapp
+        </a>
+      </div>
+    </div>
+
+    <!-- Search Widget (inside hero, positioned at bottom) -->
+    <div class="search-widget-container">
+      <form class="search-widget" id="trip-search-form" novalidate>
+        <div class="search-field" id="field-name">
+          <div class="search-icon"><i class="fa-solid fa-user"></i></div>
+          <div class="search-info">
+            <label for="search-name">Name</label>
+            <input type="text" id="search-name" placeholder="Enter Your Name" autocomplete="name">
+          </div>
+        </div>
+
+        <div class="search-field" id="field-phone">
+          <div class="search-icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="search-info">
+            <label for="search-phone">Phone Number</label>
+            <input type="tel" id="search-phone" placeholder="Enter Your Phone Number" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="search-field" id="field-date">
+          <div class="search-icon"><i class="fa-solid fa-calendar-days"></i></div>
+          <div class="search-info">
+            <label for="search-date">Travel On</label>
+            <input
+              type="date"
+              id="search-date"
+              value="2026-07-15"
+            >
+          </div>
+        </div>
+
+        <div class="search-field" id="field-travelers">
+          <div class="search-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="search-info">
+            <label for="search-passengers">Travelers</label>
+            <select id="search-passengers">
+              <option value="" disabled selected>No.Of Guests</option>
+              <option value="1">1 Person</option>
+              <option value="2">2 Persons</option>
+              <option value="3">3 Persons</option>
+              <option value="4">4 Persons</option>
+              <option value="5+">5+ Persons (Group)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="search-btn" id="search-submit-btn" aria-label="Submit trip enquiry">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Adventure Services -->
+  <section class="adventure section-padding" id="services">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Let's go on an adventure</h2>
+        <p class="section-desc adventure-subtitle">See What You can do in Bali</p>
+      </div>
+
+      <div class="adventure-cards">
+        <div class="adventure-card">
+          <div class="adv-icon-box green">
+            <img src="assets/images/ubud-icon.svg" alt="Ubud travel icon">
+          </div>
+          <div class="adv-text">
+            <h3>Ubud</h3>
+            <p class="adventure-meta">20+ Activities, 18 Sight Seeings</p>
+          </div>
+        </div>
+
+        <div class="adventure-card">
+          <div class="adv-icon-box orange">
+            <img src="assets/images/kuta-gali-icon.svg" alt="Kuta Gali travel icon">
+          </div>
+          <div class="adv-text">
+            <h3>Kuta, Gali</h3>
+            <p class="adventure-meta">16+ Activities, 20 Sight Seeings</p>
+          </div>
+        </div>
+
+        <div class="adventure-card">
+          <div class="adv-icon-box blue">
+            <img src="assets/images/lombok-icon.svg" alt="Lombok travel icon">
+          </div>
+          <div class="adv-text">
+            <h3>Lombok</h3>
+            <p class="adventure-meta">15+ Activities, 10 Sight Seeings</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="adventure-nav">
+        <button class="adventure-nav-btn adventure-nav-btn-left" aria-label="Previous adventure">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 12H16" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="adventure-nav-btn adventure-nav-btn-right" aria-label="Next adventure">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="20" fill="none" stroke="#e5e5ea" stroke-width="2"/>
+            <path d="M18 15L26 22L18 29" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 22H26" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Travel Days Selector -->
+  <section class="destinations section-padding">
+    <div class="container">
+      <div class="duration-row">
+        <div class="duration-copy">
+          <h2>How many days you <br>planning to travel?</h2>
+        </div>
+        <div class="duration-buttons">
+          <button class="duration-pill duration-pill-1">4 Days</button>
+          <button class="duration-pill duration-pill-2">5 Days</button>
+          <button class="duration-pill duration-pill-3">Custom</button>
+        </div>
+        <div class="duration-nav">
+          <button class="duration-nav-btn duration-nav-left" aria-label="Previous selection">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 12H16" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="duration-nav-btn duration-nav-right" aria-label="Next selection">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="22" cy="22" r="20" fill="none" stroke="#e5e5ea" stroke-width="2"/>
+              <path d="M18 15L26 22L18 29" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 22H26" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reasons Section -->
+  <section class="reasons section-padding">
+    <div class="container">
+      <h2 class="reasons-title">5 Reasons Why You Should <br>Visit <span class="highlight-underline">Bali</span></h2>
+      
+      <div class="reasons-wrapper">
+        <!-- Left Column: Image -->
+        <div class="reasons-image-column">
+          <div class="reasons-img-card">
+            <img src="assets/images/kuchipudi image.png" alt="Kuchipudi dancer">
+          </div>
+        </div>
+
+        <!-- Middle Column: Vertical Line -->
+        <div class="reasons-separator-line"></div>
+
+        <!-- Right Column: Content -->
+        <div class="reasons-content-column">
+          <span class="reasons-tag">Festivals</span>
+          <h3>The Culture</h3>
+          <p class="reasons-copy">This is a mixture of Hindu, Muslim and Buddhist culture. These people live together very harmoniously. You can also visit the temples and mosques for a deeper understanding of their religions.</p>
+
+          <div class="reasons-feature-list">
+            <div class="reasons-feature">Peace and Quiet</div>
+            <div class="reasons-feature">Romantic Ambience</div>
+            <div class="reasons-feature">Ease of Travel</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Centered bottom button -->
+      <div class="reasons-cta-frame">
+        <button class="more-blogs-btn" id="reasons-more-blogs-btn">More Blogs</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages Section -->
+  <section class="packages section-padding" id="packages">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-badge section-badge-popular">Popular Packages</span>
+        <h2 class="section-title">Most Chosen Packages by Customers</h2>
+      </div>
+
+      <div class="package-tabs" id="tour-tabs">
+        <button class="tab-btn active" data-tab="all">All</button>
+        <button class="tab-btn" data-tab="couple">Couple</button>
+        <button class="tab-btn" data-tab="family">Family</button>
+        <button class="tab-btn" data-tab="group">Friends</button>
+      </div>
+
+      <div class="packages-grid" id="packages-container">
+        <!-- Package Card 1 -->
+        <div class="package-card first-card" data-category="couple group" data-duration="4">
+          <div class="package-img-wrapper first-card-image">
+            <img src="assets/images/ubud.png" alt="Ubud resort view">
+            <span class="package-badge first-card-badge">10% off</span>
+          </div>
+          <div class="package-info">
+            <div class="package-location">
+              <i class="fa-solid fa-location-dot"></i> Ubud, Indonesia
+            </div>
+            <h3>Honey Moon Package in Bali</h3>
+            <div class="package-meta">
+              <div class="package-rating">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span>4.8</span>
+                <span class="package-reviews">(136)</span>
+              </div>
+            </div>
+            <div class="package-bottom">
+              <div class="package-duration">
+                <i class="fa-regular fa-clock"></i> 4 Days
+              </div>
+              <div class="package-price">
+                <span>From</span>
+                <h4>₹45,000</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package Card 2 -->
+        <div class="package-card" data-category="family" data-duration="5">
+          <div class="package-img-wrapper second-card-image">
+            <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
+            <span class="package-badge">15% off</span>
+          </div>
+          <div class="package-info">
+            <div class="package-location">
+              <i class="fa-solid fa-location-dot"></i> Nusa Penida, Indonesia
+            </div>
+            <h3>Isolated Mountains</h3>
+            <div class="package-meta">
+              <div class="package-rating">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span>4.8</span>
+                <span class="package-reviews">(136)</span>
+              </div>
+            </div>
+            <div class="package-bottom">
+              <div class="package-duration">
+                <i class="fa-regular fa-clock"></i> 5 Days
+              </div>
+              <div class="package-price">
+                <span>From</span>
+                <h4>₹50,000</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package Card 3 -->
+        <div class="package-card" data-category="couple family group" data-duration="6">
+          <div class="package-img-wrapper third-card-image">
+            <img src="assets/images/beach.png" alt="White sand beach">
+            <span class="package-badge">12% off</span>
+          </div>
+          <div class="package-info">
+            <div class="package-location">
+              <i class="fa-solid fa-location-dot"></i> Gili Trawangan, Indonesia
+            </div>
+            <h3>The White Beach Land</h3>
+            <div class="package-meta">
+              <div class="package-rating">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span>4.8</span>
+                <span class="package-reviews">(136)</span>
+              </div>
+            </div>
+            <div class="package-bottom">
+              <div class="package-duration">
+                <i class="fa-regular fa-clock"></i> 6 Days
+              </div>
+              <div class="package-price">
+                <span>From</span>
+                <h4>₹75,000</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="packages-cta-wrapper">
+        <button class="packages-cta" id="see-all-packages-btn">See all</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials / People Reviews Section -->
+  <section class="testimonials section-padding" id="testimonials">
+    <div class="container">
+      <div class="text-center">
+        <span class="testimonial-badge">TESTIMONIAL</span>
+        <h2 class="section-title">What Do They Say About Us?</h2>
+        <p class="section-desc">Of course we have to appreciate ourselves for planning purpose-driven trips for 100+ customers.</p>
+        <div class="testimonial-links">
+          <div class="testimonial-link">
+            <i class="fa-brands fa-instagram"></i>
+            <span>Instagram</span>
+          </div>
+          <span class="testimonial-divider">&amp;</span>
+          <div class="testimonial-link">
+            <span class="tripadvisor-icon" aria-label="Tripadvisor logo">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm4.43 5.7c.25.5.38 1.03.38 1.6 0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4 0-.57.13-1.1.38-1.6-.34-.16-.71-.26-1.11-.26-1.37 0-2.5 1.12-2.5 2.5 0 .48.15.93.4 1.3-.08.4-.13.82-.13 1.26 0 2.76 2.24 5 5 5s5-2.24 5-5c0-.44-.05-.86-.13-1.26.25-.37.4-.82.4-1.3 0-1.38-1.12-2.5-2.5-2.5-.4 0-.77.1-1.11.26z" fill="#007846"/>
+                <path d="M15.74 8.96c.65.07 1.16.61 1.16 1.27 0 .7-.57 1.27-1.27 1.27s-1.27-.57-1.27-1.27c0-.66.52-1.2 1.17-1.27zm-7.48 0c.65.07 1.16.61 1.16 1.27 0 .7-.57 1.27-1.27 1.27S7.9 10.93 7.9 10.23c0-.66.52-1.2 1.16-1.27z" fill="#ffffff"/>
+                <path d="M12 9c.83 0 1.5.67 1.5 1.5S12.83 12 12 12s-1.5-.67-1.5-1.5S11.17 9 12 9z" fill="#ffffff"/>
+              </svg>
+            </span>
+            <span>Tripadvisor</span>
+          </div>
+        </div>
+        <p class="testimonial-copy">for more reviews</p>
+      </div>
+
+      <!-- Testimonial Carousel Controls -->
+      <div class="testimonial-carousel-wrapper">
+        <button class="testimonial-nav-btn testimonial-prev" id="testimonial-prev" aria-label="Previous reviews">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="testimonials-grid" id="testimonials-grid">
+          <div class="testimonial-item" data-index="0">
+            <div class="testimonial-header">
+              <div class="testimonial-icon"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <h4>Don John</h4>
+                <p>@donjohn</p>
+              </div>
+            </div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star inactive"></i>
+            </div>
+            <p class="testimonial-text">Our trip with Benua Travel Agency was memorable. They arranged everything perfectly and took us to dream destinations. What an experience!</p>
+          </div>
+
+          <div class="testimonial-item" data-index="1">
+            <div class="testimonial-header">
+              <div class="testimonial-icon"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <h4>John Doe</h4>
+                <p>@johndoe</p>
+              </div>
+            </div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star inactive"></i>
+            </div>
+            <p class="testimonial-text">The team of travel experts from Benua Travel Agency really understood our needs. They provided great support and delivered an exceptional experience.</p>
+          </div>
+
+          <div class="testimonial-item" data-index="2">
+            <div class="testimonial-header">
+              <div class="testimonial-icon"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <h4>John Smith</h4>
+                <p>@johnsmith</p>
+              </div>
+            </div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">Thank you Benua Travel Agency for an unforgettable trip. The selected destinations are simply amazing and their services are very professional.</p>
+          </div>
+
+          <div class="testimonial-item" data-index="3">
+            <div class="testimonial-header">
+              <div class="testimonial-icon"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <h4>Sudarkem</h4>
+                <p>@darkem</p>
+              </div>
+            </div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star inactive"></i>
+            </div>
+            <p class="testimonial-text">During my trip with Benua Travel Agency, their tour guides were very knowledgeable and helped us explore our destinations to the fullest.</p>
+          </div>
+
+          <div class="testimonial-item" data-index="4">
+            <div class="testimonial-header">
+              <div class="testimonial-icon"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <h4>Kang Anas</h4>
+                <p>@kanganas</p>
+              </div>
+            </div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">The customized travel packages from Benua Travel Agency are perfectly suited to our preferences. They arrange all the details well, so we can have the perfect holiday.</p>
+          </div>
+
+          <div class="testimonial-item" data-index="5">
+            <div class="testimonial-header">
+              <div class="testimonial-icon"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <h4>Jonathan</h4>
+                <p>@jonathan</p>
+              </div>
+            </div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">We are very pleased with the family travel packages provided by Benua Travel Agency. They accommodate the needs of our entire family and made the experience easy.</p>
+          </div>
+
+          <div class="testimonial-item" data-index="6">
+            <div class="testimonial-header">
+              <div class="testimonial-icon"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <h4>Raim Lodge</h4>
+                <p>@raim</p>
+              </div>
+            </div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star inactive"></i>
+            </div>
+            <p class="testimonial-text">I am very satisfied with the service from Benua Travel Agency. They answered all my questions patiently and helped me plan my dream trip.</p>
+          </div>
+        </div>
+
+        <button class="testimonial-nav-btn testimonial-next" id="testimonial-next" aria-label="Next reviews">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Carousel Dots -->
+      <div class="testimonial-dots" id="testimonial-dots"></div>
+    </div>
+  </section>
+
+  <!-- Full-width Callout Banner -->
+  <section class="bali-callout">
+    <div class="bali-callout-content">
+      <span class="callout-subtitle">EXPLORE THE WONDERFULL OF</span>
+      <h2>Bali, Indonesia</h2>
+      <a href="#" class="bali-callout-cta" id="view-3d-btn">View In 3D</a>
+    </div>
+  </section>
+
+  <!-- Promo Section (Special Offer) -->
+  <section class="banner">
+    <!-- Left Side -->
+    <div class="left">
+        <div class="plane-box top-plane">
+            <i class="fa-solid fa-plane"></i>
+        </div>
+        <div class="banner-text-content">
+            <h3 class="lets-travel">Lets Travel</h3>
+            <h1 class="family-tour">Family Tour</h1>
+            <h2 class="discount">35% off</h2>
+            <p>
+                Whatever Your Summer Looks Like,<br>
+                Bring Yourown Heat With Up To 35% Off
+                Lumin Brand.
+            </p>
+            <a href="#contact" class="btn book-btn">Book A Trip</a>
+        </div>
+        <div class="plane-box bottom-plane">
+            <i class="fa-solid fa-plane"></i>
+        </div>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right">
+        <div class="column-left">
+            <img src="assets/images/image6.png" alt="Swimming pool" class="banner-img-pool">
+            <img src="assets/images/image7.png" alt="Collage" class="banner-img-collage">
+        </div>
+        <div class="column-right">
+            <img src="assets/images/image8.png" alt="Statue" class="banner-img-statue">
+            <img src="assets/images/image9.png" alt="Resort" class="banner-img-resort">
+        </div>
+    </div>
+  </section>
+
+  <!-- Priorities Section -->
+  <section class="priority-section">
+    <div class="priority-container">
+        <!-- Left Side -->
+        <div class="priority-left">
+            <div class="why-choose-box">
+                Why Choose Us
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="priority-right">
+            <h2>
+                Finding your destination is our priority
+            </h2>
+            <p>
+    With a collection of destinations that include stunning natural landscapes,
+    vibrant cosmopolitan cities and enchanting tropical islands, we take you to
+    the world's most stunning places.
+            </p>
+        </div>
+    </div>
+      <section class="why-choose-features">
+    <div class="feature-box">
+        <img src="assets/images/lots.png" alt="Lots of choices">
+        <h3>Lots of choices</h3>
+        <p>
+            Thousands of the best destinations are ready to spoil your eyes.
+        </p>
+    </div>
+
+    <div class="feature-box">
+        <img src="assets/images/easy.png" alt="Easy Booking">
+        <h3>Easy Booking</h3>
+        <p>
+            No need to be complicated in ordering tickets order now with a few taps.
+        </p>
+    </div>
+
+    <div class="feature-box">
+        <img src="assets/images/hotel.png" alt="Accommodation">
+        <h3>Accommodation</h3>
+        <p>
+            They are many choices of interesting destinations to make stories on your trip.
+        </p>
+    </div>
+
+    <div class="feature-box">
+        <img src="assets/images/guide.png" alt="Best Tour Guide">
+        <h3>Best Tour Guide</h3>
+        <p>
+            Dont worry about traveling anywhere, our tour guide is ready to guide you anytime.
+        </p>
+    </div>
+</section>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion Section -->
+  <section class="faq-section" id="faq">
+    <div class="faq-container">
+        <h2 class="faq-title">Frequently asked questions</h2>
+
+        <!-- Tabs -->
+        <div class="faq-tabs">
+            <button class="tab active" data-faq-tab="general">General</button>
+            <button class="tab" data-faq-tab="stay">Stay</button>
+            <button class="tab" data-faq-tab="traveling">Traveling</button>
+            <button class="tab" data-faq-tab="experience">Experience</button>
+        </div>
+
+        <!-- FAQ Item 1 -->
+        <div class="faq-item" data-faq-category="general">
+            <div class="faq-question">
+                <span class="faq-number">01</span>
+                <h4>What is the best time of year to visit Bali ?</h4>
+                <span class="icon">&#9662;</span>
+            </div>
+            <div class="faq-answer">
+                The best time to visit Bali is during the dry season, from April to October. During these months, you can expect sunny weather, lower humidity, and minimal rainfall, making it perfect for beach activities, temple visits, and exploring the countryside.
+            </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item active" data-faq-category="general">
+            <div class="faq-question">
+                <span class="faq-number active-number">02</span>
+                <h4>What are the must-see attractions in Bali?</h4>
+                <span class="icon">&#9652;</span>
+            </div>
+            <div class="faq-answer">
+                Bali dazzles with its temples like Tanah Lot,
+                the cultural hub of Ubud,
+                the scenic Mount Batur,
+                and stunning beaches such as Seminyak.
+                Don't miss the tranquil Nusa Islands,
+                the purifying Tirta Empul Temple,
+                and the breathtaking Jatiluwih Rice Terraces
+                for a comprehensive experience of Bali's rich culture
+                and natural beauty.
+            </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item" data-faq-category="traveling">
+            <div class="faq-question">
+                <span class="faq-number">03</span>
+                <h4>Are there any visa requirements for travelers visiting Bali?</h4>
+                <span class="icon">&#9662;</span>
+            </div>
+            <div class="faq-answer">
+                Most tourists can obtain a Visa on Arrival (VoA) for 30 days at Indonesian airports and seaports. This visa can be extended once for an additional 30 days. Some nationalities may enter visa-free for up to 30 days.
+            </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-item" data-faq-category="stay">
+            <div class="faq-question">
+                <span class="faq-number">04</span>
+                <h4>Can the travel agency assist with booking accommodations and activities in Bali?</h4>
+                <span class="icon">&#9662;</span>
+            </div>
+            <div class="faq-answer">
+                Absolutely! Our travel agency provides end-to-end planning assistance including hotel bookings, activity reservations, airport transfers, and curated itineraries tailored to your preferences and budget.
+            </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq-item" data-faq-category="traveling">
+            <div class="faq-question">
+                <span class="faq-number">05</span>
+                <h4>What are the recommended vaccinations or health precautions for travelers to Bali?</h4>
+                <span class="icon">&#9662;</span>
+            </div>
+            <div class="faq-answer">
+                It's recommended to be up-to-date on routine vaccinations such as Hepatitis A, Hepatitis B, and Typhoid. Consult your doctor about malaria prevention if you plan to visit rural areas. Always carry mosquito repellent and drink bottled water.
+            </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="faq-item" data-faq-category="experience">
+            <div class="faq-question">
+                <span class="faq-number">06</span>
+                <h4>What is the local currency in Bali, and are credit cards widely accepted?</h4>
+                <span class="icon">&#9662;</span>
+            </div>
+            <div class="faq-answer">
+                The local currency is the Indonesian Rupiah (IDR). Credit cards are accepted in major hotels, restaurants, and shops in tourist areas. However, it's advisable to carry cash for smaller vendors, local markets, and rural areas.
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Blogs Section -->
+  <section class="blog-section" id="blogs">
+    <h2 class="blog-title">Blogs All About Bali</h2>
+
+    <!-- Blog Row 1: Card1 (large) + Card2 (small) -->
+    <div class="blog-row">
+
+      <!-- Blog 1: 897x335 with image left, content right + vlogger overlay -->
+      <div class="blog-card blog-card-1">
+        <div class="blog-img-container">
+          <img src="assets/images/janna2.png" alt="Exploring Bali">
+          <span class="badge-vlogger">Vlogger</span>
+          <div class="play-control">
+            <i class="fa-solid fa-play"></i>
+            <div class="play-bar"></div>
+          </div>
+        </div>
+        <div class="blog-content">
+          <div>
+            <h3>Exploring Bali A Tropical Journey</h3>
+            <p>Dive deep into the heart of Bali with our captivating travel tales. From the majestic temples and lush rice terraces to the vibrant cultural festivals and stunning beaches, we share our journey through Balis enchanting landscapes. Discover the islands rich heritage, exquisite cuisine, and the warm hospitality of its people through our detailed travel experiences.</p>
+          </div>
+          <div class="author">
+            <div class="author-avatar-svg">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="19" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+                <circle cx="20" cy="15" r="7" fill="#9E9E9E"/>
+                <path d="M6 36c0-7.732 6.268-14 14-14s14 6.268 14 14" fill="#9E9E9E"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Janna Auniman</h4>
+              <span>I'm A World Traveller</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog 2: 354x331 with image top, content bottom -->
+      <div class="blog-card blog-card-2">
+        <img src="assets/images/tech.png" alt="Tech Nomad">
+        <div class="blog-content">
+          <h3>Tech Nomad's Guide to Bali Templates</h3>
+          <div class="author">
+            <div class="author-avatar-svg">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="19" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+                <circle cx="20" cy="15" r="7" fill="#9E9E9E"/>
+                <path d="M6 36c0-7.732 6.268-14 14-14s14 6.268 14 14" fill="#9E9E9E"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Leo Vikram</h4>
+              <span>Software Engineer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Blog Row 2: Card3 (small) + Card4 (large) -->
+    <div class="blog-row">
+
+      <!-- Blog 3: 351x333 with image top, content bottom -->
+      <div class="blog-card blog-card-3">
+        <img src="assets/images/secrets.png" alt="Secrets of Ubud">
+        <div class="blog-content">
+          <h3>Secrets of Ubud: Culture and Nature</h3>
+          <div class="author">
+            <div class="author-avatar-svg">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="19" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+                <circle cx="20" cy="15" r="7" fill="#9E9E9E"/>
+                <path d="M6 36c0-7.732 6.268-14 14-14s14 6.268 14 14" fill="#9E9E9E"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Leo Vikram</h4>
+              <span>Software Engineer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog 4: 897x328 with image left, content right + vlogger overlay -->
+      <div class="blog-card blog-card-4">
+        <div class="blog-img-container">
+          <img src="assets/images/adventure2.png" alt="Adventures in Bali">
+          <span class="badge-vlogger">Vlogger</span>
+          <div class="play-control">
+            <i class="fa-solid fa-play"></i>
+            <div class="play-bar"></div>
+          </div>
+        </div>
+        <div class="blog-content">
+          <div>
+            <h3>Adventures in Bali: Beyond the Beach</h3>
+            <p>Join us as we venture beyond Balis renowned beaches to uncover its lesser-known treasures. From the mystical Mount Batur at Sunrise to the serene beauty of the Jatiluwih Rice Terraces and the spiritual ambiance of ancient temples our adventures in Bali reveal the islands diverse landscape and rich cultural tapestry.</p>
+          </div>
+          <div class="author">
+            <div class="author-avatar-svg">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="19" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+                <circle cx="20" cy="15" r="7" fill="#9E9E9E"/>
+                <path d="M6 36c0-7.732 6.268-14 14-14s14 6.268 14 14" fill="#9E9E9E"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Sara kumari</h4>
+              <span>Adventure Traveller</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="blog-btn">
+      <a href="#">Want to know more!</a>
+    </div>
+  </section>
+
+  <!-- Subscribe Section -->
+  <section class="subscribe-section">
+    <!-- Left Side -->
+    <div class="left-content">
+        <p class="small-heading">
+            SUPERCHARGE YOUR PLANNING POWERS
+        </p>
+        <h1>
+            Subscribe to our <br>
+            mail letters
+        </h1>
+        <p class="description">
+            We send you offers and share most interesting facts
+            on travelling
+        </p>
+        <form class="subscribe-form" id="subscribe-form">
+            <input type="email" placeholder="Enter Your Email ID" required>
+            <button type="submit">➜</button>
+        </form>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-content">
+        <img src="assets/images/email.png" alt="Bali">
+    </div>
+  </section>
+
+  <!-- Instagram Grid -->
+  <section class="instagram">
+    <div class="heading">
+        <h2>Instagram</h2>
+        <p>Follow Us On @tripon</p>
+    </div>
+    <div class="gallery">
+        <img src="assets/images/image1.png" alt="Instagram 1">
+        <img src="assets/images/image2.png" alt="Instagram 2">
+        <img src="assets/images/image3.png" alt="Instagram 3">
+        <img src="assets/images/image4.png" alt="Instagram 4">
+        <img src="assets/images/image5.png" alt="Instagram 5">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+          <h1>tripon</h1>
+      </div>
+      <div class="links">
+          <a href="#home">About</a>
+          <a href="#blogs">Blogs</a>
+      </div>
+      <div class="links">
+          <a href="#services">Locations</a>
+          <a href="#packages">Packages</a>
+      </div>
+      <div class="links">
+          <a href="#">Careers</a>
+          <a href="#contact">Contact Us</a>
+      </div>
+      <div class="social">
+          <h4>FOLLOW OUR TRAVELER COMMUNITY</h4>
+          <div class="icons">
+              <i class="fa-brands fa-x-twitter"></i>
+              <i class="fa-brands fa-facebook"></i>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-youtube"></i>
+          </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Us Modal -->
+  <div class="contact-modal-overlay" id="contact-modal-overlay">
+    <div class="contact-modal" id="contact-modal">
+      <button class="contact-modal-close" id="contact-modal-close" aria-label="Close contact form">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="contact-modal-header">
+        <h2>Contact Us</h2>
+        <p>Get in touch with our travel experts</p>
+      </div>
+      <form class="contact-form" id="contact-form">
+        <div class="contact-form-group">
+          <label for="contact-name">Full Name</label>
+          <input type="text" id="contact-name" placeholder="Enter your full name" required>
+        </div>
+        <div class="contact-form-group">
+          <label for="contact-email">Email Address</label>
+          <input type="email" id="contact-email" placeholder="Enter your email" required>
+        </div>
+        <div class="contact-form-group">
+          <label for="contact-phone">Phone Number</label>
+          <input type="tel" id="contact-phone" placeholder="Enter your phone number" required>
+        </div>
+        <div class="contact-form-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" rows="4" placeholder="Tell us about your dream trip..." required></textarea>
+        </div>
+        <button type="submit" class="contact-submit-btn">
+          <i class="fa-solid fa-paper-plane"></i>
+          Send Message
+        </button>
+      </form>
+      <div class="contact-success-msg" id="contact-success-msg">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Message Sent Successfully!</h3>
+        <p>Our travel experts will contact you within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toast-notification">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-text">Success!</span>
+  </div>
+
+  <!-- Video Player Modal -->
+  <div class="video-modal-overlay" id="video-modal-overlay">
+    <div class="video-modal-container">
+      <button class="video-modal-close" id="video-modal-close" aria-label="Close video player">&times;</button>
+      <div class="video-player-wrapper">
+        <iframe id="video-player-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D Panorama Modal -->
+  <div class="panorama-modal-overlay" id="panorama-modal-overlay">
+    <div class="panorama-modal-container">
+      <button class="panorama-modal-close" id="panorama-modal-close" aria-label="Close panorama">&times;</button>
+      <div class="panorama-header">
+        <h3>Bali Interactive 3D Panorama</h3>
+        <p>Click and drag to rotate the view. Use the controls to zoom.</p>
+      </div>
+      <div class="panorama-viewer" id="panorama-viewer">
+        <!-- Hotspots for visual feedback -->
+        <div class="panorama-hotspots" id="panorama-hotspots">
+          <div class="panorama-hotspot" style="top: 45%; left: 300px;" data-tooltip="Ulun Danu Bratan Temple - A scenic Hindu water temple on Lake Bratan.">
+            <i class="fa-solid fa-circle-info"></i>
+            <span class="hotspot-tooltip">Ulun Danu Bratan Temple</span>
+          </div>
+          <div class="panorama-hotspot" style="top: 50%; left: 950px;" data-tooltip="Ubud Monkey Forest - Sanctuary and natural habitat of Balinese monkeys.">
+            <i class="fa-solid fa-circle-info"></i>
+            <span class="hotspot-tooltip">Ubud Monkey Forest</span>
+          </div>
+          <div class="panorama-hotspot" style="top: 40%; left: 1650px;" data-tooltip="Mount Batur Volcano - An active volcano popular for sunrise treks.">
+            <i class="fa-solid fa-circle-info"></i>
+            <span class="hotspot-tooltip">Mount Batur Volcano</span>
+          </div>
+        </div>
+        
+        <div class="panorama-controls">
+          <button id="pano-zoom-in" aria-label="Zoom In"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+          <button id="pano-zoom-out" aria-label="Zoom Out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+          <button id="pano-rotate-left" aria-label="Rotate Left"><i class="fa-solid fa-arrow-left"></i></button>
+          <button id="pano-rotate-right" aria-label="Rotate Right"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== SMOOTH SCROLLING =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          // Close mobile menu if open
+          closeMobileMenu();
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ===== STICKY HEADER =====
+    const siteHeader = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        siteHeader.classList.add('header-scrolled');
+      } else {
+        siteHeader.classList.remove('header-scrolled');
+      }
+    });
+
+    // ===== MOBILE MENU =====
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileCloseBtn = document.getElementById('mobile-close-btn');
+
+    function openMobileMenu() {
+      mobileMenuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenuOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+    mobileCloseBtn.addEventListener('click', closeMobileMenu);
+    mobileMenuOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileMenuOverlay) closeMobileMenu();
+    });
+
+    // Mobile nav links close menu on click
+    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+      });
+    });
+
+    // ===== PACKAGE TAB FILTERING =====
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const packageCards = document.querySelectorAll('.package-card');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active tab
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selectedTab = btn.dataset.tab;
+
+        // Filter cards with animation
+        packageCards.forEach(card => {
+          const categories = card.dataset.category;
+          if (selectedTab === 'all' || categories.includes(selectedTab)) {
+            card.style.display = '';
+            card.style.animation = 'fadeInUp 0.5s ease forwards';
+          } else {
+            card.style.animation = 'fadeOutDown 0.3s ease forwards';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // ===== FAQ ACCORDION =====
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // Close all items
+        faqItems.forEach(fi => {
+          fi.classList.remove('active');
+          const icon = fi.querySelector('.icon');
+          const num = fi.querySelector('.faq-number');
+          if (icon) icon.innerHTML = '&#9662;';
+          if (num) num.classList.remove('active-number');
+        });
+
+        // Toggle clicked item
+        if (!isActive) {
+          item.classList.add('active');
+          const icon = item.querySelector('.icon');
+          const num = item.querySelector('.faq-number');
+          if (icon) icon.innerHTML = '&#9652;';
+          if (num) num.classList.add('active-number');
+        }
+      });
+    });
+
+    // FAQ Tabs
+    const faqTabs = document.querySelectorAll('.faq-tabs .tab');
+    faqTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        faqTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const selectedCategory = tab.dataset.faqTab;
+        const faqAllItems = document.querySelectorAll('.faq-item');
+
+        faqAllItems.forEach(item => {
+          const category = item.dataset.faqCategory;
+          if (selectedCategory === 'general') {
+            item.style.display = '';
+          } else if (category === selectedCategory) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ===== TESTIMONIAL CAROUSEL =====
+    const testimonialsGrid = document.getElementById('testimonials-grid');
+    const testimonialItems = document.querySelectorAll('.testimonial-item');
+    const prevBtn = document.getElementById('testimonial-prev');
+    const nextBtn = document.getElementById('testimonial-next');
+    const dotsContainer = document.getElementById('testimonial-dots');
+    let currentPage = 0;
+
+    function getItemsPerPage() {
+      if (window.innerWidth <= 480) return 1;
+      if (window.innerWidth <= 768) return 2;
+      if (window.innerWidth <= 1024) return 3;
+      return 4;
+    }
+
+    function getTotalPages() {
+      return Math.ceil(testimonialItems.length / getItemsPerPage());
+    }
+
+    function updateCarousel() {
+      const perPage = getItemsPerPage();
+      const totalPages = getTotalPages();
+      if (currentPage >= totalPages) currentPage = totalPages - 1;
+      if (currentPage < 0) currentPage = 0;
+
+      testimonialItems.forEach((item, index) => {
+        const start = currentPage * perPage;
+        const end = start + perPage;
+        if (index >= start && index < end) {
+          item.style.display = '';
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Update dots
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'testimonial-dot' + (i === currentPage ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to page ' + (i + 1));
+        dot.addEventListener('click', () => {
+          currentPage = i;
+          updateCarousel();
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        updateCarousel();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < getTotalPages() - 1) {
+        currentPage++;
+        updateCarousel();
+      }
+    });
+
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
+
+    // ===== CONTACT US MODAL =====
+    const contactBtn = document.getElementById('contact-us-btn');
+    const contactModalOverlay = document.getElementById('contact-modal-overlay');
+    const contactModalClose = document.getElementById('contact-modal-close');
+    const contactForm = document.getElementById('contact-form');
+    const contactSuccessMsg = document.getElementById('contact-success-msg');
+
+    // Also open contact from mobile menu
+    document.querySelectorAll('.mobile-contact-btn, a[href="#contact"]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeMobileMenu();
+        openContactModal();
+      });
+    });
+
+    function openContactModal() {
+      contactModalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      contactForm.style.display = '';
+      contactSuccessMsg.style.display = 'none';
+    }
+
+    function closeContactModal() {
+      contactModalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    contactBtn.addEventListener('click', openContactModal);
+    contactModalClose.addEventListener('click', closeContactModal);
+    contactModalOverlay.addEventListener('click', (e) => {
+      if (e.target === contactModalOverlay) closeContactModal();
+    });
+
+    // Contact form submit
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Simulate sending
+      const submitBtn = contactForm.querySelector('.contact-submit-btn');
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        contactForm.style.display = 'none';
+        contactSuccessMsg.style.display = 'flex';
+        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+        submitBtn.disabled = false;
+        contactForm.reset();
+
+        // Auto close after 3s
+        setTimeout(closeContactModal, 3000);
+      }, 1500);
+    });
+
+    // ===== SEARCH FORM - Full Validation & WhatsApp Submit =====
+    const tripSearchForm = document.getElementById('trip-search-form');
+
+    // Helper: mark field error or clear
+    function setFieldError(fieldId, isError) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
+      if (isError) {
+        field.classList.add('error-field');
+      } else {
+        field.classList.remove('error-field');
+      }
+    }
+
+    // Live clear errors on input
+    document.getElementById('search-name').addEventListener('input', () => setFieldError('field-name', false));
+    document.getElementById('search-phone').addEventListener('input', () => setFieldError('field-phone', false));
+    document.getElementById('search-date').addEventListener('change', () => setFieldError('field-date', false));
+    document.getElementById('search-passengers').addEventListener('change', () => setFieldError('field-travelers', false));
+
+    tripSearchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name     = document.getElementById('search-name').value.trim();
+      const phone    = document.getElementById('search-phone').value.trim();
+      const date     = document.getElementById('search-date').value;
+      const guests   = document.getElementById('search-passengers').value;
+
+      // Validate all fields
+      let hasError = false;
+      setFieldError('field-name',      !name);
+      setFieldError('field-phone',     !phone);
+      setFieldError('field-date',      !date);
+      setFieldError('field-travelers', !guests);
+
+      if (!name)   hasError = true;
+      if (!phone)  hasError = true;
+      if (!date)   hasError = true;
+      if (!guests) hasError = true;
+
+      if (hasError) {
+        showToast('⚠️ Please fill in all details to continue');
+        return;
+      }
+
+      // Format date for display
+      const dateObj = new Date(date);
+      const formattedDate = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      // Build WhatsApp message with all details
+      const waMessage = encodeURIComponent(
+        `Hi Trip On! 🌴\n\nI'd like to plan a trip to Bali!\n\n` +
+        `👤 Name: ${name}\n` +
+        `📞 Phone: ${phone}\n` +
+        `📅 Travel On: ${formattedDate}\n` +
+        `👥 Travelers: ${guests}\n\n` +
+        `Please help me plan this amazing trip!`
+      );
+
+      // Show success toast & open WhatsApp
+      showToast(`✅ Thank you ${name}! Redirecting to WhatsApp...`);
+
+      setTimeout(() => {
+        window.open(`https://wa.me/?text=${waMessage}`, '_blank');
+        tripSearchForm.reset();
+        // Clear all error states after reset
+        ['field-name','field-phone','field-date','field-travelers'].forEach(id => setFieldError(id, false));
+      }, 800);
+    });
+
+    // ===== SUBSCRIBE FORM =====
+    document.getElementById('subscribe-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value.trim();
+      if (email) {
+        showToast('Subscribed successfully! Check your email.');
+        e.target.reset();
+      }
+    });
+
+    // ===== TOAST NOTIFICATION =====
+    function showToast(message) {
+      const toast = document.getElementById('toast-notification');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    // ===== DURATION PILLS & NAVIGATION FUNCTIONALITY =====
+    const durationPills = document.querySelectorAll('.duration-pill');
+    const durationLeftBtn = document.querySelector('.duration-nav-left');
+    const durationRightBtn = document.querySelector('.duration-nav-right');
+    let activeDurationIndex = -1; // Initially none selected
+
+    function selectDuration(index) {
+      if (index < 0 || index >= durationPills.length) return;
+      activeDurationIndex = index;
+
+      // Update pill classes
+      durationPills.forEach((p, idx) => {
+        if (idx === index) {
+          p.classList.add('selected');
+        } else {
+          p.classList.remove('selected');
+        }
+      });
+
+      // Filter Packages based on selected duration
+      const selectedPill = durationPills[index];
+      let targetDuration = "";
+      if (selectedPill.textContent.includes("4 Days")) {
+        targetDuration = "4";
+      } else if (selectedPill.textContent.includes("5 Days")) {
+        targetDuration = "5";
+      } else {
+        targetDuration = "all"; // "Custom" shows all
+      }
+
+      const allPackageCards = document.querySelectorAll('.package-card');
+      const tourTabs = document.querySelectorAll('.tab-btn');
+      
+      // Reset active tab state to "All" when using duration pills
+      tourTabs.forEach(t => {
+        if (t.dataset.tab === 'all') t.classList.add('active');
+        else t.classList.remove('active');
+      });
+
+      allPackageCards.forEach(card => {
+        const cardDuration = card.dataset.duration;
+        if (targetDuration === "all" || cardDuration === targetDuration) {
+          card.style.display = '';
+          card.style.animation = 'fadeInUp 0.5s ease forwards';
+        } else {
+          card.style.animation = 'fadeOutDown 0.3s ease forwards';
+          setTimeout(() => {
+            if (card.classList.contains('selected') === false) {
+              card.style.display = 'none';
+            }
+          }, 300);
+        }
+      });
+
+      // Smooth scroll to packages section after selection
+      const packagesSection = document.getElementById('packages');
+      if (packagesSection) {
+        setTimeout(() => {
+          packagesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+
+    durationPills.forEach((pill, index) => {
+      pill.addEventListener('click', () => {
+        selectDuration(index);
+      });
+    });
+
+    // Navigation buttons functionality
+    if (durationLeftBtn && durationRightBtn) {
+      durationLeftBtn.addEventListener('click', () => {
+        let newIndex = activeDurationIndex - 1;
+        if (newIndex < 0) newIndex = durationPills.length - 1; // loop back to end
+        selectDuration(newIndex);
+      });
+
+      durationRightBtn.addEventListener('click', () => {
+        let newIndex = activeDurationIndex + 1;
+        if (newIndex >= durationPills.length) newIndex = 0; // loop back to start
+        selectDuration(newIndex);
+      });
+    }
+
+    // ===== ADVENTURE NAV BUTTONS FUNCTIONALITY =====
+    const advLeftBtn = document.querySelector('.adventure-nav-btn-left');
+    const advRightBtn = document.querySelector('.adventure-nav-btn-right');
+    const advCardsContainer = document.querySelector('.adventure-cards');
+    const advCards = document.querySelectorAll('.adventure-card');
+    let activeAdvIndex = 0;
+
+    function highlightAdventureCard(index) {
+      if (!advCards.length) return;
+      if (index < 0) index = advCards.length - 1;
+      if (index >= advCards.length) index = 0;
+      activeAdvIndex = index;
+
+      advCards.forEach((card, idx) => {
+        if (idx === index) {
+          card.classList.add('active-card');
+        } else {
+          card.classList.remove('active-card');
+        }
+      });
+
+
+      // Scroll card into view if mobile/tablet viewport overflows
+      if (window.innerWidth <= 1024) {
+        advCards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    if (advLeftBtn && advRightBtn) {
+      advLeftBtn.addEventListener('click', () => {
+        highlightAdventureCard(activeAdvIndex - 1);
+      });
+      advRightBtn.addEventListener('click', () => {
+        highlightAdventureCard(activeAdvIndex + 1);
+      });
+      // Initialize first card highlight
+      highlightAdventureCard(0);
+    }
+
+
+
+    // ===== SCROLL ANIMATIONS =====
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections and cards
+    document.querySelectorAll('.adventure-card, .package-card, .testimonial-item, .feature-box, .faq-item, .blog-card').forEach(el => {
+      el.classList.add('animate-on-scroll');
+      observer.observe(el);
+    });
+
+    // ===== VIDEO MODAL FUNCTIONALITY =====
+    const videoModalOverlay = document.getElementById('video-modal-overlay');
+    const videoModalClose = document.getElementById('video-modal-close');
+    const videoPlayerIframe = document.getElementById('video-player-iframe');
+    const playControls = document.querySelectorAll('.play-control');
+
+    // Bali travel videos
+    const videoUrls = [
+      "https://www.youtube.com/embed/m85m31b7-mI?autoplay=1", // Video 1: Exploring Bali
+      "https://www.youtube.com/embed/2xp22e519q8?autoplay=1"  // Video 2: Adventures in Bali
+    ];
+
+    playControls.forEach((btn, index) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const url = videoUrls[index] || videoUrls[0];
+        videoPlayerIframe.src = url;
+        videoModalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeVideoModal() {
+      if (videoModalOverlay.classList.contains('active')) {
+        videoModalOverlay.classList.remove('active');
+        videoPlayerIframe.src = "";
+        document.body.style.overflow = '';
+      }
+    }
+
+    videoModalClose.addEventListener('click', closeVideoModal);
+    videoModalOverlay.addEventListener('click', (e) => {
+      if (e.target === videoModalOverlay) closeVideoModal();
+    });
+
+    // ===== 3D PANORAMA MODAL FUNCTIONALITY =====
+    const panoModalOverlay = document.getElementById('panorama-modal-overlay');
+    const panoModalClose = document.getElementById('panorama-modal-close');
+    const view3dBtn = document.getElementById('view-3d-btn');
+    const panoViewer = document.getElementById('panorama-viewer');
+    const panoHotspots = document.getElementById('panorama-hotspots');
+
+    let isPanoDragging = false;
+    let panoStartX = 0;
+    let panoCurrentOffset = 0;
+    let panoZoom = 1.0;
+    const panoWidth = 2400; // matching background-size
+
+    function openPanoModal(e) {
+      if (e) e.preventDefault();
+      panoModalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      updatePanoView();
+    }
+
+    function closePanoModal() {
+      if (panoModalOverlay.classList.contains('active')) {
+        panoModalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (view3dBtn) {
+      view3dBtn.addEventListener('click', openPanoModal);
+    }
+    panoModalClose.addEventListener('click', closePanoModal);
+    panoModalOverlay.addEventListener('click', (e) => {
+      if (e.target === panoModalOverlay) closePanoModal();
+    });
+
+    function updatePanoView() {
+      panoViewer.style.backgroundPositionX = `${panoCurrentOffset}px`;
+      panoViewer.style.backgroundSize = `${panoWidth * panoZoom}px auto`;
+      if (panoHotspots) {
+        panoHotspots.style.transform = `translateX(${panoCurrentOffset}px) scale(${panoZoom})`;
+      }
+    }
+
+    // Dragging
+    panoViewer.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.panorama-controls') || e.target.closest('.panorama-hotspot')) return;
+      isPanoDragging = true;
+      panoStartX = e.clientX - panoCurrentOffset;
+      panoViewer.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isPanoDragging) return;
+      panoCurrentOffset = e.clientX - panoStartX;
+      updatePanoView();
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isPanoDragging) {
+        isPanoDragging = false;
+        panoViewer.style.cursor = 'grab';
+      }
+    });
+
+    // Touch support for mobile devices
+    panoViewer.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.panorama-controls') || e.target.closest('.panorama-hotspot')) return;
+      isPanoDragging = true;
+      panoStartX = e.touches[0].clientX - panoCurrentOffset;
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isPanoDragging) return;
+      panoCurrentOffset = e.touches[0].clientX - panoStartX;
+      updatePanoView();
+    });
+
+    window.addEventListener('touchend', () => {
+      isPanoDragging = false;
+    });
+
+    // Zoom Controls
+    document.getElementById('pano-zoom-in').addEventListener('click', () => {
+      if (panoZoom < 2.0) {
+        panoZoom += 0.1;
+        updatePanoView();
+      }
+    });
+
+    document.getElementById('pano-zoom-out').addEventListener('click', () => {
+      if (panoZoom > 0.8) {
+        panoZoom -= 0.1;
+        updatePanoView();
+      }
+    });
+
+    // Rotation controls
+    document.getElementById('pano-rotate-left').addEventListener('click', () => {
+      panoCurrentOffset += 100;
+      updatePanoView();
+    });
+
+    document.getElementById('pano-rotate-right').addEventListener('click', () => {
+      panoCurrentOffset -= 100;
+      updatePanoView();
+    });
+
+    // ===== ESCAPE KEY HANDLER =====
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeContactModal();
+        closeMobileMenu();
+        closeVideoModal();
+        closePanoModal();
+      }
+    });
+  </script>
+</body>
+</html>
