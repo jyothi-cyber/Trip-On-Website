@@ -16,6 +16,35 @@
 </head>
 <body>
 
+  <!-- Welcome Modal -->
+  <div id="welcome-modal-overlay">
+    <div id="welcome-modal">
+      <div class="welcome-modal-icon">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="11" fill="#E6F3EC" stroke="#0E5A36" stroke-width="1.5"/>
+          <path d="M7 13.5C7 13.5 8.5 10 12 10C15.5 10 17 13.5 17 13.5" stroke="#0E5A36" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="9.5" cy="8.5" r="1.2" fill="#0E5A36"/>
+          <circle cx="14.5" cy="8.5" r="1.2" fill="#0E5A36"/>
+        </svg>
+      </div>
+      <p class="welcome-modal-tag">TRIP ON — BALI</p>
+      <h2 class="welcome-modal-title">Ready to Explore<br>Paradise?</h2>
+      <p class="welcome-modal-desc">Discover the breathtaking culture, beaches, and adventures that Bali has to offer. Are you ready to begin your journey?</p>
+      <div class="welcome-modal-actions">
+        <button id="welcome-yes-btn" class="welcome-btn welcome-btn-yes">
+          <i class="fa-solid fa-check"></i> Yes, Let's Go!
+        </button>
+        <button id="welcome-no-btn" class="welcome-btn welcome-btn-no">
+          <i class="fa-solid fa-xmark"></i> No, Thanks
+        </button>
+      </div>
+      <p id="welcome-warning" class="welcome-warning" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <!-- Main Website Content -->
+  <div id="main-content">
+
   <!-- Header -->
   <header id="site-header">
     <div class="container nav-container">
@@ -109,7 +138,8 @@
         </div>
 
         <button type="submit" class="search-btn" id="search-submit-btn" aria-label="Submit trip enquiry">
-          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Submit</span>
         </button>
       </form>
     </div>
@@ -608,35 +638,43 @@
     </div>
       <section class="why-choose-features">
     <div class="feature-box">
-        <img src="assets/images/lots.png" alt="Lots of choices">
-        <h3>Lots of choices</h3>
-        <p>
-            Thousands of the best destinations are ready to spoil your eyes.
-        </p>
+        <div class="feature-img-wrap">
+            <img src="assets/images/lots.png" alt="Lots of choices">
+        </div>
+        <div class="feature-body">
+            <h3>Lots of choices</h3>
+            <p>Thousands of the best destinations are ready to spoil your eyes.</p>
+        </div>
     </div>
 
     <div class="feature-box">
-        <img src="assets/images/easy.png" alt="Easy Booking">
-        <h3>Easy Booking</h3>
-        <p>
-            No need to be complicated in ordering tickets order now with a few taps.
-        </p>
+        <div class="feature-img-wrap">
+            <img src="assets/images/easy.png" alt="Easy Booking">
+        </div>
+        <div class="feature-body">
+            <h3>Easy Booking</h3>
+            <p>No need to be complicated in ordering tickets — order now with a few taps.</p>
+        </div>
     </div>
 
     <div class="feature-box">
-        <img src="assets/images/hotel.png" alt="Accommodation">
-        <h3>Accommodation</h3>
-        <p>
-            They are many choices of interesting destinations to make stories on your trip.
-        </p>
+        <div class="feature-img-wrap">
+            <img src="assets/images/hotel.png" alt="Accommodation">
+        </div>
+        <div class="feature-body">
+            <h3>Accommodation</h3>
+            <p>Many choices of interesting destinations to make stories on your trip.</p>
+        </div>
     </div>
 
     <div class="feature-box">
-        <img src="assets/images/guide.png" alt="Best Tour Guide">
-        <h3>Best Tour Guide</h3>
-        <p>
-            Dont worry about traveling anywhere, our tour guide is ready to guide you anytime.
-        </p>
+        <div class="feature-img-wrap">
+            <img src="assets/images/guide.png" alt="Best Tour Guide">
+        </div>
+        <div class="feature-body">
+            <h3>Best Tour Guide</h3>
+            <p>Don't worry about traveling anywhere, our tour guide is ready to guide you anytime.</p>
+        </div>
     </div>
 </section>
     </div>
@@ -887,19 +925,44 @@
     </div>
   </section>
 
-  <!-- Instagram Grid -->
+  <!-- Instagram Slider -->
   <section class="instagram">
     <div class="heading">
         <h2>Instagram</h2>
         <p>Follow Us On @tripon</p>
     </div>
-    <div class="gallery">
-        <img src="assets/images/image1.png" alt="Instagram 1">
-        <img src="assets/images/image2.png" alt="Instagram 2">
-        <img src="assets/images/image3.png" alt="Instagram 3">
-        <img src="assets/images/image4.png" alt="Instagram 4">
-        <img src="assets/images/image5.png" alt="Instagram 5">
+
+    <!-- Slider wrapper -->
+    <div class="insta-slider-wrapper" id="insta-slider-wrapper">
+      <div class="insta-slider-track" id="insta-slider-track">
+        <div class="insta-slide active">
+          <img src="assets/images/image1.png" alt="Instagram 1">
+        </div>
+        <div class="insta-slide">
+          <img src="assets/images/image2.png" alt="Instagram 2">
+        </div>
+        <div class="insta-slide">
+          <img src="assets/images/image3.png" alt="Instagram 3">
+        </div>
+        <div class="insta-slide">
+          <img src="assets/images/image4.png" alt="Instagram 4">
+        </div>
+        <div class="insta-slide">
+          <img src="assets/images/image5.png" alt="Instagram 5">
+        </div>
+      </div>
+
+      <!-- Arrows -->
+      <button class="insta-arrow insta-prev" id="insta-prev" aria-label="Previous photo">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="insta-arrow insta-next" id="insta-next" aria-label="Next photo">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
+
+    <!-- Dot indicators -->
+    <div class="insta-dots" id="insta-dots"></div>
   </section>
 
   <!-- Footer -->
@@ -969,6 +1032,51 @@
         <h3>Message Sent Successfully!</h3>
         <p>Our travel experts will contact you within 24 hours.</p>
       </div>
+    </div>
+  </div>
+
+  <!-- Edit Mode Toggle Button -->
+  <button id="edit-mode-btn" title="Enter Edit Mode (Ctrl+Shift+E)" aria-label="Toggle page edit mode">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+    </svg>
+    <span class="edit-mode-label">Edit Page</span>
+  </button>
+
+  <!-- Scroll Popup: Trip Duration -->
+  <div class="scroll-popup-overlay" id="scroll-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="scroll-popup-title">
+    <div class="scroll-popup" id="scroll-popup">
+      <button class="scroll-popup-close" id="scroll-popup-close" aria-label="Close popup">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="scroll-popup-icon">
+        <i class="fa-solid fa-calendar-days"></i>
+      </div>
+
+      <p class="scroll-popup-label">PLAN YOUR TRIP</p>
+      <h2 class="scroll-popup-title" id="scroll-popup-title">How many nights are<br>you planning?</h2>
+      <p class="scroll-popup-sub">Choose your ideal trip length and we'll match the perfect Bali package for you.</p>
+
+      <div class="scroll-popup-options">
+        <button class="popup-option-btn" data-nights="4" aria-label="4 nights trip">
+          <span class="popup-option-nights">4</span>
+          <span class="popup-option-label">Nights</span>
+          <span class="popup-option-tag">Most Popular</span>
+        </button>
+        <button class="popup-option-btn" data-nights="5" aria-label="5 nights trip">
+          <span class="popup-option-nights">5</span>
+          <span class="popup-option-label">Nights</span>
+          <span class="popup-option-tag">Best Value</span>
+        </button>
+      </div>
+
+      <button class="popup-custom-btn" id="popup-custom-btn">
+        <i class="fa-solid fa-sliders"></i> Custom Duration
+      </button>
+
+      <p class="popup-skip" id="popup-skip">Maybe later</p>
     </div>
   </div>
 
@@ -1052,44 +1160,44 @@
         title: "5 Reasons Why You Should <br>Visit <span class=\"highlight-underline\">Bali</span>",
         tabs: [
           {
-            tag: "Festivals",
-            heading: "The Culture",
-            copy: "This is a mixture of Hindu, Muslim and Buddhist culture. These people live together very harmoniously. You can also visit the temples and mosques for a deeper understanding of their religions.",
-            features: ["Peace and Quiet", "Romantic Ambience", "Ease of Travel"],
+            tag: "01",
+            heading: "Festivals",
+            copy: "Bali's calendar is packed with vibrant festivals celebrated with colourful processions, offerings, and music. From Nyepi (the Day of Silence) to Galungan and Kuningan, every festival gives you a rare window into living Balinese traditions.",
+            features: ["Hindu Ceremonies", "Colourful Processions", "Gamelan Music"],
             img: "assets/images/kuchipudi image.png",
+            alt: "Bali festivals"
+          },
+          {
+            tag: "02",
+            heading: "Culture",
+            copy: "This is a unique blend of Hindu, Muslim and Buddhist culture. These people live together very harmoniously. Visit the ancient temples and mosques for a deeper understanding of their rich religions and daily spiritual practices.",
+            features: ["Ancient Temples", "Sacred Traditions", "Local Art & Craft"],
+            img: "assets/images/ubud2.png",
             alt: "Bali culture"
           },
           {
-            tag: "Landscapes",
-            heading: "The Nature",
-            copy: "Bali is blessed with breathtaking natural scenery — from lush terraced rice paddies in Ubud to the volcanic peaks of Mount Batur. The island's diverse flora and serene countryside make it a paradise for nature lovers.",
-            features: ["Rice Terraces", "Volcanic Lakes", "Tropical Forests"],
-            img: "assets/images/ubud2.png",
-            alt: "Bali nature"
+            tag: "03",
+            heading: "Peace and Quiet",
+            copy: "Escape the noise of everyday life in Bali's serene rice terraces, tranquil jungle retreats, and silent mountain villages. Whether you are meditating at a hillside temple or relaxing in a private villa, Bali offers true inner calm.",
+            features: ["Rice Terrace Walks", "Silent Retreats", "Jungle Hideaways"],
+            img: "assets/images/ubud.png",
+            alt: "Peace and quiet in Bali"
           },
           {
-            tag: "Coastline",
-            heading: "The Beaches",
-            copy: "With over 100 beaches, Bali offers everything from the lively shores of Kuta and Seminyak to the peaceful coves of Nusa Dua and the dramatic cliffs of Uluwatu. Perfect for surfing, sunsets, and relaxation.",
-            features: ["World-Class Surf", "Crystal Clear Water", "Stunning Sunsets"],
+            tag: "04",
+            heading: "Romantic Ambience",
+            copy: "From candlelit clifftop dinners overlooking the Indian Ocean to private infinity pools at sunset, Bali is tailor-made for romance. Couples love the intimate resorts, flower-strewn villas, and intimate beachside experiences.",
+            features: ["Sunset Dinners", "Private Villas", "Couples Spa"],
             img: "assets/images/beach.png",
-            alt: "Bali beaches"
+            alt: "Romantic Bali"
           },
           {
-            tag: "Cuisine",
-            heading: "The Food",
-            copy: "Balinese cuisine is a feast for the senses. From smoky satay and crispy suckling pig (Babi Guling) to aromatic nasi goreng and fresh tropical fruits — every meal is an adventure in flavour.",
-            features: ["Local Warungs", "Exotic Spices", "Tropical Fruits"],
+            tag: "05",
+            heading: "Ease of Travel",
+            copy: "With visa-on-arrival for most nationalities, well-connected transport, friendly English-speaking locals, and countless organised tour options, moving around Bali is completely effortless — ideal for first-time and seasoned travellers alike.",
+            features: ["Visa on Arrival", "Affordable Transport", "Friendly Locals"],
             img: "assets/images/indonesia.png",
-            alt: "Bali food"
-          },
-          {
-            tag: "Thrills",
-            heading: "The Adventure",
-            copy: "For thrill-seekers, Bali delivers in every direction. Trek the volcanic rim of Mount Batur at sunrise, white-water raft through jungle gorges, dive Nusa Penida's manta rays, or swing above the treetops in Ubud.",
-            features: ["Volcano Trekking", "White-Water Rafting", "Diving & Snorkelling"],
-            img: "assets/images/adventures.png",
-            alt: "Bali adventure"
+            alt: "Easy travel in Bali"
           }
         ]
       },
@@ -1310,6 +1418,44 @@
 
     // Apply content on page load
     applyContent();
+
+    // ===== WELCOME MODAL =====
+    (function () {
+      const overlay   = document.getElementById('welcome-modal-overlay');
+      const yesBtn    = document.getElementById('welcome-yes-btn');
+      const noBtn     = document.getElementById('welcome-no-btn');
+      const warning   = document.getElementById('welcome-warning');
+      const mainContent = document.getElementById('main-content');
+
+      // Hide site content immediately; modal is visible via CSS default
+      mainContent.style.visibility = 'hidden';
+      mainContent.style.opacity    = '0';
+
+      yesBtn.addEventListener('click', () => {
+        // Fade the modal out
+        overlay.style.transition = 'opacity 0.5s ease';
+        overlay.style.opacity    = '0';
+
+        setTimeout(() => {
+          overlay.style.display = 'none';
+
+          // Reveal the full site with a smooth fade-in
+          mainContent.style.visibility = 'visible';
+          mainContent.style.transition = 'opacity 0.6s ease';
+          mainContent.style.opacity    = '1';
+        }, 500);
+      });
+
+      noBtn.addEventListener('click', () => {
+        // Show the warning message — do NOT close the modal
+        warning.textContent = 'Please click the YES option to proceed!';
+        warning.classList.add('visible');
+
+        // Shake the No button for emphasis
+        noBtn.classList.add('shake');
+        noBtn.addEventListener('animationend', () => noBtn.classList.remove('shake'), { once: true });
+      });
+    })();
 
     // ===== SMOOTH SCROLLING =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1780,6 +1926,54 @@
 
 
 
+    // ===== HERO BACKGROUND IMAGE SLIDER =====
+    (function () {
+      const heroImages = [
+        'assets/images/hero.png',
+        'assets/images/beach.png',
+        'assets/images/ubud.png',
+        'assets/images/indonesia.png',
+        'assets/images/adventures.png',
+        'assets/images/bggg.png'
+      ];
+
+      const hero = document.querySelector('.hero');
+      if (!hero) return;
+
+      // Create the fade overlay div and inject it as first child
+      const fadeEl = document.createElement('div');
+      fadeEl.className = 'hero-bg-fade';
+      hero.insertBefore(fadeEl, hero.firstChild);
+
+      let currentIndex = 0;
+      const INTERVAL_MS = 4000;   // time between slides
+      const FADE_MS     = 1000;   // must match CSS transition duration
+
+      function nextSlide() {
+        const nextIndex = (currentIndex + 1) % heroImages.length;
+        const nextSrc   = heroImages[nextIndex];
+
+        // Preload next image then crossfade
+        const img = new Image();
+        img.onload = () => {
+          // Set next image on the overlay and fade it in
+          fadeEl.style.backgroundImage = `url('${nextSrc}')`;
+          fadeEl.classList.add('fading-in');
+
+          setTimeout(() => {
+            // Once fully visible, swap it to the hero background and hide overlay
+            hero.style.backgroundImage = `url('${nextSrc}')`;
+            fadeEl.classList.remove('fading-in');
+            fadeEl.style.backgroundImage = '';
+            currentIndex = nextIndex;
+          }, FADE_MS);
+        };
+        img.src = nextSrc;
+      }
+
+      setInterval(nextSlide, INTERVAL_MS);
+    })();
+
     // ===== SCROLL ANIMATIONS =====
     const observerOptions = {
       threshold: 0.15,
@@ -1975,13 +2169,13 @@
       contentCol.style.opacity = '0';
 
       setTimeout(() => {
-        reasonsImg.src     = data.img;
-        reasonsImg.alt     = data.alt;
+        reasonsImg.src             = data.img;
+        reasonsImg.alt             = data.alt;
         reasonsTag.textContent     = data.tag;
         reasonsHeading.textContent = data.heading;
         reasonsCopy.textContent    = data.copy;
         reasonsFeatureList.innerHTML = data.features
-          .map(f => `<div class="reasons-feature">${f}</div>`)
+          .map(f => `<div class="reasons-feature"><i class="fa-solid fa-check"></i><span>${f}</span></div>`)
           .join('');
 
         // Fade in
@@ -1989,6 +2183,11 @@
         contentCol.style.opacity = '1';
       }, 220);
     }
+
+    // Initialize first reason
+    reasonsFeatureList.innerHTML = reasonsData[0].features
+      .map(f => `<div class="reasons-feature"><i class="fa-solid fa-check"></i><span>${f}</span></div>`)
+      .join('');
 
     reasonsTabBtns.forEach((btn, i) => {
       btn.addEventListener('click', () => switchReason(i));
@@ -2003,6 +2202,207 @@
         closePanoModal();
       }
     });
+
+    // ===== EDIT MODE (Ctrl + Shift + E) =====
+    const editToggleBtn = document.getElementById('edit-mode-btn');
+
+    function setEditMode(on) {
+      document.designMode = on ? 'on' : 'off';
+      editToggleBtn.classList.toggle('active', on);
+      editToggleBtn.title = on ? 'Exit Edit Mode (Ctrl+Shift+E)' : 'Enter Edit Mode (Ctrl+Shift+E)';
+      editToggleBtn.querySelector('.edit-mode-label').textContent = on ? 'Editing' : 'Edit Page';
+      // Show a reminder toast
+      showToast(on
+        ? '✏️ Edit mode ON — click any text to edit'
+        : '✅ Edit mode OFF — changes are live until you refresh'
+      );
+    }
+
+    editToggleBtn.addEventListener('click', () => {
+      setEditMode(document.designMode !== 'on');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+        e.preventDefault();
+        setEditMode(document.designMode !== 'on');
+      }
+    });
+
+    // ===== INSTAGRAM IMAGE SLIDER =====
+    (function () {
+      const track    = document.getElementById('insta-slider-track');
+      const wrapper  = document.getElementById('insta-slider-wrapper');
+      const prevBtn  = document.getElementById('insta-prev');
+      const nextBtn  = document.getElementById('insta-next');
+      const dotsWrap = document.getElementById('insta-dots');
+
+      if (!track) return;
+
+      const slides  = Array.from(track.querySelectorAll('.insta-slide'));
+      const TOTAL   = slides.length;
+      const AUTO_MS = 3000;
+      let current   = 0;
+      let timer     = null;
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'insta-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+        d.addEventListener('click', () => { goTo(i); restartTimer(); });
+        dotsWrap.appendChild(d);
+      });
+
+      function syncDots() {
+        dotsWrap.querySelectorAll('.insta-dot')
+          .forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        current = (idx + TOTAL) % TOTAL;
+        slides[current].classList.add('active');
+        syncDots();
+      }
+
+      function restartTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => goTo(current + 1), AUTO_MS);
+      }
+
+      prevBtn.addEventListener('click', () => { goTo(current - 1); restartTimer(); });
+      nextBtn.addEventListener('click', () => { goTo(current + 1); restartTimer(); });
+
+      // Pause on hover
+      wrapper.addEventListener('mouseenter', () => clearInterval(timer));
+      wrapper.addEventListener('mouseleave', restartTimer);
+
+      // Touch swipe
+      let tx = 0;
+      wrapper.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+      wrapper.addEventListener('touchend', e => {
+        const diff = tx - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); restartTimer(); }
+      }, { passive: true });
+
+      restartTimer();
+    })();
+
+    // ===== SCROLL-TRIGGERED TRIP DURATION POPUP =====
+    (function () {
+      const overlay       = document.getElementById('scroll-popup-overlay');
+      const closeBtn      = document.getElementById('scroll-popup-close');
+      const skipBtn       = document.getElementById('popup-skip');
+      const customBtn     = document.getElementById('popup-custom-btn');
+      const optionBtns    = document.querySelectorAll('.popup-option-btn');
+
+      if (!overlay) return;
+
+      // Only show once per session
+      const STORAGE_KEY = 'tripPopupSeen';
+      let popupShown = sessionStorage.getItem(STORAGE_KEY);
+
+      // Trigger when user has scrolled 35% down the page
+      const SCROLL_THRESHOLD = 0.35;
+      let triggered = false;
+
+      function openPopup() {
+        if (triggered || popupShown) return;
+        triggered = true;
+        popupShown = true;
+        sessionStorage.setItem(STORAGE_KEY, '1');
+        overlay.classList.add('visible');
+      }
+
+      function closePopup() {
+        overlay.classList.remove('visible');
+      }
+
+      // Scroll listener
+      function onScroll() {
+        const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        if (scrolled >= SCROLL_THRESHOLD) {
+          // Small delay so it feels natural, not instant
+          setTimeout(openPopup, 600);
+          window.removeEventListener('scroll', onScroll);
+        }
+      }
+
+      if (!popupShown) {
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      // Close actions
+      closeBtn.addEventListener('click', closePopup);
+      skipBtn.addEventListener('click', closePopup);
+
+      // Close on overlay background click
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closePopup();
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePopup();
+      });
+
+      // Option button selection
+      optionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Highlight selected
+          optionBtns.forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+
+          const nights = btn.dataset.nights;
+
+          // Map to duration pill index (4 nights → pill 0, 5 nights → pill 1)
+          const pillIndex = nights === '4' ? 0 : 1;
+          const pills = document.querySelectorAll('.duration-pill');
+          if (pills.length) {
+            pills.forEach(p => p.classList.remove('selected'));
+            if (pills[pillIndex]) pills[pillIndex].classList.add('selected');
+          }
+
+          // Also activate the matching package tab filter
+          const allPackageCards = document.querySelectorAll('.package-card');
+          const tourTabs = document.querySelectorAll('.tab-btn');
+          tourTabs.forEach(t => {
+            t.classList.toggle('active', t.dataset.tab === 'all');
+          });
+          allPackageCards.forEach(card => {
+            const match = card.dataset.duration === nights;
+            card.style.display = match ? '' : 'none';
+            if (match) card.style.animation = 'fadeInUp 0.5s ease forwards';
+          });
+
+          // Show confirmation toast
+          showToast(`✅ Great! Showing ${nights}-night Bali packages for you.`);
+
+          // Close popup after brief pause so user sees the selection
+          setTimeout(() => {
+            closePopup();
+            // Smooth scroll to packages
+            const packagesSection = document.getElementById('packages');
+            if (packagesSection) {
+              setTimeout(() => packagesSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+            }
+          }, 700);
+        });
+      });
+
+      // Custom duration button — close popup and scroll to duration selector
+      customBtn.addEventListener('click', () => {
+        closePopup();
+        const durationSection = document.querySelector('.destinations');
+        if (durationSection) {
+          setTimeout(() => durationSection.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+        }
+      });
+    })();
   </script>
+
+  </div><!-- /#main-content -->
+
 </body>
 </html>
