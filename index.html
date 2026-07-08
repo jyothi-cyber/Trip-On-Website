@@ -216,27 +216,26 @@
     <div class="container">
       <div class="duration-row">
         <div class="duration-copy">
-          <h2>How many days you <br>planning to travel?</h2>
+          <h2>How many days are you<br>planning to travel?</h2>
         </div>
-        <div class="duration-buttons">
-          <button class="duration-pill duration-pill-1">4 Days</button>
-          <button class="duration-pill duration-pill-2">5 Days</button>
-          <button class="duration-pill duration-pill-3">Custom</button>
-        </div>
-        <div class="duration-nav">
-          <button class="duration-nav-btn duration-nav-left" aria-label="Previous selection">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 12H16" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <button class="duration-nav-btn duration-nav-right" aria-label="Next selection">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="22" cy="22" r="20" fill="none" stroke="#e5e5ea" stroke-width="2"/>
-              <path d="M18 15L26 22L18 29" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M18 22H26" stroke="#e5e5ea" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
+        <div class="duration-controls">
+          <div class="duration-buttons">
+            <button class="duration-pill duration-pill-1">4 Days</button>
+            <button class="duration-pill duration-pill-2">5 Days</button>
+            <button class="duration-pill duration-pill-3">Custom</button>
+          </div>
+          <div class="duration-nav">
+            <button class="duration-nav-btn duration-nav-left" aria-label="Previous selection">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="duration-nav-btn duration-nav-right" aria-label="Next selection">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -414,12 +413,12 @@
         <h2 class="section-title">What Do They Say About Us?</h2>
         <p class="section-desc">Of course we have to appreciate ourselves for planning purpose-driven trips for 100+ customers.</p>
         <div class="testimonial-links">
-          <div class="testimonial-link">
+          <div class="testimonial-link" id="instagram-link">
             <i class="fa-brands fa-instagram"></i>
             <span>Instagram</span>
           </div>
           <span class="testimonial-divider">&amp;</span>
-          <div class="testimonial-link">
+          <div class="testimonial-link" id="tripadvisor-link">
             <span class="tripadvisor-icon" aria-label="Tripadvisor logo">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm4.43 5.7c.25.5.38 1.03.38 1.6 0 2.21-1.79 4-4 4-2.21 0-4-1.79-4-4 0-.57.13-1.1.38-1.6-.34-.16-.71-.26-1.11-.26-1.37 0-2.5 1.12-2.5 2.5 0 .48.15.93.4 1.3-.08.4-.13.82-.13 1.26 0 2.76 2.24 5 5 5s5-2.24 5-5c0-.44-.05-.86-.13-1.26.25-.37.4-.82.4-1.3 0-1.38-1.12-2.5-2.5-2.5-.4 0-.77.1-1.11.26z" fill="#007846"/>
@@ -602,7 +601,7 @@
                 Bring Yourown Heat With Up To 35% Off
                 Lumin Brand.
             </p>
-            <a href="#contact" class="btn book-btn">Book A Trip</a>
+            <a href="#contact" class="btn book-btn" id="book-trip-btn">Book A Trip</a>
         </div>
         <div class="plane-box bottom-plane">
             <i class="fa-solid fa-plane"></i>
@@ -623,7 +622,7 @@
   </section>
 
   <!-- Priorities Section -->
-  <section class="priority-section">
+  <section class="priority-section" id="why-choose-us">
     <div class="priority-container">
         <!-- Left Side -->
         <div class="priority-left">
@@ -902,7 +901,7 @@
     </div>
 
     <div class="blog-btn">
-      <a href="#">Want to know more!</a>
+      <a href="#" id="want-know-more-btn">Want to know more!</a>
     </div>
   </section>
 
@@ -937,7 +936,7 @@
   <section class="instagram">
     <div class="heading">
         <h2>Instagram</h2>
-        <p>Follow Us On @tripon</p>
+        <p>Follow Us On <span id="tripon-link" class="tripon-clickable"></span>@tripon</span></p>
     </div>
 
     <!-- Slider wrapper -->
@@ -979,25 +978,27 @@
       <div class="footer-logo">
           <h1>tripon</h1>
       </div>
-      <div class="links">
-          <a href="#home">About</a>
-          <a href="#blogs">Blogs</a>
+      <div class="footer-nav">
+        <div class="footer-column">
+          <a href="#" id="footer-about">About</a>
+          <a href="#blogs" id="footer-blogs">Blogs</a>
+        </div>
+        <div class="footer-column">
+          <a href="#services" id="footer-locations">Locations</a>
+          <a href="#packages" id="footer-packages">Packages</a>
+        </div>
+        <div class="footer-column">
+          <a href="#" id="footer-careers">Careers</a>
+          <a href="#contact" id="footer-contact">Contact Us</a>
+        </div>
       </div>
-      <div class="links">
-          <a href="#services">Locations</a>
-          <a href="#packages">Packages</a>
-      </div>
-      <div class="links">
-          <a href="#">Careers</a>
-          <a href="#contact">Contact Us</a>
-      </div>
-      <div class="social">
+      <div class="footer-social">
           <h4>FOLLOW OUR TRAVELER COMMUNITY</h4>
-          <div class="icons">
-              <i class="fa-brands fa-x-twitter"></i>
-              <i class="fa-brands fa-facebook"></i>
-              <i class="fa-brands fa-instagram"></i>
-              <i class="fa-brands fa-youtube"></i>
+          <div class="social-icons">
+              <i class="fa-brands fa-x-twitter" id="footer-twitter"></i>
+              <i class="fa-brands fa-facebook" id="footer-facebook"></i>
+              <i class="fa-brands fa-instagram" id="footer-instagram"></i>
+              <i class="fa-brands fa-youtube" id="footer-youtube"></i>
           </div>
       </div>
     </div>
@@ -1042,15 +1043,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Edit Mode Toggle Button -->
-  <button id="edit-mode-btn" title="Enter Edit Mode (Ctrl+Shift+E)" aria-label="Toggle page edit mode">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-    </svg>
-    <span class="edit-mode-label">Edit Page</span>
-  </button>
 
   <!-- Scroll Popup: Trip Duration -->
   <div class="scroll-popup-overlay" id="scroll-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="scroll-popup-title">
@@ -1361,7 +1353,7 @@
             heading: "Festivals",
             copy: "Bali's calendar is packed with vibrant festivals celebrated with colourful processions, offerings, and music. From Nyepi (the Day of Silence) to Galungan and Kuningan, every festival gives you a rare window into living Balinese traditions.",
             features: ["Hindu Ceremonies", "Colourful Processions", "Gamelan Music"],
-            img: "assets/images/kuchipudi image.png",
+            img: "assets/images/festival.png",
             alt: "Bali festivals"
           },
           {
@@ -1369,7 +1361,7 @@
             heading: "Culture",
             copy: "This is a unique blend of Hindu, Muslim and Buddhist culture. These people live together very harmoniously. Visit the ancient temples and mosques for a deeper understanding of their rich religions and daily spiritual practices.",
             features: ["Ancient Temples", "Sacred Traditions", "Local Art & Craft"],
-            img: "assets/images/ubud2.png",
+            img: "assets/images/kuchipudi image.png",
             alt: "Bali culture"
           },
           {
@@ -1377,7 +1369,7 @@
             heading: "Peace and Quiet",
             copy: "Escape the noise of everyday life in Bali's serene rice terraces, tranquil jungle retreats, and silent mountain villages. Whether you are meditating at a hillside temple or relaxing in a private villa, Bali offers true inner calm.",
             features: ["Rice Terrace Walks", "Silent Retreats", "Jungle Hideaways"],
-            img: "assets/images/ubud.png",
+            img: "assets/images/peace.png",
             alt: "Peace and quiet in Bali"
           },
           {
@@ -1385,7 +1377,7 @@
             heading: "Romantic Ambience",
             copy: "From candlelit clifftop dinners overlooking the Indian Ocean to private infinity pools at sunset, Bali is tailor-made for romance. Couples love the intimate resorts, flower-strewn villas, and intimate beachside experiences.",
             features: ["Sunset Dinners", "Private Villas", "Couples Spa"],
-            img: "assets/images/beach.png",
+            img: "assets/images/romantic.png",
             alt: "Romantic Bali"
           },
           {
@@ -1393,7 +1385,7 @@
             heading: "Ease of Travel",
             copy: "With visa-on-arrival for most nationalities, well-connected transport, friendly English-speaking locals, and countless organised tour options, moving around Bali is completely effortless — ideal for first-time and seasoned travellers alike.",
             features: ["Visa on Arrival", "Affordable Transport", "Friendly Locals"],
-            img: "assets/images/indonesia.png",
+            img: "assets/images/ease.png",
             alt: "Easy travel in Bali"
           }
         ]
@@ -1613,6 +1605,53 @@
       if (panoramaSubtitle) panoramaSubtitle.textContent = SITE_CONTENT.panoramaModal.subtitle;
     }
 
+    // ===== HERO BACKGROUND IMAGE SLIDESHOW =====
+    (function() {
+      const heroSection = document.querySelector('.hero');
+      if (!heroSection) return;
+
+      const heroImages = [
+        'assets/images/bggg.png',
+        'assets/images/adventure2.png',
+        'assets/images/image1.png',
+        'assets/images/peace.png'
+      ];
+
+      let currentImageIndex = 0;
+      let nextImageIndex = 1;
+
+      // Create a second background layer for crossfade effect
+      const fadeLayer = document.createElement('div');
+      fadeLayer.className = 'hero-bg-fade';
+      heroSection.insertBefore(fadeLayer, heroSection.firstChild);
+
+      function changeHeroBackground() {
+        nextImageIndex = (currentImageIndex + 1) % heroImages.length;
+        
+        // Set the next image in the fade layer
+        fadeLayer.style.backgroundImage = `url('${heroImages[nextImageIndex]}')`;
+        
+        // Trigger fade in
+        setTimeout(() => {
+          fadeLayer.classList.add('fading-in');
+        }, 50);
+
+        // After fade completes, update the main background and reset fade layer
+        setTimeout(() => {
+          heroSection.style.backgroundImage = `url('${heroImages[nextImageIndex]}')`;
+          fadeLayer.classList.remove('fading-in');
+          fadeLayer.style.backgroundImage = '';
+          currentImageIndex = nextImageIndex;
+        }, 1500);
+      }
+
+      // Set initial background
+      heroSection.style.backgroundImage = `url('${heroImages[0]}')`;
+
+      // Change background every 5 seconds
+      setInterval(changeHeroBackground, 5000);
+    })();
+
     // Apply content on page load
     applyContent();
 
@@ -1792,6 +1831,11 @@
     const nextBtn = document.getElementById('testimonial-next');
     const dotsContainer = document.getElementById('testimonial-dots');
     let currentPage = 0;
+    let autoSlideInterval;
+
+    // Hide navigation arrows
+    if (prevBtn) prevBtn.style.display = 'none';
+    if (nextBtn) nextBtn.style.display = 'none';
 
     function getItemsPerPage() {
       if (window.innerWidth <= 480) return 1;
@@ -1831,27 +1875,42 @@
         dot.addEventListener('click', () => {
           currentPage = i;
           updateCarousel();
+          resetAutoSlide();
         });
         dotsContainer.appendChild(dot);
       }
     }
 
-    prevBtn.addEventListener('click', () => {
-      if (currentPage > 0) {
-        currentPage--;
-        updateCarousel();
-      }
-    });
+    function nextSlide() {
+      const totalPages = getTotalPages();
+      currentPage = (currentPage + 1) % totalPages;
+      updateCarousel();
+    }
 
-    nextBtn.addEventListener('click', () => {
-      if (currentPage < getTotalPages() - 1) {
-        currentPage++;
-        updateCarousel();
-      }
-    });
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 4000); // Auto-slide every 4 seconds
+    }
+
+    // Initialize carousel and start auto-slide
+    updateCarousel();
+    startAutoSlide();
+
+    // Pause auto-slide on hover
+    if (testimonialsGrid) {
+      testimonialsGrid.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
+      });
+      testimonialsGrid.addEventListener('mouseleave', () => {
+        startAutoSlide();
+      });
+    }
 
     window.addEventListener('resize', updateCarousel);
-    updateCarousel();
 
     // ===== CONTACT US MODAL =====
     const contactBtn = document.getElementById('contact-us-btn');
@@ -1860,8 +1919,8 @@
     const contactForm = document.getElementById('contact-form');
     const contactSuccessMsg = document.getElementById('contact-success-msg');
 
-    // Also open contact from mobile menu
-    document.querySelectorAll('.mobile-contact-btn, a[href="#contact"]').forEach(el => {
+    // Also open contact from mobile menu (exclude book-trip button)
+    document.querySelectorAll('.mobile-contact-btn, a[href="#contact"]:not(#book-trip-btn)').forEach(el => {
       el.addEventListener('click', (e) => {
         e.preventDefault();
         closeMobileMenu();
@@ -2451,32 +2510,6 @@
       }
     });
 
-    // ===== EDIT MODE (Ctrl + Shift + E) =====
-    const editToggleBtn = document.getElementById('edit-mode-btn');
-
-    function setEditMode(on) {
-      document.designMode = on ? 'on' : 'off';
-      editToggleBtn.classList.toggle('active', on);
-      editToggleBtn.title = on ? 'Exit Edit Mode (Ctrl+Shift+E)' : 'Enter Edit Mode (Ctrl+Shift+E)';
-      editToggleBtn.querySelector('.edit-mode-label').textContent = on ? 'Editing' : 'Edit Page';
-      // Show a reminder toast
-      showToast(on
-        ? '✏️ Edit mode ON — click any text to edit'
-        : '✅ Edit mode OFF — changes are live until you refresh'
-      );
-    }
-
-    editToggleBtn.addEventListener('click', () => {
-      setEditMode(document.designMode !== 'on');
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.shiftKey && e.key === 'E') {
-        e.preventDefault();
-        setEditMode(document.designMode !== 'on');
-      }
-    });
-
     // ===== MOBILE HERO FORM =====
     (function () {
       const pill     = document.getElementById('hero-mobile-pill');
@@ -2536,6 +2569,821 @@
     })();
 
     
+    // ===== MORE BLOGS BUTTON NAVIGATION =====
+    const moreBlogsBtn = document.getElementById('reasons-more-blogs-btn');
+    if (moreBlogsBtn) {
+      moreBlogsBtn.addEventListener('click', () => {
+        const blogsSection = document.getElementById('blogs');
+        if (blogsSection) {
+          blogsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // ===== TESTIMONIAL SOCIAL LINKS NAVIGATION =====
+    // Instagram link - shows confirmation popup
+    const instagramLink = document.getElementById('instagram-link');
+    if (instagramLink) {
+      instagramLink.addEventListener('click', () => {
+        showSocialPopup('Instagram', 'https://www.instagram.com/tripon');
+      });
+    }
+
+    // Tripadvisor link - shows confirmation popup
+    const tripadvisorLink = document.getElementById('tripadvisor-link');
+    if (tripadvisorLink) {
+      tripadvisorLink.addEventListener('click', () => {
+        showSocialPopup('Tripadvisor', 'https://www.tripadvisor.com/');
+      });
+    }
+
+    // Social popup function
+    function showSocialPopup(platform, url) {
+      const popup = document.createElement('div');
+      popup.className = 'social-popup-overlay';
+      popup.innerHTML = `
+        <div class="social-popup">
+          <div class="social-popup-icon">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </div>
+          <h3>Visit ${platform}?</h3>
+          <p>You are about to visit our ${platform} page. Do you want to continue?</p>
+          <div class="social-popup-actions">
+            <button class="social-popup-btn social-popup-cancel">Cancel</button>
+            <button class="social-popup-btn social-popup-confirm">Yes, Visit ${platform}</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      // Animate in
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      // Cancel button
+      popup.querySelector('.social-popup-cancel').addEventListener('click', () => {
+        popup.classList.remove('active');
+        setTimeout(() => {
+          document.body.removeChild(popup);
+          document.body.style.overflow = '';
+        }, 300);
+      });
+
+      // Confirm button
+      popup.querySelector('.social-popup-confirm').addEventListener('click', () => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+        popup.classList.remove('active');
+        setTimeout(() => {
+          document.body.removeChild(popup);
+          document.body.style.overflow = '';
+        }, 300);
+      });
+
+      // Close on overlay click
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+          popup.classList.remove('active');
+          setTimeout(() => {
+            document.body.removeChild(popup);
+            document.body.style.overflow = '';
+          }, 300);
+        }
+      });
+    }
+
+    // Add navigation to Testimonial badge
+    const testimonialBadge = document.querySelector('.testimonial-badge');
+    if (testimonialBadge) {
+      testimonialBadge.style.cursor = 'pointer';
+      testimonialBadge.addEventListener('click', () => {
+        const testimonialSection = document.getElementById('testimonials');
+        if (testimonialSection) {
+          testimonialSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // Add navigation to Why Choose Us badge
+    const whyChooseBadge = document.querySelector('.why-choose-box');
+    if (whyChooseBadge) {
+      whyChooseBadge.style.cursor = 'pointer';
+      whyChooseBadge.addEventListener('click', () => {
+        const whyChooseSection = document.getElementById('why-choose-us');
+        if (whyChooseSection) {
+          whyChooseSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // Add navigation to "Want to know more" button
+    const wantKnowMoreBtn = document.getElementById('want-know-more-btn');
+    if (wantKnowMoreBtn) {
+      wantKnowMoreBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const blogsSection = document.getElementById('blogs');
+        if (blogsSection) {
+          // Scroll to top of blogs section
+          blogsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // ===== FOOTER NAVIGATION =====
+    // About - Shows About Us popup with tabs
+    const footerAbout = document.getElementById('footer-about');
+    if (footerAbout) {
+      footerAbout.addEventListener('click', (e) => {
+        e.preventDefault();
+        showAboutPopup();
+      });
+    }
+
+    // Blogs - Shows confirmation popup
+    const footerBlogs = document.getElementById('footer-blogs');
+    if (footerBlogs) {
+      footerBlogs.addEventListener('click', (e) => {
+        e.preventDefault();
+        showBlogsConfirmPopup();
+      });
+    }
+
+    // Locations - Shows location confirmation popup
+    const footerLocations = document.getElementById('footer-locations');
+    if (footerLocations) {
+      footerLocations.addEventListener('click', (e) => {
+        e.preventDefault();
+        showLocationPopup();
+      });
+    }
+
+    // Packages - Shows confirmation popup
+    const footerPackages = document.getElementById('footer-packages');
+    if (footerPackages) {
+      footerPackages.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPackagesConfirmPopup();
+      });
+    }
+
+    // Careers - Shows careers message popup
+    const footerCareers = document.getElementById('footer-careers');
+    if (footerCareers) {
+      footerCareers.addEventListener('click', (e) => {
+        e.preventDefault();
+        showCareersPopup();
+      });
+    }
+
+    // Contact Us - Opens contact modal
+    const footerContact = document.getElementById('footer-contact');
+    if (footerContact) {
+      footerContact.addEventListener('click', (e) => {
+        e.preventDefault();
+        openContactModal();
+      });
+    }
+
+    // About Us Popup with Tabs
+    function showAboutPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'about-popup-overlay';
+      popup.innerHTML = `
+        <div class="about-popup">
+          <button class="about-popup-close" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div class="about-popup-icon">
+            <i class="fa-solid fa-circle-info"></i>
+          </div>
+          <h3>About Trip On</h3>
+          
+          <div class="about-tabs">
+            <button class="about-tab active" data-tab="who">Who You Are</button>
+            <button class="about-tab" data-tab="what">What You Do</button>
+            <button class="about-tab" data-tab="team">Your Team</button>
+          </div>
+
+          <div class="about-content">
+            <div class="about-tab-content active" id="about-who">
+              <h4>Who We Are</h4>
+              <p>Trip On is your trusted travel companion for exploring the beautiful island of Bali. We are passionate travel experts dedicated to creating unforgettable experiences in Indonesia's most beloved destination.</p>
+              <p>With years of local expertise and a deep love for Balinese culture, we bring authentic travel experiences to adventurers from around the world.</p>
+            </div>
+
+            <div class="about-tab-content" id="about-what">
+              <h4>What We Do</h4>
+              <p>We specialize in curating personalized Bali travel experiences that go beyond the ordinary tourist routes. Our services include:</p>
+              <ul>
+                <li><i class="fa-solid fa-check"></i> Custom tour packages tailored to your interests</li>
+                <li><i class="fa-solid fa-check"></i> Cultural immersion experiences</li>
+                <li><i class="fa-solid fa-check"></i> Adventure activities and nature tours</li>
+                <li><i class="fa-solid fa-check"></i> Accommodation booking and travel planning</li>
+                <li><i class="fa-solid fa-check"></i> Local guide services</li>
+              </ul>
+            </div>
+
+            <div class="about-tab-content" id="about-team">
+              <h4>Your Team</h4>
+              <p>Our team consists of experienced travel professionals, local Balinese guides, and adventure enthusiasts who share a common goal: making your Bali journey extraordinary.</p>
+              <p>Every team member brings unique insights, whether it's knowledge of hidden temples, the best surf spots, authentic local cuisine, or the most breathtaking sunset viewpoints.</p>
+              <p>We're not just tour operators – we're your friends in Bali, ready to share the magic of this island paradise with you.</p>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      const tabs = popup.querySelectorAll('.about-tab');
+      const contents = popup.querySelectorAll('.about-tab-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetTab = tab.dataset.tab;
+          
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+          
+          tab.classList.add('active');
+          popup.querySelector(`#about-${targetTab}`).classList.add('active');
+        });
+      });
+
+      const closeBtn = popup.querySelector('.about-popup-close');
+      closeBtn.addEventListener('click', () => closeGenericPopup(popup));
+
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) closeGenericPopup(popup);
+      });
+    }
+
+    // Blogs Confirmation Popup
+    function showBlogsConfirmPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'confirm-popup-overlay';
+      popup.innerHTML = `
+        <div class="confirm-popup">
+          <div class="confirm-popup-icon">
+            <i class="fa-solid fa-blog"></i>
+          </div>
+          <h3>Visit Blogs Section?</h3>
+          <p>Would you like to explore our Bali travel blogs and stories?</p>
+          <div class="confirm-popup-actions">
+            <button class="confirm-popup-btn confirm-popup-cancel">Cancel</button>
+            <button class="confirm-popup-btn confirm-popup-confirm">Yes, Take Me There</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      const cancelBtn = popup.querySelector('.confirm-popup-cancel');
+      const confirmBtn = popup.querySelector('.confirm-popup-confirm');
+
+      cancelBtn.addEventListener('click', () => closeGenericPopup(popup));
+
+      confirmBtn.addEventListener('click', () => {
+        closeGenericPopup(popup);
+        const blogsSection = document.getElementById('blogs');
+        if (blogsSection) {
+          setTimeout(() => {
+            blogsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      });
+
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) closeGenericPopup(popup);
+      });
+    }
+
+    // Packages Confirmation Popup
+    function showPackagesConfirmPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'confirm-popup-overlay';
+      popup.innerHTML = `
+        <div class="confirm-popup">
+          <div class="confirm-popup-icon">
+            <i class="fa-solid fa-box-open"></i>
+          </div>
+          <h3>Visit Packages Section?</h3>
+          <p>Are you going to visit package section?</p>
+          <div class="confirm-popup-actions">
+            <button class="confirm-popup-btn confirm-popup-cancel">No</button>
+            <button class="confirm-popup-btn confirm-popup-confirm">Yes</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      const cancelBtn = popup.querySelector('.confirm-popup-cancel');
+      const confirmBtn = popup.querySelector('.confirm-popup-confirm');
+
+      cancelBtn.addEventListener('click', () => closeGenericPopup(popup));
+
+      confirmBtn.addEventListener('click', () => {
+        closeGenericPopup(popup);
+        const packagesSection = document.getElementById('packages');
+        if (packagesSection) {
+          setTimeout(() => {
+            packagesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      });
+
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) closeGenericPopup(popup);
+      });
+    }
+
+    // Careers Popup
+    function showCareersPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'careers-popup-overlay';
+      popup.innerHTML = `
+        <div class="careers-popup">
+          <div class="careers-popup-icon">
+            <i class="fa-solid fa-plane-departure"></i>
+          </div>
+          <h3>Career Opportunities</h3>
+          <p class="careers-message">Our hiring team is currently out exploring! We don't have any career openings right now, but since you're here, why not take a look at our virtual 3D tour of Bali?</p>
+          <div class="careers-popup-actions">
+            <button class="careers-popup-btn careers-popup-cancel">Maybe Later</button>
+            <button class="careers-popup-btn careers-popup-tour">View 3D Tour</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      const cancelBtn = popup.querySelector('.careers-popup-cancel');
+      const tourBtn = popup.querySelector('.careers-popup-tour');
+
+      cancelBtn.addEventListener('click', () => closeGenericPopup(popup));
+
+      tourBtn.addEventListener('click', () => {
+        closeGenericPopup(popup);
+        // Open the 3D panorama modal
+        setTimeout(() => {
+          openPanoModal();
+        }, 300);
+      });
+
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) closeGenericPopup(popup);
+      });
+    }
+
+    // Generic popup close function
+    function closeGenericPopup(popup) {
+      popup.classList.remove('active');
+      setTimeout(() => {
+        if (popup.parentNode) {
+          document.body.removeChild(popup);
+        }
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    // Location Popup Function (keeping existing)
+    function showLocationPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'location-popup-overlay';
+      popup.innerHTML = `
+        <div class="location-popup">
+          <div class="location-popup-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <h3>Bali Location</h3>
+          <p>Would you like to know the exact location of Bali?</p>
+          <div class="location-popup-actions">
+            <button class="location-popup-btn location-popup-no">No, Thanks</button>
+            <button class="location-popup-btn location-popup-yes">Yes, Show Me</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      const noBtn = popup.querySelector('.location-popup-no');
+      const yesBtn = popup.querySelector('.location-popup-yes');
+
+      function closePopup() {
+        popup.classList.remove('active');
+        setTimeout(() => {
+          document.body.removeChild(popup);
+          document.body.style.overflow = '';
+        }, 300);
+      }
+
+      // No button
+      noBtn.addEventListener('click', closePopup);
+
+      // Yes button - Show location details
+      yesBtn.addEventListener('click', () => {
+        popup.querySelector('.location-popup').innerHTML = `
+          <div class="location-popup-icon">
+            <i class="fa-solid fa-map-marked-alt"></i>
+          </div>
+          <h3>Bali, Indonesia</h3>
+          <div class="location-details">
+            <div class="location-item">
+              <i class="fa-solid fa-globe"></i>
+              <div>
+                <strong>Coordinates</strong>
+                <p>8.3405° S, 115.0920° E</p>
+              </div>
+            </div>
+            <div class="location-item">
+              <i class="fa-solid fa-map-pin"></i>
+              <div>
+                <strong>Location</strong>
+                <p>Island Province in Indonesia</p>
+              </div>
+            </div>
+            <div class="location-item">
+              <i class="fa-solid fa-city"></i>
+              <div>
+                <strong>Capital</strong>
+                <p>Denpasar</p>
+              </div>
+            </div>
+            <div class="location-item">
+              <i class="fa-solid fa-earth-asia"></i>
+              <div>
+                <strong>Region</strong>
+                <p>Southeast Asia, Lesser Sunda Islands</p>
+              </div>
+            </div>
+          </div>
+          <button class="location-popup-btn location-popup-close">Close</button>
+        `;
+
+        const closeBtn = popup.querySelector('.location-popup-close');
+        closeBtn.addEventListener('click', closePopup);
+      });
+
+      // Close on overlay click
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) closePopup();
+      });
+    }
+
+    // Footer social media icons with popups (reusing existing showSocialPopup function)
+    const socialLinks = {
+      'footer-twitter': { name: 'X (Twitter)', url: 'https://twitter.com/tripon' },
+      'footer-facebook': { name: 'Facebook', url: 'https://facebook.com/tripon' },
+      'footer-instagram': { name: 'Instagram', url: 'https://instagram.com/tripon' },
+      'footer-youtube': { name: 'YouTube', url: 'https://youtube.com/@tripon' }
+    };
+
+    Object.keys(socialLinks).forEach(iconId => {
+      const icon = document.getElementById(iconId);
+      if (icon) {
+        icon.addEventListener('click', () => {
+          const social = socialLinks[iconId];
+          showSocialPopup(social.name, social.url);
+        });
+      }
+    });
+
+    // ===== @TRIPON TRIP CHOICE POPUP =====
+    const triponLink = document.getElementById('tripon-link');
+    if (triponLink) {
+      triponLink.addEventListener('click', () => {
+        showTripChoicePopup();
+      });
+    }
+
+    function showTripChoicePopup() {
+      const popup = document.createElement('div');
+      popup.className = 'trip-choice-overlay';
+      popup.innerHTML = `
+        <div class="trip-choice-popup">
+          <button class="trip-choice-close" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div class="trip-choice-icon">
+            <i class="fa-solid fa-earth-asia"></i>
+          </div>
+          <h3>Choose Your Destination</h3>
+          <p>Which trip do you want to visit? Select your dream destination below!</p>
+          <div class="trip-choice-options">
+            <button class="trip-choice-btn trip-choice-bali">
+              <i class="fa-solid fa-umbrella-beach"></i>
+              Bali Trip
+            </button>
+            <button class="trip-choice-btn trip-choice-andaman">
+              <i class="fa-solid fa-water"></i>
+              Andaman Trip
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      const closeBtn = popup.querySelector('.trip-choice-close');
+      const baliBtn = popup.querySelector('.trip-choice-bali');
+      const andamanBtn = popup.querySelector('.trip-choice-andaman');
+
+      function closePopup() {
+        popup.classList.remove('active');
+        setTimeout(() => {
+          if (popup.parentNode) {
+            document.body.removeChild(popup);
+          }
+          document.body.style.overflow = '';
+        }, 300);
+      }
+
+      closeBtn.addEventListener('click', closePopup);
+
+      baliBtn.addEventListener('click', () => {
+        closePopup();
+        // Navigate to Bali trip (current page - scroll to top)
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          showToast('🌴 Welcome to Bali Trip! Explore the paradise.');
+        }, 300);
+      });
+
+      andamanBtn.addEventListener('click', () => {
+        closePopup();
+        // Navigate to Andaman trip (you can change this URL to your Andaman page)
+        setTimeout(() => {
+          showToast('🌊 Redirecting to Andaman Trip...');
+          // Uncomment the line below when you have an Andaman page
+          // window.location.href = 'andaman.html';
+          
+          // For now, show a message
+          setTimeout(() => {
+            alert('Andaman trip page coming soon! 🏝️');
+          }, 500);
+        }, 300);
+      });
+
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) closePopup();
+      });
+
+      document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+          closePopup();
+          document.removeEventListener('keydown', escHandler);
+        }
+      });
+    }
+
+    // ===== BOOKING TRIP POPUP =====
+    const bookTripBtn = document.getElementById('book-trip-btn');
+    if (bookTripBtn) {
+      bookTripBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showBookingConfirmPopup();
+      });
+    }
+
+    // ===== TOP AIRPLANE ICON POPUP =====
+    const topPlaneIcon = document.querySelector('.top-plane');
+    if (topPlaneIcon) {
+      topPlaneIcon.addEventListener('click', () => {
+        showAirplaneBookingPopup();
+      });
+    }
+
+    function showAirplaneBookingPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'airplane-popup-overlay';
+      popup.innerHTML = `
+        <div class="airplane-popup">
+          <div class="airplane-popup-icon">
+            <i class="fa-solid fa-plane-departure"></i>
+          </div>
+          <h3>Book Aeroplane to Bali?</h3>
+          <p>Are you booking aeroplane to visit Bali?</p>
+          <div class="airplane-popup-actions">
+            <button class="airplane-popup-btn airplane-popup-no">No</button>
+            <button class="airplane-popup-btn airplane-popup-yes">Yes, Book Now</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      const noBtn = popup.querySelector('.airplane-popup-no');
+      const yesBtn = popup.querySelector('.airplane-popup-yes');
+
+      function closePopup() {
+        popup.classList.remove('active');
+        setTimeout(() => {
+          document.body.removeChild(popup);
+          document.body.style.overflow = '';
+        }, 300);
+      }
+
+      noBtn.addEventListener('click', closePopup);
+
+      yesBtn.addEventListener('click', () => {
+        closePopup();
+        // Show booking form after short delay
+        setTimeout(() => {
+          showBookingConfirmPopup();
+        }, 300);
+      });
+
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) closePopup();
+      });
+
+      document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+          closePopup();
+          document.removeEventListener('keydown', escHandler);
+        }
+      });
+    }
+
+    function showBookingConfirmPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'booking-confirm-overlay';
+      popup.innerHTML = `
+        <div class="booking-confirm-popup">
+          <div class="booking-confirm-icon">
+            <i class="fa-solid fa-plane-departure"></i>
+          </div>
+          <div class="booking-initial">
+            <h3>Book A Trip?</h3>
+            <p>Would you like to book a trip to Bali with us?</p>
+            <div class="booking-actions">
+              <button class="booking-btn booking-cancel">No, Thanks</button>
+              <button class="booking-btn booking-confirm">Yes, Book Now</button>
+            </div>
+          </div>
+          <div class="booking-form-content booking-form-hidden">
+            <h3>Booking Information</h3>
+            <p>Please fill in your details below</p>
+            <form id="booking-details-form">
+              <div class="booking-form-group">
+                <label for="booking-name">Full Name</label>
+                <input type="text" id="booking-name" placeholder="Enter your full name" required>
+              </div>
+              <div class="booking-form-group">
+                <label for="booking-date">Travel Date</label>
+                <input type="date" id="booking-date" min="${new Date().toISOString().split('T')[0]}" required>
+              </div>
+              <div class="booking-form-group">
+                <label for="booking-destination">Destination</label>
+                <select id="booking-destination" required>
+                  <option value="">Select a destination</option>
+                  <option value="Ubud">Ubud, Bali</option>
+                  <option value="Nusa Penida">Nusa Penida, Bali</option>
+                  <option value="Gili Trawangan">Gili Trawangan, Bali</option>
+                  <option value="Kuta">Kuta, Bali</option>
+                  <option value="Seminyak">Seminyak, Bali</option>
+                  <option value="Custom">Custom Location</option>
+                </select>
+              </div>
+              <button type="submit" class="booking-btn booking-submit">Submit Booking</button>
+            </form>
+          </div>
+          <div class="booking-thank-you">
+            <div class="booking-thank-you-icon">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <h3>Thank You for Booking!</h3>
+            <p>Your trip booking has been received. Our team will contact you shortly with further details.</p>
+            <button class="booking-btn booking-submit" id="booking-close-btn">Close</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(() => popup.classList.add('active'), 10);
+
+      const initialView = popup.querySelector('.booking-initial');
+      const formView = popup.querySelector('.booking-form-content');
+      const thankYouView = popup.querySelector('.booking-thank-you');
+      const cancelBtn = popup.querySelector('.booking-cancel');
+      const confirmBtn = popup.querySelector('.booking-confirm');
+      const form = popup.querySelector('#booking-details-form');
+      const closeBtn = popup.querySelector('#booking-close-btn');
+
+      function closePopup() {
+        popup.classList.remove('active');
+        setTimeout(() => {
+          document.body.removeChild(popup);
+          document.body.style.overflow = '';
+        }, 300);
+      }
+
+      // Cancel button
+      cancelBtn.addEventListener('click', closePopup);
+
+      // Yes, Book Now button
+      confirmBtn.addEventListener('click', () => {
+        initialView.classList.add('booking-form-hidden');
+        formView.classList.remove('booking-form-hidden');
+      });
+
+      // Form submission
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nameInput = document.getElementById('booking-name');
+        const name = nameInput.value.trim();
+        const date = document.getElementById('booking-date').value;
+        const destination = document.getElementById('booking-destination').value;
+
+        // Validate name (letters and spaces only)
+        if (!/^[A-Za-z\s]+$/.test(name)) {
+          showToast('⚠️ Please enter a valid name (letters only)');
+          nameInput.focus();
+          return;
+        }
+
+        if (name && date && destination) {
+          formView.classList.add('booking-form-hidden');
+          thankYouView.classList.add('active');
+        } else {
+          showToast('⚠️ Please fill in all fields');
+        }
+      });
+
+      // Name input validation - letters only
+      const nameInput = popup.querySelector('#booking-name');
+      nameInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+      });
+
+      // Close thank you
+      closeBtn.addEventListener('click', closePopup);
+
+      // Close on overlay click
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+          closePopup();
+        }
+      });
+    }
+
+    // ===== PACKAGES NAVIGATION =====
+    // Navigate to packages section when clicking "Popular Packages" badge
+    const packagesBadge = document.querySelector('.section-badge-popular');
+    if (packagesBadge) {
+      packagesBadge.style.cursor = 'pointer';
+      packagesBadge.addEventListener('click', () => {
+        const packagesSection = document.getElementById('packages');
+        if (packagesSection) {
+          packagesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // Navigate to packages section when clicking "See all" button
+    const seeAllPackagesBtn = document.getElementById('see-all-packages-btn');
+    if (seeAllPackagesBtn) {
+      seeAllPackagesBtn.addEventListener('click', () => {
+        // Reset to show all packages
+        const tourTabs = document.querySelectorAll('.tab-btn');
+        tourTabs.forEach(t => {
+          if (t.dataset.tab === 'all') {
+            t.classList.add('active');
+          } else {
+            t.classList.remove('active');
+          }
+        });
+        
+        // Show all package cards
+        const allPackageCards = document.querySelectorAll('.package-card');
+        allPackageCards.forEach(card => {
+          card.style.display = '';
+          card.style.animation = 'fadeInUp 0.5s ease forwards';
+        });
+
+        // Scroll to top of packages section
+        const packagesSection = document.getElementById('packages');
+        if (packagesSection) {
+          packagesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
     // ===== SCROLL-TRIGGERED TRIP DURATION POPUP =====
     (function () {
       const overlay       = document.getElementById('scroll-popup-overlay');
