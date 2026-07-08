@@ -81,9 +81,9 @@
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <p class="hero-subtitle">Seek Out</p>
+        <p class="hero-subtitle">New Discovery</p>
         <h1>Plan A Trip To<br>Bali!</h1>
-        <p class="hero-tagline">Experience the Great culture in the world.</p>
+        <p class="hero-tagline">Experience the Greatest culture in the world...</p>
         <a href="https://wa.me/?text=Hi%20Trip%20On%2C%20I%27d%20like%20to%20plan%20a%20trip%20to%20Bali" class="hero-cta" target="_blank" rel="noopener noreferrer" id="whatsapp-cta-btn">
           <i class="fa-brands fa-whatsapp"></i>
           Chat Us On Whatsapp
@@ -91,29 +91,37 @@
       </div>
     </div>
 
-    <!-- Search Widget (inside hero, positioned at bottom) -->
+    <!-- Mobile bottom CTA pill (visible on mobile only) -->
+    <div class="hero-mobile-cta-wrap" id="hero-mobile-cta-wrap">
+      <div class="hero-mobile-pill" id="hero-mobile-pill-btn">
+        <span>Book a Trip With Us</span>
+        <span class="hero-mobile-cta-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+    </div>
+
+    <!-- Search Widget (inside hero, positioned at bottom — desktop only) -->
     <div class="search-widget-container">
       <form class="search-widget" id="trip-search-form" novalidate>
         <div class="search-field" id="field-name">
           <div class="search-icon"><i class="fa-solid fa-user"></i></div>
           <div class="search-info">
             <label for="search-name">Name</label>
-            <input type="text" id="search-name" placeholder="Enter Your Name" autocomplete="name">
+            <input type="text" id="search-name" placeholder="Enter Your Name" autocomplete="name" pattern="[A-Za-z\s]+" inputmode="text">
           </div>
         </div>
 
         <div class="search-field" id="field-phone">
           <div class="search-icon"><i class="fa-solid fa-phone"></i></div>
           <div class="search-info">
-            <label for="search-phone">Phone Number</label>
-            <input type="tel" id="search-phone" placeholder="Enter Your Phone Number" autocomplete="tel">
+            <label for="search-phone">Phone</label>
+            <input type="tel" id="search-phone" placeholder="Enter Your Contact" autocomplete="tel" pattern="[0-9]+" inputmode="numeric" maxlength="15">
           </div>
         </div>
 
         <div class="search-field" id="field-date">
           <div class="search-icon"><i class="fa-solid fa-calendar-days"></i></div>
           <div class="search-info">
-            <label for="search-date">Travel On</label>
+            <label for="search-date">Select Date</label>
             <input
               type="date"
               id="search-date"
@@ -125,9 +133,9 @@
         <div class="search-field" id="field-travelers">
           <div class="search-icon"><i class="fa-solid fa-users"></i></div>
           <div class="search-info">
-            <label for="search-passengers">Travelers</label>
+            <label for="search-passengers">00</label>
             <select id="search-passengers">
-              <option value="" disabled selected>No.Of Guests</option>
+              <option value="" disabled selected>No. of Travelers</option>
               <option value="1">1 Person</option>
               <option value="2">2 Persons</option>
               <option value="3">3 Persons</option>
@@ -138,12 +146,12 @@
         </div>
 
         <button type="submit" class="search-btn" id="search-submit-btn" aria-label="Submit trip enquiry">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span>Submit</span>
+          Submit
         </button>
       </form>
     </div>
   </section>
+
 
   <!-- Adventure Services -->
   <section class="adventure section-padding" id="services">
@@ -1080,6 +1088,195 @@
     </div>
   </div>
 
+  <!-- Travel Survey Popup (6 Steps) -->
+  <div class="survey-overlay" id="survey-overlay" role="dialog" aria-modal="true" aria-labelledby="survey-title">
+    <div class="survey-modal" id="survey-modal">
+      <button class="survey-close" id="survey-close" aria-label="Close survey">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Header -->
+      <div class="survey-header">
+        <div class="survey-header-icon">
+          <i class="fa-solid fa-map-location-dot"></i>
+        </div>
+        <p class="survey-badge">TRAVEL SURVEY</p>
+        <h2 class="survey-title" id="survey-title">Help Us Plan Your<br>Perfect Bali Trip!</h2>
+        <p class="survey-desc">Just 6 quick questions to personalize your experience.</p>
+      </div>
+
+      <!-- Steps wrapper -->
+      <div class="survey-steps" id="survey-steps">
+
+        <!-- Step 1: How many nights -->
+        <div class="survey-step active" id="survey-step-1">
+          <p class="survey-question">1 of 6 &nbsp;·&nbsp; How many nights are you planning to stay in Bali?</p>
+          <div class="survey-options">
+            <button class="survey-opt" data-q="1" data-val="2-3">
+              <i class="fa-solid fa-moon"></i> 2-3 Nights
+            </button>
+            <button class="survey-opt" data-q="1" data-val="4-5">
+              <i class="fa-solid fa-calendar-days"></i> 4-5 Nights
+            </button>
+            <button class="survey-opt" data-q="1" data-val="6-7">
+              <i class="fa-solid fa-calendar-week"></i> 6-7 Nights
+            </button>
+            <button class="survey-opt" data-q="1" data-val="8+">
+              <i class="fa-solid fa-calendar"></i> 8+ Nights
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: How many travelers -->
+        <div class="survey-step" id="survey-step-2">
+          <p class="survey-question">2 of 6 &nbsp;·&nbsp; How many travelers will be joining you on this trip?</p>
+          <div class="survey-options">
+            <button class="survey-opt" data-q="2" data-val="1">
+              <i class="fa-solid fa-person"></i> Just Me
+            </button>
+            <button class="survey-opt" data-q="2" data-val="2">
+              <i class="fa-solid fa-user-group"></i> 2 Persons
+            </button>
+            <button class="survey-opt" data-q="2" data-val="3-4">
+              <i class="fa-solid fa-users"></i> 3-4 Persons
+            </button>
+            <button class="survey-opt" data-q="2" data-val="5+">
+              <i class="fa-solid fa-people-group"></i> 5+ Persons
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Travel preferences -->
+        <div class="survey-step" id="survey-step-3">
+          <p class="survey-question">3 of 6 &nbsp;·&nbsp; Share us your travel-specific preferences?</p>
+          <div class="survey-options">
+            <button class="survey-opt" data-q="3" data-val="Beaches">
+              <i class="fa-solid fa-umbrella-beach"></i> Beaches & Relaxation
+            </button>
+            <button class="survey-opt" data-q="3" data-val="Culture">
+              <i class="fa-solid fa-torii-gate"></i> Temples & Culture
+            </button>
+            <button class="survey-opt" data-q="3" data-val="Adventure">
+              <i class="fa-solid fa-person-hiking"></i> Adventure & Trekking
+            </button>
+            <button class="survey-opt" data-q="3" data-val="Wellness">
+              <i class="fa-solid fa-spa"></i> Wellness & Yoga
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 4: Name -->
+        <div class="survey-step" id="survey-step-4">
+          <p class="survey-question">4 of 6 &nbsp;·&nbsp; May we ask for your name, please?</p>
+          <div class="survey-input-group">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="survey-name" placeholder="Enter your full name" autocomplete="name" pattern="[A-Za-z\s]+" inputmode="text">
+          </div>
+          <button class="survey-next-btn" id="survey-next-4">Next <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- Step 5: Phone and Email -->
+        <div class="survey-step" id="survey-step-5">
+          <p class="survey-question">5 of 6 &nbsp;·&nbsp; Enter valid phone number and email?</p>
+          <div class="survey-input-group">
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" id="survey-phone" placeholder="Enter phone number" inputmode="numeric" maxlength="15" pattern="[0-9]+">
+          </div>
+          <div class="survey-input-group">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="survey-email" placeholder="Enter email address" autocomplete="email" inputmode="email">
+          </div>
+          <button class="survey-next-btn" id="survey-next-5">Next <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- Step 6: When to book -->
+        <div class="survey-step" id="survey-step-6">
+          <p class="survey-question">6 of 6 &nbsp;·&nbsp; When would you like to secure your trip reservation?</p>
+          <div class="survey-options">
+            <button class="survey-opt" data-q="6" data-val="Immediately">
+              <i class="fa-solid fa-bolt"></i> Immediately
+            </button>
+            <button class="survey-opt" data-q="6" data-val="1week">
+              <i class="fa-solid fa-calendar-check"></i> Within 1 Week
+            </button>
+            <button class="survey-opt" data-q="6" data-val="1month">
+              <i class="fa-solid fa-calendar-days"></i> Within 1 Month
+            </button>
+            <button class="survey-opt" data-q="6" data-val="Exploring">
+              <i class="fa-solid fa-binoculars"></i> Just Exploring
+            </button>
+          </div>
+        </div>
+
+        <!-- Thank you screen -->
+        <div class="survey-step" id="survey-step-done">
+          <div class="survey-done">
+            <div class="survey-done-icon">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3>Thank You for Filling!</h3>
+            <p>We've received your details and will personalize your Bali experience. Our team will contact you shortly!</p>
+            <button class="survey-done-btn" id="survey-done-btn">
+              <i class="fa-solid fa-compass"></i> Explore Packages
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /.survey-steps -->
+
+      <!-- Progress bar -->
+      <div class="survey-progress-wrap">
+        <div class="survey-progress-bar" id="survey-progress-bar" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Thank You Modal -->
+  <div class="booking-ty-overlay" id="booking-thankyou-overlay">
+    <div class="booking-ty-modal">
+      <button class="booking-ty-close" id="booking-ty-close" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Animated tick -->
+      <div class="booking-ty-icon">
+        <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+          <circle class="booking-ty-circle" cx="26" cy="26" r="24" fill="none" stroke="#0E5A36" stroke-width="2.5"/>
+          <path class="booking-ty-tick" fill="none" stroke="#0E5A36" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M14 27l8 8 16-16"/>
+        </svg>
+      </div>
+
+      <p class="booking-ty-tag">BOOKING CONFIRMED</p>
+      <h2 class="booking-ty-title">Thank You for<br>Your Booking!</h2>
+      <p class="booking-ty-sub">We've received your trip request and our travel experts will get in touch with you shortly.</p>
+
+      <!-- Booking summary card -->
+      <div class="booking-ty-summary">
+        <div class="booking-ty-row">
+          <span><i class="fa-solid fa-user"></i> Traveller</span>
+          <strong id="booking-ty-name">—</strong>
+        </div>
+        <div class="booking-ty-row">
+          <span><i class="fa-solid fa-calendar-days"></i> Travel Date</span>
+          <strong id="booking-ty-date">—</strong>
+        </div>
+        <div class="booking-ty-row">
+          <span><i class="fa-solid fa-users"></i> Guests</span>
+          <strong id="booking-ty-guests">—</strong>
+        </div>
+        <div class="booking-ty-row">
+          <span><i class="fa-solid fa-location-dot"></i> Destination</span>
+          <strong>Bali, Indonesia</strong>
+        </div>
+      </div>
+
+      <button class="booking-ty-btn" id="booking-ty-btn">
+        <i class="fa-solid fa-compass"></i> Explore Packages
+      </button>
+      <p class="booking-ty-note">Our team will call you within 24 hours.</p>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div class="toast-notification" id="toast-notification">
     <i class="fa-solid fa-circle-check"></i>
@@ -1759,25 +1956,11 @@
       const dateObj = new Date(date);
       const formattedDate = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 
-      // Build WhatsApp message with all details
-      const waMessage = encodeURIComponent(
-        `Hi Trip On! 🌴\n\nI'd like to plan a trip to Bali!\n\n` +
-        `👤 Name: ${name}\n` +
-        `📞 Phone: ${phone}\n` +
-        `📅 Travel On: ${formattedDate}\n` +
-        `👥 Travelers: ${guests}\n\n` +
-        `Please help me plan this amazing trip!`
-      );
+      // Show Thank You booking modal
+      showBookingThankyou(name, formattedDate, guests);
 
-      // Show success toast & open WhatsApp
-      showToast(`✅ Thank you ${name}! Redirecting to WhatsApp...`);
-
-      setTimeout(() => {
-        window.open(`https://wa.me/?text=${waMessage}`, '_blank');
-        tripSearchForm.reset();
-        // Clear all error states after reset
-        ['field-name','field-phone','field-date','field-travelers'].forEach(id => setFieldError(id, false));
-      }, 800);
+      tripSearchForm.reset();
+      ['field-name','field-phone','field-date','field-travelers'].forEach(id => setFieldError(id, false));
     });
 
     // ===== SUBSCRIBE FORM =====
@@ -1800,6 +1983,31 @@
         toast.classList.remove('show');
       }, 3500);
     }
+
+    // ===== BOOKING THANK YOU MODAL =====
+    function showBookingThankyou(name, date, guests) {
+      const modal = document.getElementById('booking-thankyou-overlay');
+      document.getElementById('booking-ty-name').textContent   = name;
+      document.getElementById('booking-ty-date').textContent   = date;
+      document.getElementById('booking-ty-guests').textContent = guests;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBookingThankyou() {
+      const modal = document.getElementById('booking-thankyou-overlay');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('booking-ty-close').addEventListener('click', closeBookingThankyou);
+    document.getElementById('booking-ty-btn').addEventListener('click', () => {
+      closeBookingThankyou();
+      document.getElementById('packages').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    document.getElementById('booking-thankyou-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeBookingThankyou();
+    });
 
     // ===== DURATION PILLS & NAVIGATION FUNCTIONALITY =====
     const durationPills = document.querySelectorAll('.duration-pill');
@@ -1924,55 +2132,7 @@
       highlightAdventureCard(0);
     }
 
-
-
-    // ===== HERO BACKGROUND IMAGE SLIDER =====
-    (function () {
-      const heroImages = [
-        'assets/images/hero.png',
-        'assets/images/beach.png',
-        'assets/images/ubud.png',
-        'assets/images/indonesia.png',
-        'assets/images/adventures.png',
-        'assets/images/bggg.png'
-      ];
-
-      const hero = document.querySelector('.hero');
-      if (!hero) return;
-
-      // Create the fade overlay div and inject it as first child
-      const fadeEl = document.createElement('div');
-      fadeEl.className = 'hero-bg-fade';
-      hero.insertBefore(fadeEl, hero.firstChild);
-
-      let currentIndex = 0;
-      const INTERVAL_MS = 4000;   // time between slides
-      const FADE_MS     = 1000;   // must match CSS transition duration
-
-      function nextSlide() {
-        const nextIndex = (currentIndex + 1) % heroImages.length;
-        const nextSrc   = heroImages[nextIndex];
-
-        // Preload next image then crossfade
-        const img = new Image();
-        img.onload = () => {
-          // Set next image on the overlay and fade it in
-          fadeEl.style.backgroundImage = `url('${nextSrc}')`;
-          fadeEl.classList.add('fading-in');
-
-          setTimeout(() => {
-            // Once fully visible, swap it to the hero background and hide overlay
-            hero.style.backgroundImage = `url('${nextSrc}')`;
-            fadeEl.classList.remove('fading-in');
-            fadeEl.style.backgroundImage = '';
-            currentIndex = nextIndex;
-          }, FADE_MS);
-        };
-        img.src = nextSrc;
-      }
-
-      setInterval(nextSlide, INTERVAL_MS);
-    })();
+    // ===== SCROLL ANIMATIONS =====
 
     // ===== SCROLL ANIMATIONS =====
     const observerOptions = {
@@ -1995,40 +2155,6 @@
       observer.observe(el);
     });
 
-    // ===== VIDEO MODAL FUNCTIONALITY =====
-    const videoModalOverlay = document.getElementById('video-modal-overlay');
-    const videoModalClose = document.getElementById('video-modal-close');
-    const videoPlayerIframe = document.getElementById('video-player-iframe');
-    const playControls = document.querySelectorAll('.play-control');
-
-    // Bali travel videos
-    const videoUrls = [
-      "https://www.youtube.com/embed/m85m31b7-mI?autoplay=1", // Video 1: Exploring Bali
-      "https://www.youtube.com/embed/2xp22e519q8?autoplay=1"  // Video 2: Adventures in Bali
-    ];
-
-    playControls.forEach((btn, index) => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const url = videoUrls[index] || videoUrls[0];
-        videoPlayerIframe.src = url;
-        videoModalOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    function closeVideoModal() {
-      if (videoModalOverlay.classList.contains('active')) {
-        videoModalOverlay.classList.remove('active');
-        videoPlayerIframe.src = "";
-        document.body.style.overflow = '';
-      }
-    }
-
-    videoModalClose.addEventListener('click', closeVideoModal);
-    videoModalOverlay.addEventListener('click', (e) => {
-      if (e.target === videoModalOverlay) closeVideoModal();
-    });
 
     // ===== 3D PANORAMA MODAL FUNCTIONALITY =====
     const panoModalOverlay = document.getElementById('panorama-modal-overlay');
@@ -2193,6 +2319,128 @@
       btn.addEventListener('click', () => switchReason(i));
     });
 
+    // ===== MOBILE HERO PILL → OPENS 6-STEP SURVEY =====
+    (function () {
+      const pillBtn = document.getElementById('hero-mobile-pill-btn');
+      const surveyOverlay = document.getElementById('survey-overlay');
+      if (pillBtn && surveyOverlay) {
+        pillBtn.addEventListener('click', () => {
+          surveyOverlay.classList.add('visible');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+    })();
+
+    // ===== TRAVEL SURVEY POPUP (6 STEPS) =====
+    (function () {
+      const overlay   = document.getElementById('survey-overlay');
+      const closeBtn  = document.getElementById('survey-close');
+      const doneBtn   = document.getElementById('survey-done-btn');
+      const progressBar = document.getElementById('survey-progress-bar');
+      if (!overlay) return;
+
+      let currentStep = 1;
+      const totalSteps = 6;
+      const answers = {};
+
+      function closeSurvey() {
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+        // Reset to step 1
+        currentStep = 1;
+        goToStep(1);
+      }
+
+      function goToStep(step) {
+        currentStep = step;
+        document.querySelectorAll('.survey-step').forEach(s => s.classList.remove('active'));
+        const target = document.getElementById(step === 'done' ? 'survey-step-done' : `survey-step-${step}`);
+        if (target) target.classList.add('active');
+        const pct = step === 'done' ? 100 : ((step - 1) / totalSteps) * 100;
+        progressBar.style.width = pct + '%';
+      }
+
+      // Steps 1-3, 6: Option buttons
+      document.querySelectorAll('.survey-opt').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const q = btn.dataset.q;
+          answers[q] = btn.dataset.val;
+
+          // Highlight selection
+          btn.closest('.survey-options').querySelectorAll('.survey-opt').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+
+          const next = parseInt(q) + 1;
+          setTimeout(() => {
+            if (next <= totalSteps) {
+              goToStep(next);
+            } else {
+              // After step 6 → done
+              goToStep('done');
+            }
+          }, 340);
+        });
+      });
+
+      // Step 4: Name field → Next button
+      const nameInput = document.getElementById('survey-name');
+      const next4Btn = document.getElementById('survey-next-4');
+      if (nameInput && next4Btn) {
+        // Letters only
+        nameInput.addEventListener('input', function () {
+          this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+        });
+        next4Btn.addEventListener('click', () => {
+          const name = nameInput.value.trim();
+          if (!name || !/^[A-Za-z\s]+$/.test(name)) {
+            showToast('⚠️ Please enter a valid name (letters only)');
+            return;
+          }
+          answers['name'] = name;
+          goToStep(5);
+        });
+      }
+
+      // Step 5: Phone + Email → Next button
+      const phoneInput = document.getElementById('survey-phone');
+      const emailInput = document.getElementById('survey-email');
+      const next5Btn = document.getElementById('survey-next-5');
+      if (phoneInput && emailInput && next5Btn) {
+        // Digits only for phone
+        phoneInput.addEventListener('input', function () {
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        next5Btn.addEventListener('click', () => {
+          const phone = phoneInput.value.trim();
+          const email = emailInput.value.trim();
+          if (!phone || !/^[0-9]{7,15}$/.test(phone)) {
+            showToast('⚠️ Please enter a valid phone number');
+            return;
+          }
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showToast('⚠️ Please enter a valid email address');
+            return;
+          }
+          answers['phone'] = phone;
+          answers['email'] = email;
+          goToStep(6);
+        });
+      }
+
+      // Close / done buttons
+      closeBtn.addEventListener('click', closeSurvey);
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeSurvey(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSurvey(); });
+
+      if (doneBtn) {
+        doneBtn.addEventListener('click', () => {
+          closeSurvey();
+          const pkgSection = document.getElementById('packages');
+          if (pkgSection) setTimeout(() => pkgSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+        });
+      }
+    })();
+
     // ===== ESCAPE KEY HANDLER =====
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
@@ -2229,66 +2477,65 @@
       }
     });
 
-    // ===== INSTAGRAM IMAGE SLIDER =====
+    // ===== MOBILE HERO FORM =====
     (function () {
-      const track    = document.getElementById('insta-slider-track');
-      const wrapper  = document.getElementById('insta-slider-wrapper');
-      const prevBtn  = document.getElementById('insta-prev');
-      const nextBtn  = document.getElementById('insta-next');
-      const dotsWrap = document.getElementById('insta-dots');
+      const pill     = document.getElementById('hero-mobile-pill');
+      const form     = document.getElementById('hero-mobile-form');
+      const thankyou = document.getElementById('hero-mobile-thankyou');
+      if (!pill || !form || !thankyou) return;
 
-      if (!track) return;
-
-      const slides  = Array.from(track.querySelectorAll('.insta-slide'));
-      const TOTAL   = slides.length;
-      const AUTO_MS = 3000;
-      let current   = 0;
-      let timer     = null;
-
-      // Build dots
-      slides.forEach((_, i) => {
-        const d = document.createElement('button');
-        d.className = 'insta-dot' + (i === 0 ? ' active' : '');
-        d.setAttribute('aria-label', 'Go to photo ' + (i + 1));
-        d.addEventListener('click', () => { goTo(i); restartTimer(); });
-        dotsWrap.appendChild(d);
+      // Tap pill → show form
+      pill.addEventListener('click', () => {
+        pill.style.display = 'none';
+        form.style.display = 'flex';
+        thankyou.style.display = 'none';
+        setTimeout(() => document.getElementById('hmf-name').focus(), 100);
       });
 
-      function syncDots() {
-        dotsWrap.querySelectorAll('.insta-dot')
-          .forEach((d, i) => d.classList.toggle('active', i === current));
-      }
+      // Name: letters only
+      document.getElementById('hmf-name').addEventListener('input', function () {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+      });
+      // Phone: digits only
+      document.getElementById('hmf-phone').addEventListener('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+      });
 
-      function goTo(idx) {
-        slides[current].classList.remove('active');
-        current = (idx + TOTAL) % TOTAL;
-        slides[current].classList.add('active');
-        syncDots();
-      }
+      // Form submit
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name    = document.getElementById('hmf-name').value.trim();
+        const phone   = document.getElementById('hmf-phone').value.trim();
+        const guests  = document.getElementById('hmf-travelers').value;
+        const date    = document.getElementById('hmf-date').value;
 
-      function restartTimer() {
-        clearInterval(timer);
-        timer = setInterval(() => goTo(current + 1), AUTO_MS);
-      }
+        if (!name || !phone || !guests || !date) {
+          showToast('⚠️ Please fill in all fields');
+          return;
+        }
+        if (!/^[A-Za-z\s]+$/.test(name)) {
+          showToast('⚠️ Name should contain letters only');
+          return;
+        }
+        if (!/^[0-9]{7,15}$/.test(phone)) {
+          showToast('⚠️ Enter a valid phone number');
+          return;
+        }
 
-      prevBtn.addEventListener('click', () => { goTo(current - 1); restartTimer(); });
-      nextBtn.addEventListener('click', () => { goTo(current + 1); restartTimer(); });
+        // Show Thank You message
+        form.style.display = 'none';
+        thankyou.style.display = 'flex';
 
-      // Pause on hover
-      wrapper.addEventListener('mouseenter', () => clearInterval(timer));
-      wrapper.addEventListener('mouseleave', restartTimer);
-
-      // Touch swipe
-      let tx = 0;
-      wrapper.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
-      wrapper.addEventListener('touchend', e => {
-        const diff = tx - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); restartTimer(); }
-      }, { passive: true });
-
-      restartTimer();
+        // Reset after 3.5 seconds
+        form.reset();
+        setTimeout(() => {
+          thankyou.style.display = 'none';
+          pill.style.display = 'flex';
+        }, 3500);
+      });
     })();
 
+    
     // ===== SCROLL-TRIGGERED TRIP DURATION POPUP =====
     (function () {
       const overlay       = document.getElementById('scroll-popup-overlay');
