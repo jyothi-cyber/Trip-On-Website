@@ -405,7 +405,7 @@
         </div>
 
         <!-- Package Card 2 -->
-        <div class="package-card" data-duration="5">
+        <div class="package-card" data-duration="4">
           <div class="package-img-wrapper">
             <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
             <span class="package-badge">15% off</span>
@@ -438,7 +438,7 @@
         </div>
 
         <!-- Package Card 3 -->
-        <div class="package-card" data-duration="6">
+        <div class="package-card" data-duration="5">
           <div class="package-img-wrapper">
             <img src="assets/images/beach.png" alt="White sand beach">
             <span class="package-badge">20% off</span>
@@ -471,7 +471,7 @@
         </div>
 
         <!-- Package Card 4 (Row 2) -->
-        <div class="package-card" data-duration="4">
+        <div class="package-card" data-duration="5">
           <div class="package-img-wrapper">
             <img src="assets/images/ubud.png" alt="Ubud resort view">
             <span class="package-badge">10% off</span>
@@ -504,7 +504,7 @@
         </div>
 
         <!-- Package Card 5 -->
-        <div class="package-card" data-duration="5">
+        <div class="package-card" data-duration="6">
           <div class="package-img-wrapper">
             <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
             <span class="package-badge">15% off</span>
@@ -570,7 +570,7 @@
         </div>
 
         <!-- Package Card 7 (Row 3) -->
-        <div class="package-card" data-duration="4">
+        <div class="package-card" data-duration="7">
           <div class="package-img-wrapper">
             <img src="assets/images/ubud.png" alt="Ubud resort view">
             <span class="package-badge">10% off</span>
@@ -603,7 +603,7 @@
         </div>
 
         <!-- Package Card 8 -->
-        <div class="package-card" data-duration="5">
+        <div class="package-card" data-duration="7">
           <div class="package-img-wrapper">
             <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
             <span class="package-badge">15% off</span>
@@ -636,7 +636,7 @@
         </div>
 
         <!-- Package Card 9 -->
-        <div class="package-card" data-duration="6">
+        <div class="package-card" data-duration="all">
           <div class="package-img-wrapper">
             <img src="assets/images/beach.png" alt="White sand beach">
             <span class="package-badge">20% off</span>
@@ -1525,6 +1525,90 @@
     </div>
   </div>
 
+  <!-- Custom Packages Popup -->
+  <div class="custom-packages-overlay" id="custom-packages-overlay">
+    <div class="custom-packages-popup">
+      <button class="custom-packages-close" id="custom-packages-close" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <div class="custom-packages-icon">
+        <i class="fa-solid fa-suitcase-rolling"></i>
+      </div>
+      
+      <h3>Bali Tour Custom Packages</h3>
+      <p class="subtitle">Tell us about your dream Bali vacation and we'll create a personalized package just for you!</p>
+      
+      <form id="custom-packages-form">
+        <div class="custom-form-row">
+          <div class="custom-form-group">
+            <label for="custom-name">Full Name *</label>
+            <input type="text" id="custom-name" placeholder="Enter your full name" required>
+          </div>
+          <div class="custom-form-group">
+            <label for="custom-phone">Phone Number *</label>
+            <input type="tel" id="custom-phone" placeholder="Enter your phone" required>
+          </div>
+        </div>
+        
+        <div class="custom-form-row">
+          <div class="custom-form-group">
+            <label for="custom-email">Email Address *</label>
+            <input type="email" id="custom-email" placeholder="Enter your email" required>
+          </div>
+          <div class="custom-form-group">
+            <label for="custom-travelers">Number of Travelers *</label>
+            <select id="custom-travelers" required>
+              <option value="">Select travelers</option>
+              <option value="1">1 Person</option>
+              <option value="2">2 Persons</option>
+              <option value="3">3 Persons</option>
+              <option value="4">4 Persons</option>
+              <option value="5+">5+ Persons</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="custom-form-row">
+          <div class="custom-form-group">
+            <label for="custom-nights">Number of Nights *</label>
+            <select id="custom-nights" required>
+              <option value="">Select nights</option>
+              <option value="3">3 Nights</option>
+              <option value="4">4 Nights</option>
+              <option value="5">5 Nights</option>
+              <option value="6">6 Nights</option>
+              <option value="7">7 Nights</option>
+              <option value="8+">8+ Nights</option>
+            </select>
+          </div>
+          <div class="custom-form-group">
+            <label for="custom-budget">Budget Range *</label>
+            <select id="custom-budget" required>
+              <option value="">Select budget</option>
+              <option value="30-50k">₹30,000 - ₹50,000</option>
+              <option value="50-75k">₹50,000 - ₹75,000</option>
+              <option value="75-100k">₹75,000 - ₹1,00,000</option>
+              <option value="100k+">₹1,00,000+</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="custom-form-group">
+          <label for="custom-preferences">Special Preferences</label>
+          <textarea id="custom-preferences" placeholder="Tell us about your interests (adventure, culture, relaxation, etc.) and any special requirements..."></textarea>
+        </div>
+        
+        <button type="submit" class="custom-submit-btn">
+          <i class="fa-solid fa-paper-plane"></i>
+          Submit Request
+        </button>
+        
+        <p class="custom-packages-note">Our travel experts will contact you within 24 hours with a customized itinerary.</p>
+      </form>
+    </div>
+  </div>
+
   <!-- Booking Thank You Modal -->
   <div class="booking-ty-overlay" id="booking-thankyou-overlay">
     <div class="booking-ty-modal">
@@ -1961,44 +2045,6 @@
     // Apply content on page load
     applyContent();
 
-    // ===== WELCOME MODAL =====
-    (function () {
-      const overlay = document.getElementById('welcome-modal-overlay');
-      const yesBtn = document.getElementById('welcome-yes-btn');
-      const noBtn = document.getElementById('welcome-no-btn');
-      const warning = document.getElementById('welcome-warning');
-      const mainContent = document.getElementById('main-content');
-
-      // Hide site content immediately; modal is visible via CSS default
-      mainContent.style.visibility = 'hidden';
-      mainContent.style.opacity = '0';
-
-      yesBtn.addEventListener('click', () => {
-        // Fade the modal out
-        overlay.style.transition = 'opacity 0.5s ease';
-        overlay.style.opacity = '0';
-
-        setTimeout(() => {
-          overlay.style.display = 'none';
-
-          // Reveal the full site with a smooth fade-in
-          mainContent.style.visibility = 'visible';
-          mainContent.style.transition = 'opacity 0.6s ease';
-          mainContent.style.opacity = '1';
-        }, 500);
-      });
-
-      noBtn.addEventListener('click', () => {
-        // Show the warning message — do NOT close the modal
-        warning.textContent = 'Please click the YES option to proceed!';
-        warning.classList.add('visible');
-
-        // Shake the No button for emphasis
-        noBtn.classList.add('shake');
-        noBtn.addEventListener('animationend', () => noBtn.classList.remove('shake'), { once: true });
-      });
-    })();
-
     // ===== SMOOTH SCROLLING =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -2102,6 +2148,12 @@
             }, 300);
           }
         });
+        
+        // Show toast notification
+        const nightsText = selectedDuration === '4' ? '4 Nights 5 Days' : 
+                          selectedDuration === '5' ? '5 Nights 6 Days' : 
+                          selectedDuration === '6' ? '6 Nights 7 Days' : '7 Nights 8 Days';
+        showToast(`✨ Showing packages for ${nightsText}`);
       });
     });
 
@@ -2124,8 +2176,99 @@
     // Ask Custom Packages button
     if (askCustomBtn) {
       askCustomBtn.addEventListener('click', () => {
-        openContactModal();
+        openCustomPackagesPopup();
       });
+    }
+    
+    // ===== CUSTOM PACKAGES POPUP =====
+    const customPackagesOverlay = document.getElementById('custom-packages-overlay');
+    const customPackagesClose = document.getElementById('custom-packages-close');
+    const customPackagesForm = document.getElementById('custom-packages-form');
+    
+    function openCustomPackagesPopup() {
+      customPackagesOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeCustomPackagesPopup() {
+      customPackagesOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    if (customPackagesClose) {
+      customPackagesClose.addEventListener('click', closeCustomPackagesPopup);
+    }
+    
+    if (customPackagesOverlay) {
+      customPackagesOverlay.addEventListener('click', (e) => {
+        if (e.target === customPackagesOverlay) {
+          closeCustomPackagesPopup();
+        }
+      });
+    }
+    
+    // Custom packages form submission
+    if (customPackagesForm) {
+      customPackagesForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('custom-name').value.trim();
+        const phone = document.getElementById('custom-phone').value.trim();
+        const email = document.getElementById('custom-email').value.trim();
+        const travelers = document.getElementById('custom-travelers').value;
+        const nights = document.getElementById('custom-nights').value;
+        const budget = document.getElementById('custom-budget').value;
+        const preferences = document.getElementById('custom-preferences').value.trim();
+        
+        // Validate name (letters only)
+        if (!/^[A-Za-z\s]+$/.test(name)) {
+          showToast('⚠️ Please enter a valid name (letters only)');
+          return;
+        }
+        
+        // Validate phone (digits only)
+        if (!/^[0-9]{7,15}$/.test(phone)) {
+          showToast('⚠️ Please enter a valid phone number');
+          return;
+        }
+        
+        // Validate email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showToast('⚠️ Please enter a valid email address');
+          return;
+        }
+        
+        // Create WhatsApp message
+        const message = `Hi Trip On! I need a custom Bali package:\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nTravelers: ${travelers}\nNights: ${nights}\nBudget: ${budget}\nPreferences: ${preferences || 'None'}`;
+        
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        
+        // Show success message
+        showToast('✅ Request submitted! Redirecting to WhatsApp...');
+        
+        // Close popup and reset form
+        setTimeout(() => {
+          closeCustomPackagesPopup();
+          customPackagesForm.reset();
+          window.open(whatsappUrl, '_blank');
+        }, 1000);
+      });
+      
+      // Name input - letters only
+      const nameInput = document.getElementById('custom-name');
+      if (nameInput) {
+        nameInput.addEventListener('input', function() {
+          this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+        });
+      }
+      
+      // Phone input - digits only
+      const phoneInput = document.getElementById('custom-phone');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
+      }
     }
 
     // ===== FAQ ACCORDION =====
@@ -2506,50 +2649,78 @@
       });
     }
 
-    // ===== ADVENTURE CAROUSEL NAVIGATION =====
-    const advLeftBtn = document.querySelector('.adventure-nav-btn-left');
-    const advRightBtn = document.querySelector('.adventure-nav-btn-right');
-    const advCardsContainer = document.querySelector('.adventure-cards');
-    const advCardsTrack = document.querySelector('.adventure-cards-track');
+    // ===== ADVENTURE HORIZONTAL SLIDER/CAROUSEL =====
+    (function() {
+      const advLeftBtn = document.querySelector('.adventure-nav-btn-left');
+      const advRightBtn = document.querySelector('.adventure-nav-btn-right');
+      const advCardsContainer = document.querySelector('.adventure-cards');
+      const advCardsTrack = document.querySelector('.adventure-cards-track');
+      
+      if (!advLeftBtn || !advRightBtn || !advCardsContainer || !advCardsTrack) return;
 
-    if (advLeftBtn && advRightBtn && advCardsContainer && advCardsTrack) {
-      // Pause animation and enable manual scrolling
-      advCardsTrack.style.animationPlayState = 'paused';
+      // Stop any CSS animation
+      advCardsTrack.style.animation = 'none';
+      
+      // Get all unique adventure cards (first 6, not duplicates)
+      const allCards = Array.from(advCardsContainer.querySelectorAll('.adventure-card'));
+      const uniqueCards = allCards.slice(0, 6);
+      const totalCards = uniqueCards.length;
+      let currentIndex = 0;
 
-      // Calculate scroll amount (card width + gap)
-      const scrollAmount = 350; // Approximate card width + gap
+      // Function to get exact scroll amount (card width + gap)
+      function getScrollAmount() {
+        const firstCard = uniqueCards[0];
+        if (!firstCard) return 350;
+        const cardWidth = firstCard.offsetWidth;
+        const gap = 24; // Gap between cards from CSS
+        return cardWidth + gap;
+      }
 
-      // Left arrow - scroll left
+      // Go to specific slide
+      function goToSlide(index) {
+        // Loop around
+        if (index < 0) {
+          currentIndex = totalCards - 1;
+        } else if (index >= totalCards) {
+          currentIndex = 0;
+        } else {
+          currentIndex = index;
+        }
+        
+        const scrollAmount = getScrollAmount();
+        
+        // Smooth scroll to the card
+        advCardsContainer.style.scrollBehavior = 'smooth';
+        advCardsContainer.scrollLeft = scrollAmount * currentIndex;
+      }
+
+      // Left arrow - move ONE card to the left
       advLeftBtn.addEventListener('click', () => {
-        advCardsContainer.scrollBy({
-          left: -scrollAmount,
-          behavior: 'smooth'
-        });
+        goToSlide(currentIndex - 1);
       });
 
-      // Right arrow - scroll right
+      // Right arrow - move ONE card to the right
       advRightBtn.addEventListener('click', () => {
-        advCardsContainer.scrollBy({
-          left: scrollAmount,
-          behavior: 'smooth'
-        });
+        goToSlide(currentIndex + 1);
       });
 
-      // Optional: Resume animation when not actively clicking arrows
+      // Optional: Track manual scroll to update currentIndex
       let scrollTimeout;
       advCardsContainer.addEventListener('scroll', () => {
-        // Pause animation while manually scrolling
-        advCardsTrack.style.animationPlayState = 'paused';
-
-        // Clear previous timeout
         clearTimeout(scrollTimeout);
-
-        // Resume animation after 2 seconds of no scrolling
         scrollTimeout = setTimeout(() => {
-          advCardsTrack.style.animationPlayState = 'running';
-        }, 2000);
+          const scrollAmount = getScrollAmount();
+          const scrollLeft = advCardsContainer.scrollLeft;
+          const newIndex = Math.round(scrollLeft / scrollAmount);
+          if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalCards) {
+            currentIndex = newIndex;
+          }
+        }, 150);
       });
-    }
+
+      // Initialize - start at first card
+      advCardsContainer.scrollLeft = 0;
+    })();
 
     // ===== SCROLL ANIMATIONS =====
 
