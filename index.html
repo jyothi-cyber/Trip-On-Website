@@ -15,36 +15,6 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- Welcome Modal -->
-  <div id="welcome-modal-overlay">
-    <div id="welcome-modal">
-      <div class="welcome-modal-icon">
-        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="11" fill="#E6F3EC" stroke="#0E5A36" stroke-width="1.5"/>
-          <path d="M7 13.5C7 13.5 8.5 10 12 10C15.5 10 17 13.5 17 13.5" stroke="#0E5A36" stroke-width="1.8" stroke-linecap="round"/>
-          <circle cx="9.5" cy="8.5" r="1.2" fill="#0E5A36"/>
-          <circle cx="14.5" cy="8.5" r="1.2" fill="#0E5A36"/>
-        </svg>
-      </div>
-      <p class="welcome-modal-tag">TRIP ON — BALI</p>
-      <h2 class="welcome-modal-title">Ready to Explore<br>Paradise?</h2>
-      <p class="welcome-modal-desc">Discover the breathtaking culture, beaches, and adventures that Bali has to offer. Are you ready to begin your journey?</p>
-      <div class="welcome-modal-actions">
-        <button id="welcome-yes-btn" class="welcome-btn welcome-btn-yes">
-          <i class="fa-solid fa-check"></i> Yes, Let's Go!
-        </button>
-        <button id="welcome-no-btn" class="welcome-btn welcome-btn-no">
-          <i class="fa-solid fa-xmark"></i> No, Thanks
-        </button>
-      </div>
-      <p id="welcome-warning" class="welcome-warning" aria-live="polite"></p>
-    </div>
-  </div>
-
-  <!-- Main Website Content -->
-  <div id="main-content">
-
   <!-- Header -->
   <header id="site-header">
     <div class="container nav-container">
@@ -162,33 +132,126 @@
       </div>
 
       <div class="adventure-cards">
-        <div class="adventure-card">
-          <div class="adv-icon-box green">
-            <img src="assets/images/ubud-icon.svg" alt="Ubud travel icon">
+        <div class="adventure-cards-track">
+          <div class="adventure-card">
+            <div class="adv-icon-box green">
+              <img src="assets/images/ubud-icon.svg" alt="Ubud travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Ubud</h3>
+              <p class="adventure-meta">20+ Activities, 18 Sight Seeings</p>
+            </div>
           </div>
-          <div class="adv-text">
-            <h3>Ubud</h3>
-            <p class="adventure-meta">20+ Activities, 18 Sight Seeings</p>
-          </div>
-        </div>
 
-        <div class="adventure-card">
-          <div class="adv-icon-box orange">
-            <img src="assets/images/kuta-gali-icon.svg" alt="Kuta Gali travel icon">
+          <div class="adventure-card">
+            <div class="adv-icon-box orange">
+              <img src="assets/images/kuta-gali-icon.svg" alt="Kuta Gali travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Kuta, Gali</h3>
+              <p class="adventure-meta">16+ Activities, 20 Sight Seeings</p>
+            </div>
           </div>
-          <div class="adv-text">
-            <h3>Kuta, Gali</h3>
-            <p class="adventure-meta">16+ Activities, 20 Sight Seeings</p>
-          </div>
-        </div>
 
-        <div class="adventure-card">
-          <div class="adv-icon-box blue">
-            <img src="assets/images/lombok-icon.svg" alt="Lombok travel icon">
+          <div class="adventure-card">
+            <div class="adv-icon-box blue">
+              <img src="assets/images/lombok-icon.svg" alt="Lombok travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Lombok</h3>
+              <p class="adventure-meta">15+ Activities, 10 Sight Seeings</p>
+            </div>
           </div>
-          <div class="adv-text">
-            <h3>Lombok</h3>
-            <p class="adventure-meta">15+ Activities, 10 Sight Seeings</p>
+
+          <div class="adventure-card">
+            <div class="adv-icon-box purple">
+              <img src="assets/images/ubud-icon.svg" alt="Seminyak travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Seminyak</h3>
+              <p class="adventure-meta">25+ Activities, 12 Sight Seeings</p>
+            </div>
+          </div>
+
+          <div class="adventure-card">
+            <div class="adv-icon-box teal">
+              <img src="assets/images/lombok-icon.svg" alt="Nusa Penida travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Nusa Penida</h3>
+              <p class="adventure-meta">18+ Activities, 15 Sight Seeings</p>
+            </div>
+          </div>
+
+          <div class="adventure-card">
+            <div class="adv-icon-box pink">
+              <img src="assets/images/kuta-gali-icon.svg" alt="Canggu travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Canggu</h3>
+              <p class="adventure-meta">22+ Activities, 14 Sight Seeings</p>
+            </div>
+          </div>
+
+          <!-- Duplicate cards for seamless infinite loop -->
+          <div class="adventure-card">
+            <div class="adv-icon-box green">
+              <img src="assets/images/ubud-icon.svg" alt="Ubud travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Ubud</h3>
+              <p class="adventure-meta">20+ Activities, 18 Sight Seeings</p>
+            </div>
+          </div>
+
+          <div class="adventure-card">
+            <div class="adv-icon-box orange">
+              <img src="assets/images/kuta-gali-icon.svg" alt="Kuta Gali travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Kuta, Gali</h3>
+              <p class="adventure-meta">16+ Activities, 20 Sight Seeings</p>
+            </div>
+          </div>
+
+          <div class="adventure-card">
+            <div class="adv-icon-box blue">
+              <img src="assets/images/lombok-icon.svg" alt="Lombok travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Lombok</h3>
+              <p class="adventure-meta">15+ Activities, 10 Sight Seeings</p>
+            </div>
+          </div>
+
+          <div class="adventure-card">
+            <div class="adv-icon-box purple">
+              <img src="assets/images/ubud-icon.svg" alt="Seminyak travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Seminyak</h3>
+              <p class="adventure-meta">25+ Activities, 12 Sight Seeings</p>
+            </div>
+          </div>
+
+          <div class="adventure-card">
+            <div class="adv-icon-box teal">
+              <img src="assets/images/lombok-icon.svg" alt="Nusa Penida travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Nusa Penida</h3>
+              <p class="adventure-meta">18+ Activities, 15 Sight Seeings</p>
+            </div>
+          </div>
+
+          <div class="adventure-card">
+            <div class="adv-icon-box pink">
+              <img src="assets/images/kuta-gali-icon.svg" alt="Canggu travel icon">
+            </div>
+            <div class="adv-text">
+              <h3>Canggu</h3>
+              <p class="adventure-meta">22+ Activities, 14 Sight Seeings</p>
+            </div>
           </div>
         </div>
       </div>
@@ -2152,43 +2215,29 @@
       });
     }
 
-    // ===== ADVENTURE NAV BUTTONS FUNCTIONALITY =====
+    // ===== ADVENTURE INFINITE MARQUEE =====
+    // The marquee animation is pure CSS, no JS needed for continuous scrolling
+    // Arrow buttons can control speed or pause if needed
     const advLeftBtn = document.querySelector('.adventure-nav-btn-left');
     const advRightBtn = document.querySelector('.adventure-nav-btn-right');
-    const advCardsContainer = document.querySelector('.adventure-cards');
-    const advCards = document.querySelectorAll('.adventure-card');
-    let activeAdvIndex = 0;
+    const advCardsTrack = document.querySelector('.adventure-cards-track');
 
-    function highlightAdventureCard(index) {
-      if (!advCards.length) return;
-      if (index < 0) index = advCards.length - 1;
-      if (index >= advCards.length) index = 0;
-      activeAdvIndex = index;
-
-      advCards.forEach((card, idx) => {
-        if (idx === index) {
-          card.classList.add('active-card');
-        } else {
-          card.classList.remove('active-card');
-        }
-      });
-
-
-      // Scroll card into view if mobile/tablet viewport overflows
-      if (window.innerWidth <= 1024) {
-        advCards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }
-    }
-
-    if (advLeftBtn && advRightBtn) {
+    if (advLeftBtn && advRightBtn && advCardsTrack) {
+      // Left arrow - slow down animation
       advLeftBtn.addEventListener('click', () => {
-        highlightAdventureCard(activeAdvIndex - 1);
+        advCardsTrack.style.animationDuration = '40s';
+        setTimeout(() => {
+          advCardsTrack.style.animationDuration = '30s';
+        }, 2000);
       });
+      
+      // Right arrow - speed up animation
       advRightBtn.addEventListener('click', () => {
-        highlightAdventureCard(activeAdvIndex + 1);
+        advCardsTrack.style.animationDuration = '20s';
+        setTimeout(() => {
+          advCardsTrack.style.animationDuration = '30s';
+        }, 2000);
       });
-      // Initialize first card highlight
-      highlightAdventureCard(0);
     }
 
     // ===== SCROLL ANIMATIONS =====
@@ -2581,19 +2630,19 @@
     }
 
     // ===== TESTIMONIAL SOCIAL LINKS NAVIGATION =====
-    // Instagram link - shows confirmation popup
+    // Instagram link - direct navigation
     const instagramLink = document.getElementById('instagram-link');
     if (instagramLink) {
       instagramLink.addEventListener('click', () => {
-        showSocialPopup('Instagram', 'https://www.instagram.com/tripon');
+        window.open('https://www.instagram.com/tripon', '_blank', 'noopener,noreferrer');
       });
     }
 
-    // Tripadvisor link - shows confirmation popup
+    // Tripadvisor link - direct navigation
     const tripadvisorLink = document.getElementById('tripadvisor-link');
     if (tripadvisorLink) {
       tripadvisorLink.addEventListener('click', () => {
-        showSocialPopup('Tripadvisor', 'https://www.tripadvisor.com/');
+        window.open('https://www.tripadvisor.com/', '_blank', 'noopener,noreferrer');
       });
     }
 

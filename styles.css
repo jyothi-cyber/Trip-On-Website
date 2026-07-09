@@ -670,9 +670,36 @@ header.header-scrolled {
 }
 
 .adventure-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: row;
   gap: 20px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 10px 0;
+  position: relative;
+  width: 100%;
+}
+
+/* Marquee animation wrapper */
+.adventure-cards-track {
+  display: flex;
+  gap: 20px;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover */
+.adventure-cards:hover .adventure-cards-track {
+  animation-play-state: paused;
 }
 
 .adventure-card {
@@ -683,11 +710,12 @@ header.header-scrolled {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
-  /* Horizontal layout: icon left, text right */
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 16px;
+  min-width: 350px;
+  flex-shrink: 0;
 }
 
 .adventure-card::after {
@@ -703,16 +731,14 @@ header.header-scrolled {
   transform-origin: left;
 }
 
-.adventure-card:hover,
-.adventure-card.active-card {
+.adventure-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
-  border-color: var(--primary-color);
+  border-color: #cccccc;
 }
 
-.adventure-card:hover::after,
-.adventure-card.active-card::after {
-  transform: scaleX(1);
+.adventure-card:hover::after {
+  transform: scaleX(0);
 }
 
 /* Icon circle — left side */
@@ -738,6 +764,9 @@ header.header-scrolled {
 .adv-icon-box.green  { background-color: #E6F3EC; }
 .adv-icon-box.orange { background-color: #FDF2E2; }
 .adv-icon-box.blue   { background-color: #EBF3FE; }
+.adv-icon-box.purple { background-color: #F3E8FF; }
+.adv-icon-box.teal   { background-color: #CCFBF1; }
+.adv-icon-box.pink   { background-color: #FCE7F3; }
 
 /* Text block — right side */
 .adv-text {
