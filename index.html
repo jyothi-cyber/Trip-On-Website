@@ -2215,27 +2215,47 @@
       });
     }
 
-    // ===== ADVENTURE INFINITE MARQUEE =====
-    // The marquee animation is pure CSS, no JS needed for continuous scrolling
-    // Arrow buttons can control speed or pause if needed
+    // ===== ADVENTURE CAROUSEL NAVIGATION =====
     const advLeftBtn = document.querySelector('.adventure-nav-btn-left');
     const advRightBtn = document.querySelector('.adventure-nav-btn-right');
+    const advCardsContainer = document.querySelector('.adventure-cards');
     const advCardsTrack = document.querySelector('.adventure-cards-track');
 
-    if (advLeftBtn && advRightBtn && advCardsTrack) {
-      // Left arrow - slow down animation
+    if (advLeftBtn && advRightBtn && advCardsContainer && advCardsTrack) {
+      // Pause animation and enable manual scrolling
+      advCardsTrack.style.animationPlayState = 'paused';
+      
+      // Calculate scroll amount (card width + gap)
+      const scrollAmount = 350; // Approximate card width + gap
+
+      // Left arrow - scroll left
       advLeftBtn.addEventListener('click', () => {
-        advCardsTrack.style.animationDuration = '40s';
-        setTimeout(() => {
-          advCardsTrack.style.animationDuration = '30s';
-        }, 2000);
+        advCardsContainer.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
       });
       
-      // Right arrow - speed up animation
+      // Right arrow - scroll right
       advRightBtn.addEventListener('click', () => {
-        advCardsTrack.style.animationDuration = '20s';
-        setTimeout(() => {
-          advCardsTrack.style.animationDuration = '30s';
+        advCardsContainer.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+
+      // Optional: Resume animation when not actively clicking arrows
+      let scrollTimeout;
+      advCardsContainer.addEventListener('scroll', () => {
+        // Pause animation while manually scrolling
+        advCardsTrack.style.animationPlayState = 'paused';
+        
+        // Clear previous timeout
+        clearTimeout(scrollTimeout);
+        
+        // Resume animation after 2 seconds of no scrolling
+        scrollTimeout = setTimeout(() => {
+          advCardsTrack.style.animationPlayState = 'running';
         }, 2000);
       });
     }
