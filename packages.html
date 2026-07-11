@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Packages - Trip On</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #FFFFFF;
+    }
+    
+    /* Header Styles */
+    .packages-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: 16px 0;
+    }
+    
+    .header-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Logo */
+    .header-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .header-logo img {
+      height: 32px;
+      width: auto;
+    }
+    
+    /* Navigation Links */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    
+    .nav-link {
+      font-size: 16px;
+      font-weight: 400;
+      color: #888E9E;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-link:hover {
+      color: #101828;
+    }
+    
+    .nav-link.active {
+      color: #888E9E;
+      font-weight: 500;
+    }
+    
+    /* Bali Dropdown */
+    .nav-dropdown {
+      position: relative;
+    }
+    
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #888E9E;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .dropdown-toggle:hover {
+      color: #101828;
+    }
+    
+    .dropdown-toggle i {
+      font-size: 12px;
+    }
+    
+    /* Contact Us Button */
+    .contact-btn {
+      width: 122px;
+      height: 37px;
+      padding: 0;
+      background: #FFFFFF;
+      border: 1px solid #20664E;
+      border-radius: 24px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #000000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .contact-btn:hover {
+      background: #F0F9F5;
+      border-color: #1A5540;
+    }
+    
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #344054;
+      cursor: pointer;
+    }
+    
+    /* Mobile Menu Overlay */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100vh;
+      background: #FFFFFF;
+      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+      z-index: 2000;
+      transition: right 0.3s ease;
+      padding: 80px 32px 32px;
+    }
+    
+    .mobile-menu-overlay.active {
+      right: 0;
+    }
+    
+    .mobile-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #344054;
+      cursor: pointer;
+    }
+    
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .mobile-nav-links a {
+      font-size: 18px;
+      font-weight: 500;
+      color: #667085;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid #F2F4F7;
+    }
+    
+    .mobile-nav-links a:hover {
+      color: #101828;
+    }
+    
+    .mobile-contact-btn {
+      margin-top: 24px;
+      padding: 14px 0;
+      background: #0E5A36;
+      color: #FFFFFF;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    
+    /* Page Content */
+    .page-content {
+      margin-top: 80px;
+      min-height: calc(100vh - 80px);
+    }
+    
+    /* Packages Section */
+    .packages-section {
+      padding: 60px 0 80px;
+      background: #FFFFFF;
+    }
+    
+    .packages-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+    
+    /* Main Title */
+    .packages-main-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+    
+    /* Filter Buttons */
+    .filter-buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .filter-btn {
+      background: #FFFFFF;
+      border: 1px solid #E9E9E9;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #344054;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .filter-btn[data-filter="all"] {
+      width: 165px;
+      height: 59px;
+      background: #007846;
+      border-color: #007846;
+      color: #FFFFFF;
+    }
+    
+    .filter-btn[data-filter="5nights"],
+    .filter-btn[data-filter="6nights"],
+    .filter-btn[data-filter="7nights"] {
+      width: 154px;
+      height: 55px;
+      border-color: #E9E9E9;
+    }
+    
+    .filter-btn:hover {
+      background: #F9FAFB;
+      border-color: #98A2B3;
+    }
+    
+    .filter-btn.active {
+      background: #007846;
+      border-color: #007846;
+      color: #FFFFFF;
+    }
+    
+    .filter-btn[data-filter="all"].active {
+      background: #007846;
+      border-color: #007846;
+    }
+    
+    .filter-btn.custom-btn {
+      width: 331px;
+      height: 62px;
+      background: #FFFFFF;
+      border: 1px solid #FF4D03;
+      border-radius: 30px;
+      color: #FF4D03;
+    }
+    
+    .filter-btn.custom-btn:hover {
+      background: #FFF5F0;
+      border-color: #FF4D03;
+    }
+    
+    /* Package Cards Grid */
+    .packages-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    /* Package Card Item */
+    .package-card-item {
+      width: 100%;
+      background: #FFFFFF;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .package-card-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Card Image */
+    .card-image {
+      position: relative;
+      width: 430px;
+      height: 234px;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+    
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Discount Badge */
+    .discount-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 87px;
+      height: 27px;
+      background: #FFFFFF;
+      color: #FF3737;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    
+    /* Card Content */
+    .card-content {
+      padding: 16px;
+    }
+    
+    /* Location Tag */
+    .location-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #667085;
+      margin-bottom: 8px;
+    }
+    
+    .location-tag i {
+      font-size: 14px;
+      color: #667085;
+    }
+    
+    /* Card Title */
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    
+    /* Rating Stars */
+    .rating-stars {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    
+    .rating-stars i {
+      color: #FDB022;
+      font-size: 14px;
+    }
+    
+    .rating-count {
+      margin-left: 8px;
+      font-size: 14px;
+      color: #667085;
+    }
+    
+    /* Card Footer */
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid #F2F4F7;
+    }
+    
+    /* Duration */
+    .duration {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #667085;
+    }
+    
+    .duration i {
+      font-size: 14px;
+      color: #667085;
+    }
+    
+    /* Price Tag */
+    .price-tag {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    
+    .from-text {
+      font-size: 12px;
+      color: #667085;
+      margin-bottom: 2px;
+    }
+    
+    .price-amount {
+      font-size: 18px;
+      font-weight: 700;
+      color: #101828;
+    }
+    
+    /* Know More About Locations Section */
+    .locations-section {
+      padding: 80px 0;
+      background: #FFFFFF;
+    }
+    
+    .locations-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+    
+    .locations-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #000000;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    
+    .locations-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: #667085;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .locations-slider-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+    
+    .locations-slider {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.3s ease;
+      max-width: 100%;
+    }
+    
+    .location-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      min-width: 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .location-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .location-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .location-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .location-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .location-description {
+      font-size: 14px;
+      font-weight: 400;
+      color: #667085;
+      text-align: center;
+    }
+    
+    .location-arrow {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #D0D5DD;
+      border-radius: 50%;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+    
+    .location-arrow:hover {
+      background: #F9FAFB;
+      border-color: #98A2B3;
+    }
+    
+    .location-arrow i {
+      font-size: 16px;
+      color: #344054;
+    }
+    
+    /* Navigation Arrows Below Cards */
+    .locations-nav-arrows {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .location-arrow-bottom {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #D0D5DD;
+      border-radius: 50%;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .location-arrow-bottom:hover {
+      background: #F9FAFB;
+      border-color: #98A2B3;
+    }
+    
+    .location-arrow-bottom:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    
+    .location-arrow-bottom i {
+      font-size: 16px;
+      color: #344054;
+    }
+    
+    /* Blogs All About Bali Section */
+    .blogs-section {
+      padding: 80px 0;
+      background: #FFFFFF;
+    }
+    
+    .blogs-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+    
+    .blogs-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    
+    .blogs-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #000000;
+      text-align: center;
+    }
+    
+    .blogs-grid-wrapper {
+      overflow: visible;
+    }
+    
+    .blogs-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    /* Blog Rows */
+    .blog-row {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+    }
+    
+    /* Blog Card */
+    .blog-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Row 1: Card 1 (Large) + Card 2 (Small) */
+    .blog-card-1 {
+      width: 897px;
+      height: 335px;
+      flex-direction: row;
+    }
+    
+    .blog-card-2 {
+      width: 354px;
+      height: 331px;
+      flex-direction: column;
+    }
+    
+    /* Row 2: Card 3 (Small) + Card 4 (Large) */
+    .blog-card-3 {
+      width: 353px;
+      height: 331px;
+      flex-direction: column;
+    }
+    
+    .blog-card-4 {
+      width: 897px;
+      height: 335px;
+      flex-direction: row;
+    }
+    
+    /* Blog Images */
+    .blog-image {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    
+    .blog-image-1,
+    .blog-image-4 {
+      width: 275px;
+      height: 289px;
+      border-radius: 24px;
+      margin: 23px;
+    }
+    
+    .blog-image-2,
+    .blog-image-3 {
+      width: 321px;
+      height: 121px;
+      border-radius: 24px;
+      margin: 16px 16px 0 16px;
+    }
+    
+    .blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+    }
+    
+    /* Blog Badge */
+    .blog-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 94px;
+      height: 27px;
+      background: #FFFFFF;
+      color: #909090;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: lowercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* First card badge - moved down 20px */
+    .blog-badge-1 {
+      top: 32px;
+    }
+    
+    /* Play Icon */
+    .blog-play-icon {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #16A34A;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    /* Blog Content */
+    .blog-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+    
+    .blog-content-1,
+    .blog-content-4 {
+      padding: 32px 24px;
+    }
+    
+    .blog-content-2,
+    .blog-content-3 {
+      padding: 20px;
+    }
+    
+    /* Blog Title */
+    .blog-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    
+    .blog-title-small {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    
+    /* Blog Description */
+    .blog-description {
+      font-size: 14px;
+      font-weight: 400;
+      color: #667085;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    /* Blog Author */
+    .blog-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+    }
+    
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #F2F4F7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .author-avatar i {
+      font-size: 20px;
+      color: #667085;
+    }
+    
+    .author-info {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .author-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 2px;
+    }
+    
+    .author-role {
+      font-size: 12px;
+      font-weight: 400;
+      color: #667085;
+    }
+    
+    /* Want More Button */
+    .blogs-button-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 48px;
+    }
+    
+    .want-more-btn {
+      padding: 14px 32px;
+      background: #16A34A;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .want-more-btn:hover {
+      background: #15803D;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+    
+    /* Instagram Section */
+    .instagram-section {
+      padding: 60px 0;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+    
+    .instagram-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+    
+    .instagram-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 8px;
+    }
+    
+    .instagram-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: #667085;
+      margin-bottom: 32px;
+    }
+    
+    .instagram-gallery {
+      display: flex;
+      gap: 16px;
+      animation: scroll-left 20s linear infinite;
+      width: fit-content;
+    }
+    
+    .instagram-gallery:hover {
+      animation-play-state: paused;
+    }
+    
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
+    .instagram-item {
+      flex: 0 0 auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .instagram-item:hover {
+      transform: scale(1.05);
+    }
+    
+    .instagram-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Footer */
+    .packages-footer {
+      background: #FFFFFF;
+      border-top: 1px solid #E5E7EB;
+      padding: 48px 0;
+    }
+    
+    .footer-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 60px;
+    }
+    
+    .footer-left {
+      flex-shrink: 0;
+    }
+    
+    .footer-logo {
+      height: 32px;
+      width: auto;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 80px;
+      flex: 1;
+    }
+    
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .footer-link {
+      font-size: 14px;
+      font-weight: 400;
+      color: #667085;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: #000000;
+    }
+    
+    .footer-social {
+      flex-shrink: 0;
+    }
+    
+    .social-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .social-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #D0D5DD;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #667085;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: #F9FAFB;
+      border-color: #98A2B3;
+      color: #000000;
+    }
+    
+    .social-icon i {
+      font-size: 16px;
+    }
+    
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 3000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #667085;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-close:hover {
+      background: #F2F4F7;
+      color: #000000;
+    }
+    
+    .modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 24px;
+    }
+    
+    .modal-subtitle {
+      font-size: 16px;
+      font-weight: 600;
+      color: #101828;
+      margin-bottom: 16px;
+      margin-top: 24px;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      background: #F9FAFB;
+      border-radius: 8px;
+    }
+    
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: #16A34A;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+    
+    .contact-icon i {
+      font-size: 18px;
+    }
+    
+    .contact-details {
+      flex: 1;
+    }
+    
+    .contact-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #667085;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    
+    .contact-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: #000000;
+    }
+    
+    .contact-value a {
+      color: #16A34A;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .contact-value a:hover {
+      color: #15803D;
+      text-decoration: underline;
+    }
+    
+    .packages-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .package-item {
+      padding: 16px;
+      background: #F9FAFB;
+      border-radius: 8px;
+      border-left: 4px solid #16A34A;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .package-item:hover {
+      background: #F0F9F5;
+      transform: translateX(4px);
+    }
+    
+    .package-item-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 4px;
+    }
+    
+    .package-item-details {
+      font-size: 13px;
+      color: #667085;
+      display: flex;
+      gap: 16px;
+    }
+    
+    .package-item-price {
+      font-weight: 600;
+      color: #16A34A;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .header-container {
+        padding: 0 32px;
+      }
+      
+      .header-nav {
+        gap: 24px;
+      }
+      
+      .packages-container {
+        padding: 0 32px;
+      }
+      
+      .packages-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .locations-container {
+        padding: 0 32px;
+      }
+      
+      .locations-title {
+        font-size: 28px;
+      }
+      
+      .locations-slider {
+        max-width: 600px;
+      }
+      
+      .blogs-container {
+        padding: 0 32px;
+      }
+      
+      .blogs-title {
+        font-size: 28px;
+      }
+      
+      .blogs-grid {
+        gap: 20px;
+      }
+      
+      .instagram-container {
+        padding: 0 32px;
+      }
+      
+      .instagram-item {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .footer-container {
+        padding: 0 32px;
+        gap: 40px;
+      }
+      
+      .footer-links {
+        gap: 40px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 24px;
+      }
+      
+      .header-nav,
+      .contact-btn {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .packages-container {
+        padding: 0 24px;
+      }
+      
+      .packages-main-title {
+        font-size: 24px;
+        margin-bottom: 24px;
+      }
+      
+      .filter-buttons {
+        gap: 8px;
+      }
+      
+      .filter-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+      
+      .packages-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .card-image {
+        width: 100%;
+        max-width: 430px;
+        margin: 0 auto;
+      }
+      
+      .locations-section {
+        padding: 60px 0;
+      }
+      
+      .locations-container {
+        padding: 0 24px;
+      }
+      
+      .locations-title {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+      
+      .locations-subtitle {
+        font-size: 14px;
+        margin-bottom: 32px;
+      }
+      
+      .locations-slider-wrapper {
+        gap: 12px;
+      }
+      
+      .locations-slider {
+        max-width: 100%;
+      }
+      
+      .location-card {
+        min-width: 220px;
+      }
+      
+      .location-arrow-bottom {
+        width: 36px;
+        height: 36px;
+      }
+      
+      .location-arrow-bottom i {
+        font-size: 14px;
+      }
+      
+      .blogs-section {
+        padding: 60px 0;
+      }
+      
+      .blogs-container {
+        padding: 0 24px;
+      }
+      
+      .blogs-header {
+        margin-bottom: 32px;
+      }
+      
+      .blogs-title {
+        font-size: 24px;
+      }
+      
+      .blog-row {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .blog-card-1,
+      .blog-card-2,
+      .blog-card-3,
+      .blog-card-4 {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+      }
+      
+      .blog-image-1,
+      .blog-image-2,
+      .blog-image-3,
+      .blog-image-4 {
+        width: 100%;
+        height: 200px;
+        margin: 16px;
+      }
+      
+      .blogs-button-wrapper {
+        margin-top: 32px;
+      }
+      
+      .want-more-btn {
+        font-size: 15px;
+        padding: 12px 28px;
+      }
+      
+      .instagram-section {
+        padding: 48px 0;
+      }
+      
+      .instagram-container {
+        padding: 0 24px;
+      }
+      
+      .instagram-title {
+        font-size: 20px;
+      }
+      
+      .instagram-subtitle {
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+      
+      .instagram-gallery {
+        gap: 12px;
+      }
+      
+      .instagram-item {
+        width: 160px;
+        height: 160px;
+      }
+      
+      .packages-footer {
+        padding: 40px 0;
+      }
+      
+      .footer-container {
+        padding: 0 24px;
+        flex-direction: column;
+        gap: 32px;
+      }
+      
+      .footer-links {
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      
+      .footer-social {
+        width: 100%;
+      }
+      
+      .social-title {
+        font-size: 11px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header-container {
+        padding: 0 16px;
+      }
+      
+      .header-logo img {
+        height: 28px;
+      }
+      
+      .packages-container {
+        padding: 0 16px;
+      }
+      
+      .packages-section {
+        padding: 40px 0 60px;
+      }
+      
+      .packages-main-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      
+      .filter-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .filter-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+      }
+      
+      .filter-btn[data-filter="all"],
+      .filter-btn[data-filter="5nights"],
+      .filter-btn[data-filter="6nights"],
+      .filter-btn[data-filter="7nights"] {
+        width: 100%;
+        height: 50px;
+      }
+      
+      .filter-btn.custom-btn {
+        width: 100%;
+        height: 56px;
+      }
+      
+      .locations-container {
+        padding: 0 16px;
+      }
+      
+      .locations-title {
+        font-size: 20px;
+      }
+      
+      .locations-subtitle {
+        font-size: 13px;
+      }
+      
+      .location-card {
+        min-width: 180px;
+        padding: 20px;
+      }
+      
+      .location-icon {
+        width: 56px;
+        height: 56px;
+      }
+      
+      .location-name {
+        font-size: 18px;
+      }
+      
+      .location-description {
+        font-size: 13px;
+      }
+      
+      .blogs-container {
+        padding: 0 16px;
+      }
+      
+      .blogs-title {
+        font-size: 20px;
+      }
+      
+      .blog-title {
+        font-size: 16px;
+      }
+      
+      .blog-title-small {
+        font-size: 15px;
+      }
+      
+      .blog-description {
+        font-size: 13px;
+      }
+      
+      .want-more-btn {
+        width: 100%;
+        font-size: 14px;
+      }
+      
+      .instagram-container {
+        padding: 0 16px;
+      }
+      
+      .instagram-title {
+        font-size: 18px;
+      }
+      
+      .instagram-item {
+        width: 140px;
+        height: 140px;
+      }
+      
+      .footer-container {
+        padding: 0 16px;
+      }
+      
+      .footer-logo {
+        height: 28px;
+      }
+      
+      .footer-links {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .footer-link {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="packages-header">
+    <div class="header-container">
+      <!-- Logo -->
+      <a href="index.html" class="header-logo">
+        <img src="assets/images/tripon-logo.png" alt="Trip On">
+      </a>
+      
+      <!-- Navigation -->
+      <nav class="header-nav">
+        <div class="nav-dropdown">
+          <button class="dropdown-toggle" id="bali-dropdown">
+            Bali
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+        <a href="index.html#testimonials" class="nav-link">People Reviews</a>
+        <a href="packages.html" class="nav-link active">Packages</a>
+      </nav>
+      
+      <!-- Contact Button -->
+      <button class="contact-btn" id="contact-btn-header">CONTACT US</button>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" id="mobile-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobile-menu">
+    <button class="mobile-close-btn" id="mobile-close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <nav class="mobile-nav-links">
+      <a href="index.html#home">Bali</a>
+      <a href="index.html#testimonials">People Reviews</a>
+      <a href="packages.html">Packages</a>
+      <a href="#" class="mobile-contact-btn" id="mobile-contact">Contact Us</a>
+    </nav>
+  </div>
+  
+  <!-- Page Content -->
+  <div class="page-content">
+    <!-- Packages Section -->
+    <section class="packages-section">
+      <div class="packages-container">
+        <!-- Title -->
+        <h1 class="packages-main-title">Explore all things to do in Phuket</h1>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">4 Nights 5 Days</button>
+          <button class="filter-btn" data-filter="5nights">5 Nights 6 Days</button>
+          <button class="filter-btn" data-filter="6nights">6 Nights 7 Days</button>
+          <button class="filter-btn" data-filter="7nights">7 Nights 8 Days</button>
+          <button class="filter-btn custom-btn" id="custom-package-btn">Ask Custom Packages</button>
+        </div>
+        
+        <!-- Package Cards Grid -->
+        <div class="packages-cards-grid" id="packages-cards-grid">
+          <!-- Card 1 - 4 Nights -->
+          <div class="package-card-item" data-nights="4">
+            <div class="card-image">
+              <img src="assets/images/ubud.png" alt="Ubud, Indonesia">
+              <span class="discount-badge">10% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Ubud, Indonesia
+              </div>
+              <h3 class="card-title">The Cultural homeland</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  4 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹45,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 2 - 4 Nights -->
+          <div class="package-card-item" data-nights="4">
+            <div class="card-image">
+              <img src="assets/images/indonesia.png" alt="Nusa Penida, Indonesia">
+              <span class="discount-badge">15% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Nusa Penida, Indonesia
+              </div>
+              <h3 class="card-title">Isolated Mountains</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  5 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹50,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 3 - 5 Nights -->
+          <div class="package-card-item" data-nights="5">
+            <div class="card-image">
+              <img src="assets/images/beach.png" alt="Gili Trawangan, Indonesia">
+              <span class="discount-badge">12% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Gili Trawangan, Indonesia
+              </div>
+              <h3 class="card-title">The White Beach Land</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  6 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹75,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 4 - 5 Nights -->
+          <div class="package-card-item" data-nights="5">
+            <div class="card-image">
+              <img src="assets/images/ubud.png" alt="Ubud, Indonesia">
+              <span class="discount-badge">10% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Ubud, Indonesia
+              </div>
+              <h3 class="card-title">The Cultural homeland</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  4 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹45,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 5 - 6 Nights -->
+          <div class="package-card-item" data-nights="6">
+            <div class="card-image">
+              <img src="assets/images/indonesia.png" alt="Nusa Penida, Indonesia">
+              <span class="discount-badge">15% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Nusa Penida, Indonesia
+              </div>
+              <h3 class="card-title">Isolated Mountains</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  5 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹50,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 6 - 6 Nights -->
+          <div class="package-card-item" data-nights="6">
+            <div class="card-image">
+              <img src="assets/images/beach.png" alt="Gili Trawangan, Indonesia">
+              <span class="discount-badge">12% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Gili Trawangan, Indonesia
+              </div>
+              <h3 class="card-title">The White Beach Land</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  6 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹75,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 7 - 7 Nights -->
+          <div class="package-card-item" data-nights="7">
+            <div class="card-image">
+              <img src="assets/images/ubud.png" alt="Ubud, Indonesia">
+              <span class="discount-badge">10% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Ubud, Indonesia
+              </div>
+              <h3 class="card-title">The Cultural homeland</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  4 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹45,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 8 - 7 Nights -->
+          <div class="package-card-item" data-nights="7">
+            <div class="card-image">
+              <img src="assets/images/indonesia.png" alt="Nusa Penida, Indonesia">
+              <span class="discount-badge">15% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Nusa Penida, Indonesia
+              </div>
+              <h3 class="card-title">Isolated Mountains</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  5 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹50,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 9 - 7 Nights -->
+          <div class="package-card-item" data-nights="7">
+            <div class="card-image">
+              <img src="assets/images/beach.png" alt="Gili Trawangan, Indonesia">
+              <span class="discount-badge">12% off</span>
+            </div>
+            <div class="card-content">
+              <div class="location-tag">
+                <i class="fa-solid fa-location-dot"></i>
+                Gili Trawangan, Indonesia
+              </div>
+              <h3 class="card-title">The White Beach Land</h3>
+              <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span class="rating-count">4.8(136)</span>
+              </div>
+              <div class="card-footer">
+                <div class="duration">
+                  <i class="fa-regular fa-clock"></i>
+                  6 Days
+                </div>
+                <div class="price-tag">
+                  <span class="from-text">from</span>
+                  <span class="price-amount">₹75,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Know More About Locations Section -->
+    <section class="locations-section">
+      <div class="locations-container">
+        <h2 class="locations-title">Know More About Locations</h2>
+        <p class="locations-subtitle">See What You can do in Bali</p>
+        
+        <div class="locations-slider-wrapper">
+          <div class="locations-slider" id="locations-slider">
+            <!-- Location Card 1 - Ubud -->
+            <div class="location-card">
+              <div class="location-icon">
+                <img src="assets/images/ubud-icon.svg" alt="Ubud">
+              </div>
+              <h3 class="location-name">Ubud</h3>
+              <p class="location-description">50 Acitivities,Sightseeiings</p>
+            </div>
+            
+            <!-- Location Card 2 - Kuta, Gali -->
+            <div class="location-card">
+              <div class="location-icon">
+                <img src="assets/images/kuta-gali-icon.svg" alt="Kuta, Gali">
+              </div>
+              <h3 class="location-name">Kuta, Gali</h3>
+              <p class="location-description">50 Acitivities,Sightseeiings</p>
+            </div>
+            
+            <!-- Location Card 3 - Lombok -->
+            <div class="location-card">
+              <div class="location-icon">
+                <img src="assets/images/lombok-icon.svg" alt="Lombok">
+              </div>
+              <h3 class="location-name">Lombok</h3>
+              <p class="location-description">50 Acitivities,Sightseeiings</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Navigation Arrows Below -->
+        <div class="locations-nav-arrows">
+          <button class="location-arrow-bottom location-arrow-left" id="location-prev">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          
+          <button class="location-arrow-bottom location-arrow-right" id="location-next">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Blogs All About Bali Section -->
+    <section class="blogs-section">
+      <div class="blogs-container">
+        <div class="blogs-header">
+          <h2 class="blogs-title">Blogs All About Bali</h2>
+        </div>
+        
+        <div class="blogs-grid-wrapper">
+          <div class="blogs-grid">
+            <!-- Row 1: Card 1 + Card 2 -->
+            <div class="blog-row">
+              <!-- Blog Card 1 - Large Left -->
+              <div class="blog-card blog-card-1">
+                <div class="blog-image blog-image-1">
+                  <img src="assets/images/ubud2.png" alt="Exploring Bali">
+                  <span class="blog-badge blog-badge-1">vlogger</span>
+                </div>
+                <div class="blog-content blog-content-1">
+                  <div>
+                    <h3 class="blog-title">Exploring Bali A Tropical Journey</h3>
+                    <p class="blog-description">Dive deep into the heart of Bali with our captivating travel tales. From the majestic temples and lush rice terraces to the vibrant cultural celebrations and stunning beaches, we share our journey through Bali's most iconic destinations, hidden gems, and local experiences that capture the essence, cuisine, and the warm hospitality of its people through our detailed travel experiences.</p>
+                  </div>
+                  <div class="blog-author">
+                    <div class="author-avatar">
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="author-info">
+                      <h4 class="author-name">Janna Auniman</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Blog Card 2 - Small Right -->
+              <div class="blog-card blog-card-2">
+                <div class="blog-image blog-image-2">
+                  <img src="assets/images/janna2.png" alt="Tech Nomad's Guide">
+                </div>
+                <div class="blog-content blog-content-2">
+                  <div>
+                    <h3 class="blog-title blog-title-small">Tech Nomad's Guide to Bali Templates</h3>
+                  </div>
+                  <div class="blog-author">
+                    <div class="author-avatar">
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="author-info">
+                      <h4 class="author-name">Leo Vikram</h4>
+                      <p class="author-role">Software Engineer</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Row 2: Card 3 + Card 4 -->
+            <div class="blog-row">
+              <!-- Blog Card 3 - Small Left -->
+              <div class="blog-card blog-card-3">
+                <div class="blog-image blog-image-3">
+                  <img src="assets/images/beach.png" alt="Beach">
+                </div>
+                <div class="blog-content blog-content-3">
+                  <div>
+                    <h3 class="blog-title blog-title-small">Leo Vikram</h3>
+                  </div>
+                  <div class="blog-author">
+                    <div class="author-avatar">
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="author-info">
+                      <h4 class="author-name">Leo Vikram</h4>
+                      <p class="author-role">Software Engineer</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Blog Card 4 - Large Right -->
+              <div class="blog-card blog-card-4">
+                <div class="blog-image blog-image-4">
+                  <img src="assets/images/beach.png" alt="Adventures in Bali">
+                  <span class="blog-badge">vlogger</span>
+                </div>
+                <div class="blog-content blog-content-4">
+                  <div>
+                    <h3 class="blog-title">Adventures in Bali: Beyond the Beach</h3>
+                    <p class="blog-description">Join us on an exhilarating journey beyond Bali's beautiful beaches to uncover its lesser-known treasures. From the mystical Mount Batur at Sunrise to the cascading beauty of the Jatiluwih Rice Terraces and the spiritual ambiance of Pura Luhur Uluwatu temple, we reveal the island's diverse landscape and rich cultural tapestry.</p>
+                  </div>
+                  <div class="blog-author">
+                    <div class="author-avatar">
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="author-info">
+                      <h4 class="author-name">Sara Kumari</h4>
+                      <p class="author-role">Adventure Traveller</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="blogs-button-wrapper">
+          <button class="want-more-btn" id="want-more-btn">Want to know more!</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Instagram Section -->
+    <section class="instagram-section">
+      <div class="instagram-container">
+        <h2 class="instagram-title">Instagram</h2>
+        <p class="instagram-subtitle">Follow Us On @tripon</p>
+        
+        <div class="instagram-gallery">
+          <!-- First set of images -->
+          <div class="instagram-item">
+            <img src="assets/images/image5.png" alt="Instagram Post 1">
+          </div>
+          <div class="instagram-item">
+            <img src="assets/images/kuchipudi image.png" alt="Instagram Post 2">
+          </div>
+          <div class="instagram-item">
+            <img src="assets/images/beach.png" alt="Instagram Post 3">
+          </div>
+          <div class="instagram-item">
+            <img src="assets/images/ubud2.png" alt="Instagram Post 4">
+          </div>
+          <div class="instagram-item">
+            <img src="assets/images/image6.png" alt="Instagram Post 5">
+          </div>
+          
+          <!-- Duplicate set for seamless infinite scroll -->
+          <div class="instagram-item">
+            <img src="assets/images/image5.png" alt="Instagram Post 1">
+          </div>
+          <div class="instagram-item">
+            <img src="assets/images/kuchipudi image.png" alt="Instagram Post 2">
+          </div>
+          <div class="instagram-item">
+            <img src="assets/images/beach.png" alt="Instagram Post 3">
+          </div>
+          <div class="instagram-item">
+            <img src="assets/images/ubud2.png" alt="Instagram Post 4">
+          </div>
+          <div class="instagram-item">
+            <img src="assets/images/image6.png" alt="Instagram Post 5">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="packages-footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <img src="assets/images/tripon-logo.png" alt="Trip On" class="footer-logo">
+        </div>
+        
+        <div class="footer-links">
+          <div class="footer-column">
+            <a href="#about" class="footer-link">About</a>
+            <a href="#blogs" class="footer-link">Blogs</a>
+          </div>
+          
+          <div class="footer-column">
+            <a href="#what-we-do" class="footer-link">What We Do</a>
+            <a href="packages.html" class="footer-link">Packages</a>
+          </div>
+          
+          <div class="footer-column">
+            <a href="#careers" class="footer-link">Careers</a>
+            <a href="#contact" class="footer-link">Contact Us</a>
+          </div>
+        </div>
+        
+        <div class="footer-social">
+          <p class="social-title">FOLLOW OUR TRAVELER COMMUNITY</p>
+          <div class="social-icons">
+            <a href="https://twitter.com/tripon" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/tripon" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/tripon" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@tripon" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  
+  <!-- Contact Us Modal -->
+  <div class="modal-overlay" id="contact-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="contact-modal-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h2 class="modal-title">Contact Our Travel Team</h2>
+      <p style="font-size: 14px; color: #667085; margin-bottom: 24px;">Get in touch with our expert travel consultants for personalized assistance with your Bali vacation.</p>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-solid fa-phone"></i>
+          </div>
+          <div class="contact-details">
+            <div class="contact-label">Phone</div>
+            <div class="contact-value"><a href="tel:+911234567890">+91 123 456 7890</a></div>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:contact@tripon.com">contact@tripon.com</a></div>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <div class="contact-details">
+            <div class="contact-label">WhatsApp</div>
+            <div class="contact-value"><a href="https://wa.me/911234567890" target="_blank">+91 123 456 7890</a></div>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div class="contact-details">
+            <div class="contact-label">Office Address</div>
+            <div class="contact-value">123 Travel Street, Mumbai, India - 400001</div>
+          </div>
+        </div>
+      </div>
+      
+      <h3 class="modal-subtitle">Business Hours</h3>
+      <div style="padding: 12px; background: #F9FAFB; border-radius: 8px; font-size: 14px; color: #667085;">
+        Monday - Friday: 9:00 AM - 7:00 PM<br>
+        Saturday: 10:00 AM - 6:00 PM<br>
+        Sunday: Closed
+      </div>
+    </div>
+  </div>
+  
+  <!-- Packages Modal -->
+  <div class="modal-overlay" id="packages-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="packages-modal-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h2 class="modal-title">Bali Packages</h2>
+      <p style="font-size: 14px; color: #667085; margin-bottom: 24px;">Explore our curated packages for an unforgettable Bali experience.</p>
+      
+      <div class="packages-list">
+        <div class="package-item">
+          <div class="package-item-title">4 Nights 5 Days - Bali Essentials</div>
+          <div class="package-item-details">
+            <span>4 Days</span>
+            <span>•</span>
+            <span>3 Star Hotels</span>
+            <span>•</span>
+            <span class="package-item-price">₹40,000/person</span>
+          </div>
+        </div>
+        
+        <div class="package-item">
+          <div class="package-item-title">5 Nights 6 Days - Cultural Immersion</div>
+          <div class="package-item-details">
+            <span>5 Days</span>
+            <span>•</span>
+            <span>4 Star Hotels</span>
+            <span>•</span>
+            <span class="package-item-price">₹55,000/person</span>
+          </div>
+        </div>
+        
+        <div class="package-item">
+          <div class="package-item-title">6 Nights 7 Days - Beach & Adventure</div>
+          <div class="package-item-details">
+            <span>6 Days</span>
+            <span>•</span>
+            <span>4 Star Hotels</span>
+            <span>•</span>
+            <span class="package-item-price">₹70,000/person</span>
+          </div>
+        </div>
+        
+        <div class="package-item">
+          <div class="package-item-title">7 Nights 8 Days - Luxury Getaway</div>
+          <div class="package-item-details">
+            <span>7 Days</span>
+            <span>•</span>
+            <span>5 Star Hotels</span>
+            <span>•</span>
+            <span class="package-item-price">₹95,000/person</span>
+          </div>
+        </div>
+        
+        <div class="package-item">
+          <div class="package-item-title">Honeymoon Special Package</div>
+          <div class="package-item-details">
+            <span>6 Days</span>
+            <span>•</span>
+            <span>Luxury Resorts</span>
+            <span>•</span>
+            <span class="package-item-price">₹1,20,000/couple</span>
+          </div>
+        </div>
+        
+        <div class="package-item">
+          <div class="package-item-title">Family Fun Package</div>
+          <div class="package-item-details">
+            <span>5 Days</span>
+            <span>•</span>
+            <span>Family Resorts</span>
+            <span>•</span>
+            <span class="package-item-price">₹85,000/family</span>
+          </div>
+        </div>
+      </div>
+      
+      <h3 class="modal-subtitle">What's Included</h3>
+      <div style="padding: 16px; background: #F9FAFB; border-radius: 8px; font-size: 13px; color: #667085; line-height: 1.8;">
+        ✓ Accommodation in selected hotels<br>
+        ✓ Daily breakfast<br>
+        ✓ Airport transfers<br>
+        ✓ Sightseeing tours<br>
+        ✓ Professional tour guide<br>
+        ✓ All applicable taxes
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Mobile Menu Toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.getElementById('mobile-close');
+    
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+    
+    mobileClose.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+    
+    // Close mobile menu when clicking outside
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+    
+    // Bali Dropdown (placeholder functionality)
+    const baliDropdown = document.getElementById('bali-dropdown');
+    baliDropdown.addEventListener('click', () => {
+      window.location.href = 'index.html#home';
+    });
+    
+    // Contact Button Click
+    const contactBtn = document.getElementById('contact-btn-header');
+    const mobileContactBtn = document.getElementById('mobile-contact');
+    const contactModal = document.getElementById('contact-modal');
+    const contactModalClose = document.getElementById('contact-modal-close');
+    
+    contactBtn.addEventListener('click', () => {
+      contactModal.classList.add('active');
+    });
+    
+    mobileContactBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      mobileMenu.classList.remove('active');
+      contactModal.classList.add('active');
+    });
+    
+    contactModalClose.addEventListener('click', () => {
+      contactModal.classList.remove('active');
+    });
+    
+    // Close modal when clicking outside
+    contactModal.addEventListener('click', (e) => {
+      if (e.target === contactModal) {
+        contactModal.classList.remove('active');
+      }
+    });
+    
+    // Packages Button Click (when clicking on "Packages" nav link)
+    const packagesNavLink = document.querySelector('.nav-link.active');
+    const packagesModal = document.getElementById('packages-modal');
+    const packagesModalClose = document.getElementById('packages-modal-close');
+    
+    // Add click event to packages nav link to show modal
+    if (packagesNavLink && packagesNavLink.textContent.trim() === 'Packages') {
+      packagesNavLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        packagesModal.classList.add('active');
+      });
+    }
+    
+    packagesModalClose.addEventListener('click', () => {
+      packagesModal.classList.remove('active');
+    });
+    
+    // Close packages modal when clicking outside
+    packagesModal.addEventListener('click', (e) => {
+      if (e.target === packagesModal) {
+        packagesModal.classList.remove('active');
+      }
+    });
+    
+    // Package items click to navigate to details
+    const packageItems = document.querySelectorAll('.package-item');
+    packageItems.forEach(item => {
+      item.addEventListener('click', () => {
+        packagesModal.classList.remove('active');
+        window.location.href = 'package-details.html';
+      });
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+    
+    // Filter Buttons Functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const packageCards = document.querySelectorAll('.package-card-item');
+    
+    // Function to filter and display cards
+    function filterCards(nights) {
+      packageCards.forEach(card => {
+        const cardNights = card.getAttribute('data-nights');
+        
+        if (nights === 'all') {
+          // Show all 9 cards for "7 Nights 8 Days"
+          card.style.display = 'block';
+        } else if (cardNights === nights) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    
+    // Filter button click handlers
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Skip if custom button
+        if (button.classList.contains('custom-btn')) {
+          alert('Custom Package Request: Please contact us to create a personalized package for your needs!');
+          return;
+        }
+        
+        // Remove active class from all filter buttons (except custom)
+        filterButtons.forEach(btn => {
+          if (!btn.classList.contains('custom-btn')) {
+            btn.classList.remove('active');
+          }
+        });
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        // Get filter value and display cards
+        const filterValue = button.getAttribute('data-filter');
+        
+        switch(filterValue) {
+          case 'all':
+            filterCards('4');
+            break;
+          case '5nights':
+            filterCards('5');
+            break;
+          case '6nights':
+            filterCards('6');
+            break;
+          case '7nights':
+            filterCards('all'); // Show all 9 cards
+            break;
+        }
+      });
+    });
+    
+    // Initialize with 4 nights cards (cards 1-2)
+    filterCards('4');
+    
+    // Package Card Click - Navigate to details page
+    packageCards.forEach(card => {
+      card.addEventListener('click', () => {
+        window.location.href = 'package-details.html';
+      });
+    });
+    
+    // Location Slider Functionality
+    const locationPrev = document.getElementById('location-prev');
+    const locationNext = document.getElementById('location-next');
+    const locationsSlider = document.getElementById('locations-slider');
+    const locationCards = document.querySelectorAll('.location-card');
+    
+    let currentLocationIndex = 0;
+    const totalLocationCards = locationCards.length;
+    
+    function updateLocationSlider() {
+      const cardWidth = locationCards[0].offsetWidth;
+      const gap = 24;
+      const offset = currentLocationIndex * (cardWidth + gap);
+      locationsSlider.style.transform = `translateX(-${offset}px)`;
+      
+      // Update button states
+      locationPrev.disabled = currentLocationIndex === 0;
+      locationNext.disabled = currentLocationIndex >= totalLocationCards - 1;
+    }
+    
+    locationPrev.addEventListener('click', () => {
+      if (currentLocationIndex > 0) {
+        currentLocationIndex--;
+        updateLocationSlider();
+      }
+    });
+    
+    locationNext.addEventListener('click', () => {
+      if (currentLocationIndex < totalLocationCards - 1) {
+        currentLocationIndex++;
+        updateLocationSlider();
+      }
+    });
+    
+    // Auto-adjust slider on window resize
+    window.addEventListener('resize', () => {
+      updateLocationSlider();
+    });
+    
+    // Initialize button states
+    updateLocationSlider();
+    
+    // Want to know more button
+    const wantMoreBtn = document.getElementById('want-more-btn');
+    wantMoreBtn.addEventListener('click', () => {
+      // Navigate to blogs page or show more blogs
+      alert('View all blogs functionality - you can link to a dedicated blogs page here!');
+    });
+  </script>
+</body>
+</html>

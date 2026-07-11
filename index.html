@@ -27,7 +27,7 @@
       <nav class="nav-links" id="navbar-links" aria-label="Primary navigation">
         <a href="#home">Bali</a>
         <a href="#testimonials">People Reviews</a>
-        <a href="#packages">Packages</a>
+        <a href="packages.html" target="_blank">Packages</a>
       </nav>
       <button class="nav-btn" id="contact-us-btn">Contact Us</button>
       <div class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle mobile menu">
@@ -43,7 +43,7 @@
         <nav class="mobile-nav-links">
           <a href="#home">Bali</a>
           <a href="#testimonials">People Reviews</a>
-          <a href="#packages">Packages</a>
+          <a href="packages.html" target="_blank">Packages</a>
           <a href="#contact" class="mobile-contact-btn">Contact Us</a>
         </nav>
       </div>
@@ -346,8 +346,11 @@
       </div>
 
       <!-- Centered bottom button -->
-      <div class="reasons-cta-frame">
-        <button class="more-blogs-btn" id="reasons-more-blogs-btn">More Blogs</button>
+      <div class="popular-packages-frame">
+        <button class="popular-packages-btn" id="popular-packages-btn">
+          <i class="fa-solid fa-box-open"></i>
+          Popular Packages
+        </button>
       </div>
     </div>
   </section>
@@ -1085,10 +1088,6 @@
         <div class="blog-img-container">
           <img src="assets/images/janna2.png" alt="Exploring Bali">
           <span class="badge-vlogger">Vlogger</span>
-          <div class="play-control">
-            <i class="fa-solid fa-play"></i>
-            <div class="play-bar"></div>
-          </div>
         </div>
         <div class="blog-content">
           <div>
@@ -1166,10 +1165,6 @@
         <div class="blog-img-container">
           <img src="assets/images/adventure2.png" alt="Adventures in Bali">
           <span class="badge-vlogger">Vlogger</span>
-          <div class="play-control">
-            <i class="fa-solid fa-play"></i>
-            <div class="play-bar"></div>
-          </div>
         </div>
         <div class="blog-content">
           <div>
@@ -1236,10 +1231,27 @@
       <p>Follow Us On <span id="tripon-link" class="tripon-clickable"></span>@tripon</span></p>
     </div>
 
-    <!-- Slider wrapper -->
+    <!-- Slider wrapper with infinite scroll -->
     <div class="insta-slider-wrapper" id="insta-slider-wrapper">
       <div class="insta-slider-track" id="insta-slider-track">
-        <div class="insta-slide active">
+        <!-- First set of images -->
+        <div class="insta-slide">
+          <img src="assets/images/image1.png" alt="Instagram 1">
+        </div>
+        <div class="insta-slide">
+          <img src="assets/images/image2.png" alt="Instagram 2">
+        </div>
+        <div class="insta-slide">
+          <img src="assets/images/image3.png" alt="Instagram 3">
+        </div>
+        <div class="insta-slide">
+          <img src="assets/images/image4.png" alt="Instagram 4">
+        </div>
+        <div class="insta-slide">
+          <img src="assets/images/image5.png" alt="Instagram 5">
+        </div>
+        <!-- Duplicate set for seamless infinite loop -->
+        <div class="insta-slide">
           <img src="assets/images/image1.png" alt="Instagram 1">
         </div>
         <div class="insta-slide">
@@ -1255,18 +1267,7 @@
           <img src="assets/images/image5.png" alt="Instagram 5">
         </div>
       </div>
-
-      <!-- Arrows -->
-      <button class="insta-arrow insta-prev" id="insta-prev" aria-label="Previous photo">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
-      <button class="insta-arrow insta-next" id="insta-next" aria-label="Next photo">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
     </div>
-
-    <!-- Dot indicators -->
-    <div class="insta-dots" id="insta-dots"></div>
   </section>
 
   <!-- Footer -->
@@ -3100,13 +3101,17 @@
     })();
 
 
-    // ===== MORE BLOGS BUTTON NAVIGATION =====
-    const moreBlogsBtn = document.getElementById('reasons-more-blogs-btn');
-    if (moreBlogsBtn) {
-      moreBlogsBtn.addEventListener('click', () => {
-        const blogsSection = document.getElementById('blogs');
-        if (blogsSection) {
-          blogsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // ===== POPULAR PACKAGES BUTTON NAVIGATION =====
+    const popularPackagesBtn = document.getElementById('popular-packages-btn');
+    if (popularPackagesBtn) {
+      popularPackagesBtn.addEventListener('click', () => {
+        const packagesSection = document.getElementById('packages');
+        if (packagesSection) {
+          packagesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Show success toast
+          setTimeout(() => {
+            showToast('🎉 Explore our Popular Packages!');
+          }, 500);
         }
       });
     }

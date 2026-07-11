@@ -1188,6 +1188,50 @@ header.header-scrolled {
   box-shadow: 0 8px 24px rgba(32, 102, 78, 0.35);
 }
 
+/* Popular Packages Button */
+.popular-packages-frame {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.popular-packages-btn {
+  width: 357px;
+  height: 59px;
+  background: #fff;
+  color: #037b2b;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  font-family: var(--font-main);
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: none;
+}
+
+.popular-packages-btn i {
+  font-size: 20px;
+  color: #037b2b;
+}
+
+.popular-packages-btn:hover {
+  background: #037b2b;
+  color: #fff;
+  border-color: #037b2b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(3, 123, 43, 0.25);
+}
+
+.popular-packages-btn:hover i {
+  color: #fff;
+}
+
 /* ===== PACKAGES SECTION ===== */
 .packages {
   background-color: transparent;
@@ -4628,7 +4672,7 @@ footer {
 }
 
 .package-card {
-  width: 45% !important;
+  width: 100%;
   height: auto !important;
   min-height: 400px;
 }
@@ -4816,6 +4860,20 @@ footer {
     height: 280px;
   }
 
+  .popular-packages-frame {
+    margin-top: 60px;
+  }
+
+  .popular-packages-btn {
+    width: 280px;
+    height: 52px;
+    font-size: 20px;
+  }
+
+  .popular-packages-btn i {
+    font-size: 18px;
+  }
+
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
@@ -4828,7 +4886,7 @@ footer {
 
   .package-card {
     width: 100% !important;
-    max-width: 380px !important;
+    max-width: 360px;
     height: auto !important;
     min-height: 400px;
   }
@@ -5505,7 +5563,7 @@ footer {
 }
 
 /* =============================================
-   INSTAGRAM IMAGE SLIDER
+   INSTAGRAM IMAGE SLIDER WITH INFINITE SCROLL
 ============================================= */
 
 /* Remove old static gallery if it ever renders */
@@ -5513,25 +5571,41 @@ footer {
   display: none;
 }
 
-/* Instagram images in one line - no slider */
+/* Instagram section wrapper */
 .insta-slider-wrapper {
   position: relative;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  overflow: visible;
+  overflow: hidden;
 }
 
-/* Track - flex layout for horizontal display */
+/* Track - flex layout for horizontal display with animation */
 .insta-slider-track {
   display: flex;
-  gap: 20px;
-  justify-content: center;
+  gap: 16px;
   align-items: center;
   flex-wrap: nowrap;
+  animation: scroll-left 20s linear infinite;
+  will-change: transform;
 }
 
-/* Individual slide - all visible in a row */
+/* Pause animation on hover */
+.insta-slider-wrapper:hover .insta-slider-track {
+  animation-play-state: paused;
+}
+
+/* Infinite scroll animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Individual slide - uniform size */
 .insta-slide {
   flex: 0 0 auto;
   width: 220px;
@@ -5554,100 +5628,44 @@ footer {
   display: block;
 }
 
-/* Hide arrows - not needed anymore */
+/* Hide arrows - not needed with infinite scroll */
 .insta-arrow {
   display: none;
 }
 
-/* Hide dot indicators - not needed anymore */
+/* Hide dot indicators - not needed with infinite scroll */
 .insta-dots {
   display: none;
 }
 
-/* Responsive - wrap on smaller screens */
+/* Responsive - maintain infinite scroll on all screens */
 @media (max-width: 1024px) {
-  .insta-slider-track {
-    flex-wrap: wrap;
-    gap: 16px;
+  .insta-slide {
+    width: 200px;
+    height: 200px;
   }
+}
 
+@media (max-width: 768px) {
   .insta-slide {
     width: 180px;
     height: 180px;
   }
+  
+  .insta-slider-track {
+    gap: 14px;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+  .insta-slide {
+    width: 160px;
+    height: 160px;
+  }
+  
   .insta-slider-track {
     gap: 12px;
-  }
-
-  .insta-slide {
-    width: 150px;
-    height: 150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .insta-slider-track {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .insta-slide {
-    width: 280px;
-    height: 280px;
-  }
-}
-
-gap: 8px;
-margin-top: 16px;
-}
-
-.insta-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #c8d9d0;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.3s ease, width 0.3s ease, border-radius 0.3s ease;
-}
-
-.insta-dot.active {
-  background: var(--primary-color);
-  width: 26px;
-  border-radius: 999px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .insta-slider-wrapper {
-    width: calc(100% - 24px);
-    aspect-ratio: 4 / 3;
-    border-radius: 14px;
-  }
-
-  .insta-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 12px;
-  }
-
-  .insta-prev {
-    left: 8px;
-  }
-
-  .insta-next {
-    right: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  .insta-slider-wrapper {
-    aspect-ratio: 1 / 1;
-    border-radius: 10px;
+    animation: scroll-left 15s linear infinite;
   }
 }
 
@@ -7083,14 +7101,14 @@ margin-top: 16px;
 
   .package-card {
     scroll-snap-align: start;
-    width: 300px !important;
+    width: 360px;
     min-height: 400px;
   }
 
   .package-card:nth-child(1),
   .package-card:nth-child(2),
   .package-card:nth-child(3) {
-    width: 300px !important;
+    width: 360px;
     min-height: 400px;
   }
 }
@@ -7102,14 +7120,14 @@ margin-top: 16px;
   }
 
   .package-card {
-    width: 280px !important;
+    width: 360px;
     min-height: 380px;
   }
 
   .package-card:nth-child(1),
   .package-card:nth-child(2),
   .package-card:nth-child(3) {
-    width: 280px !important;
+    width: 360px;
     min-height: 380px;
   }
 
