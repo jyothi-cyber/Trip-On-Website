@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore detailed Bali travel blogs, stories, and experiences from Trip On travelers and vloggers.">
+  <title>Bali Travel Blogs - Trip On</title>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0E5A36 0%, #1a8c57 100%);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: white;
+      color: #0E5A36;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      background: #0E5A36;
+      color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .blog-detail-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .blog-detail-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+
+    .blog-card-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .blog-card-content {
+      padding: 1.5rem;
+    }
+
+    .blog-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .blog-card-content h2 {
+      font-size: 1.5rem;
+      color: #0E5A36;
+      margin-bottom: 1rem;
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .blog-meta i {
+      color: #0E5A36;
+    }
+
+    .blog-card-content p {
+      color: #555;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .blog-highlights {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .blog-highlights h4 {
+      color: #0E5A36;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .blog-highlights ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .blog-highlights li {
+      padding: 0.3rem 0;
+      color: #555;
+    }
+
+    .blog-highlights li:before {
+      content: "✓ ";
+      color: #0E5A36;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0E5A36, #1a8c57);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .author-details h5 {
+      color: #0E5A36;
+      margin-bottom: 0.2rem;
+    }
+
+    .author-details p {
+      color: #666;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #0E5A36, #1a8c57);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .read-more-btn:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(14, 90, 54, 0.3);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .footer {
+      background: #0E5A36;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+
+    .footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #FFD700;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .back-btn {
+        top: 10px;
+        left: 10px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <button class="back-btn" onclick="window.close()">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Home
+  </button>
+
+  <div class="header">
+    <h1><i class="fa-solid fa-blog"></i> Bali Travel Blogs</h1>
+    <p>Discover amazing stories and experiences from our travelers</p>
+  </div>
+
+  <div class="container">
+    <div class="blog-grid">
+      <!-- Blog 1: Exploring Bali A Tropical Journey -->
+      <div class="blog-detail-card">
+        <img src="assets/images/janna2.png" alt="Exploring Bali" class="blog-card-image">
+        <div class="blog-card-content">
+          <span class="blog-badge">Vlogger</span>
+          <h2>Exploring Bali: A Tropical Journey</h2>
+          <div class="blog-meta">
+            <span><i class="fa-solid fa-calendar"></i> June 15, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 12.5K views</span>
+          </div>
+          <p>Dive deep into the heart of Bali with our captivating travel tales. From the majestic temples and lush rice terraces to the vibrant cultural festivals and stunning beaches, we share our journey through Bali's enchanting landscapes.</p>
+          
+          <div class="blog-highlights">
+            <h4>Journey Highlights:</h4>
+            <ul>
+              <li>Visit to Tanah Lot Temple at sunset</li>
+              <li>Exploring Tegallalang Rice Terraces in Ubud</li>
+              <li>Traditional Balinese dance performance</li>
+              <li>Sunrise trek at Mount Batur volcano</li>
+              <li>Beach hopping in Seminyak and Canggu</li>
+              <li>Authentic local cuisine tasting experience</li>
+            </ul>
+          </div>
+
+          <p>Discover the island's rich heritage, exquisite cuisine, and the warm hospitality of its people through our detailed travel experiences. This comprehensive guide takes you through hidden gems, local favorites, and must-visit attractions that make Bali truly magical.</p>
+
+          <div class="author-info">
+            <div class="author-avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="author-details">
+              <h5>Janna Auniman</h5>
+              <p>World Traveller & Content Creator</p>
+            </div>
+          </div>
+          <a href="blog-exploring-bali.html" target="_blank" class="read-more-btn">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Blog 2: Tech Nomad's Guide to Bali -->
+      <div class="blog-detail-card">
+        <img src="assets/images/tech.png" alt="Tech Nomad in Bali" class="blog-card-image">
+        <div class="blog-card-content">
+          <span class="blog-badge">Digital Nomad</span>
+          <h2>Tech Nomad's Guide to Bali</h2>
+          <div class="blog-meta">
+            <span><i class="fa-solid fa-calendar"></i> June 8, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 8.2K views</span>
+          </div>
+          <p>A comprehensive guide for digital nomads and remote workers looking to base themselves in Bali. Discover the best coworking spaces, reliable internet cafes, and productive work environments.</p>
+          
+          <div class="blog-highlights">
+            <h4>Tech Nomad Essentials:</h4>
+            <ul>
+              <li>Top 5 coworking spaces in Canggu and Ubud</li>
+              <li>Best cafes with reliable WiFi and power outlets</li>
+              <li>Affordable accommodation for long-term stays</li>
+              <li>Visa options for digital nomads</li>
+              <li>Networking events and tech communities</li>
+              <li>Work-life balance tips in tropical paradise</li>
+            </ul>
+          </div>
+
+          <p>Learn how to maintain productivity while enjoying Bali's incredible lifestyle. From managing time zones to finding the perfect work setup, this guide covers everything a tech professional needs to thrive in Bali.</p>
+
+          <div class="author-info">
+            <div class="author-avatar">
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <div class="author-details">
+              <h5>Leo Vikram</h5>
+              <p>Software Engineer & Digital Nomad</p>
+            </div>
+          </div>
+          <a href="blog-tech-nomad.html" target="_blank" class="read-more-btn">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Blog 3: Secrets of Ubud -->
+      <div class="blog-detail-card">
+        <img src="assets/images/secrets.png" alt="Secrets of Ubud" class="blog-card-image">
+        <div class="blog-card-content">
+          <span class="blog-badge">Culture & Nature</span>
+          <h2>Secrets of Ubud: Culture and Nature</h2>
+          <div class="blog-meta">
+            <span><i class="fa-solid fa-calendar"></i> May 25, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 15.3K views</span>
+          </div>
+          <p>Uncover the hidden treasures of Ubud, the cultural heart of Bali. From sacred temples nestled in jungle valleys to traditional art galleries and organic cafes, this guide reveals Ubud's best-kept secrets.</p>
+          
+          <div class="blog-highlights">
+            <h4>Ubud's Hidden Gems:</h4>
+            <ul>
+              <li>Secret waterfall trails off the beaten path</li>
+              <li>Traditional healing ceremonies and yoga retreats</li>
+              <li>Local artisan workshops and craft studios</li>
+              <li>Organic farm-to-table dining experiences</li>
+              <li>Monkey Forest sanctuary early morning visits</li>
+              <li>Sacred springs and holy water temples</li>
+            </ul>
+          </div>
+
+          <p>Experience authentic Balinese culture through spiritual ceremonies, traditional dance performances, and interactions with local communities. This comprehensive guide helps you explore Ubud like a local, beyond the tourist hotspots.</p>
+
+          <div class="author-info">
+            <div class="author-avatar">
+              <i class="fa-solid fa-om"></i>
+            </div>
+            <div class="author-details">
+              <h5>Leo Vikram</h5>
+              <p>Cultural Explorer & Photographer</p>
+            </div>
+          </div>
+          <a href="blog-secrets-ubud.html" target="_blank" class="read-more-btn">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Blog 4: Adventures in Bali -->
+      <div class="blog-detail-card">
+        <img src="assets/images/adventure2.png" alt="Adventures in Bali" class="blog-card-image">
+        <div class="blog-card-content">
+          <span class="blog-badge">Vlogger</span>
+          <h2>Adventures in Bali: Beyond the Beach</h2>
+          <div class="blog-meta">
+            <span><i class="fa-solid fa-calendar"></i> May 18, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 18.7K views</span>
+          </div>
+          <p>Join us as we venture beyond Bali's renowned beaches to uncover its lesser-known treasures. From the mystical Mount Batur at sunrise to the serene beauty of the Jatiluwih Rice Terraces and the spiritual ambiance of ancient temples.</p>
+          
+          <div class="blog-highlights">
+            <h4>Adventure Highlights:</h4>
+            <ul>
+              <li>Mount Batur sunrise trekking experience</li>
+              <li>White water rafting on Ayung River</li>
+              <li>Cliff jumping at Hidden Canyon Beji Guwang</li>
+              <li>Scuba diving at USS Liberty Shipwreck</li>
+              <li>Mountain biking through jungle trails</li>
+              <li>Canyoning in Gitgit and Aling Aling waterfalls</li>
+            </ul>
+          </div>
+
+          <p>Our adventures in Bali reveal the island's diverse landscape and rich cultural tapestry. Whether you're seeking adrenaline-pumping activities or serene natural wonders, Bali offers unforgettable experiences for every type of adventurer.</p>
+
+          <div class="author-info">
+            <div class="author-avatar">
+              <i class="fa-solid fa-person-hiking"></i>
+            </div>
+            <div class="author-details">
+              <h5>Sara Kumari</h5>
+              <p>Adventure Traveller & Vlogger</p>
+            </div>
+          </div>
+          <a href="blog-adventures-bali.html" target="_blank" class="read-more-btn">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Additional Blog 5: Bali's Culinary Journey -->
+      <div class="blog-detail-card">
+        <img src="assets/images/culture.png" alt="Bali Culinary" class="blog-card-image">
+        <div class="blog-card-content">
+          <span class="blog-badge">Food & Culture</span>
+          <h2>Bali's Culinary Journey</h2>
+          <div class="blog-meta">
+            <span><i class="fa-solid fa-calendar"></i> May 10, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 10.5K views</span>
+          </div>
+          <p>Embark on a delicious journey through Bali's diverse culinary landscape. From traditional warungs serving authentic Balinese cuisine to upscale restaurants offering fusion dishes.</p>
+          
+          <div class="blog-highlights">
+            <h4>Culinary Experiences:</h4>
+            <ul>
+              <li>Traditional Balinese cooking classes</li>
+              <li>Street food tours in Denpasar</li>
+              <li>Farm-to-table organic restaurants</li>
+              <li>Seafood BBQ on Jimbaran Beach</li>
+              <li>Coffee plantation tours and tastings</li>
+              <li>Vegetarian and vegan dining options</li>
+            </ul>
+          </div>
+
+          <p>Experience the rich flavors of Bali, from spicy sambal to sweet coconut desserts. This guide takes you through must-try dishes, hidden local eateries, and the best places to experience Balinese hospitality through food.</p>
+
+          <div class="author-info">
+            <div class="author-avatar">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <div class="author-details">
+              <h5>Maya Patel</h5>
+              <p>Food Blogger & Chef</p>
+            </div>
+          </div>
+          <a href="blog-culinary-journey.html" target="_blank" class="read-more-btn">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Additional Blog 6: Wellness & Yoga Retreat -->
+      <div class="blog-detail-card">
+        <img src="assets/images/peace.png" alt="Wellness in Bali" class="blog-card-image">
+        <div class="blog-card-content">
+          <span class="blog-badge">Wellness</span>
+          <h2>Finding Peace: Wellness in Bali</h2>
+          <div class="blog-meta">
+            <span><i class="fa-solid fa-calendar"></i> April 28, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 13.8K views</span>
+          </div>
+          <p>Discover why Bali is the world's premier destination for wellness, yoga, and spiritual healing. From luxury spa retreats to traditional healing ceremonies.</p>
+          
+          <div class="blog-highlights">
+            <h4>Wellness Experiences:</h4>
+            <ul>
+              <li>Best yoga studios and retreat centers</li>
+              <li>Traditional Balinese healing treatments</li>
+              <li>Meditation and mindfulness workshops</li>
+              <li>Organic spa treatments and massages</li>
+              <li>Sound healing and reiki sessions</li>
+              <li>Detox and wellness programs</li>
+            </ul>
+          </div>
+
+          <p>Rejuvenate your mind, body, and soul in Bali's tranquil environment. This comprehensive guide helps you find the perfect wellness experience, whether you're seeking physical healing, spiritual growth, or simply relaxation.</p>
+
+          <div class="author-info">
+            <div class="author-avatar">
+              <i class="fa-solid fa-spa"></i>
+            </div>
+            <div class="author-details">
+              <h5>Anika Sharma</h5>
+              <p>Yoga Instructor & Wellness Coach</p>
+            </div>
+          </div>
+          <a href="blog-wellness-bali.html" target="_blank" class="read-more-btn">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2026 Trip On. All rights reserved.</p>
+    <p>Explore Bali with us - Your trusted travel companion</p>
+    <div class="footer-links">
+      <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
+      <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+      <a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a>
+    </div>
+  </div>
+
+  <script>
+    // Blog data for dynamic full story generation
+    const blogData = {
+      'blog-exploring-bali': {
+        title: 'Exploring Bali: A Tropical Journey',
+        badge: 'Vlogger',
+        author: 'Janna Auniman',
+        authorRole: 'World Traveller & Content Creator',
+        date: 'June 15, 2026',
+        views: '12.5K',
+        image: 'assets/images/janna2.png',
+        intro: 'Dive deep into the heart of Bali with our captivating travel tales. From the majestic temples and lush rice terraces to the vibrant cultural festivals and stunning beaches, we share our journey through Bali\'s enchanting landscapes.',
+        content: `
+          <h3>The Journey Begins</h3>
+          <p>Our Bali adventure started with the iconic Tanah Lot Temple, perched dramatically on a rocky outcrop in the sea. Watching the sunset here was nothing short of magical – the sky painted in hues of orange and pink as waves crashed against the ancient temple.</p>
+          
+          <h3>Ubud's Cultural Heart</h3>
+          <p>The Tegallalang Rice Terraces in Ubud left us breathless. Walking through the emerald-green stepped terraces, we witnessed traditional farming methods that have been practiced for centuries. The local farmers welcomed us warmly and shared stories about their ancestral land.</p>
+          
+          <h3>Traditional Performances</h3>
+          <p>We were fortunate to witness a traditional Balinese dance performance. The intricate movements, elaborate costumes, and gamelan music told ancient stories of gods and demons. The dancers' precision and dedication to their craft was truly inspiring.</p>
+          
+          <h3>Mount Batur Sunrise</h3>
+          <p>The 2am wake-up call for the Mount Batur trek was worth every second. As we reached the summit, the sun broke through the horizon, illuminating the volcanic landscape and Lake Batur below. It's a moment that will forever be etched in our memories.</p>
+          
+          <h3>Beach Paradise</h3>
+          <p>Seminyak and Canggu offered the perfect blend of relaxation and adventure. From surfing lessons to beachside yoga sessions, and sunset cocktails at beach clubs, these coastal towns captured the laid-back Bali lifestyle we'd heard so much about.</p>
+          
+          <h3>Culinary Delights</h3>
+          <p>The authentic local cuisine was a highlight of our journey. From Babi Guling (suckling pig) to fresh seafood grilled on Jimbaran Beach, every meal was an adventure. The aromatic spices and fresh ingredients made each dish memorable.</p>
+        `,
+        highlights: [
+          'Visit to Tanah Lot Temple at sunset',
+          'Exploring Tegallalang Rice Terraces in Ubud',
+          'Traditional Balinese dance performance',
+          'Sunrise trek at Mount Batur volcano',
+          'Beach hopping in Seminyak and Canggu',
+          'Authentic local cuisine tasting experience'
+        ]
+      },
+      'blog-tech-nomad': {
+        title: 'Tech Nomad\'s Guide to Bali',
+        badge: 'Digital Nomad',
+        author: 'Leo Vikram',
+        authorRole: 'Software Engineer & Digital Nomad',
+        date: 'June 8, 2026',
+        views: '8.2K',
+        image: 'assets/images/tech.png',
+        intro: 'A comprehensive guide for digital nomads and remote workers looking to base themselves in Bali. Discover the best coworking spaces, reliable internet cafes, and productive work environments.',
+        content: `
+          <h3>Why Bali for Remote Work?</h3>
+          <p>Bali has become a digital nomad hub for good reason. The combination of affordable living, stunning natural beauty, vibrant community, and improving infrastructure makes it ideal for remote workers seeking work-life balance.</p>
+          
+          <h3>Best Coworking Spaces</h3>
+          <p>Canggu is home to some of the best coworking spaces in Southeast Asia. Dojo Bali, Tropical Nomad, and Outpost offer excellent facilities with high-speed internet, comfortable seating, meeting rooms, and a thriving community of like-minded professionals.</p>
+          
+          <h3>Reliable Internet</h3>
+          <p>Internet connectivity has improved significantly in recent years. Most coworking spaces offer 50-100 Mbps connections, and many villas and cafes have backup connections. Always have a local SIM card with data as a backup.</p>
+          
+          <h3>Accommodation Options</h3>
+          <p>Long-term rentals are affordable and plentiful. A comfortable one-bedroom villa with a pool can be found for $500-800/month. Areas like Canggu, Ubud, and Sanur are popular with digital nomads.</p>
+          
+          <h3>Visa Information</h3>
+          <p>The B211A visa allows stays up to 60 days and can be extended four times (30 days each), giving you up to 6 months. Many nomads use visa agents to handle the process smoothly.</p>
+          
+          <h3>Community and Networking</h3>
+          <p>Regular meetups, skill-sharing sessions, and social events make it easy to connect with other nomads. The community is welcoming and supportive, perfect for both solo travelers and those seeking collaboration.</p>
+        `,
+        highlights: [
+          'Top 5 coworking spaces in Canggu and Ubud',
+          'Best cafes with reliable WiFi and power outlets',
+          'Affordable accommodation for long-term stays',
+          'Visa options for digital nomads',
+          'Networking events and tech communities',
+          'Work-life balance tips in tropical paradise'
+        ]
+      },
+      'blog-secrets-ubud': {
+        title: 'Secrets of Ubud: Culture and Nature',
+        badge: 'Culture & Nature',
+        author: 'Leo Vikram',
+        authorRole: 'Cultural Explorer & Photographer',
+        date: 'May 25, 2026',
+        views: '15.3K',
+        image: 'assets/images/secrets.png',
+        intro: 'Uncover the hidden treasures of Ubud, the cultural heart of Bali. From sacred temples nestled in jungle valleys to traditional art galleries and organic cafes, this guide reveals Ubud\'s best-kept secrets.',
+        content: `
+          <h3>Hidden Waterfalls</h3>
+          <p>Beyond the well-known Tegenungan, Ubud hides several secret waterfalls. Tukad Cepung, with its mystical rays of light piercing through the canyon, and Tibumana, a serene waterfall perfect for swimming, are local favorites rarely crowded with tourists.</p>
+          
+          <h3>Sacred Temples</h3>
+          <p>While Tirta Empul is famous, smaller temples like Gunung Kawi Sebatu offer equally powerful spiritual experiences without the crowds. The holy spring water rituals here are authentic and deeply moving.</p>
+          
+          <h3>Traditional Healing</h3>
+          <p>Ubud is renowned for its traditional Balinese healers (Balian). These practitioners use ancient techniques combining energy work, massage, and spiritual counseling. Many visitors report profound healing experiences.</p>
+          
+          <h3>Art and Crafts</h3>
+          <p>Away from the main streets, local artisans create beautiful traditional crafts. Visit the silversmith workshops in Celuk, wood carving studios in Mas, and painting galleries showcasing traditional Balinese art styles.</p>
+          
+          <h3>Organic Dining</h3>
+          <p>Ubud's farm-to-table movement is strong. Restaurants like Sari Organik, set in the middle of rice fields, serve fresh organic produce harvested daily. The food is not just healthy but incredibly flavorful.</p>
+          
+          <h3>Yoga and Wellness</h3>
+          <p>The Yoga Barn and Radiantly Alive offer world-class yoga classes, but smaller studios provide more intimate experiences. Morning yoga in rice field settings is a uniquely Ubud experience.</p>
+        `,
+        highlights: [
+          'Secret waterfall trails off the beaten path',
+          'Traditional healing ceremonies and yoga retreats',
+          'Local artisan workshops and craft studios',
+          'Organic farm-to-table dining experiences',
+          'Monkey Forest sanctuary early morning visits',
+          'Sacred springs and holy water temples'
+        ]
+      },
+      'blog-adventures-bali': {
+        title: 'Adventures in Bali: Beyond the Beach',
+        badge: 'Vlogger',
+        author: 'Sara Kumari',
+        authorRole: 'Adventure Traveller & Vlogger',
+        date: 'May 18, 2026',
+        views: '18.7K',
+        image: 'assets/images/adventure2.png',
+        intro: 'Join us as we venture beyond Bali\'s renowned beaches to uncover its lesser-known treasures. From the mystical Mount Batur at sunrise to the serene beauty of the Jatiluwih Rice Terraces and the spiritual ambiance of ancient temples.',
+        content: `
+          <h3>Mount Batur Trek</h3>
+          <p>The 2-hour pre-dawn trek up Mount Batur is challenging but incredibly rewarding. Reaching the crater rim as the sun rises over the volcanic landscape, with Mount Agung in the distance, is an unforgettable moment. The guide cooked breakfast using volcanic steam!</p>
+          
+          <h3>White Water Rafting</h3>
+          <p>The Ayung River offers thrilling class II-III rapids through stunning jungle scenery. Paddling past cascading waterfalls and ancient stone carvings, we navigated 16km of exciting rapids while soaking in Bali's natural beauty.</p>
+          
+          <h3>Hidden Canyon Adventure</h3>
+          <p>Beji Guwang Hidden Canyon is an adventure playground. Jumping into crystal-clear pools, sliding down natural rock slides, and wading through narrow gorges surrounded by towering canyon walls was pure adrenaline.</p>
+          
+          <h3>Scuba Diving</h3>
+          <p>The USS Liberty Shipwreck in Tulamben is one of the world's best wreck dives. Swimming through the 120m WWII cargo ship now covered in colorful coral and teeming with marine life was surreal.</p>
+          
+          <h3>Mountain Biking</h3>
+          <p>Cycling through rural villages, rice terraces, and jungle trails gave us an authentic glimpse of Balinese life. The downhill routes from Kintamani offer stunning views with minimal effort.</p>
+Order          <h3>Canyoning Waterfalls</h3>
+          <p>Gitgit and Aling-Aling waterfalls offer canyoning experiences with cliff jumps up to 15 meters, natural slides, and rappelling down cascading falls. It's the ultimate adrenaline rush in a beautiful setting.</p>
+        `,
+        highlights: [
+          'Mount Batur sunrise trekking experience',
+          'White water rafting on Ayung River',
+          'Cliff jumping at Hidden Canyon Beji Guwang',
+          'Scuba diving at USS Liberty Shipwreck',
+          'Mountain biking through jungle trails',
+          'Canyoning in Gitgit and Aling Aling waterfalls'
+        ]
+      },
+      'blog-culinary-journey': {
+        title: 'Bali\'s Culinary Journey',
+        badge: 'Food & Culture',
+        author: 'Maya Patel',
+        authorRole: 'Food Blogger & Chef',
+        date: 'May 10, 2026',
+        views: '10.5K',
+        image: 'assets/images/culture.png',
+        intro: 'Embark on a delicious journey through Bali\'s diverse culinary landscape. From traditional warungs serving authentic Balinese cuisine to upscale restaurants offering fusion dishes.',
+        content: `
+          <h3>Traditional Balinese Cuisine</h3>
+          <p>Balinese food is a celebration of flavors. Babi Guling (suckling pig) is the island's signature dish, slow-roasted with a blend of turmeric, coriander, lemongrass, and chili. The crispy skin and tender meat are unforgettable.</p>
+          
+          <h3>Cooking Classes</h3>
+          <p>Taking a cooking class in Ubud was enlightening. We started at the local market, learned to select fresh ingredients, then prepared traditional dishes like Lawar, Sate Lilit, and Bebek Betutu in a beautiful outdoor kitchen.</p>
+          
+          <h3>Street Food Adventures</h3>
+          <p>Denpasar's night markets offer authentic local flavors at incredible prices. From Nasi Campur (mixed rice) to Mie Goreng (fried noodles) and Martabak (stuffed pancake), every stall has its own secret recipes passed down through generations.</p>
+          
+          <h3>Farm-to-Table Dining</h3>
+          <p>Restaurants like Locavore and Mozaic showcase Bali's produce in innovative ways. Dining surrounded by rice fields at Sari Organik, eating food harvested hours before, creates a deep connection with the land.</p>
+          
+          <h3>Jimbaran Seafood</h3>
+          <p>Watching the sunset while dining on freshly grilled fish, squid, and prawns on Jimbaran Beach is a quintessential Bali experience. You choose your seafood, they grill it to perfection, and you enjoy it with your toes in the sand.</p>
+          
+          <h3>Coffee Culture</h3>
+          <p>Bali's coffee plantations produce exceptional beans. Tasting the famous (and controversial) Luwak coffee, learning about traditional processing methods, and sipping fresh brew overlooking terraced gardens was a highlight.</p>
+        `,
+        highlights: [
+          'Traditional Balinese cooking classes',
+          'Street food tours in Denpasar',
+          'Farm-to-table organic restaurants',
+          'Seafood BBQ on Jimbaran Beach',
+          'Coffee plantation tours and tastings',
+          'Vegetarian and vegan dining options'
+        ]
+      },
+      'blog-wellness-bali': {
+        title: 'Finding Peace: Wellness in Bali',
+        badge: 'Wellness',
+        author: 'Anika Sharma',
+        authorRole: 'Yoga Instructor & Wellness Coach',
+        date: 'April 28, 2026',
+        views: '13.8K',
+        image: 'assets/images/peace.png',
+        intro: 'Discover why Bali is the world\'s premier destination for wellness, yoga, and spiritual healing. From luxury spa retreats to traditional healing ceremonies.',
+        content: `
+          <h3>Yoga Paradise</h3>
+          <p>Bali offers yoga for every level and style. The Yoga Barn in Ubud hosts multiple classes daily in stunning open-air studios. From Vinyasa to Yin, Sound Healing to Acro Yoga, the variety is incredible.</p>
+          
+          <h3>Traditional Healing</h3>
+          <p>I visited a traditional Balian (healer) who used energy work and intuitive guidance. The experience was profound – he identified issues I hadn't shared and provided healing that felt both ancient and deeply effective.</p>
+          
+          <h3>Meditation Retreats</h3>
+          <p>Silent meditation retreats in the Sidemen Valley offer complete digital detox. Spending days in silence, meditating, and connecting with nature reset my entire system and provided clarity I hadn't felt in years.</p>
+          
+          <h3>Spa Treatments</h3>
+          <p>Balinese massage is legendary for good reason. The combination of gentle stretches, pressure points, and aromatic oils induces deep relaxation. Many treatments incorporate flower baths, body scrubs, and healing oils.</p>
+          
+          <h3>Sound Healing</h3>
+          <p>Sound bath sessions using Tibetan singing bowls, gongs, and crystal bowls create powerful healing vibrations. Lying in the Pyramids of Chi in Ubud during a sound healing session was transformative.</p>
+          
+          <h3>Holistic Wellness</h3>
+          <p>Many retreat centers offer comprehensive wellness programs combining yoga, meditation, healthy eating, spa treatments, and workshops on mindfulness and personal growth. It's healing for body, mind, and spirit.</p>
+        `,
+        highlights: [
+          'Best yoga studios and retreat centers',
+          'Traditional Balinese healing treatments',
+          'Meditation and mindfulness workshops',
+          'Organic spa treatments and massages',
+          'Sound healing and reiki sessions',
+          'Detox and wellness programs'
+        ]
+      }
+    };
+
+    // Smooth scroll effect for all links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Add animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.blog-detail-card').forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s ease';
+      observer.observe(card);
+    });
+
+    // Read More button functionality - opens blog full story in new tab
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = btn.getAttribute('href');
+        const blogKey = href.replace('.html', '');
+        const blog = blogData[blogKey];
+        
+        if (blog) {
+          // Create full story HTML
+          const fullStoryHTML = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>${blog.title} - Trip On</title>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+              <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+              <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body {
+                  font-family: 'Poppins', sans-serif;
+                  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                  color: #333;
+                  line-height: 1.8;
+                }
+                .back-btn {
+                  position: fixed;
+                  top: 20px;
+                  left: 20px;
+                  background: white;
+                  color: #0E5A36;
+                  border: none;
+                  padding: 12px 20px;
+                  border-radius: 50px;
+                  cursor: pointer;
+                  font-weight: 600;
+                  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                  transition: all 0.3s ease;
+                  z-index: 1000;
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  font-family: 'Poppins', sans-serif;
+                }
+                .back-btn:hover {
+                  transform: translateY(-2px);
+                  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+                  background: #0E5A36;
+                  color: white;
+                }
+                .hero {
+                  background: linear-gradient(135deg, #0E5A36 0%, #1a8c57 100%);
+                  color: white;
+                  padding: 4rem 2rem 2rem;
+                  text-align: center;
+                  position: relative;
+                  overflow: hidden;
+                }
+                .hero::before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: url('${blog.image}') center/cover;
+                  opacity: 0.2;
+                  z-index: 0;
+                }
+                .hero-content {
+                  position: relative;
+                  z-index: 1;
+                  max-width: 900px;
+                  margin: 0 auto;
+                }
+                .badge {
+                  display: inline-block;
+                  background: rgba(255,255,255,0.2);
+                  padding: 8px 16px;
+                  border-radius: 20px;
+                  margin-bottom: 1rem;
+                  font-size: 0.9rem;
+                }
+                .hero h1 {
+                  font-size: 3rem;
+                  margin-bottom: 1rem;
+                  font-weight: 700;
+                  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                }
+                .meta {
+                  display: flex;
+                  justify-content: center;
+                  gap: 2rem;
+                  margin-top: 1rem;
+                  font-size: 0.95rem;
+                  opacity: 0.9;
+                }
+                .meta span {
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                }
+                .container {
+                  max-width: 900px;
+                  margin: 3rem auto;
+                  padding: 0 2rem;
+                }
+                .article {
+                  background: white;
+                  border-radius: 16px;
+                  padding: 3rem;
+                  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+                  margin-bottom: 2rem;
+                }
+                .intro {
+                  font-size: 1.2rem;
+                  color: #555;
+                  line-height: 2;
+                  margin-bottom: 2rem;
+                  padding-bottom: 2rem;
+                  border-bottom: 2px solid #e0e0e0;
+                }
+                .article h3 {
+                  color: #0E5A36;
+                  font-size: 1.8rem;
+                  margin: 2rem 0 1rem;
+                }
+                .article p {
+                  color: #555;
+                  margin-bottom: 1.5rem;
+                  line-height: 1.9;
+                }
+                .highlights {
+                  background: #f8f9fa;
+                  border-left: 4px solid #0E5A36;
+                  padding: 2rem;
+                  margin: 2rem 0;
+                  border-radius: 8px;
+                }
+                .highlights h4 {
+                  color: #0E5A36;
+                  margin-bottom: 1rem;
+                  font-size: 1.3rem;
+                }
+                .highlights ul {
+                  list-style: none;
+                  padding: 0;
+                }
+                .highlights li {
+                  padding: 0.5rem 0;
+                  color: #555;
+                }
+                .highlights li:before {
+                  content: "✓ ";
+                  color: #0E5A36;
+                  font-weight: bold;
+                  margin-right: 12px;
+                  font-size: 1.2rem;
+                }
+                .author-box {
+                  background: linear-gradient(135deg, #0E5A36 0%, #1a8c57 100%);
+                  color: white;
+                  padding: 2rem;
+                  border-radius: 12px;
+                  display: flex;
+                  align-items: center;
+                  gap: 1.5rem;
+                  margin-top: 3rem;
+                }
+                .author-avatar {
+                  width: 80px;
+                  height: 80px;
+                  border-radius: 50%;
+                  background: rgba(255,255,255,0.2);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 2rem;
+                }
+                .author-info h4 {
+                  font-size: 1.3rem;
+                  margin-bottom: 0.3rem;
+                }
+                .author-info p {
+                  opacity: 0.9;
+                  margin: 0;
+                }
+                @media (max-width: 768px) {
+                  .hero h1 { font-size: 2rem; }
+                  .article { padding: 2rem 1.5rem; }
+                  .container { padding: 0 1rem; }
+                  .back-btn { top: 10px; left: 10px; padding: 10px 16px; font-size: 0.9rem; }
+                }
+              </style>
+            </head>
+            <body>
+              <button class="back-btn" onclick="window.close()">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+              </button>
+              
+              <div class="hero">
+                <div class="hero-content">
+                  <span class="badge">${blog.badge}</span>
+                  <h1>${blog.title}</h1>
+                  <div class="meta">
+                    <span><i class="fa-solid fa-calendar"></i> ${blog.date}</span>
+                    <span><i class="fa-solid fa-eye"></i> ${blog.views} views</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="container">
+                <div class="article">
+                  <p class="intro">${blog.intro}</p>
+                  
+                  ${blog.content}
+                  
+                  <div class="highlights">
+                    <h4>Key Highlights:</h4>
+                    <ul>
+                      ${blog.highlights.map(h => `<li>${h}</li>`).join('')}
+                    </ul>
+                  </div>
+                  
+                  <div class="author-box">
+                    <div class="author-avatar">
+                      <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="author-info">
+                      <h4>Written by ${blog.author}</h4>
+                      <p>${blog.authorRole}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </body>
+            </html>
+          `;
+          
+          // Open in new tab with generated content
+          const newWindow = window.open('', '_blank');
+          newWindow.document.write(fullStoryHTML);
+          newWindow.document.close();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

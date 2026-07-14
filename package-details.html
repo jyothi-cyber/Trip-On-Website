@@ -36,10 +36,14 @@
     }
 
     .details-logo {
-      font-size: 28px;
-      font-weight: 800;
-      color: #0E5A36;
+      display: flex;
+      align-items: center;
       text-decoration: none;
+    }
+
+    .details-logo img {
+      height: 40px;
+      width: auto;
     }
 
     .details-nav {
@@ -122,6 +126,41 @@
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
 
+    /* Package Badges */
+    .package-badge-wrapper {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+    
+    .exclusive-badge {
+      padding: 8px 20px;
+      background: linear-gradient(135deg, #FF6B35, #FF8C5A);
+      color: #ffffff;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+    }
+    
+    .nights-badge {
+      padding: 8px 16px;
+      background: #F3F4F6;
+      color: #667085;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .nights-badge i {
+      font-size: 12px;
+    }
+
+    /* Package Title */
     .package-title {
       font-size: 32px;
       font-weight: 700;
@@ -176,24 +215,15 @@
     /* Image Gallery */
     .image-gallery {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-bottom: 32px;
       border-radius: 16px;
-      overflow: hidden;
     }
 
-    .main-gallery-image {
-      grid-row: 1 / 3;
+    .gallery-image {
       width: 100%;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 16px;
-    }
-
-    .side-gallery-image {
-      width: 100%;
-      height: 194px;
+      height: 200px;
       object-fit: cover;
       border-radius: 16px;
     }
@@ -312,32 +342,6 @@
       border: 1px solid #E2EDE8;
     }
 
-    .price-section {
-      text-align: center;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #E2EDE8;
-      margin-bottom: 24px;
-    }
-
-    .price-label {
-      font-size: 14px;
-      color: #667085;
-      margin-bottom: 8px;
-    }
-
-    .price-amount {
-      font-size: 40px;
-      font-weight: 800;
-      color: #0E5A36;
-      line-height: 1;
-      margin: 8px 0;
-    }
-
-    .price-subtitle {
-      font-size: 13px;
-      color: #667085;
-    }
-
     .booking-form-group {
       margin-bottom: 16px;
     }
@@ -373,7 +377,7 @@
     .book-now-btn {
       width: 100%;
       padding: 16px;
-      background: linear-gradient(135deg, #FF6B35, #FF8C5A);
+      background: #FF6B35;
       color: #ffffff;
       border: none;
       border-radius: 12px;
@@ -385,6 +389,7 @@
     }
 
     .book-now-btn:hover {
+      background: #E64403;
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
     }
@@ -396,20 +401,11 @@
       }
 
       .image-gallery {
-        grid-template-columns: 1fr;
-      }
-
-      .main-gallery-image {
-        grid-row: 1;
-        height: 250px;
-      }
-
-      .side-gallery-image {
-        height: 150px;
-      }
-
-      .info-cards {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-image {
+        height: 150px;
       }
 
       .main-details {
@@ -428,23 +424,67 @@
       .details-nav {
         display: none;
       }
+      
+      .recommended-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .recommended-title {
+        font-size: 28px;
+        margin-bottom: 32px;
+      }
+      
+      .instagram-container {
+        padding: 0 32px;
+      }
+      
+      .instagram-item {
+        width: 200px;
+        height: 200px;
+      }
     }
 
     @media (max-width: 480px) {
-      .info-cards {
+      .image-gallery {
         grid-template-columns: 1fr;
+      }
+      
+      .gallery-image {
+        height: 200px;
       }
 
       .package-title {
         font-size: 24px;
       }
-
-      .price-amount {
-        font-size: 32px;
+      
+      .recommended-title {
+        font-size: 24px;
+      }
+      
+      .recommended-package-title {
+        font-size: 16px;
+      }
+      
+      .instagram-container {
+        padding: 0 24px;
+      }
+      
+      .instagram-title {
+        font-size: 20px;
+      }
+      
+      .instagram-subtitle {
+        font-size: 13px;
+      }
+      
+      .instagram-item {
+        width: 160px;
+        height: 160px;
       }
     }
 
-    /* Thank You Popup */
+    /* Thank You Popup - Booking Confirmed Style */
     .thankyou-overlay {
       position: fixed;
       top: 0;
@@ -471,27 +511,52 @@
       background: #ffffff;
       border-radius: 24px;
       padding: 48px;
-      max-width: 480px;
+      max-width: 540px;
       width: 90%;
       text-align: center;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       transform: scale(0.9) translateY(20px);
       transition: transform 0.3s ease;
+      position: relative;
     }
 
     .thankyou-overlay.active .thankyou-popup {
       transform: scale(1) translateY(0);
     }
 
+    .thankyou-close-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F3F4F6;
+      border: none;
+      color: #667085;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .thankyou-close-icon:hover {
+      background: #E5E7EB;
+      color: #111111;
+    }
+
     .thankyou-icon {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #0E5A36, #16A34A);
+      border: 4px solid #0E5A36;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 24px;
+      background: #ffffff;
       animation: checkPop 0.5s ease 0.2s both;
     }
 
@@ -511,20 +576,29 @@
 
     .thankyou-icon i {
       font-size: 40px;
-      color: #ffffff;
+      color: #0E5A36;
+    }
+
+    .thankyou-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #0E5A36;
+      margin-bottom: 12px;
     }
 
     .thankyou-popup h3 {
       font-size: 28px;
       font-weight: 700;
-      color: #122119;
+      color: #111111;
       margin: 0 0 12px;
     }
 
     .thankyou-popup p {
       font-size: 16px;
       color: #667085;
-      margin: 0 0 24px;
+      margin: 0 0 32px;
       line-height: 1.6;
     }
 
@@ -532,15 +606,15 @@
       background: #F9FAFB;
       border: 1px solid #E2EDE8;
       border-radius: 16px;
-      padding: 20px;
-      margin: 24px 0;
+      padding: 20px 24px;
+      margin: 32px 0;
       text-align: left;
     }
 
     .thankyou-detail-row {
       display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
+      align-items: center;
+      padding: 12px 0;
       border-bottom: 1px solid #E2EDE8;
     }
 
@@ -548,7 +622,20 @@
       border-bottom: none;
     }
 
+    .thankyou-detail-icon {
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .thankyou-detail-icon i {
+      font-size: 16px;
+      color: #0E5A36;
+    }
+
     .thankyou-detail-label {
+      flex: 1;
       font-size: 14px;
       color: #667085;
       font-weight: 500;
@@ -556,13 +643,14 @@
 
     .thankyou-detail-value {
       font-size: 14px;
-      color: #122119;
+      color: #111111;
       font-weight: 600;
+      text-align: right;
     }
 
-    .thankyou-close-btn {
+    .thankyou-explore-btn {
       width: 100%;
-      padding: 14px;
+      padding: 16px;
       background: #0E5A36;
       color: #ffffff;
       border: none;
@@ -571,12 +659,243 @@
       font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .thankyou-close-btn:hover {
+    .thankyou-explore-btn:hover {
       background: #0a4327;
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(14, 90, 54, 0.3);
+    }
+
+    .thankyou-note {
+      font-size: 13px;
+      color: #98A2B3;
+      margin-top: 16px;
+    }
+    
+    /* Recommended Packages Section */
+    .recommended-packages-section {
+      margin-top: 80px;
+      padding: 60px 0;
+      background: #F9FAFB;
+      margin-left: -24px;
+      margin-right: -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    
+    .recommended-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #122119;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .recommended-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .recommended-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .recommended-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    .recommended-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+    
+    .recommended-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .recommended-card:hover .recommended-img-wrapper img {
+      transform: scale(1.1);
+    }
+    
+    .recommended-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 6px 16px;
+      background: #FFFFFF;
+      color: #FF3737;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    
+    .recommended-content {
+      padding: 20px;
+    }
+    
+    .recommended-location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #667085;
+      margin-bottom: 8px;
+    }
+    
+    .recommended-location i {
+      font-size: 12px;
+      color: #0E5A36;
+    }
+    
+    .recommended-package-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #122119;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    
+    .recommended-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    
+    .recommended-rating i {
+      color: #FDB022;
+      font-size: 14px;
+    }
+    
+    .recommended-rating span {
+      margin-left: 8px;
+      font-size: 13px;
+      color: #667085;
+    }
+    
+    .recommended-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid #E2EDE8;
+    }
+    
+    .recommended-duration {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #667085;
+    }
+    
+    .recommended-duration i {
+      font-size: 14px;
+    }
+    
+    .recommended-price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    
+    .from-text {
+      font-size: 11px;
+      color: #667085;
+      margin-bottom: 2px;
+    }
+    
+    .price-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #122119;
+    }
+    
+    /* Instagram Section */
+    .instagram-section {
+      padding: 60px 0;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+    
+    .instagram-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+    
+    .instagram-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 8px;
+    }
+    
+    .instagram-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: #667085;
+      margin-bottom: 32px;
+    }
+    
+    .instagram-gallery {
+      display: flex;
+      gap: 16px;
+      animation: scroll-left 20s linear infinite;
+      width: fit-content;
+    }
+    
+    .instagram-gallery:hover {
+      animation-play-state: paused;
+    }
+    
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
+    .instagram-item {
+      flex: 0 0 auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .instagram-item:hover {
+      transform: scale(1.05);
+    }
+    
+    .instagram-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -585,12 +904,14 @@
   <!-- Header -->
   <header class="details-header">
     <div class="details-header-content">
-      <a href="index.html" class="details-logo">tripon</a>
+      <a href="index.html" class="details-logo">
+        <img src="assets/images/tripon-logo.png" alt="Trip On Logo" />
+      </a>
       <nav class="details-nav">
+        <a href="index.html">Bali</a>
+        <a href="index.html#testimonials">People Reviews</a>
         <a href="index.html#packages">Packages</a>
-        <a href="index.html#testimonials">Reviews</a>
-        <a href="#contact">Contact</a>
-        <button class="contact-btn" onclick="window.location.href='index.html'">Back to Home</button>
+        <button class="contact-btn">CONTACT US</button>
       </nav>
     </div>
   </header>
@@ -611,92 +932,73 @@
       <!-- Left Column: Main Details -->
       <div class="main-details">
         <!-- Package Header -->
-        <h1 class="package-title" id="package-title">Phi Phi Islands Adventure Day Trip with Seaview Lunch</h1>
-        
-        <div class="package-meta-info">
-          <div class="rating-info">
-            <div class="stars">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <span class="rating-text" id="package-rating">4.8 (3,674 reviews)</span>
-          </div>
-          <div class="location-info">
-            <i class="fa-solid fa-location-dot"></i>
-            <span id="package-location">Phuket, Thailand</span>
-          </div>
+        <div class="package-badge-wrapper">
+          <span class="exclusive-badge">Bali Exclusive Offer</span>
+          <span class="nights-badge"><i class="fa-solid fa-moon"></i> 6 Nights</span>
         </div>
-
+        
+        <h1 class="package-title" id="package-title">Bali Exclusive Package - 6 Nights 7 Days</h1>
+        
         <!-- Image Gallery -->
         <div class="image-gallery">
-          <img src="assets/images/beach.png" alt="Main view" class="main-gallery-image" id="main-img">
-          <img src="assets/images/indonesia.png" alt="Side view 1" class="side-gallery-image" id="side-img-1">
-          <img src="assets/images/ubud.png" alt="Side view 2" class="side-gallery-image" id="side-img-2">
+          <img src="assets/images/image1.png" alt="Bali view 1" class="gallery-image" id="gallery-img-1">
+          <img src="assets/images/image2.png" alt="Bali view 2" class="gallery-image" id="gallery-img-2">
+          <img src="assets/images/image3.png" alt="Bali view 3" class="gallery-image" id="gallery-img-3">
+          <img src="assets/images/image4.png" alt="Bali view 4" class="gallery-image" id="gallery-img-4">
+          <img src="assets/images/image5.png" alt="Bali view 5" class="gallery-image" id="gallery-img-5">
+          <img src="assets/images/image6.png" alt="Bali view 6" class="gallery-image" id="gallery-img-6">
         </div>
 
-        <!-- Info Cards -->
-        <div class="info-cards">
-          <div class="info-card">
-            <i class="fa-regular fa-clock"></i>
-            <div class="info-card-label">Duration</div>
-            <div class="info-card-value" id="duration-display">8 hours</div>
-          </div>
-          <div class="info-card">
-            <i class="fa-solid fa-language"></i>
-            <div class="info-card-label">Languages</div>
-            <div class="info-card-value">English, Thai</div>
-          </div>
-          <div class="info-card">
-            <i class="fa-solid fa-users"></i>
-            <div class="info-card-label">Group Size</div>
-            <div class="info-card-value">Max 30</div>
-          </div>
-          <div class="info-card">
-            <i class="fa-solid fa-ticket"></i>
-            <div class="info-card-label">Booking</div>
-            <div class="info-card-value">Instant</div>
-          </div>
-        </div>
-
-        <!-- Tour Overview Section -->
+        
+        <!-- Package at a Glance Section -->
         <div class="details-section">
           <div class="section-header active" onclick="toggleSection(this)">
-            <h3>Tour Overview</h3>
+            <h3>Package at a Glance</h3>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
           <div class="section-content active">
-            <p>Experience the breathtaking beauty of Phi Phi Islands on this full-day adventure from Phuket. Visit the iconic Maya Bay, snorkel in crystal-clear waters, and enjoy a delicious Thai lunch with stunning sea views.</p>
+            <p>Experience the magic of Bali with our exclusive 6 Nights 7 Days package. This carefully curated journey takes you through Bali's most stunning destinations, from ancient temples and lush rice terraces to pristine beaches and vibrant cultural experiences.</p>
             
             <ul class="highlights-list">
-              <li>Visit the famous Maya Bay and Pileh Lagoon</li>
-              <li>Snorkel at Shark Point and discover colorful marine life</li>
-              <li>Enjoy a buffet lunch at a beachfront restaurant</li>
-              <li>Explore Monkey Beach and Viking Cave</li>
-              <li>Hotel pickup and drop-off included</li>
+              <li>6 Nights accommodation in 4-star hotels/resorts</li>
+              <li>Daily breakfast at the hotel</li>
+              <li>Airport transfers and inter-city transportation</li>
+              <li>Visit to Tanah Lot Temple and Uluwatu Temple</li>
+              <li>Ubud full-day tour including Tegalalang Rice Terrace</li>
+              <li>Snorkeling at Nusa Penida or water sports</li>
+              <li>Traditional Balinese spa treatment</li>
               <li>Professional English-speaking guide</li>
             </ul>
           </div>
         </div>
 
-        <!-- What's Included Section -->
+        <!-- Inclusions & Exclusions Section -->
         <div class="details-section">
           <div class="section-header" onclick="toggleSection(this)">
-            <h3>What's Included</h3>
+            <h3>Inclusions & Exclusions</h3>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
           <div class="section-content">
+            <p><strong>What's Included:</strong></p>
             <ul class="highlights-list">
-              <li>Round-trip hotel transfers</li>
-              <li>Speed boat ride to Phi Phi Islands</li>
-              <li>Professional guide</li>
-              <li>Buffet lunch with sea view</li>
-              <li>Snorkeling equipment</li>
-              <li>Life jackets</li>
-              <li>Drinking water and soft drinks</li>
+              <li>6 Nights accommodation (twin/double sharing)</li>
+              <li>Daily breakfast</li>
+              <li>All transfers and sightseeing by private AC vehicle</li>
+              <li>Professional English-speaking guide</li>
+              <li>Entrance fees to monuments and temples</li>
+              <li>1 Traditional Balinese spa session (60 minutes)</li>
+              <li>Airport pickup and drop-off</li>
+              <li>All applicable taxes</li>
+            </ul>
+            
+            <p><strong>What's Not Included:</strong></p>
+            <ul class="highlights-list">
+              <li>International and domestic airfare</li>
+              <li>Lunch and dinner (unless specified)</li>
+              <li>Personal expenses (shopping, laundry, tips)</li>
               <li>Travel insurance</li>
+              <li>Optional activities and water sports</li>
+              <li>Any items not mentioned in inclusions</li>
             </ul>
           </div>
         </div>
@@ -708,55 +1010,69 @@
             <i class="fa-solid fa-chevron-down"></i>
           </div>
           <div class="section-content">
-            <p><strong>7:00 AM</strong> - Hotel pickup</p>
-            <p><strong>8:00 AM</strong> - Depart from Phuket pier</p>
-            <p><strong>9:30 AM</strong> - Arrive at Maya Bay, explore and swim</p>
-            <p><strong>11:00 AM</strong> - Snorkeling at Shark Point</p>
-            <p><strong>12:30 PM</strong> - Lunch at beachfront restaurant</p>
-            <p><strong>2:00 PM</strong> - Visit Monkey Beach and Viking Cave</p>
-            <p><strong>3:30 PM</strong> - Depart back to Phuket</p>
-            <p><strong>5:00 PM</strong> - Return to hotel</p>
-          </div>
-        </div>
-
-        <!-- Availability Calendar Section -->
-        <div class="details-section">
-          <div class="section-header" onclick="toggleSection(this)">
-            <h3>Availability Calendar</h3>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-          <div class="section-content">
-            <p>This tour is available daily throughout the year, subject to weather conditions. During monsoon season (May-October), some locations may be inaccessible for safety reasons.</p>
-          </div>
-        </div>
-
-        <!-- FAQ Section -->
-        <div class="details-section">
-          <div class="section-header" onclick="toggleSection(this)">
-            <h3>FAQ</h3>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-          <div class="section-content">
-            <p><strong>Q: Is this tour suitable for children?</strong><br>
-            A: Yes, children of all ages are welcome. Life jackets are provided.</p>
+            <p><strong>Day 1: Arrival in Bali - Seminyak</strong></p>
+            <p>Arrive at Ngurah Rai International Airport. Our representative will meet you and transfer you to your hotel in Seminyak. Check-in and relax. Evening free for leisure. Overnight in Seminyak.</p>
             
-            <p><strong>Q: What should I bring?</strong><br>
-            A: Sunscreen, swimwear, towel, camera, and light clothing.</p>
+            <p><strong>Day 2: Tanah Lot Temple & Seminyak Beach</strong></p>
+            <p>After breakfast, visit the iconic Tanah Lot Temple, one of Bali's most photographed landmarks. Explore the temple perched on a rock formation in the sea. Afternoon free at Seminyak Beach. Witness a spectacular sunset. Overnight in Seminyak.</p>
             
-            <p><strong>Q: Can I cancel if the weather is bad?</strong><br>
-            A: Yes, full refund available if cancelled due to bad weather.</p>
+            <p><strong>Day 3: Full Day Ubud Tour</strong></p>
+            <p>After breakfast, drive to Ubud. Visit Tegalalang Rice Terrace, Ubud Monkey Forest, Ubud Palace, and Ubud Art Market. Optional visit to a coffee plantation. Return to hotel. Overnight in Seminyak.</p>
+            
+            <p><strong>Day 4: Water Temple & Uluwatu Temple</strong></p>
+            <p>Visit Tirta Empul Water Temple in the morning. Afternoon drive to Uluwatu Temple, perched on a cliff overlooking the Indian Ocean. Watch the famous Kecak Fire Dance at sunset. Overnight in Seminyak.</p>
+            
+            <p><strong>Day 5: Nusa Penida Island Day Trip</strong></p>
+            <p>After breakfast, take a speedboat to Nusa Penida. Visit Kelingking Beach (T-Rex), Angel's Billabong, Broken Beach, and Crystal Bay. Snorkeling opportunity (optional). Return to hotel in the evening. Overnight in Seminyak.</p>
+            
+            <p><strong>Day 6: Spa & Leisure</strong></p>
+            <p>After breakfast, enjoy a relaxing traditional Balinese spa treatment (60 minutes). Rest of the day at leisure for shopping or beach activities. Overnight in Seminyak.</p>
+            
+            <p><strong>Day 7: Departure</strong></p>
+            <p>After breakfast, check out from the hotel. Transfer to Ngurah Rai International Airport for your onward journey with wonderful memories of Bali.</p>
           </div>
         </div>
 
-        <!-- Customer Reviews Section -->
+        <!-- Terms & Conditions Section -->
         <div class="details-section">
           <div class="section-header" onclick="toggleSection(this)">
-            <h3>Customer Reviews</h3>
+            <h3>Terms & Conditions</h3>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
           <div class="section-content">
-            <p>"Amazing experience! The water was crystal clear and our guide was fantastic. Highly recommend!" - Sarah M.</p>
-            <p>"Best day trip in Phuket. Maya Bay is stunning and the lunch was delicious." - John D.</p>
+            <ul class="highlights-list">
+              <li>Rates are subject to availability at the time of booking</li>
+              <li>Check-in time: 2:00 PM | Check-out time: 12:00 PM</li>
+              <li>Early check-in and late check-out subject to availability</li>
+              <li>Hotel may ask for security deposit at check-in</li>
+              <li>Cancellation policy: 15 days prior - no charge, 7-14 days - 50% charge, less than 7 days - 100% charge</li>
+              <li>Prices may change during festive seasons and peak periods</li>
+              <li>Itinerary is subject to change based on weather conditions</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Frequently Asked Questions Section -->
+        <div class="details-section">
+          <div class="section-header" onclick="toggleSection(this)">
+            <h3>Frequently Asked Questions</h3>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="section-content">
+            <p><strong>Q: Do I need a visa for Bali?</strong><br>
+            A: Indian citizens get 30-day visa on arrival. Passport must be valid for 6 months.</p>
+            
+            <p><strong>Q: What is the best time to visit Bali?</strong><br>
+            A: April to October is the dry season and best time to visit. June to September is peak tourist season.</p>
+            
+            <p><strong>Q: Is this package customizable?</strong><br>
+            A: Yes, we can customize the package as per your requirements. Contact us for custom packages.</p>
+            
+            <p><strong>Q: What type of hotels are included?</strong><br>
+            A: We provide 4-star hotels/resorts. Upgrade to 5-star available at additional cost.</p>
+            
+            <p><strong>Q: Are meals included?</strong><br>
+            A: Only breakfast is included. Lunch and dinner can be added at additional cost.</p>
           </div>
         </div>
       </div>
@@ -764,66 +1080,244 @@
       <!-- Right Sidebar: Booking Card -->
       <div class="booking-sidebar">
         <div class="booking-card">
-          <div class="price-section">
-            <div class="price-label">From</div>
-            <div class="price-amount" id="package-price">₹75,000</div>
-            <div class="price-subtitle">per person</div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #122119; margin-bottom: 24px; text-align: center;">Book Your Tour</h3>
+          
+          <div class="booking-form-group">
+            <label>Traveller Name</label>
+            <input type="text" id="traveller-name" placeholder="Enter your name">
           </div>
 
           <div class="booking-form-group">
-            <label>Select Date</label>
+            <label>Date</label>
             <input type="date" id="booking-date" min="">
           </div>
 
           <div class="booking-form-group">
-            <label>Number of Travelers</label>
-            <select id="travelers">
-              <option value="1">1 Person</option>
-              <option value="2" selected>2 Persons</option>
-              <option value="3">3 Persons</option>
-              <option value="4">4 Persons</option>
-              <option value="5+">5+ Persons</option>
-            </select>
+            <label>Guests</label>
+            <input type="number" id="guests" placeholder="Number of guests" min="1" value="2">
+          </div>
+
+          <div class="booking-form-group">
+            <label>Destination</label>
+            <input type="text" id="destination" value="Bali, Indonesia" readonly>
           </div>
 
           <button class="book-now-btn" onclick="bookNow()">
-            Book Now
+            SUBMIT
           </button>
         </div>
       </div>
     </div>
+    
+    <!-- Recommended Packages Section -->
+    <section class="recommended-packages-section">
+      <h2 class="recommended-title">Recommended Packages</h2>
+      
+      <div class="recommended-grid">
+        <!-- Package Card 1 -->
+        <div class="recommended-card" onclick="openPackageDetails('Bali Delight - Adventure in Paradise', 'Ubud, Indonesia', '4.8(136)', '4 Days', '₹45,000', 'assets/images/ubud.png', '10% off')">
+          <div class="recommended-img-wrapper">
+            <img src="assets/images/ubud.png" alt="Bali Delight">
+            <span class="recommended-badge">10% off</span>
+          </div>
+          <div class="recommended-content">
+            <div class="recommended-location">
+              <i class="fa-solid fa-location-dot"></i>
+              Ubud, Indonesia
+            </div>
+            <h3 class="recommended-package-title">Bali Delight - Adventure in Paradise</h3>
+            <div class="recommended-rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <span>4.8(136)</span>
+            </div>
+            <div class="recommended-footer">
+              <div class="recommended-duration">
+                <i class="fa-regular fa-clock"></i>
+                4 Days
+              </div>
+              <div class="recommended-price">
+                <span class="from-text">from</span>
+                <span class="price-value">₹45,000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Package Card 2 -->
+        <div class="recommended-card" onclick="openPackageDetails('Nusa Penida - Isolated Mountains', 'Nusa Penida, Indonesia', '4.8(136)', '5 Days', '₹50,000', 'assets/images/indonesia.png', '15% off')">
+          <div class="recommended-img-wrapper">
+            <img src="assets/images/indonesia.png" alt="Nusa Penida">
+            <span class="recommended-badge">15% off</span>
+          </div>
+          <div class="recommended-content">
+            <div class="recommended-location">
+              <i class="fa-solid fa-location-dot"></i>
+              Nusa Penida, Indonesia
+            </div>
+            <h3 class="recommended-package-title">Nusa Penida - Isolated Mountains</h3>
+            <div class="recommended-rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <span>4.8(136)</span>
+            </div>
+            <div class="recommended-footer">
+              <div class="recommended-duration">
+                <i class="fa-regular fa-clock"></i>
+                5 Days
+              </div>
+              <div class="recommended-price">
+                <span class="from-text">from</span>
+                <span class="price-value">₹50,000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Package Card 3 -->
+        <div class="recommended-card" onclick="openPackageDetails('Gili Trawangan - The White Beach Land', 'Gili Trawangan, Indonesia', '4.8(136)', '6 Days', '₹75,000', 'assets/images/beach.png', '12% off')">
+          <div class="recommended-img-wrapper">
+            <img src="assets/images/beach.png" alt="Gili Trawangan">
+            <span class="recommended-badge">12% off</span>
+          </div>
+          <div class="recommended-content">
+            <div class="recommended-location">
+              <i class="fa-solid fa-location-dot"></i>
+              Gili Trawangan, Indonesia
+            </div>
+            <h3 class="recommended-package-title">Gili Trawangan - The White Beach Land</h3>
+            <div class="recommended-rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <span>4.8(136)</span>
+            </div>
+            <div class="recommended-footer">
+              <div class="recommended-duration">
+                <i class="fa-regular fa-clock"></i>
+                6 Days
+              </div>
+              <div class="recommended-price">
+                <span class="from-text">from</span>
+                <span class="price-value">₹75,000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
+  
+  <!-- Instagram Section -->
+  <section class="instagram-section">
+    <div class="instagram-container">
+      <h2 class="instagram-title">Instagram</h2>
+      <p class="instagram-subtitle">Follow Us On @tripon</p>
+      
+      <div class="instagram-gallery">
+        <!-- First set of images -->
+        <div class="instagram-item">
+          <img src="assets/images/image5.png" alt="Instagram Post 1">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/image6.png" alt="Instagram Post 2">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/beach.png" alt="Instagram Post 3">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/ubud2.png" alt="Instagram Post 4">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/image7.png" alt="Instagram Post 5">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/image8.png" alt="Instagram Post 6">
+        </div>
+        
+        <!-- Duplicate set for seamless infinite scroll -->
+        <div class="instagram-item">
+          <img src="assets/images/image5.png" alt="Instagram Post 1">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/image6.png" alt="Instagram Post 2">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/beach.png" alt="Instagram Post 3">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/ubud2.png" alt="Instagram Post 4">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/image7.png" alt="Instagram Post 5">
+        </div>
+        <div class="instagram-item">
+          <img src="assets/images/image8.png" alt="Instagram Post 6">
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Thank You Popup -->
+  <!-- Thank You Popup - Booking Confirmed -->
   <div class="thankyou-overlay" id="thankyou-overlay">
     <div class="thankyou-popup">
+      <button class="thankyou-close-icon" onclick="closeThankYou()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
       <div class="thankyou-icon">
         <i class="fa-solid fa-check"></i>
       </div>
       
-      <h3>Thank You for Booking!</h3>
-      <p>Your booking request has been received successfully. Our team will contact you shortly to confirm your reservation.</p>
+      <div class="thankyou-badge">BOOKING CONFIRMED</div>
+      <h3>Thank You for<br>Your Booking!</h3>
+      <p>We've received your trip request and our travel experts will get in touch with you shortly.</p>
       
       <div class="thankyou-details">
         <div class="thankyou-detail-row">
-          <span class="thankyou-detail-label">Package</span>
-          <span class="thankyou-detail-value" id="thankyou-package">-</span>
+          <div class="thankyou-detail-icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <span class="thankyou-detail-label">Traveller</span>
+          <span class="thankyou-detail-value" id="thankyou-traveller">-</span>
         </div>
         <div class="thankyou-detail-row">
+          <div class="thankyou-detail-icon">
+            <i class="fa-solid fa-calendar-days"></i>
+          </div>
           <span class="thankyou-detail-label">Travel Date</span>
           <span class="thankyou-detail-value" id="thankyou-date">-</span>
         </div>
         <div class="thankyou-detail-row">
-          <span class="thankyou-detail-label">Travelers</span>
+          <div class="thankyou-detail-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <span class="thankyou-detail-label">Guests</span>
           <span class="thankyou-detail-value" id="thankyou-travelers">-</span>
         </div>
         <div class="thankyou-detail-row">
-          <span class="thankyou-detail-label">Price</span>
-          <span class="thankyou-detail-value" id="thankyou-price">-</span>
+          <div class="thankyou-detail-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <span class="thankyou-detail-label">Destination</span>
+          <span class="thankyou-detail-value" id="thankyou-destination">Bali, Indonesia</span>
         </div>
       </div>
       
-      <button class="thankyou-close-btn" onclick="closeThankYou()">Close</button>
+      <button class="thankyou-explore-btn" onclick="explorePackages()">
+        <i class="fa-solid fa-compass"></i>
+        Explore Packages
+      </button>
+      
+      <p class="thankyou-note">Our team will call you within 24 hours.</p>
     </div>
   </div>
 
@@ -873,26 +1367,35 @@
 
     // Book now functionality
     function bookNow() {
+      const travellerName = document.getElementById('traveller-name').value;
       const date = document.getElementById('booking-date').value;
-      const travelers = document.getElementById('travelers').value;
+      const guests = document.getElementById('guests').value;
+      const destination = document.getElementById('destination').value;
+      
+      if (!travellerName) {
+        alert('Please enter your name');
+        return;
+      }
       
       if (!date) {
         alert('Please select a travel date');
         return;
       }
       
-      const packageData = JSON.parse(sessionStorage.getItem('selectedPackage') || '{}');
+      if (!guests || guests < 1) {
+        alert('Please enter number of guests');
+        return;
+      }
       
       // Update thank you popup with booking details
-      document.getElementById('thankyou-package').textContent = packageData.title || 'Package';
+      document.getElementById('thankyou-traveller').textContent = travellerName;
       document.getElementById('thankyou-date').textContent = new Date(date).toLocaleDateString('en-US', { 
-        weekday: 'long', 
-        year: 'numeric', 
+        day: 'numeric',
         month: 'long', 
-        day: 'numeric' 
+        year: 'numeric' 
       });
-      document.getElementById('thankyou-travelers').textContent = travelers + (travelers === '1' ? ' Person' : ' Persons');
-      document.getElementById('thankyou-price').textContent = packageData.price || 'N/A';
+      document.getElementById('thankyou-travelers').textContent = guests + ' ' + (guests == 1 ? 'Guest' : 'Guests');
+      document.getElementById('thankyou-destination').textContent = destination;
       
       // Show thank you popup
       document.getElementById('thankyou-overlay').classList.add('active');
@@ -905,8 +1408,14 @@
       document.body.style.overflow = '';
       
       // Reset form
+      document.getElementById('traveller-name').value = '';
       document.getElementById('booking-date').value = '';
-      document.getElementById('travelers').value = '2';
+      document.getElementById('guests').value = '2';
+    }
+
+    // Explore packages - redirect to packages section
+    function explorePackages() {
+      window.location.href = 'index.html#packages';
     }
 
     // Close popup when clicking outside
@@ -915,6 +1424,25 @@
         closeThankYou();
       }
     });
+    
+    // Open package details function for recommended packages
+    function openPackageDetails(title, location, rating, duration, price, image, discount) {
+      // Store package data
+      const packageData = {
+        title: title,
+        location: location,
+        rating: rating,
+        duration: duration,
+        price: price,
+        image: image,
+        discount: discount
+      };
+      
+      sessionStorage.setItem('selectedPackage', JSON.stringify(packageData));
+      
+      // Reload the page to show new package details
+      window.location.reload();
+    }
   </script>
 </body>
 </html>
