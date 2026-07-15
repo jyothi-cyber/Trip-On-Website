@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location Details - Trip On</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===== LOCATION DETAILS PAGE ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #101828; }
+
+    /* NAV */
+    .ld-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 0 60px; height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ld-nav-logo img { height: 36px; }
+    .ld-nav-links { display: flex; gap: 32px; list-style: none; }
+    .ld-nav-links a { font-size: 15px; font-weight: 500; color: #344054; text-decoration: none; transition: color .2s; }
+    .ld-nav-links a:hover { color: #20664e; }
+    .ld-nav-btn { background: #20664e; color: #fff; border: none; border-radius: 50px; padding: 10px 24px; font-family: 'Poppins',sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .2s; }
+    .ld-nav-btn:hover { background: #0E5A36; }
+    .ld-mobile-toggle { display: none; background: none; border: none; font-size: 22px; cursor: pointer; color: #344054; }
+
+    /* PAGE WRAPPER */
+    .ld-page { max-width: 1300px; margin: 90px auto 0; padding: 40px 60px 0; }
+
+    /* BREADCRUMB */
+    .ld-breadcrumb { font-size: 13px; color: #98A2B3; margin-bottom: 28px; }
+    .ld-breadcrumb a { color: #20664e; text-decoration: none; }
+    .ld-breadcrumb a:hover { text-decoration: underline; }
+
+    /* TWO-COLUMN LAYOUT */
+    .ld-body { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: flex-start; }
+
+    /* LEFT COLUMN */
+    .ld-left h1 { font-size: 32px; font-weight: 700; color: #101828; margin-bottom: 16px; line-height: 1.3; }
+
+    /* Author row */
+    .ld-author { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .ld-author-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+    .ld-author-info .ld-author-name { font-size: 14px; font-weight: 600; color: #101828; }
+    .ld-author-info .ld-author-date { font-size: 12px; color: #98A2B3; }
+
+    /* Overview text */
+    .ld-overview-text { font-size: 15px; line-height: 28px; color: #667085; margin-bottom: 28px; }
+
+    /* Quick facts */
+    .ld-quick-facts { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+    .ld-fact { background: #f7fbf9; border: 1.5px solid #DDF3EA; border-radius: 50px; padding: 7px 18px; font-size: 13px; font-weight: 600; color: #20664e; display: flex; align-items: center; gap: 7px; }
+    .ld-fact i { font-size: 13px; }
+
+    /* Gallery grid */
+    .ld-gallery { margin-bottom: 40px; }
+    .ld-gallery-top { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .ld-gallery-bottom { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .ld-gallery-img { width: 100%; border-radius: 12px; object-fit: cover; display: block; transition: transform .3s; }
+    .ld-gallery-top .ld-gallery-img { height: 220px; }
+    .ld-gallery-bottom .ld-gallery-img { height: 150px; }
+    .ld-gallery-img:hover { transform: scale(1.03); }
+
+    /* Section headings */
+    .ld-section-title { font-size: 26px; font-weight: 700; color: #101828; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #F2F4F7; }
+
+    /* History & Temple text */
+    .ld-text-block { font-size: 15px; line-height: 28px; color: #667085; margin-bottom: 16px; }
+
+    /* RIGHT SIDEBAR */
+    .ld-sidebar { position: sticky; top: 90px; }
+
+    /* Rating card */
+    .ld-rating-card { background: #fff; border: 1.5px solid #E4E7EC; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .ld-rating-card .ld-rating-title { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 16px; }
+    .ld-rating-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px; }
+    .ld-rating-label { color: #667085; }
+    .ld-rating-stars { color: #F79009; letter-spacing: 2px; font-size: 13px; }
+    .ld-rating-score { font-weight: 700; color: #101828; }
+
+    /* Booking card */
+    .ld-book-card { background: linear-gradient(135deg, #20664e 0%, #0E5A36 100%); border-radius: 16px; padding: 28px; color: #fff; margin-bottom: 24px; }
+    .ld-book-card .ld-book-label { font-size: 13px; opacity: .85; margin-bottom: 6px; }
+    .ld-book-card .ld-book-price { font-size: 32px; font-weight: 800; margin-bottom: 4px; }
+    .ld-book-card .ld-book-note { font-size: 12px; opacity: .7; margin-bottom: 20px; }
+    .ld-book-btn { display: block; width: 100%; background: #fff; color: #20664e; border: none; border-radius: 50px; padding: 13px; font-family: 'Poppins',sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; text-decoration: none; transition: background .2s, transform .2s; }
+    .ld-book-btn:hover { background: #f0fff8; transform: translateY(-2px); }
+
+    /* Tags */
+    .ld-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .ld-tag { background: #F9FAFB; border: 1.5px solid #E4E7EC; border-radius: 8px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: #344054; cursor: pointer; transition: background .2s, border-color .2s; }
+    .ld-tag:hover { background: #DDF3EA; border-color: #20664e; color: #20664e; }
+
+    /* ===== RECOMMENDED PACKAGES ===== */
+    .ld-packages-section { padding: 60px 0 40px; border-top: 1px solid #F2F4F7; margin-top: 40px; }
+    .ld-packages-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .ld-packages-header h2 { font-size: 28px; font-weight: 700; }
+    .ld-packages-nav { display: flex; gap: 10px; }
+    .ld-pkg-nav-btn { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid #E4E7EC; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #344054; font-size: 14px; transition: background .2s, border-color .2s; }
+    .ld-pkg-nav-btn:hover { background: #20664e; border-color: #20664e; color: #fff; }
+    .ld-packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .ld-pkg-card { border: 1.5px solid #E4E7EC; border-radius: 16px; overflow: hidden; transition: transform .3s, box-shadow .3s; cursor: pointer; }
+    .ld-pkg-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .ld-pkg-img-wrap { position: relative; height: 180px; overflow: hidden; }
+    .ld-pkg-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .ld-pkg-badge { position: absolute; top: 12px; left: 12px; background: #F79009; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; }
+    .ld-pkg-body { padding: 16px; }
+    .ld-pkg-loc { font-size: 12px; color: #667085; margin-bottom: 6px; }
+    .ld-pkg-loc i { color: #20664e; margin-right: 4px; }
+    .ld-pkg-title { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 8px; }
+    .ld-pkg-stars { color: #F79009; font-size: 12px; margin-bottom: 10px; }
+    .ld-pkg-footer { display: flex; justify-content: space-between; align-items: center; }
+    .ld-pkg-days { font-size: 12px; color: #667085; }
+    .ld-pkg-days i { margin-right: 4px; }
+    .ld-pkg-price { font-size: 16px; font-weight: 700; color: #20664e; }
+    .ld-pkg-price span { font-size: 11px; font-weight: 400; color: #98A2B3; display: block; }
+    .ld-pkg-book-btn { display: block; margin: 16px; background: #F79009; color: #fff; border: none; border-radius: 50px; padding: 10px; font-family: 'Poppins',sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; text-align: center; transition: background .2s; }
+    .ld-pkg-book-btn:hover { background: #e08800; }
+
+    /* ===== ADVENTURE SECTION ===== */
+    .ld-adventure-section { padding: 60px 0; background: #f9fafb; margin: 0 -60px; padding-left: 60px; padding-right: 60px; }
+    .ld-adventure-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .ld-adventure-sub { font-size: 14px; color: #667085; margin-bottom: 32px; }
+    .ld-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .ld-adv-card { background: #fff; border: 1.5px solid #E4E7EC; border-radius: 16px; padding: 20px 24px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: transform .25s, box-shadow .25s; }
+    .ld-adv-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.1); }
+    .ld-adv-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ld-adv-icon img { width: 30px; height: 30px; object-fit: contain; }
+    .ld-adv-icon.green  { background: #DDF3EA; }
+    .ld-adv-icon.orange { background: #FEF3C7; }
+    .ld-adv-icon.blue   { background: #DBEAFE; }
+    .ld-adv-icon.purple { background: #EDE9FE; }
+    .ld-adv-icon.teal   { background: #CCFBF1; }
+    .ld-adv-icon.pink   { background: #FCE7F3; }
+    .ld-adv-text h3 { font-size: 15px; font-weight: 700; color: #101828; margin-bottom: 4px; }
+    .ld-adv-text p { font-size: 12px; color: #667085; }
+
+    /* ===== ARTICLES SECTION ===== */
+    .ld-articles-section { padding: 60px 0; }
+    .ld-articles-title { font-size: 28px; font-weight: 700; margin-bottom: 32px; }
+    .ld-articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .ld-article-card { border: 1.5px solid #E4E7EC; border-radius: 16px; overflow: hidden; transition: transform .3s, box-shadow .3s; }
+    .ld-article-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .ld-article-img { width: 100%; height: 160px; object-fit: cover; }
+    .ld-article-body { padding: 16px; }
+    .ld-article-badge { display: inline-block; background: #DDF3EA; color: #20664e; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 50px; margin-bottom: 10px; }
+    .ld-article-title { font-size: 14px; font-weight: 700; color: #101828; margin-bottom: 8px; line-height: 1.5; }
+    .ld-article-meta { font-size: 12px; color: #98A2B3; }
+
+    /* ===== FOOTER ===== */
+    .ld-footer { background: #101828; color: #fff; padding: 60px; }
+    .ld-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1300px; margin: 0 auto 40px; }
+    .ld-footer-brand h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .ld-footer-brand p { font-size: 13px; color: #98A2B3; line-height: 22px; margin-bottom: 20px; }
+    .ld-footer-socials { display: flex; gap: 12px; }
+    .ld-footer-socials a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px; text-decoration: none; transition: background .2s; }
+    .ld-footer-socials a:hover { background: #20664e; }
+    .ld-footer-col h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+    .ld-footer-col ul { list-style: none; }
+    .ld-footer-col ul li { margin-bottom: 10px; }
+    .ld-footer-col ul li a { color: #98A2B3; font-size: 13px; text-decoration: none; transition: color .2s; }
+    .ld-footer-col ul li a:hover { color: #fff; }
+    .ld-footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; color: #98A2B3; max-width: 1300px; margin: 0 auto; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .ld-body { grid-template-columns: 1fr; }
+      .ld-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+      .ld-packages-grid { grid-template-columns: repeat(2, 1fr); }
+      .ld-adv-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .ld-page { padding: 24px 20px 0; margin-top: 70px; }
+      .ld-nav { padding: 0 20px; }
+      .ld-nav-links { display: none; }
+      .ld-mobile-toggle { display: block; }
+      .ld-body { grid-template-columns: 1fr; }
+      .ld-sidebar { grid-template-columns: 1fr; }
+      .ld-gallery-top { grid-template-columns: 1fr; }
+      .ld-gallery-bottom { grid-template-columns: repeat(2, 1fr); }
+      .ld-packages-grid { grid-template-columns: 1fr; }
+      .ld-adv-grid { grid-template-columns: 1fr; }
+      .ld-articles-grid { grid-template-columns: 1fr; }
+      .ld-adventure-section { margin: 0 -20px; padding: 40px 20px; }
+      .ld-footer { padding: 40px 20px; }
+      .ld-footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .ld-left h1 { font-size: 24px; }
+    }
+    @media (max-width: 480px) {
+      .ld-gallery-bottom { grid-template-columns: 1fr; }
+      .ld-footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="ld-nav">
+    <div class="ld-nav-logo">
+      <a href="index.html"><img src="assets/images/tripon-logo.png" alt="Trip On"></a>
+    </div>
+    <ul class="ld-nav-links">
+      <li><a href="index.html#home">Bali</a></li>
+      <li><a href="index.html#testimonials">People Reviews</a></li>
+      <li><a href="packages.html">Packages</a></li>
+    </ul>
+    <button class="ld-nav-btn" onclick="window.location.href='index.html'">Contact Us</button>
+    <button class="ld-mobile-toggle" id="ld-mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+  </nav>
+
+  <!-- PAGE -->
+  <div class="ld-page">
+
+    <!-- Breadcrumb -->
+    <div class="ld-breadcrumb">
+      <a href="index.html">Home</a> &rsaquo;
+      <a href="index.html#services">Destinations</a> &rsaquo;
+      <span id="ld-bc-name">Ubud</span>
+    </div>
+
+    <!-- TWO-COLUMN BODY -->
+    <div class="ld-body">
+
+      <!-- LEFT COLUMN -->
+      <div class="ld-left">
+        <h1 id="ld-title">Everything you should know about Ubud</h1>
+
+        <!-- Author -->
+        <div class="ld-author">
+          <img class="ld-author-avatar" src="assets/images/janna2.png" alt="Author">
+          <div class="ld-author-info">
+            <div class="ld-author-name" id="ld-author-name">Trip On Editorial</div>
+            <div class="ld-author-date" id="ld-author-date">Updated July 2026</div>
+          </div>
+        </div>
+
+        <!-- Overview -->
+        <p class="ld-overview-text" id="ld-overview"></p>
+
+        <!-- Quick facts -->
+        <div class="ld-quick-facts" id="ld-quick-facts"></div>
+
+        <!-- Gallery -->
+        <div class="ld-gallery">
+          <div class="ld-gallery-top" id="ld-gallery-top"></div>
+          <div class="ld-gallery-bottom" id="ld-gallery-bottom"></div>
+        </div>
+
+        <!-- History -->
+        <h2 class="ld-section-title">History:</h2>
+        <div id="ld-history"></div>
+
+        <!-- Landmark / Temple -->
+        <h2 class="ld-section-title" id="ld-landmark-title" style="margin-top:32px;">Temple Inside:</h2>
+        <div id="ld-landmark"></div>
+
+        <!-- Recommended Packages -->
+        <div class="ld-packages-section">
+          <div class="ld-packages-header">
+            <h2>Recommended Package</h2>
+            <div class="ld-packages-nav">
+              <button class="ld-pkg-nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="ld-pkg-nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+          <div class="ld-packages-grid" id="ld-packages-grid"></div>
+        </div>
+
+        <!-- Adventure Section -->
+        <div class="ld-adventure-section">
+          <h2 class="ld-adventure-title">Let's go on an adventure</h2>
+          <p class="ld-adventure-sub">Explore more destinations in Bali</p>
+          <div class="ld-adv-grid" id="ld-adv-grid"></div>
+        </div>
+
+        <!-- Articles -->
+        <div class="ld-articles-section">
+          <h2 class="ld-articles-title">Exploring Our Article</h2>
+          <div class="ld-articles-grid" id="ld-articles-grid"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div class="ld-sidebar">
+
+        <!-- Rating card -->
+        <div class="ld-rating-card">
+          <div class="ld-rating-title">Visitor Ratings</div>
+          <div class="ld-rating-row">
+            <span class="ld-rating-label">Scenery</span>
+            <span class="ld-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="ld-rating-score" id="ld-rate-scenery">4.9</span>
+          </div>
+          <div class="ld-rating-row">
+            <span class="ld-rating-label">Culture</span>
+            <span class="ld-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="ld-rating-score" id="ld-rate-culture">4.8</span>
+          </div>
+          <div class="ld-rating-row">
+            <span class="ld-rating-label">Food</span>
+            <span class="ld-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            <span class="ld-rating-score" id="ld-rate-food">4.6</span>
+          </div>
+          <div class="ld-rating-row">
+            <span class="ld-rating-label">Accessibility</span>
+            <span class="ld-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            <span class="ld-rating-score" id="ld-rate-access">4.5</span>
+          </div>
+        </div>
+
+        <!-- Booking card -->
+        <div class="ld-book-card">
+          <div class="ld-book-label">Starting from</div>
+          <div class="ld-book-price" id="ld-book-price">₹45,000</div>
+          <div class="ld-book-note">per person · includes hotel + transport</div>
+          <a href="packages.html" class="ld-book-btn">Book This Package</a>
+        </div>
+
+        <!-- Tags -->
+        <div>
+          <div class="ld-rating-title" style="margin-bottom:12px;">Popular Tags</div>
+          <div class="ld-tags" id="ld-tags"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="ld-footer">
+    <div class="ld-footer-grid">
+      <div class="ld-footer-brand">
+        <h3>tripon</h3>
+        <p>Your trusted travel partner for unforgettable Bali adventures. We create memories that last a lifetime.</p>
+        <div class="ld-footer-socials">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="ld-footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="packages.html">Packages</a></li>
+          <li><a href="index.html#blogs">Blogs</a></li>
+        </ul>
+      </div>
+      <div class="ld-footer-col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a href="location-details.html?loc=ubud">Ubud</a></li>
+          <li><a href="location-details.html?loc=kuta">Kuta, Gali</a></li>
+          <li><a href="location-details.html?loc=lombok">Lombok</a></li>
+          <li><a href="location-details.html?loc=seminyak">Seminyak</a></li>
+          <li><a href="location-details.html?loc=nusa">Nusa Penida</a></li>
+          <li><a href="location-details.html?loc=canggu">Canggu</a></li>
+        </ul>
+      </div>
+      <div class="ld-footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">+62 123 456 789</a></li>
+          <li><a href="#">info@tripon.com</a></li>
+          <li><a href="#">Bali, Indonesia</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ld-footer-bottom">&copy; 2026 Trip On. All rights reserved.</div>
+  </footer>
+
+<script>
+const LOCATIONS = {
+  ubud: {
+    name: 'Ubud', title: 'Everything you should know about Ubud',
+    author: 'Trip On Editorial', date: 'Updated July 2026',
+    price: '₹45,000',
+    overview: 'Ubud is the cultural heart of Bali — a lush highland town surrounded by rice terraces, sacred forests, and ancient temples. Known worldwide for traditional arts, craft villages, and the iconic Monkey Forest, Ubud offers an immersive blend of spirituality, nature, and Balinese heritage that draws travellers seeking more than just beaches.',
+    facts: [
+      {icon:'fa-map-location-dot', text:'20+ Activities'},
+      {icon:'fa-camera', text:'18 Sight Seeings'},
+      {icon:'fa-clock', text:'Best: May–Oct'},
+      {icon:'fa-language', text:'Bahasa · English'},
+      {icon:'fa-coins', text:'Currency: IDR'}
+    ],
+    galleryTop: ['assets/images/ubud.png','assets/images/ubud2.png'],
+    galleryBottom: ['assets/images/image1.png','assets/images/image2.png','assets/images/image3.png'],
+    history: [
+      'Ubud\'s name derives from the Balinese word "ubad" meaning medicine, reflecting its ancient role as a centre of healing herbs and traditional remedies. Situated in the Gianyar Regency, the town grew from a cluster of village compounds into a powerful artistic capital over many centuries.',
+      'In the 19th century, Ubud was the seat of the Sukawati royal family, who played a central role in promoting Balinese arts. The presence of the royal court drew painters, dancers, musicians, and sculptors, turning Ubud into a living gallery of traditional Balinese culture.',
+      'During the 1930s, Western artists like Walter Spies and Rudolf Bonnet settled in Ubud, collaborating with local artists and founding the Pita Maha arts collective. Their influence helped Ubud gain international recognition, attracting intellectuals, writers, and explorers who wrote extensively about its beauty.'
+    ],
+    landmark: {
+      title: 'Temple Inside:',
+      content: [
+        'Ubud\'s most celebrated temple complex is the Monkey Forest Sanctuary, home to over 700 long-tailed macaques and three ancient Hindu temples dating to the 14th century. The moss-covered stone gates and forest canopy create an otherworldly atmosphere unlike anywhere else in Bali.',
+        'The Ubud Palace (Puri Saren Agung) sits at the centre of town and continues to function as the official residence of Ubud\'s royal family. Every evening, its inner courtyard becomes a stage for traditional Legong and Kecak dance performances illuminated by torchlight.',
+        'Further into the hills lie the Goa Gajah Elephant Cave and the Yeh Pulu rock relief carvings — ancient sacred sites where stone-carved demons guard bathing pools and centuries-old inscriptions tell stories of Balinese mythology.'
+      ]
+    },
+    packages: [
+      {img:'assets/images/ubud.png', badge:'10% off', loc:'Ubud, Indonesia', title:'The Cultural Homeland', stars:5, rating:'4.8(136)', days:'4 Days', price:'₹45,000'},
+      {img:'assets/images/ubud2.png', badge:'15% off', loc:'Ubud, Indonesia', title:'Rice Terrace Explorer', stars:5, rating:'4.9(98)', days:'5 Days', price:'₹55,000'},
+      {img:'assets/images/image1.png', badge:'12% off', loc:'Ubud, Indonesia', title:'Monkey Forest Trail', stars:5, rating:'4.7(112)', days:'3 Days', price:'₹38,000'}
+    ],
+    tags: ['Culture','Temples','Rice Terraces','Monkey Forest','Art','Wellness','Trekking'],
+    ratings: {scenery:'4.9',culture:'4.9',food:'4.7',access:'4.6'},
+    articles: [
+      {img:'assets/images/festival.png', badge:'Culture', title:'Ubud\'s Hidden Temples You Must Visit', date:'June 12, 2026'},
+      {img:'assets/images/secrets.png', badge:'Nature', title:'Best Rice Terrace Walks in Ubud', date:'May 28, 2026'},
+      {img:'assets/images/image2.png', badge:'Food', title:'Top 10 Warungs for Authentic Balinese Food', date:'May 10, 2026'}
+    ]
+  },
+
+  kuta: {
+    name: 'Kuta, Gali', title: 'Everything you should know about Kuta, Gali',
+    author: 'Trip On Editorial', date: 'Updated July 2026',
+    price: '₹42,000',
+    overview: 'Kuta and the Gili Islands together form one of Bali\'s most iconic coastal experiences. Kuta\'s long golden beach has legendary surf breaks that attract riders from around the world, while the three Gili islands — Trawangan, Air, and Meno — offer turquoise lagoons, coral reefs teeming with sea turtles, and a laid-back island lifestyle free from motorised vehicles.',
+    facts: [
+      {icon:'fa-map-location-dot', text:'16+ Activities'},
+      {icon:'fa-camera', text:'20 Sight Seeings'},
+      {icon:'fa-clock', text:'Best: Apr–Oct'},
+      {icon:'fa-water', text:'Surfing & Diving'},
+      {icon:'fa-coins', text:'Currency: IDR'}
+    ],
+    galleryTop: ['assets/images/beach.png','assets/images/image4.png'],
+    galleryBottom: ['assets/images/image5.png','assets/images/image6.png','assets/images/romantic.png'],
+    history: [
+      'Kuta was a small fishing village and the first port of contact for European and American traders who arrived in Bali during the 19th century. The Dutch colonial presence established a trading post here, and the beach gradually transformed from a commercial landing point into a popular retreat.',
+      'The 1960s and 1970s saw Kuta emerge as a global surfing destination when pioneering surfers discovered its consistent right-hand beach breaks. Cheap guesthouses, surf board rentals, and beachside warungs made it a backpacker haven, and its reputation spread rapidly across the surfing world.',
+      'The Gili Islands, located off the northwest coast of Lombok, remained virtually unknown until the 1980s when early eco-travellers began arriving by wooden boat. Their no-motor-vehicle policy, preserved coral gardens, and relaxed pace quickly made them one of Southeast Asia\'s most beloved island escapes.'
+    ],
+    landmark: {
+      title: 'Beach Attractions:',
+      content: [
+        'Kuta Beach stretches for nearly three kilometres, backed by a bustling strip of surf shops, restaurants, and nightlife venues. At dusk, hundreds of visitors gather on the sand to watch Bali\'s most spectacular sunsets painting the sky in vivid orange and pink.',
+        'Pura Segara, a small sea temple at the southern end of Kuta Beach, is where local priests perform daily offerings to appease the spirits of the ocean. Visitors are welcome to observe the ceremonies from a respectful distance, gaining a rare glimpse of living Balinese Hindu tradition.',
+        'On Gili Trawangan, the famous "swing over the sea" has become an iconic landmark. The island\'s main strip hosts some of the region\'s best dive operators, and snorkelling directly off the beach reveals hawksbill sea turtles grazing on the shallow coral just metres from shore.'
+      ]
+    },
+    packages: [
+      {img:'assets/images/beach.png', badge:'15% off', loc:'Kuta, Indonesia', title:'Sunset Surf & Sand', stars:5, rating:'4.8(144)', days:'4 Days', price:'₹42,000'},
+      {img:'assets/images/image4.png', badge:'10% off', loc:'Gili Islands', title:'Gili Island Escape', stars:5, rating:'4.9(88)', days:'5 Days', price:'₹52,000'},
+      {img:'assets/images/romantic.png', badge:'20% off', loc:'Kuta, Indonesia', title:'Romantic Beach Getaway', stars:5, rating:'4.7(120)', days:'3 Days', price:'₹36,000'}
+    ],
+    tags: ['Surfing','Beach','Sunsets','Nightlife','Gili Islands','Snorkelling','Diving'],
+    ratings: {scenery:'4.8',culture:'4.5',food:'4.7',access:'4.8'},
+    articles: [
+      {img:'assets/images/beach.png', badge:'Adventure', title:'Beginner\'s Guide to Surfing Kuta', date:'June 20, 2026'},
+      {img:'assets/images/image5.png', badge:'Islands', title:'Gili Trawangan: Island Life Without Cars', date:'May 15, 2026'},
+      {img:'assets/images/romantic.png', badge:'Travel', title:'Best Sunset Spots Along Kuta Beach', date:'Apr 30, 2026'}
+    ]
+  },
+
+  lombok: {
+    name: 'Lombok', title: 'Everything you should know about Lombok',
+    author: 'Trip On Editorial', date: 'Updated July 2026',
+    price: '₹48,000',
+    overview: 'Lombok is Bali\'s quieter, wilder neighbour — an island of dramatic volcanic peaks, pristine white-sand beaches, and the deeply traditional Sasak culture. Mount Rinjani, Indonesia\'s second-highest volcano, dominates the skyline and draws trekkers seeking crater lake panoramas, while the southern coast delivers world-class surf breaks and near-empty beaches.',
+    facts: [
+      {icon:'fa-map-location-dot', text:'15+ Activities'},
+      {icon:'fa-camera', text:'10 Sight Seeings'},
+      {icon:'fa-mountain', text:'Mount Rinjani 3726m'},
+      {icon:'fa-clock', text:'Best: May–Sep'},
+      {icon:'fa-coins', text:'Currency: IDR'}
+    ],
+    galleryTop: ['assets/images/image7.png','assets/images/peace.png'],
+    galleryBottom: ['assets/images/image8.png','assets/images/image9.png','assets/images/culture.png'],
+    history: [
+      'Lombok\'s history is layered with the influences of the indigenous Sasak people, the Balinese Hindu kingdom of Karangasem, and the Dutch colonial administration. The Sasak people, who make up the majority of the population, practise a unique blend of Islam and pre-Islamic animist traditions called Wetu Telu.',
+      'In the 18th and 19th centuries, the Balinese dominated western Lombok from their stronghold in Mataram, introducing Hindu temples and cultural traditions that still survive today at Pura Lingsar. The Dutch defeated the Balinese in 1894, absorbing Lombok into the colonial Dutch East Indies.',
+      'Modern Lombok began attracting surfers and adventurous travellers in the 1990s, drawn by uncrowded breaks along the Kuta coastline and the challenging ascent of Rinjani. Today it balances low-key tourism with authentic island life, offering an experience quite distinct from the well-worn tourist trail of Bali.'
+    ],
+    landmark: {
+      title: 'Sacred Sites:',
+      content: [
+        'Pura Lingsar is the most important religious complex in Lombok, uniquely celebrating both Hindu and Sasak Wetu Telu faiths within the same compound. The temple hosts the annual Peresehan festival and the Perang Topat ceremony, where participants throw rice cakes at one another as an act of communal blessing.',
+        'The Segara Anak crater lake sits at 2,000 metres inside the caldera of Mount Rinjani and is regarded as sacred by both Hindus and Muslims. Pilgrims make the arduous three-day trek to bathe in its hot springs and cast flower offerings into its turquoise waters as acts of spiritual purification.',
+        'The traditional Sasak villages of Sade and Ende near Kuta preserve architectural traditions unchanged for centuries — houses built on raised bamboo platforms with thatched alang-alang grass roofs, and floors polished with a mixture of clay and buffalo dung for strength and pest resistance.'
+      ]
+    },
+    packages: [
+      {img:'assets/images/image7.png', badge:'12% off', loc:'Lombok, Indonesia', title:'Rinjani Trek Adventure', stars:5, rating:'4.9(76)', days:'5 Days', price:'₹58,000'},
+      {img:'assets/images/peace.png', badge:'10% off', loc:'Kuta Lombok', title:'South Coast Surf Safari', stars:5, rating:'4.7(94)', days:'4 Days', price:'₹48,000'},
+      {img:'assets/images/culture.png', badge:'18% off', loc:'Lombok, Indonesia', title:'Sasak Culture Discovery', stars:5, rating:'4.8(62)', days:'3 Days', price:'₹36,000'}
+    ],
+    tags: ['Trekking','Volcano','Beaches','Sasak Culture','Surfing','Waterfalls','Snorkelling'],
+    ratings: {scenery:'4.9',culture:'4.8',food:'4.5',access:'4.3'},
+    articles: [
+      {img:'assets/images/image7.png', badge:'Adventure', title:'Trekking Mount Rinjani: What to Expect', date:'June 5, 2026'},
+      {img:'assets/images/culture.png', badge:'Culture', title:'Sasak Villages: Lombok\'s Living Heritage', date:'May 22, 2026'},
+      {img:'assets/images/peace.png', badge:'Beach', title:'Kuta Lombok vs Kuta Bali: The Difference', date:'Apr 18, 2026'}
+    ]
+  },
+
+  seminyak: {
+    name: 'Seminyak', title: 'Everything you should know about Seminyak',
+    author: 'Trip On Editorial', date: 'Updated July 2026',
+    price: '₹62,000',
+    overview: 'Seminyak is Bali\'s most cosmopolitan beach destination — an upscale coastal strip lined with boutique hotels, award-winning restaurants, high-end fashion boutiques, and world-famous beach clubs. Where Kuta trades on energy and surf, Seminyak trades on style and sophistication, attracting a global crowd seeking luxury Bali living without sacrificing proximity to the ocean.',
+    facts: [
+      {icon:'fa-map-location-dot', text:'25+ Activities'},
+      {icon:'fa-camera', text:'12 Sight Seeings'},
+      {icon:'fa-champagne-glasses', text:'Luxury Dining'},
+      {icon:'fa-clock', text:'Best: May–Oct'},
+      {icon:'fa-coins', text:'Currency: IDR'}
+    ],
+    galleryTop: ['assets/images/romantic.png','assets/images/hotel.png'],
+    galleryBottom: ['assets/images/image1.png','assets/images/image3.png','assets/images/lots.png'],
+    history: [
+      'Seminyak was a quiet, relatively undeveloped stretch of coastline north of Kuta until the early 1990s, when Bali\'s tourism infrastructure began expanding northward. Early boutique guesthouses and restaurants catering to more discerning travellers laid the foundations for what would become the island\'s luxury hub.',
+      'Through the late 1990s and 2000s, international designers, chefs, and hoteliers chose Seminyak for its superior beaches and calmer atmosphere compared to Kuta. Flagship villas, designer stores, and fine dining establishments rapidly transformed the landscape from fishing village to fashion destination.',
+      'Despite its modern makeover, Seminyak retains strong connections to Balinese spiritual life. The Pura Petitenget sea temple, one of the six key temples forming Bali\'s spiritual chain, remains an active ceremonial centre where colourful processions regularly spill across the beach road.'
+    ],
+    landmark: {
+      title: 'Must-See Attractions:',
+      content: [
+        'Pura Petitenget is the anchor of Seminyak\'s spiritual identity — an ancient sea temple perched above the beach whose name translates roughly to "magic box," referencing a sacred item brought by the 16th-century priest Dang Hyang Nirartha. Sunset ceremonies here are among Bali\'s most atmospheric experiences.',
+        'The Seminyak Beach club scene is unrivalled in Asia. Venues like Potato Head and Ku De Ta pioneered the concept of all-day beach clubs combining pool loungers, international DJs, gourmet food, and craft cocktails against a backdrop of the Indian Ocean — a model since replicated worldwide.',
+        'Seminyak Square and the surrounding boutique streets are a treasure trove for fashion-conscious shoppers. Local and international designers operate flagship stores selling everything from handwoven textiles and leather goods to contemporary Balinese jewellery and custom-tailored clothing.'
+      ]
+    },
+    packages: [
+      {img:'assets/images/romantic.png', badge:'10% off', loc:'Seminyak, Indonesia', title:'Luxury Beach Retreat', stars:5, rating:'4.9(182)', days:'5 Days', price:'₹72,000'},
+      {img:'assets/images/hotel.png', badge:'15% off', loc:'Seminyak, Indonesia', title:'Honeymoon Paradise', stars:5, rating:'4.9(156)', days:'6 Days', price:'₹85,000'},
+      {img:'assets/images/lots.png', badge:'12% off', loc:'Seminyak, Indonesia', title:'Beach Club & Spa Break', stars:5, rating:'4.8(134)', days:'4 Days', price:'₹62,000'}
+    ],
+    tags: ['Luxury','Beach Clubs','Fine Dining','Spa','Sunsets','Shopping','Nightlife'],
+    ratings: {scenery:'4.8',culture:'4.4',food:'4.9',access:'4.9'},
+    articles: [
+      {img:'assets/images/romantic.png', badge:'Luxury', title:'Top 5 Beach Clubs in Seminyak 2026', date:'July 1, 2026'},
+      {img:'assets/images/hotel.png', badge:'Food', title:'Seminyak\'s Best Fine Dining Restaurants', date:'June 8, 2026'},
+      {img:'assets/images/lots.png', badge:'Shopping', title:'Designer Boutiques Worth Visiting in Seminyak', date:'May 25, 2026'}
+    ]
+  },
+
+  nusa: {
+    name: 'Nusa Penida', title: 'Everything you should know about Nusa Penida',
+    author: 'Trip On Editorial', date: 'Updated July 2026',
+    price: '₹50,000',
+    overview: 'Nusa Penida is Bali\'s most dramatic offshore island — a rugged limestone plateau ringed by sheer sea cliffs, hidden coves, and crystal-clear bays that appear almost impossibly blue. Famous for the iconic Kelingking Beach T-Rex cliff viewpoint, pristine snorkelling with manta rays, and roads that test even the most capable vehicles, it remains bracingly wild compared to mainland Bali.',
+    facts: [
+      {icon:'fa-map-location-dot', text:'18+ Activities'},
+      {icon:'fa-camera', text:'15 Sight Seeings'},
+      {icon:'fa-fish', text:'Manta Ray Diving'},
+      {icon:'fa-clock', text:'Best: Apr–Oct'},
+      {icon:'fa-coins', text:'Currency: IDR'}
+    ],
+    galleryTop: ['assets/images/indonesia.png','assets/images/image6.png'],
+    galleryBottom: ['assets/images/image8.png','assets/images/image9.png','assets/images/peace.png'],
+    history: [
+      'Nusa Penida was historically regarded by Balinese Hindus as a place of spiritual danger, home to Jero Gede Macaling — a powerful and malevolent demon. Exiles, criminals, and outcasts were sent to the island as punishment, reinforcing its dark reputation among mainland Balinese communities.',
+      'Despite its fearsome mythology, Nusa Penida was inhabited by Balinese migrants and developed its own distinct cultural identity. Temples dedicated to appeasing the island\'s powerful spiritual forces were constructed, and ritual pilgrimages from the Balinese mainland became common.',
+      'The modern transformation of Nusa Penida began in the 2010s when images of Kelingking Beach and Angel\'s Billabong went viral on social media. The island shifted rapidly from a barely-visited day trip to one of Bali\'s most photographed destinations, though its infrastructure remains charmingly behind the times.'
+    ],
+    landmark: {
+      title: 'Natural Wonders:',
+      content: [
+        'Kelingking Beach is Nusa Penida\'s most photographed location — a dramatic T-Rex-shaped limestone promontory dropping vertically into a pristine white beach far below. The descent to the beach is a knee-trembling scramble down near-vertical ropes and rough steps that rewards the brave with total seclusion.',
+        'Angel\'s Billabong and Broken Beach are geological marvels located side by side on the island\'s north-western tip. Angel\'s Billabong is a natural infinity pool carved into the coastal rock that fills and drains with each tide, its turquoise waters startlingly vivid against the dark basalt surrounding it.',
+        'The waters off Nusa Penida\'s south-western coast are one of the world\'s best places to snorkel and dive with oceanic manta rays. Crystal Bay offers calm, clear water and frequent sightings of the rare Mola Mola (ocean sunfish) between July and October, drawing divers from across the globe.'
+      ]
+    },
+    packages: [
+      {img:'assets/images/indonesia.png', badge:'15% off', loc:'Nusa Penida, Indonesia', title:'Isolated Mountains', stars:5, rating:'4.8(136)', days:'4 Days', price:'₹50,000'},
+      {img:'assets/images/image6.png', badge:'10% off', loc:'Nusa Penida, Indonesia', title:'Kelingking Cliff Explorer', stars:5, rating:'4.9(108)', days:'3 Days', price:'₹42,000'},
+      {img:'assets/images/peace.png', badge:'20% off', loc:'Nusa Penida, Indonesia', title:'Manta Ray Diving & Beach', stars:5, rating:'4.8(92)', days:'5 Days', price:'₹58,000'}
+    ],
+    tags: ['Cliffs','Snorkelling','Manta Rays','Beaches','Photography','Diving','Adventure'],
+    ratings: {scenery:'5.0',culture:'4.3',food:'4.2',access:'3.9'},
+    articles: [
+      {img:'assets/images/indonesia.png', badge:'Adventure', title:'Kelingking Beach: The Ultimate Guide', date:'June 18, 2026'},
+      {img:'assets/images/image6.png', badge:'Nature', title:'Swimming with Mantas at Nusa Penida', date:'May 30, 2026'},
+      {img:'assets/images/peace.png', badge:'Travel Tips', title:'How to Get to Nusa Penida from Bali', date:'May 12, 2026'}
+    ]
+  },
+
+  canggu: {
+    name: 'Canggu', title: 'Everything you should know about Canggu',
+    author: 'Trip On Editorial', date: 'Updated July 2026',
+    price: '₹46,000',
+    overview: 'Canggu is Bali\'s most talked-about neighbourhood — a creative melting pot where rice paddies meet surf breaks and digital nomads share co-working spaces with visiting surfers and yoga retreaters. Once a sleepy coastal village north of Seminyak, Canggu\'s Instagram-friendly cafes, black-sand beaches, and vibrant social scene have made it the unofficial capital of modern Bali lifestyle.',
+    facts: [
+      {icon:'fa-map-location-dot', text:'22+ Activities'},
+      {icon:'fa-camera', text:'14 Sight Seeings'},
+      {icon:'fa-laptop', text:'Digital Nomad Hub'},
+      {icon:'fa-clock', text:'Best: May–Sep'},
+      {icon:'fa-coins', text:'Currency: IDR'}
+    ],
+    galleryTop: ['assets/images/adventure2.png','assets/images/image2.png'],
+    galleryBottom: ['assets/images/image3.png','assets/images/lots.png','assets/images/guide.png'],
+    history: [
+      'Canggu\'s history stretches back centuries as a traditional Balinese farming and fishing community. The area\'s volcanic black-sand beaches and reliable surf breaks were known to local fishermen long before tourists arrived, and the paddy fields that still frame the village today have been cultivated for generations.',
+      'The early surfing community discovered Canggu\'s Echo Beach and Batu Bolong breaks in the 1990s, establishing small guesthouses and surf camps that attracted a trickle of adventurous travellers. The neighbourhood retained its quiet village character well into the 2000s.',
+      'The digital nomad revolution of the 2010s transformed Canggu more dramatically than any other Bali neighbourhood. High-speed internet, affordable co-working spaces, and a sociable international community made it a magnet for location-independent workers, triggering an explosion of cafes, boutique gyms, and trendy accommodation that continues to this day.'
+    ],
+    landmark: {
+      title: 'Iconic Spots:',
+      content: [
+        'Batu Bolong Temple is Canggu\'s spiritual centrepiece — a small Hindu sea temple perched dramatically on a black rock at the water\'s edge, framed by crashing waves and sunset light. Daily ceremonies fill the air with incense and gamelan music, offering a grounding counterpoint to the neighbourhood\'s trendy cafe culture.',
+        'Echo Beach is Canggu\'s most celebrated surf spot, offering punchy left and right-hand reef breaks that attract intermediate and advanced surfers. The beachfront is lined with warung restaurants and surf schools, and the ritual of watching skilled surfers from a clifftop cafe at sunset has become a Canggu institution.',
+        'Canggu\'s cafe scene is legendary in the digital nomad world — venues like Deus Ex Machina, The Shady Shack, and Finn\'s Beach Club set the template for the hybrid bar-restaurant-social-space concept. Rice paddy cafes offer cold brew coffee and avocado toast against views of jade-green terraces.'
+      ]
+    },
+    packages: [
+      {img:'assets/images/adventure2.png', badge:'10% off', loc:'Canggu, Indonesia', title:'Surf & Co-work Retreat', stars:5, rating:'4.8(148)', days:'5 Days', price:'₹52,000'},
+      {img:'assets/images/image2.png', badge:'15% off', loc:'Canggu, Indonesia', title:'Yoga & Wellness Escape', stars:5, rating:'4.9(122)', days:'4 Days', price:'₹46,000'},
+      {img:'assets/images/lots.png', badge:'12% off', loc:'Canggu, Indonesia', title:'Paddy Field & Beach Break', stars:5, rating:'4.7(96)', days:'3 Days', price:'₹38,000'}
+    ],
+    tags: ['Surfing','Cafes','Digital Nomad','Yoga','Rice Paddies','Nightlife','Wellness'],
+    ratings: {scenery:'4.7',culture:'4.3',food:'4.9',access:'4.7'},
+    articles: [
+      {img:'assets/images/adventure2.png', badge:'Lifestyle', title:'Why Digital Nomads Love Canggu', date:'July 4, 2026'},
+      {img:'assets/images/lots.png', badge:'Food', title:'Canggu\'s Best Cafes for Working Remotely', date:'June 14, 2026'},
+      {img:'assets/images/guide.png', badge:'Surf', title:'A Beginner\'s Guide to Batu Bolong Beach', date:'June 2, 2026'}
+    ]
+  }
+};
+
+// All adventure cards for the "Let's go on an adventure" section
+const ALL_ADV = [
+  {loc:'ubud',     icon:'green',  img:'assets/images/ubud-icon.svg',      name:'Ubud',        meta:'20+ Activities, 18 Sight Seeings'},
+  {loc:'kuta',     icon:'orange', img:'assets/images/kuta-gali-icon.svg', name:'Kuta, Gali',  meta:'16+ Activities, 20 Sight Seeings'},
+  {loc:'lombok',   icon:'blue',   img:'assets/images/lombok-icon.svg',    name:'Lombok',      meta:'15+ Activities, 10 Sight Seeings'},
+  {loc:'seminyak', icon:'purple', img:'assets/images/ubud-icon.svg',      name:'Seminyak',    meta:'25+ Activities, 12 Sight Seeings'},
+  {loc:'nusa',     icon:'teal',   img:'assets/images/lombok-icon.svg',    name:'Nusa Penida', meta:'18+ Activities, 15 Sight Seeings'},
+  {loc:'canggu',   icon:'pink',   img:'assets/images/kuta-gali-icon.svg', name:'Canggu',      meta:'22+ Activities, 14 Sight Seeings'}
+];
+
+function stars(n) {
+  return '&#9733;'.repeat(n) + (n < 5 ? '&#9734;'.repeat(5 - n) : '');
+}
+
+function render(key) {
+  const d = LOCATIONS[key];
+  if (!d) return;
+
+  document.title = d.name + ' - Trip On';
+  document.getElementById('ld-bc-name').textContent = d.name;
+  document.getElementById('ld-title').textContent = d.title;
+  document.getElementById('ld-author-name').textContent = d.author;
+  document.getElementById('ld-author-date').textContent = d.date;
+  document.getElementById('ld-overview').textContent = d.overview;
+  document.getElementById('ld-book-price').textContent = d.price;
+  document.getElementById('ld-rate-scenery').textContent = d.ratings.scenery;
+  document.getElementById('ld-rate-culture').textContent = d.ratings.culture;
+  document.getElementById('ld-rate-food').textContent = d.ratings.food;
+  document.getElementById('ld-rate-access').textContent = d.ratings.access;
+  document.getElementById('ld-landmark-title').textContent = d.landmark.title;
+
+  // Quick facts
+  document.getElementById('ld-quick-facts').innerHTML =
+    d.facts.map(f => `<div class="ld-fact"><i class="fa-solid ${f.icon}"></i>${f.text}</div>`).join('');
+
+  // Gallery top (2 images)
+  document.getElementById('ld-gallery-top').innerHTML =
+    d.galleryTop.map(s => `<img class="ld-gallery-img" src="${s}" alt="${d.name}">`).join('');
+
+  // Gallery bottom (3 images)
+  document.getElementById('ld-gallery-bottom').innerHTML =
+    d.galleryBottom.map(s => `<img class="ld-gallery-img" src="${s}" alt="${d.name}">`).join('');
+
+  // History
+  document.getElementById('ld-history').innerHTML =
+    d.history.map(p => `<p class="ld-text-block">${p}</p>`).join('');
+
+  // Landmark
+  document.getElementById('ld-landmark').innerHTML =
+    d.landmark.content.map(p => `<p class="ld-text-block">${p}</p>`).join('');
+
+  // Packages
+  document.getElementById('ld-packages-grid').innerHTML = d.packages.map(p => `
+    <div class="ld-pkg-card" onclick="window.location.href='packages.html'">
+      <div class="ld-pkg-img-wrap">
+        <img src="${p.img}" alt="${p.title}">
+        <span class="ld-pkg-badge">${p.badge}</span>
+      </div>
+      <div class="ld-pkg-body">
+        <div class="ld-pkg-loc"><i class="fa-solid fa-location-dot"></i>${p.loc}</div>
+        <div class="ld-pkg-title">${p.title}</div>
+        <div class="ld-pkg-stars">${stars(p.stars)} <small style="color:#667085">${p.rating}</small></div>
+        <div class="ld-pkg-footer">
+          <div class="ld-pkg-days"><i class="fa-regular fa-clock"></i>${p.days}</div>
+          <div class="ld-pkg-price"><span>from</span>${p.price}</div>
+        </div>
+      </div>
+      <button class="ld-pkg-book-btn">Book Now</button>
+    </div>`).join('');
+
+  // Adventure grid — show all except current
+  document.getElementById('ld-adv-grid').innerHTML = ALL_ADV
+    .filter(a => a.loc !== key)
+    .slice(0, 6)
+    .map(a => `
+      <div class="ld-adv-card" onclick="window.location.href='locations/${a.loc}.html'">
+        <div class="ld-adv-icon ${a.icon}"><img src="${a.img}" alt="${a.name}"></div>
+        <div class="ld-adv-text"><h3>${a.name}</h3><p>${a.meta}</p></div>
+      </div>`).join('');
+
+  // Articles
+  document.getElementById('ld-articles-grid').innerHTML = d.articles.map(a => `
+    <div class="ld-article-card">
+      <img class="ld-article-img" src="${a.img}" alt="${a.title}">
+      <div class="ld-article-body">
+        <span class="ld-article-badge">${a.badge}</span>
+        <div class="ld-article-title">${a.title}</div>
+        <div class="ld-article-meta"><i class="fa-regular fa-calendar"></i> ${a.date}</div>
+      </div>
+    </div>`).join('');
+
+  // Tags
+  document.getElementById('ld-tags').innerHTML =
+    d.tags.map(t => `<span class="ld-tag">${t}</span>`).join('');
+}
+
+// Read URL param ?loc=ubud (default: ubud)
+const param = new URLSearchParams(window.location.search).get('loc') || 'ubud';
+render(param);
+
+// Mobile nav toggle (basic)
+document.getElementById('ld-mobile-toggle').addEventListener('click', function () {
+  const nav = document.querySelector('.ld-nav-links');
+  if (nav.style.display === 'flex') {
+    nav.style.display = 'none';
+  } else {
+    nav.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:#fff;padding:20px 24px;gap:16px;box-shadow:0 8px 20px rgba(0,0,0,0.1);z-index:999;';
+  }
+});
+</script>
+</body>
+</html>

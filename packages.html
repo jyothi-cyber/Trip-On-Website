@@ -2446,7 +2446,15 @@
       button.addEventListener('click', () => {
         // Skip if custom button
         if (button.classList.contains('custom-btn')) {
-          alert('Custom Package Request: Please contact us to create a personalized package for your needs!');
+          // Redirect to home page and open custom package popup
+          window.location.href = 'index.html#packages';
+          setTimeout(() => {
+            // Trigger custom package popup on home page
+            const askCustomBtn = document.getElementById('ask-custom-packages-btn');
+            if (askCustomBtn) {
+              askCustomBtn.click();
+            }
+          }, 300);
           return;
         }
         
@@ -2482,6 +2490,67 @@
     
     // Initialize with 4 nights cards (cards 1-2)
     filterCards('4');
+    
+    // ===== URL PARAMETER HANDLING =====
+    // Check if there's a duration parameter in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const durationParam = urlParams.get('duration');
+    
+    if (durationParam) {
+      // Scroll to packages section
+      setTimeout(() => {
+        const packagesSection = document.querySelector('.packages-section');
+        if (packagesSection) {
+          packagesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      
+      // Handle custom package request
+      if (durationParam === 'custom') {
+        setTimeout(() => {
+          const customBtn = document.getElementById('custom-package-btn');
+          if (customBtn) {
+            customBtn.click();
+          }
+        }, 500);
+      } else {
+        // Filter packages based on duration
+        let filterValue = '4'; // default
+        let buttonToActivate = null;
+        
+        switch(durationParam) {
+          case '4':
+            filterValue = '4';
+            buttonToActivate = document.querySelector('.filter-btn[data-filter="all"]');
+            break;
+          case '5':
+            filterValue = '5';
+            buttonToActivate = document.querySelector('.filter-btn[data-filter="5nights"]');
+            break;
+          case '6':
+            filterValue = '6';
+            buttonToActivate = document.querySelector('.filter-btn[data-filter="6nights"]');
+            break;
+          case '7':
+            filterValue = 'all';
+            buttonToActivate = document.querySelector('.filter-btn[data-filter="7nights"]');
+            break;
+        }
+        
+        // Update filter buttons active state
+        if (buttonToActivate) {
+          filterButtons.forEach(btn => {
+            if (!btn.classList.contains('custom-btn')) {
+              btn.classList.remove('active');
+            }
+          });
+          buttonToActivate.classList.add('active');
+        }
+        
+        // Filter the cards
+        filterCards(filterValue);
+      }
+    }
     
     // Package Card Click - Navigate to details page
     packageCards.forEach(card => {

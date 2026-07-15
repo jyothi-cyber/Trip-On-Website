@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=../packages.html?duration=custom">
+  <title>Custom Package - Trip On</title>
+  <style>
+    body { margin: 0; font-family: 'Poppins', sans-serif; background: #f9fafb; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 16px; }
+    .spinner { width: 40px; height: 40px; border: 3px solid #DDF3EA; border-top-color: #20664e; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    p { font-size: 15px; color: #667085; margin: 0; }
+    strong { color: #20664e; }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <p>Loading <strong>Custom</strong> packages...</p>
+  <script>window.location.replace('../packages.html?duration=custom');</script>
+</body>
+</html>
