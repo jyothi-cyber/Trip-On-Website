@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cultural Homeland - Bali Package | Trip On</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Poppins',sans-serif;background:#f9fafb;color:#101828}a{text-decoration:none}
+    .nav{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:0 60px;height:70px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo img{height:36px}
+    .nav-back{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#20664e;cursor:pointer;border:none;background:none}
+    .nav-back:hover{color:#0E5A36}
+    .pkg-hero{position:relative;height:480px;overflow:hidden}
+    .pkg-hero img{width:100%;height:100%;object-fit:cover}
+    .pkg-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.65))}
+    .pkg-hero-content{position:absolute;bottom:48px;left:60px;color:#fff}
+    .pkg-hero-badge{display:inline-flex;align-items:center;gap:6px;background:#F79009;border-radius:50px;padding:5px 14px;font-size:12px;font-weight:700;margin-bottom:16px}
+    .pkg-hero-content h1{font-size:48px;font-weight:800;line-height:1.15;margin-bottom:12px;max-width:700px}
+    .pkg-hero-meta{display:flex;gap:24px;font-size:14px;font-weight:500;opacity:.9}
+    .pkg-hero-meta span{display:flex;align-items:center;gap:6px}
+    .breadcrumb{background:#fff;padding:14px 60px;font-size:13px;color:#98A2B3;border-bottom:1px solid #F2F4F7}
+    .breadcrumb a{color:#20664e}.breadcrumb a:hover{text-decoration:underline}
+    .pkg-main{max-width:1300px;margin:0 auto;padding:48px 60px;display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:flex-start}
+    .pkg-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+    .pkg-section h2{font-size:22px;font-weight:700;color:#101828;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid #F2F4F7}
+    .pkg-section p{font-size:15px;line-height:28px;color:#667085;margin-bottom:14px}
+    .highlights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .highlight-item{display:flex;align-items:flex-start;gap:12px;background:#f7fbf9;border-radius:10px;padding:14px}
+    .highlight-icon{width:36px;height:36px;border-radius:8px;background:#DDF3EA;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#20664e;font-size:15px}
+    .highlight-text h4{font-size:13px;font-weight:700;color:#101828;margin-bottom:2px}
+    .highlight-text p{font-size:12px;color:#667085;margin:0;line-height:1.5}
+    .itinerary-day{border-left:3px solid #DDF3EA;padding-left:20px;margin-bottom:24px;position:relative}
+    .itinerary-day::before{content:'';width:12px;height:12px;background:#20664e;border-radius:50%;position:absolute;left:-7.5px;top:5px}
+    .itinerary-day h4{font-size:15px;font-weight:700;color:#101828;margin-bottom:6px}
+    .itinerary-day p{font-size:14px;color:#667085;line-height:24px;margin:0}
+    .inc-list,.exc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .exc-list{margin-top:16px}
+    .inc-list li,.exc-list li{display:flex;align-items:center;gap:10px;font-size:14px}
+    .inc-list li{color:#344054}.inc-list li i{color:#20664e;font-size:13px;flex-shrink:0}
+    .exc-list li{color:#667085}.exc-list li i{color:#F04438;font-size:13px;flex-shrink:0}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;transition:transform .3s}
+    .gallery-grid img:hover{transform:scale(1.04)}
+    .pkg-sidebar{position:sticky;top:90px}
+    .sidebar-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:24px}
+    .sidebar-price-label{font-size:13px;color:#667085;margin-bottom:4px}
+    .sidebar-price{font-size:40px;font-weight:800;color:#20664e;margin-bottom:4px}
+    .sidebar-price-note{font-size:12px;color:#98A2B3;margin-bottom:24px}
+    .sidebar-divider{border:none;border-top:1px solid #F2F4F7;margin:20px 0}
+    .sidebar-info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:14px}
+    .sidebar-info-label{color:#667085;display:flex;align-items:center;gap:8px}
+    .sidebar-info-label i{color:#20664e;width:16px}
+    .sidebar-info-value{font-weight:600;color:#101828}
+    .book-btn{display:block;width:100%;background:#20664e;color:#fff;border:none;border-radius:50px;padding:15px;font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center;transition:background .2s,transform .2s;margin-bottom:12px}
+    .book-btn:hover{background:#0E5A36;transform:translateY(-2px)}
+    .enquire-btn{display:block;width:100%;background:#fff;color:#20664e;border:2px solid #20664e;border-radius:50px;padding:14px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;cursor:pointer;text-align:center;transition:background .2s}
+    .enquire-btn:hover{background:#f0fff8}
+    .sidebar-trust{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+    .trust-item{display:flex;align-items:center;gap:10px;font-size:13px;color:#344054}
+    .trust-item i{color:#20664e;font-size:15px}
+    .pkg-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .pkg-tag{background:#F9FAFB;border:1.5px solid #E4E7EC;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:500;color:#344054}
+    @media(max-width:1024px){.pkg-main{grid-template-columns:1fr;padding:32px 30px}.pkg-sidebar{position:static}.pkg-hero-content{left:30px}.pkg-hero-content h1{font-size:36px}.breadcrumb{padding:14px 30px}}
+    @media(max-width:768px){.nav{padding:0 20px}.pkg-hero{height:350px}.pkg-hero-content{left:20px;bottom:24px}.pkg-hero-content h1{font-size:26px}.pkg-hero-meta{flex-wrap:wrap;gap:12px}.pkg-main{padding:24px 16px}.highlights-grid,.inc-list,.exc-list{grid-template-columns:1fr}.gallery-grid{grid-template-columns:repeat(2,1fr)}.breadcrumb{padding:14px 16px}}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="../index.html"><img src="../assets/images/tripon-logo.png" alt="Trip On"></a></div>
+  <button class="nav-back" id="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Packages</button>
+</nav>
+
+<div class="pkg-hero">
+  <img src="../assets/images/ubud.png" alt="The Cultural Homeland">
+  <div class="pkg-hero-overlay"></div>
+  <div class="pkg-hero-content">
+    <div class="pkg-hero-badge"><i class="fa-solid fa-tag"></i> 10% Off</div>
+    <h1>The Cultural Homeland</h1>
+    <div class="pkg-hero-meta">
+      <span><i class="fa-solid fa-location-dot"></i> Ubud, Indonesia</span>
+      <span><i class="fa-regular fa-clock"></i> 4 Days / 3 Nights</span>
+      <span><i class="fa-solid fa-star" style="color:#F79009"></i> 4.8 (136 reviews)</span>
+    </div>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="../index.html">Home</a> &rsaquo; <a href="../index.html#packages">Packages</a> &rsaquo; <a href="#">Destination</a> &rsaquo; <a href="#">Bali</a> &rsaquo; <span>The Cultural Homeland</span>
+</div>
+
+<div class="pkg-main">
+  <div class="pkg-left">
+
+    <div class="pkg-section">
+      <h2>Package Overview</h2>
+      <p>Immerse yourself in the cultural soul of Bali with this 4-day journey through Ubud — Bali's artistic heartland. Nestled among emerald rice terraces and ancient forests, Ubud offers a profound encounter with traditional Balinese arts, sacred temples, and timeless rituals that have shaped this extraordinary island for centuries.</p>
+      <p>From the mystical Monkey Forest Sanctuary to the magnificent Ubud Palace where nightly dance performances light up the royal courtyard, every moment reveals a new layer of Balinese heritage. Expert local guides lead you through hidden temples, craft villages, and terraced landscapes.</p>
+      <div class="pkg-tags">
+        <span class="pkg-tag">Culture</span><span class="pkg-tag">Temples</span><span class="pkg-tag">Rice Terraces</span>
+        <span class="pkg-tag">Traditional Arts</span><span class="pkg-tag">Monkey Forest</span><span class="pkg-tag">Dance Shows</span>
+      </div>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Package Highlights</h2>
+      <div class="highlights-grid">
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-tree"></i></div><div class="highlight-text"><h4>Monkey Forest Sanctuary</h4><p>Ancient temples surrounded by 700+ macaques</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-wheat-awn"></i></div><div class="highlight-text"><h4>Tegalalang Rice Terraces</h4><p>Walk through UNESCO-listed rice paddies</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-masks-theater"></i></div><div class="highlight-text"><h4>Kecak Dance Performance</h4><p>Spectacular fire dance at Ubud Palace</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-paintbrush"></i></div><div class="highlight-text"><h4>Art Village Tour</h4><p>Visit Celuk, Mas and Batuan craft villages</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-mug-hot"></i></div><div class="highlight-text"><h4>Luwak Coffee Plantation</h4><p>Taste authentic Balinese coffee</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-spa"></i></div><div class="highlight-text"><h4>Traditional Spa</h4><p>Rejuvenating Balinese massage</p></div></div>
+      </div>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Day-by-Day Itinerary</h2>
+      <div class="itinerary-day"><h4>Day 1 &mdash; Arrival &amp; Ubud Orientation</h4><p>Arrive at Ngurah Rai Airport. Transfer to Ubud hotel. Evening stroll through Ubud Art Market. Welcome dinner at a valley-view warung. Kecak Fire Dance performance at Ubud Palace.</p></div>
+      <div class="itinerary-day"><h4>Day 2 &mdash; Temples, Forest &amp; Rice Terraces</h4><p>Visit Monkey Forest Sanctuary and Pura Dalem Agung temple. Explore Tegalalang Rice Terraces. Afternoon at Goa Gajah Elephant Cave. Evening traditional Balinese cooking class with dinner.</p></div>
+      <div class="itinerary-day"><h4>Day 3 &mdash; Art Villages &amp; Coffee Plantation</h4><p>Full-day art village tour: Celuk (silver), Mas (wood carving), Batuan (paintings). Luwak coffee plantation tasting. Yeh Pulu rock relief carvings. Evening Balinese spa treatment.</p></div>
+      <div class="itinerary-day"><h4>Day 4 &mdash; Sunrise &amp; Departure</h4><p>Optional: Early sunrise yoga session. Breakfast and free time for shopping at Ubud market. Check-out and transfer to airport with lasting memories.</p></div>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Inclusions &amp; Exclusions</h2>
+      <ul class="inc-list">
+        <li><i class="fa-solid fa-circle-check"></i> 3 nights (4-star resort)</li>
+        <li><i class="fa-solid fa-circle-check"></i> Daily breakfast</li>
+        <li><i class="fa-solid fa-circle-check"></i> Airport pickup &amp; drop</li>
+        <li><i class="fa-solid fa-circle-check"></i> All temple entry fees</li>
+        <li><i class="fa-solid fa-circle-check"></i> English-speaking guide</li>
+        <li><i class="fa-solid fa-circle-check"></i> Kecak dance show tickets</li>
+        <li><i class="fa-solid fa-circle-check"></i> Luwak coffee tasting</li>
+        <li><i class="fa-solid fa-circle-check"></i> Cooking class &amp; dinner</li>
+        <li><i class="fa-solid fa-circle-check"></i> Traditional spa (1 hr)</li>
+        <li><i class="fa-solid fa-circle-check"></i> All AC transportation</li>
+      </ul>
+      <ul class="exc-list">
+        <li><i class="fa-solid fa-circle-xmark"></i> International airfare</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> Travel insurance</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> Personal shopping</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> Lunch &amp; dinner (except noted)</li>
+      </ul>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Photo Gallery</h2>
+      <div class="gallery-grid">
+        <img src="../assets/images/ubud.png" alt="Ubud">
+        <img src="../assets/images/ubud2.png" alt="Ubud Rice Terraces">
+        <img src="../assets/images/festival.png" alt="Bali Festival">
+        <img src="../assets/images/image1.png" alt="Temple">
+        <img src="../assets/images/image2.png" alt="Culture">
+        <img src="../assets/images/culture.png" alt="Traditional Arts">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pkg-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-price-label">Starting from</div>
+      <div class="sidebar-price">&#8377;45,000</div>
+      <div class="sidebar-price-note">per person &middot; taxes included</div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-regular fa-clock"></i> Duration</span><span class="sidebar-info-value">4 Days / 3 Nights</span></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-location-dot"></i> Location</span><span class="sidebar-info-value">Ubud, Bali</span></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-users"></i> Group Size</span><span class="sidebar-info-value">2 – 15 persons</span></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-star" style="color:#F79009"></i> Rating</span><span class="sidebar-info-value">4.8 (136 reviews)</span></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-tag"></i> Discount</span><span class="sidebar-info-value" style="color:#F79009;font-weight:700">10% Off</span></div>
+      <div class="sidebar-divider"></div>
+      <button class="book-btn" onclick="window.location.href='../index.html#packages'">Book This Package</button>
+      <button class="enquire-btn" onclick="window.location.href='../index.html#packages'">Send Enquiry</button>
+      <div class="sidebar-trust">
+        <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Free cancellation up to 48hrs</div>
+        <div class="trust-item"><i class="fa-solid fa-headset"></i> 24/7 customer support</div>
+        <div class="trust-item"><i class="fa-solid fa-medal"></i> Best price guarantee</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('back-btn').addEventListener('click', () => {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = '../index.html#packages';
+  });
+</script>
+</body>
+</html>

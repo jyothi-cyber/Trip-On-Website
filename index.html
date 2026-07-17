@@ -306,11 +306,11 @@
         </div>
         <div class="duration-controls">
           <div class="duration-buttons">
-            <a href="packages.html?duration=4" class="duration-pill duration-pill-1">4 Days</a>
-            <a href="packages.html?duration=5" class="duration-pill duration-pill-2">5 Days</a>
-            <a href="packages.html?duration=6" class="duration-pill duration-pill-3">6 Days</a>
-            <a href="packages.html?duration=7" class="duration-pill duration-pill-4">7 Days</a>
-            <a href="packages.html?duration=custom" class="duration-pill duration-pill-5">Custom</a>
+            <a href="packages/4-nights.html" target="_blank" class="duration-pill duration-pill-1">4 Days</a>
+            <a href="packages/5-nights.html" target="_blank" class="duration-pill duration-pill-2">5 Days</a>
+            <a href="packages/6-nights.html" target="_blank" class="duration-pill duration-pill-3">6 Days</a>
+            <a href="packages/7-nights.html" target="_blank" class="duration-pill duration-pill-4">7 Days</a>
+            <a href="packages/custom.html"   target="_blank" class="duration-pill duration-pill-5">Custom</a>
           </div>
           <div class="duration-nav">
             <button class="duration-nav-btn duration-nav-left" aria-label="Previous selection">
@@ -396,7 +396,7 @@
 
       <div class="packages-grid" id="packages-container">
         <!-- Package Card 1 -->
-        <div class="package-card" data-duration="4">
+        <div class="package-card" data-duration="4" data-package="the-cultural-homeland">
           <div class="package-img-wrapper">
             <img src="assets/images/ubud.png" alt="Ubud resort view">
             <span class="package-badge">10% off</span>
@@ -429,7 +429,7 @@
         </div>
 
         <!-- Package Card 2 -->
-        <div class="package-card" data-duration="4">
+        <div class="package-card" data-duration="4" data-package="isolated-mountains">
           <div class="package-img-wrapper">
             <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
             <span class="package-badge">15% off</span>
@@ -462,7 +462,7 @@
         </div>
 
         <!-- Package Card 3 -->
-        <div class="package-card" data-duration="5">
+        <div class="package-card" data-duration="5" data-package="the-white-beach-land">
           <div class="package-img-wrapper">
             <img src="assets/images/beach.png" alt="White sand beach">
             <span class="package-badge">20% off</span>
@@ -495,7 +495,7 @@
         </div>
 
         <!-- Package Card 4 (Row 2) -->
-        <div class="package-card" data-duration="5">
+        <div class="package-card" data-duration="5" data-package="the-cultural-homeland">
           <div class="package-img-wrapper">
             <img src="assets/images/ubud.png" alt="Ubud resort view">
             <span class="package-badge">10% off</span>
@@ -528,7 +528,7 @@
         </div>
 
         <!-- Package Card 5 -->
-        <div class="package-card" data-duration="6">
+        <div class="package-card" data-duration="6" data-package="isolated-mountains">
           <div class="package-img-wrapper">
             <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
             <span class="package-badge">15% off</span>
@@ -561,7 +561,7 @@
         </div>
 
         <!-- Package Card 6 -->
-        <div class="package-card" data-duration="6">
+        <div class="package-card" data-duration="6" data-package="the-white-beach-land">
           <div class="package-img-wrapper">
             <img src="assets/images/beach.png" alt="White sand beach">
             <span class="package-badge">20% off</span>
@@ -594,7 +594,7 @@
         </div>
 
         <!-- Package Card 7 (Row 3) -->
-        <div class="package-card" data-duration="7">
+        <div class="package-card" data-duration="7" data-package="the-cultural-homeland">
           <div class="package-img-wrapper">
             <img src="assets/images/ubud.png" alt="Ubud resort view">
             <span class="package-badge">10% off</span>
@@ -627,7 +627,7 @@
         </div>
 
         <!-- Package Card 8 -->
-        <div class="package-card" data-duration="7">
+        <div class="package-card" data-duration="7" data-package="isolated-mountains">
           <div class="package-img-wrapper">
             <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
             <span class="package-badge">15% off</span>
@@ -660,7 +660,7 @@
         </div>
 
         <!-- Package Card 9 -->
-        <div class="package-card" data-duration="all">
+        <div class="package-card" data-duration="all" data-package="the-white-beach-land">
           <div class="package-img-wrapper">
             <img src="assets/images/beach.png" alt="White sand beach">
             <span class="package-badge">20% off</span>
@@ -2805,20 +2805,16 @@
     // ===== ADVENTURE CARD CLICK → LOCATION DETAILS =====
     document.querySelectorAll('.adventure-card[data-loc]').forEach(card => {
       card.addEventListener('click', () => {
-        window.location.href = 'locations/' + card.dataset.loc + '.html';
+        window.open('locations/' + card.dataset.loc + '.html', '_blank');
       });
     });
 
     // ===== PACKAGE CARD CLICK → PACKAGES FOLDER =====
-    document.querySelectorAll('.package-card[data-duration]').forEach(card => {
+    document.querySelectorAll('.package-card[data-package]').forEach(card => {
       card.style.cursor = 'pointer';
       card.addEventListener('click', () => {
-        const dur = card.dataset.duration;
-        if (dur === 'custom') {
-          window.location.href = 'packages/custom.html';
-        } else {
-          window.location.href = 'packages/' + dur + '-nights.html';
-        }
+        const slug = card.dataset.package;
+        window.open('packages/' + slug + '.html', '_blank');
       });
     });
 

@@ -402,6 +402,7 @@ header.header-scrolled {
    HERO SECTION - 1200x700px frame, border-radius 20px
 ======================================== */
 .hero {
+  margin-top: 120px !important;
   position: relative;
   width: 1300px;
   max-width: 95%;

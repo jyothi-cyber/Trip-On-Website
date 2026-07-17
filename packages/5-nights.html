@@ -3,19 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=../packages.html?duration=5">
-  <title>5 Nights 6 Days Packages - Trip On</title>
+  <title>5 Nights 6 Days Packages - Bali | Trip On</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; font-family: 'Poppins', sans-serif; background: #f9fafb; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; gap: 16px; }
-    .spinner { width: 40px; height: 40px; border: 3px solid #DDF3EA; border-top-color: #20664e; border-radius: 50%; animation: spin .8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    p { font-size: 15px; color: #667085; margin: 0; }
-    strong { color: #20664e; }
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Poppins',sans-serif;background:#fff;color:#101828}a{text-decoration:none;color:inherit}
+    .pkg-nav{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:0 60px;height:70px;display:flex;align-items:center;justify-content:space-between}
+    .pkg-nav-logo img{height:36px}
+    .pkg-nav-links{display:flex;gap:32px;list-style:none}
+    .pkg-nav-links a{font-size:15px;font-weight:500;color:#667085;transition:color .2s}
+    .pkg-nav-links a:hover,.pkg-nav-links a.active{color:#20664e}
+    .pkg-nav-btn{background:#20664e;color:#fff;border:none;border-radius:50px;padding:10px 24px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer}
+    .pkg-nav-btn:hover{background:#0E5A36}
+    .breadcrumb{background:#f9fafb;padding:14px 60px;font-size:13px;color:#98A2B3;border-bottom:1px solid #F2F4F7}
+    .breadcrumb a{color:#20664e}.breadcrumb a:hover{text-decoration:underline}
+    .page-wrap{max-width:1300px;margin:0 auto;padding:48px 60px}
+    .page-title{font-size:36px;font-weight:700;color:#101828;margin-bottom:8px}
+    .page-sub{font-size:16px;color:#667085;margin-bottom:40px}
+    .filter-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+    .filter-tab{padding:10px 24px;border-radius:50px;border:2px solid #E4E7EC;background:#fff;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;color:#667085;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+    .filter-tab:hover{border-color:#20664e;color:#20664e}
+    .filter-tab.active{background:#20664e;border-color:#20664e;color:#fff}
+    .filter-tab.custom-tab{background:#F79009;border-color:#F79009;color:#fff}
+    .filter-tab.custom-tab:hover{background:#e08800;border-color:#e08800}
+    .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .pkg-card{border:1.5px solid #E4E7EC;border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s}
+    .pkg-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.1)}
+    .card-img-wrap{position:relative;height:200px;overflow:hidden}
+    .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .pkg-card:hover .card-img-wrap img{transform:scale(1.06)}
+    .card-badge{position:absolute;top:12px;left:12px;background:#F79009;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px}
+    .card-body{padding:20px}
+    .card-loc{font-size:12px;color:#667085;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .card-loc i{color:#20664e}
+    .card-title{font-size:16px;font-weight:700;color:#101828;margin-bottom:10px}
+    .card-stars{color:#F79009;font-size:13px;margin-bottom:14px}
+    .card-stars small{color:#667085;font-size:12px;margin-left:4px}
+    .card-footer{display:flex;justify-content:space-between;align-items:center}
+    .card-duration{font-size:13px;color:#667085;display:flex;align-items:center;gap:6px}
+    .card-price{text-align:right}
+    .card-price .from{font-size:11px;color:#98A2B3;display:block}
+    .card-price .amount{font-size:18px;font-weight:700;color:#20664e}
+    .card-btn{display:block;margin:16px 20px 20px;background:#20664e;color:#fff;border:none;border-radius:50px;padding:11px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-align:center;transition:background .2s}
+    .card-btn:hover{background:#0E5A36}
+    @media(max-width:1024px){.cards-grid{grid-template-columns:repeat(2,1fr)}.page-wrap{padding:32px 30px}.breadcrumb{padding:14px 30px}}
+    @media(max-width:768px){.pkg-nav{padding:0 20px}.cards-grid{grid-template-columns:1fr}.page-wrap{padding:24px 16px}.breadcrumb{padding:14px 16px}.page-title{font-size:26px}}
   </style>
 </head>
 <body>
-  <div class="spinner"></div>
-  <p>Loading <strong>5 Nights 6 Days</strong> packages...</p>
-  <script>window.location.replace('../packages.html?duration=5');</script>
+<nav class="pkg-nav">
+  <div class="pkg-nav-logo"><a href="../index.html"><img src="../assets/images/tripon-logo.png" alt="Trip On"></a></div>
+  <ul class="pkg-nav-links">
+    <li><a href="../index.html#home">Bali</a></li>
+    <li><a href="../index.html#testimonials">People Reviews</a></li>
+    <li><a href="5-nights.html" class="active">Packages</a></li>
+  </ul>
+  <button class="pkg-nav-btn" onclick="window.location.href='../index.html'">Contact Us</button>
+</nav>
+<div class="breadcrumb">
+  <a href="../index.html">Home</a> &rsaquo; <a href="#">Destination</a> &rsaquo; <a href="#">Bali</a> &rsaquo; <span>Packages &mdash; 5 Nights 6 Days</span>
+</div>
+<div class="page-wrap">
+  <h1 class="page-title">Bali Packages</h1>
+  <p class="page-sub">Explore hand-picked travel packages for every budget and interest</p>
+  <div class="filter-row">
+    <a href="4-nights.html" class="filter-tab">4 Nights 5 Days</a>
+    <a href="5-nights.html" class="filter-tab active">5 Nights 6 Days</a>
+    <a href="6-nights.html" class="filter-tab">6 Nights 7 Days</a>
+    <a href="7-nights.html" class="filter-tab">7 Nights 8 Days</a>
+    <a href="custom.html" class="filter-tab custom-tab">Ask Custom Packages</a>
+  </div>
+  <div class="cards-grid" id="cards-grid"></div>
+</div>
+<script>
+const CARDS = [
+  {img:'../assets/images/beach.png',badge:'12% off',loc:'Gili Trawangan, Indonesia',title:'The White Beach Land',rating:'4.8',count:'136',days:'6 Days',price:'&#8377;75,000',slug:'the-white-beach-land'},
+  {img:'../assets/images/ubud.png',badge:'10% off',loc:'Ubud, Indonesia',title:'The Cultural Homeland',rating:'4.8',count:'98',days:'4 Days',price:'&#8377;45,000',slug:'the-cultural-homeland'},
+  {img:'../assets/images/indonesia.png',badge:'15% off',loc:'Nusa Penida, Indonesia',title:'Isolated Mountains',rating:'4.7',count:'112',days:'5 Days',price:'&#8377;50,000',slug:'isolated-mountains'}
+];
+const grid = document.getElementById('cards-grid');
+grid.innerHTML = CARDS.map(c => `
+  <div class="pkg-card" onclick="window.open('../packages/${c.slug}.html','_blank')">
+    <div class="card-img-wrap"><img src="${c.img}" alt="${c.title}"><span class="card-badge">${c.badge}</span></div>
+    <div class="card-body">
+      <div class="card-loc"><i class="fa-solid fa-location-dot"></i>${c.loc}</div>
+      <div class="card-title">${c.title}</div>
+      <div class="card-stars">&#9733;&#9733;&#9733;&#9733;&#9733;<small>${c.rating}(${c.count})</small></div>
+      <div class="card-footer">
+        <div class="card-duration"><i class="fa-regular fa-clock"></i>${c.days}</div>
+        <div class="card-price"><span class="from">from</span><span class="amount">${c.price}</span></div>
+      </div>
+    </div>
+    <button class="card-btn">View Package</button>
+  </div>`).join('');
+</script>
 </body>
 </html>

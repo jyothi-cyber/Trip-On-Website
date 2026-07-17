@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The White Beach Land - Bali Package | Trip On</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Poppins',sans-serif;background:#f9fafb;color:#101828}a{text-decoration:none}
+    .nav{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:0 60px;height:70px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo img{height:36px}
+    .nav-back{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#20664e;cursor:pointer;border:none;background:none}
+    .nav-back:hover{color:#0E5A36}
+    .pkg-hero{position:relative;height:480px;overflow:hidden}
+    .pkg-hero img{width:100%;height:100%;object-fit:cover}
+    .pkg-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.65))}
+    .pkg-hero-content{position:absolute;bottom:48px;left:60px;color:#fff}
+    .pkg-hero-badge{display:inline-flex;align-items:center;gap:6px;background:#F79009;border-radius:50px;padding:5px 14px;font-size:12px;font-weight:700;margin-bottom:16px}
+    .pkg-hero-content h1{font-size:48px;font-weight:800;line-height:1.15;margin-bottom:12px;max-width:700px}
+    .pkg-hero-meta{display:flex;gap:24px;font-size:14px;font-weight:500;opacity:.9}
+    .pkg-hero-meta span{display:flex;align-items:center;gap:6px}
+    .breadcrumb{background:#fff;padding:14px 60px;font-size:13px;color:#98A2B3;border-bottom:1px solid #F2F4F7}
+    .breadcrumb a{color:#20664e}.breadcrumb a:hover{text-decoration:underline}
+    .pkg-main{max-width:1300px;margin:0 auto;padding:48px 60px;display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:flex-start}
+    .pkg-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+    .pkg-section h2{font-size:22px;font-weight:700;color:#101828;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid #F2F4F7}
+    .pkg-section p{font-size:15px;line-height:28px;color:#667085;margin-bottom:14px}
+    .highlights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .highlight-item{display:flex;align-items:flex-start;gap:12px;background:#f7fbf9;border-radius:10px;padding:14px}
+    .highlight-icon{width:36px;height:36px;border-radius:8px;background:#DDF3EA;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#20664e;font-size:15px}
+    .highlight-text h4{font-size:13px;font-weight:700;color:#101828;margin-bottom:2px}
+    .highlight-text p{font-size:12px;color:#667085;margin:0;line-height:1.5}
+    .itinerary-day{border-left:3px solid #DDF3EA;padding-left:20px;margin-bottom:24px;position:relative}
+    .itinerary-day::before{content:'';width:12px;height:12px;background:#20664e;border-radius:50%;position:absolute;left:-7.5px;top:5px}
+    .itinerary-day h4{font-size:15px;font-weight:700;color:#101828;margin-bottom:6px}
+    .itinerary-day p{font-size:14px;color:#667085;line-height:24px;margin:0}
+    .inc-list,.exc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .exc-list{margin-top:16px}
+    .inc-list li,.exc-list li{display:flex;align-items:center;gap:10px;font-size:14px}
+    .inc-list li{color:#344054}.inc-list li i{color:#20664e;font-size:13px;flex-shrink:0}
+    .exc-list li{color:#667085}.exc-list li i{color:#F04438;font-size:13px;flex-shrink:0}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;transition:transform .3s}
+    .gallery-grid img:hover{transform:scale(1.04)}
+    .pkg-sidebar{position:sticky;top:90px}
+    .sidebar-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:24px}
+    .sidebar-price-label{font-size:13px;color:#667085;margin-bottom:4px}
+    .sidebar-price{font-size:40px;font-weight:800;color:#20664e;margin-bottom:4px}
+    .sidebar-price-note{font-size:12px;color:#98A2B3;margin-bottom:24px}
+    .sidebar-divider{border:none;border-top:1px solid #F2F4F7;margin:20px 0}
+    .sidebar-info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:14px}
+    .sidebar-info-label{color:#667085;display:flex;align-items:center;gap:8px}
+    .sidebar-info-label i{color:#20664e;width:16px}
+    .sidebar-info-value{font-weight:600;color:#101828}
+    .book-btn{display:block;width:100%;background:#20664e;color:#fff;border:none;border-radius:50px;padding:15px;font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center;transition:background .2s,transform .2s;margin-bottom:12px}
+    .book-btn:hover{background:#0E5A36;transform:translateY(-2px)}
+    .enquire-btn{display:block;width:100%;background:#fff;color:#20664e;border:2px solid #20664e;border-radius:50px;padding:14px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;cursor:pointer;text-align:center;transition:background .2s}
+    .enquire-btn:hover{background:#f0fff8}
+    .sidebar-trust{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+    .trust-item{display:flex;align-items:center;gap:10px;font-size:13px;color:#344054}
+    .trust-item i{color:#20664e;font-size:15px}
+    .pkg-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .pkg-tag{background:#F9FAFB;border:1.5px solid #E4E7EC;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:500;color:#344054}
+    @media(max-width:1024px){.pkg-main{grid-template-columns:1fr;padding:32px 30px}.pkg-sidebar{position:static}.pkg-hero-content{left:30px}.pkg-hero-content h1{font-size:36px}.breadcrumb{padding:14px 30px}}
+    @media(max-width:768px){.nav{padding:0 20px}.pkg-hero{height:350px}.pkg-hero-content{left:20px;bottom:24px}.pkg-hero-content h1{font-size:26px}.pkg-hero-meta{flex-wrap:wrap;gap:12px}.pkg-main{padding:24px 16px}.highlights-grid,.inc-list,.exc-list{grid-template-columns:1fr}.gallery-grid{grid-template-columns:repeat(2,1fr)}.breadcrumb{padding:14px 16px}}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="../index.html"><img src="../assets/images/tripon-logo.png" alt="Trip On"></a></div>
+  <button class="nav-back" id="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Packages</button>
+</nav>
+
+<div class="pkg-hero">
+  <img src="../assets/images/beach.png" alt="The White Beach Land">
+  <div class="pkg-hero-overlay"></div>
+  <div class="pkg-hero-content">
+    <div class="pkg-hero-badge"><i class="fa-solid fa-tag"></i> 20% Off</div>
+    <h1>The White Beach Land</h1>
+    <div class="pkg-hero-meta">
+      <span><i class="fa-solid fa-location-dot"></i> Gili Trawangan, Indonesia</span>
+      <span><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</span>
+      <span><i class="fa-solid fa-star" style="color:#F79009"></i> 4.8 (136 reviews)</span>
+    </div>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="../index.html">Home</a> &rsaquo; <a href="../index.html#packages">Packages</a> &rsaquo; <a href="#">Destination</a> &rsaquo; <a href="#">Bali</a> &rsaquo; <span>The White Beach Land</span>
+</div>
+
+<div class="pkg-main">
+  <div class="pkg-left">
+
+    <div class="pkg-section">
+      <h2>Package Overview</h2>
+      <p>Escape to the pristine paradise of Gili Trawangan — the largest of the three Gili Islands and one of Southeast Asia's most celebrated beach destinations. This 6-day package delivers the ultimate tropical island experience: powdery white sand, turquoise waters alive with sea turtles, world-class diving and snorkelling, and a wonderfully relaxed atmosphere with no motorised vehicles on the island.</p>
+      <p>Gili Trawangan effortlessly combines natural beauty with a vibrant social scene. By day you'll snorkel with hawksbill turtles metres from shore; by evening you'll watch the sun dip behind Bali's sacred Mount Agung from a beachside hammock while sipping fresh coconut. This is island life at its finest.</p>
+      <div class="pkg-tags">
+        <span class="pkg-tag">Beach</span><span class="pkg-tag">Snorkelling</span><span class="pkg-tag">Diving</span>
+        <span class="pkg-tag">Turtles</span><span class="pkg-tag">Sunsets</span><span class="pkg-tag">Island Life</span><span class="pkg-tag">No Vehicles</span>
+      </div>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Package Highlights</h2>
+      <div class="highlights-grid">
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-umbrella-beach"></i></div><div class="highlight-text"><h4>White Sand Beaches</h4><p>Miles of pristine coral-sand beaches</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-fish"></i></div><div class="highlight-text"><h4>Sea Turtle Snorkelling</h4><p>Swim with wild hawksbill turtles</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-person-swimming"></i></div><div class="highlight-text"><h4>Scuba Diving</h4><p>World-class reef diving with certified instructors</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-horse"></i></div><div class="highlight-text"><h4>Horse Riding on Beach</h4><p>Sunset horse rides along the shore</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-bicycle"></i></div><div class="highlight-text"><h4>Cycling the Island</h4><p>Explore the car-free island by bicycle</p></div></div>
+        <div class="highlight-item"><div class="highlight-icon"><i class="fa-solid fa-sun"></i></div><div class="highlight-text"><h4>Mt Agung Sunsets</h4><p>Breathtaking sunsets over Bali's sacred volcano</p></div></div>
+      </div>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Day-by-Day Itinerary</h2>
+      <div class="itinerary-day"><h4>Day 1 &mdash; Arrival &amp; Island Welcome</h4><p>Fly into Bali. Transfer to Padang Bai harbour. Fast boat to Gili Trawangan (2 hrs). Check-in at beachfront bungalow. Afternoon swim and beach relaxation. Welcome sunset cocktails and seafood dinner on the beach.</p></div>
+      <div class="itinerary-day"><h4>Day 2 &mdash; Snorkelling with Sea Turtles</h4><p>Morning guided snorkelling tour at Turtle Heaven and Shark Point. Encounter wild hawksbill sea turtles in their natural habitat. Afternoon: Relax on the beach or explore the island by bicycle. Evening: Beachside BBQ dinner.</p></div>
+      <div class="itinerary-day"><h4>Day 3 &mdash; Scuba Diving Experience</h4><p>Full-day diving session with certified PADI instructors at Gili's famous dive sites including Halik Reef and Shark Point. Beginners are welcome with a Discover Scuba course option. Afternoon free. Evening: Gili T's famous Swing Bar sunset gathering.</p></div>
+      <div class="itinerary-day"><h4>Day 4 &mdash; Gili Island Hopping</h4><p>Take the local boat to explore Gili Air and Gili Meno — the quieter, more romantic neighbouring islands. Snorkel at Gili Meno's famous underwater sculpture garden. Picnic lunch on a private beach. Return to Trawangan by evening.</p></div>
+      <div class="itinerary-day"><h4>Day 5 &mdash; Cycling &amp; Sunset Horse Ride</h4><p>Morning: Cycle around the entire island (takes about 2 hours at a leisurely pace). Visit local pearl farms and artisan shops. Afternoon: Paddle boarding and kayaking. Evening: Horseback riding on the beach at sunset — a truly magical experience.</p></div>
+      <div class="itinerary-day"><h4>Day 6 &mdash; Last Swim &amp; Departure</h4><p>Final morning swim and breakfast on the beach. Check-out and fast boat back to Bali. Transfer to Ngurah Rai Airport. Depart with the island glow that only Gili Trawangan can give.</p></div>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Inclusions &amp; Exclusions</h2>
+      <ul class="inc-list">
+        <li><i class="fa-solid fa-circle-check"></i> 5 nights beachfront bungalow</li>
+        <li><i class="fa-solid fa-circle-check"></i> Daily breakfast</li>
+        <li><i class="fa-solid fa-circle-check"></i> Fast boat (Bali ↔ Gili T)</li>
+        <li><i class="fa-solid fa-circle-check"></i> Guided snorkelling tour</li>
+        <li><i class="fa-solid fa-circle-check"></i> Scuba diving (2 dives)</li>
+        <li><i class="fa-solid fa-circle-check"></i> Island hopping boat trip</li>
+        <li><i class="fa-solid fa-circle-check"></i> Bicycle hire (1 day)</li>
+        <li><i class="fa-solid fa-circle-check"></i> Sunset horse ride</li>
+        <li><i class="fa-solid fa-circle-check"></i> Snorkelling equipment</li>
+        <li><i class="fa-solid fa-circle-check"></i> Airport transfers</li>
+      </ul>
+      <ul class="exc-list">
+        <li><i class="fa-solid fa-circle-xmark"></i> International airfare</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> Travel insurance</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> Additional dive courses</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> Lunch &amp; dinner (except noted)</li>
+      </ul>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Photo Gallery</h2>
+      <div class="gallery-grid">
+        <img src="../assets/images/beach.png" alt="Gili Beach">
+        <img src="../assets/images/image4.png" alt="Snorkelling">
+        <img src="../assets/images/image5.png" alt="Gili Trawangan">
+        <img src="../assets/images/romantic.png" alt="Sunset">
+        <img src="../assets/images/image6.png" alt="Ocean">
+        <img src="../assets/images/hotel.png" alt="Resort">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pkg-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-price-label">Starting from</div>
+      <div class="sidebar-price">&#8377;75,000</div>
+      <div class="sidebar-price-note">per person &middot; taxes included</div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-regular fa-clock"></i> Duration</span><span class="sidebar-info-value">6 Days / 5 Nights</span></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-location-dot"></i> Location</span><span class="sidebar-info-value">Gili Trawangan</span></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-users"></i> Group Size</span><span class="sidebar-info-value">2 – 12 persons</span></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-star" style="color:#F79009"></i> Rating</span><span class="sidebar-info-value">4.8 (136 reviews)</span></div>
+      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-tag"></i> Discount</span><span class="sidebar-info-value" style="color:#F79009;font-weight:700">20% Off</span></div>
+      <div class="sidebar-divider"></div>
+      <button class="book-btn" onclick="window.location.href='../index.html#packages'">Book This Package</button>
+      <button class="enquire-btn" onclick="window.location.href='../index.html#packages'">Send Enquiry</button>
+      <div class="sidebar-trust">
+        <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Free cancellation up to 48hrs</div>
+        <div class="trust-item"><i class="fa-solid fa-headset"></i> 24/7 customer support</div>
+        <div class="trust-item"><i class="fa-solid fa-medal"></i> Best price guarantee</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('back-btn').addEventListener('click', () => {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = '../index.html#packages';
+  });
+</script>
+</body>
+</html>

@@ -3,11 +3,261 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=../location-details.html?loc=nusa">
   <title>Nusa Penida - Trip On</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:#fff;color:#101828}
+    a{text-decoration:none}
+    /* NAV */
+    .ld-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:0 60px;height:70px;display:flex;align-items:center;justify-content:space-between}
+    .ld-nav-logo img{height:36px}
+    .ld-nav-links{display:flex;gap:32px;list-style:none}
+    .ld-nav-links a{font-size:15px;font-weight:500;color:#344054;transition:color .2s}
+    .ld-nav-links a:hover{color:#20664e}
+    .ld-nav-btn{background:#20664e;color:#fff;border:none;border-radius:50px;padding:10px 24px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s}
+    .ld-nav-btn:hover{background:#0E5A36}
+    .ld-mobile-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;color:#344054}
+    /* PAGE */
+    .ld-page{max-width:1300px;margin:90px auto 0;padding:40px 60px 0}
+    .ld-breadcrumb{font-size:13px;color:#98A2B3;margin-bottom:28px}
+    .ld-breadcrumb a{color:#20664e}
+    .ld-breadcrumb a:hover{text-decoration:underline}
+    /* LAYOUT */
+    .ld-body{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:flex-start}
+    .ld-left h1{font-size:32px;font-weight:700;color:#101828;margin-bottom:16px;line-height:1.3}
+    /* AUTHOR */
+    .ld-author{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+    .ld-author-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover}
+    .ld-author-name{font-size:14px;font-weight:600;color:#101828}
+    .ld-author-date{font-size:12px;color:#98A2B3}
+    /* TEXT */
+    .ld-overview-text{font-size:15px;line-height:28px;color:#667085;margin-bottom:28px}
+    .ld-text-block{font-size:15px;line-height:28px;color:#667085;margin-bottom:16px}
+    /* FACTS */
+    .ld-quick-facts{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
+    .ld-fact{background:#f7fbf9;border:1.5px solid #DDF3EA;border-radius:50px;padding:7px 18px;font-size:13px;font-weight:600;color:#20664e;display:flex;align-items:center;gap:7px}
+    /* GALLERY */
+    .ld-gallery{margin-bottom:40px}
+    .ld-gallery-top{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+    .ld-gallery-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .ld-gallery-img{width:100%;border-radius:12px;object-fit:cover;display:block;transition:transform .3s}
+    .ld-gallery-top .ld-gallery-img{height:220px}
+    .ld-gallery-bottom .ld-gallery-img{height:150px}
+    .ld-gallery-img:hover{transform:scale(1.03)}
+    /* SECTION TITLE */
+    .ld-section-title{font-size:26px;font-weight:700;color:#101828;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #F2F4F7}
+    /* SIDEBAR */
+    .ld-sidebar{position:sticky;top:90px}
+    .ld-rating-card{background:#fff;border:1.5px solid #E4E7EC;border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+    .ld-rating-title{font-size:15px;font-weight:700;color:#101828;margin-bottom:16px}
+    .ld-rating-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px}
+    .ld-rating-label{color:#667085}
+    .ld-rating-stars{color:#F79009;letter-spacing:2px}
+    .ld-rating-score{font-weight:700;color:#101828}
+    .ld-book-card{background:linear-gradient(135deg,#20664e,#0E5A36);border-radius:16px;padding:28px;color:#fff;margin-bottom:24px}
+    .ld-book-label{font-size:13px;opacity:.85;margin-bottom:6px}
+    .ld-book-price{font-size:32px;font-weight:800;margin-bottom:4px}
+    .ld-book-note{font-size:12px;opacity:.7;margin-bottom:20px}
+    .ld-book-btn{display:block;width:100%;background:#fff;color:#20664e;border:none;border-radius:50px;padding:13px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-align:center;transition:background .2s,transform .2s}
+    .ld-book-btn:hover{background:#f0fff8;transform:translateY(-2px)}
+    .ld-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .ld-tag{background:#F9FAFB;border:1.5px solid #E4E7EC;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:500;color:#344054;cursor:pointer;transition:background .2s,border-color .2s}
+    .ld-tag:hover{background:#DDF3EA;border-color:#20664e;color:#20664e}
+    /* PACKAGES */
+    .ld-packages-section{padding:60px 0 40px;border-top:1px solid #F2F4F7;margin-top:40px}
+    .ld-packages-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+    .ld-packages-header h2{font-size:28px;font-weight:700}
+    .ld-packages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .ld-pkg-card{border:1.5px solid #E4E7EC;border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:pointer}
+    .ld-pkg-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+    .ld-pkg-img-wrap{position:relative;height:180px;overflow:hidden}
+    .ld-pkg-img-wrap img{width:100%;height:100%;object-fit:cover}
+    .ld-pkg-badge{position:absolute;top:12px;left:12px;background:#F79009;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px}
+    .ld-pkg-body{padding:16px}
+    .ld-pkg-loc{font-size:12px;color:#667085;margin-bottom:6px}
+    .ld-pkg-loc i{color:#20664e;margin-right:4px}
+    .ld-pkg-title{font-size:15px;font-weight:700;color:#101828;margin-bottom:8px}
+    .ld-pkg-stars{color:#F79009;font-size:12px;margin-bottom:10px}
+    .ld-pkg-footer{display:flex;justify-content:space-between;align-items:center}
+    .ld-pkg-days{font-size:12px;color:#667085}
+    .ld-pkg-price{font-size:16px;font-weight:700;color:#20664e}
+    .ld-pkg-price span{font-size:11px;font-weight:400;color:#98A2B3;display:block}
+    .ld-pkg-book-btn{display:block;margin:16px;background:#F79009;color:#fff;border:none;border-radius:50px;padding:10px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:background .2s}
+    .ld-pkg-book-btn:hover{background:#e08800}
+    /* ADVENTURE */
+    .ld-adventure-section{padding:60px;background:#f9fafb;margin:40px -60px 0}
+    .ld-adventure-title{font-size:28px;font-weight:700;margin-bottom:8px}
+    .ld-adventure-sub{font-size:14px;color:#667085;margin-bottom:32px}
+    .ld-adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .ld-adv-card{background:#fff;border:1.5px solid #E4E7EC;border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:transform .25s,box-shadow .25s}
+    .ld-adv-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.1)}
+    .ld-adv-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ld-adv-icon img{width:30px;height:30px;object-fit:contain}
+    .ld-adv-icon.green{background:#DDF3EA}.ld-adv-icon.orange{background:#FEF3C7}.ld-adv-icon.blue{background:#DBEAFE}
+    .ld-adv-icon.purple{background:#EDE9FE}.ld-adv-icon.teal{background:#CCFBF1}.ld-adv-icon.pink{background:#FCE7F3}
+    .ld-adv-text h3{font-size:15px;font-weight:700;color:#101828;margin-bottom:4px}
+    .ld-adv-text p{font-size:12px;color:#667085}
+    /* ARTICLES */
+    .ld-articles-section{padding:60px 0}
+    .ld-articles-title{font-size:28px;font-weight:700;margin-bottom:32px}
+    .ld-articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .ld-article-card{border:1.5px solid #E4E7EC;border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+    .ld-article-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+    .ld-article-img{width:100%;height:160px;object-fit:cover}
+    .ld-article-body{padding:16px}
+    .ld-article-badge{display:inline-block;background:#DDF3EA;color:#20664e;font-size:11px;font-weight:600;padding:3px 10px;border-radius:50px;margin-bottom:10px}
+    .ld-article-title{font-size:14px;font-weight:700;color:#101828;margin-bottom:8px;line-height:1.5}
+    .ld-article-meta{font-size:12px;color:#98A2B3}
+    /* FOOTER */
+    .ld-footer{background:#101828;color:#fff;padding:60px;margin-top:0}
+    .ld-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1300px;margin:0 auto 40px}
+    .ld-footer-brand h3{font-size:22px;font-weight:800;margin-bottom:12px}
+    .ld-footer-brand p{font-size:13px;color:#98A2B3;line-height:22px;margin-bottom:20px}
+    .ld-footer-socials{display:flex;gap:12px}
+    .ld-footer-socials a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;transition:background .2s}
+    .ld-footer-socials a:hover{background:#20664e}
+    .ld-footer-col h4{font-size:14px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+    .ld-footer-col ul{list-style:none}
+    .ld-footer-col ul li{margin-bottom:10px}
+    .ld-footer-col ul li a{color:#98A2B3;font-size:13px;transition:color .2s}
+    .ld-footer-col ul li a:hover{color:#fff}
+    .ld-footer-bottom{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#98A2B3;max-width:1300px;margin:0 auto}
+    /* RESPONSIVE */
+    @media(max-width:1100px){.ld-body{grid-template-columns:1fr}.ld-sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:20px}.ld-packages-grid{grid-template-columns:repeat(2,1fr)}.ld-adv-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.ld-page{padding:24px 20px 0;margin-top:70px}.ld-nav{padding:0 20px}.ld-nav-links{display:none}.ld-mobile-toggle{display:block}.ld-body{grid-template-columns:1fr}.ld-sidebar{grid-template-columns:1fr}.ld-gallery-top{grid-template-columns:1fr}.ld-gallery-bottom{grid-template-columns:repeat(2,1fr)}.ld-packages-grid{grid-template-columns:1fr}.ld-adv-grid{grid-template-columns:1fr}.ld-articles-grid{grid-template-columns:1fr}.ld-adventure-section{margin:40px -20px 0;padding:40px 20px}.ld-footer{padding:40px 20px}.ld-footer-grid{grid-template-columns:1fr 1fr;gap:24px}.ld-left h1{font-size:24px}}
+    @media(max-width:480px){.ld-gallery-bottom{grid-template-columns:1fr}.ld-footer-grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-  <p style="font-family:sans-serif;text-align:center;margin-top:40vh;color:#667085">Loading Nusa Penida...</p>
-  <script>window.location.replace('../location-details.html?loc=nusa');</script>
-</body>
-</html>
+
+<nav class="ld-nav">
+  <div class="ld-nav-logo"><a href="../index.html"><img src="../assets/images/tripon-logo.png" alt="Trip On"></a></div>
+  <ul class="ld-nav-links">
+    <li><a href="../index.html#home">Bali</a></li>
+    <li><a href="../index.html#testimonials">People Reviews</a></li>
+    <li><a href="../packages.html">Packages</a></li>
+  </ul>
+  <button class="ld-nav-btn" onclick="location.href='../index.html'">Contact Us</button>
+  <button class="ld-mobile-toggle" id="mob-toggle"><i class="fa-solid fa-bars"></i></button>
+</nav>
+
+<div class="ld-page">
+  <div class="ld-breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="../index.html#services">Destinations</a> &rsaquo; <span>Nusa Penida</span></div>
+  <div class="ld-body">
+    <div class="ld-left">
+      <h1>Everything you should know about Nusa Penida</h1>
+      <div class="ld-author">
+        <img class="ld-author-avatar" src="../assets/images/janna2.png" alt="Author">
+        <div><div class="ld-author-name">Trip On Editorial</div><div class="ld-author-date">Updated July 2026</div></div>
+      </div>
+      <p class="ld-overview-text">Nusa Penida is Bali's most dramatic offshore island — a rugged limestone plateau ringed by sheer sea cliffs, hidden coves, and crystal-clear bays that appear almost impossibly blue. Famous for the iconic Kelingking Beach T-Rex cliff viewpoint, pristine snorkelling with manta rays, and roads that test even the most capable vehicles, it remains bracingly wild compared to mainland Bali.</p>
+      <div class="ld-quick-facts">
+        <div class="ld-fact"><i class="fa-solid fa-map-location-dot"></i>18+ Activities</div>
+        <div class="ld-fact"><i class="fa-solid fa-camera"></i>15 Sight Seeings</div>
+        <div class="ld-fact"><i class="fa-solid fa-fish"></i>Manta Ray Diving</div>
+        <div class="ld-fact"><i class="fa-solid fa-clock"></i>Best: Apr–Oct</div>
+        <div class="ld-fact"><i class="fa-solid fa-coins"></i>Currency: IDR</div>
+      </div>
+      <div class="ld-gallery">
+        <div class="ld-gallery-top">
+          <img class="ld-gallery-img" src="../assets/images/indonesia.png" alt="Nusa Penida">
+          <img class="ld-gallery-img" src="../assets/images/image6.png" alt="Nusa Penida">
+        </div>
+        <div class="ld-gallery-bottom">
+          <img class="ld-gallery-img" src="../assets/images/image8.png" alt="Nusa Penida">
+          <img class="ld-gallery-img" src="../assets/images/image9.png" alt="Nusa Penida">
+          <img class="ld-gallery-img" src="../assets/images/peace.png" alt="Nusa Penida">
+        </div>
+      </div>
+      <h2 class="ld-section-title">History:</h2>
+      <p class="ld-text-block">Nusa Penida was historically regarded by Balinese Hindus as a place of spiritual danger, home to Jero Gede Macaling — a powerful and malevolent demon. Exiles, criminals, and outcasts were sent to the island as punishment, reinforcing its dark reputation among mainland Balinese communities.</p>
+      <p class="ld-text-block">Despite its fearsome mythology, Nusa Penida was inhabited by Balinese migrants and developed its own distinct cultural identity. Temples dedicated to appeasing the island's powerful spiritual forces were constructed, and ritual pilgrimages from the Balinese mainland became common.</p>
+      <p class="ld-text-block">The modern transformation of Nusa Penida began in the 2010s when images of Kelingking Beach and Angel's Billabong went viral on social media. The island shifted rapidly from a barely-visited day trip to one of Bali's most photographed destinations.</p>
+      <h2 class="ld-section-title" style="margin-top:32px">Natural Wonders:</h2>
+      <p class="ld-text-block">Kelingking Beach is Nusa Penida's most photographed location — a dramatic T-Rex-shaped limestone promontory dropping vertically into a pristine white beach far below. The descent rewards the brave with total seclusion accessible only via a challenging scramble down near-vertical ropes.</p>
+      <p class="ld-text-block">Angel's Billabong and Broken Beach are geological marvels on the island's north-western tip. Angel's Billabong is a natural infinity pool carved into the coastal rock that fills and drains with each tide, its turquoise waters startlingly vivid against the dark basalt surrounding it.</p>
+      <p class="ld-text-block">The waters off Nusa Penida's south-western coast are one of the world's best places to dive with oceanic manta rays. Crystal Bay also offers frequent sightings of the rare Mola Mola ocean sunfish between July and October, drawing divers from across the globe.</p>
+      <!-- Packages -->
+      <div class="ld-packages-section">
+        <div class="ld-packages-header"><h2>Recommended Package</h2></div>
+        <div class="ld-packages-grid" id="pkg-grid"></div>
+      </div>
+      <!-- Adventure -->
+      <div class="ld-adventure-section">
+        <h2 class="ld-adventure-title">Let's go on an adventure</h2>
+        <p class="ld-adventure-sub">Explore more destinations in Bali</p>
+        <div class="ld-adv-grid" id="adv-grid"></div>
+      </div>
+      <!-- Articles -->
+      <div class="ld-articles-section">
+        <h2 class="ld-articles-title">Exploring Our Article</h2>
+        <div class="ld-articles-grid" id="art-grid"></div>
+      </div>
+    </div>
+    <!-- SIDEBAR -->
+    <div class="ld-sidebar">
+      <div class="ld-rating-card">
+        <div class="ld-rating-title">Visitor Ratings</div>
+        <div class="ld-rating-row"><span class="ld-rating-label">Scenery</span><span class="ld-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="ld-rating-score">5.0</span></div>
+        <div class="ld-rating-row"><span class="ld-rating-label">Culture</span><span class="ld-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="ld-rating-score">4.3</span></div>
+        <div class="ld-rating-row"><span class="ld-rating-label">Food</span><span class="ld-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="ld-rating-score">4.2</span></div>
+        <div class="ld-rating-row"><span class="ld-rating-label">Accessibility</span><span class="ld-rating-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span><span class="ld-rating-score">3.9</span></div>
+      </div>
+      <div class="ld-book-card">
+        <div class="ld-book-label">Starting from</div>
+        <div class="ld-book-price">&#8377;50,000</div>
+        <div class="ld-book-note">per person &middot; includes hotel + transport</div>
+        <a href="../packages.html" class="ld-book-btn">Book This Package</a>
+      </div>
+      <div><div class="ld-rating-title" style="margin-bottom:12px">Popular Tags</div>
+      <div class="ld-tags">
+        <span class="ld-tag">Cliffs</span><span class="ld-tag">Snorkelling</span><span class="ld-tag">Manta Rays</span>
+        <span class="ld-tag">Photography</span><span class="ld-tag">Diving</span><span class="ld-tag">Beaches</span><span class="ld-tag">Adventure</span>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<footer class="ld-footer">
+  <div class="ld-footer-grid">
+    <div class="ld-footer-brand"><h3>tripon</h3><p>Your trusted travel partner for unforgettable Bali adventures.</p>
+      <div class="ld-footer-socials"><a href="#"><i class="fa-brands fa-facebook"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a></div>
+    </div>
+    <div class="ld-footer-col"><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../packages.html">Packages</a></li><li><a href="../index.html#blogs">Blogs</a></li></ul></div>
+    <div class="ld-footer-col"><h4>Destinations</h4><ul>
+      <li><a href="ubud.html">Ubud</a></li><li><a href="kuta.html">Kuta, Gali</a></li><li><a href="lombok.html">Lombok</a></li>
+      <li><a href="seminyak.html">Seminyak</a></li><li><a href="nusa.html">Nusa Penida</a></li><li><a href="canggu.html">Canggu</a></li>
+    </ul></div>
+    <div class="ld-footer-col"><h4>Contact</h4><ul><li><a href="#">+62 123 456 789</a></li><li><a href="#">info@tripon.com</a></li><li><a href="#">Bali, Indonesia</a></li></ul></div>
+  </div>
+  <div class="ld-footer-bottom">&copy; 2026 Trip On. All rights reserved.</div>
+</footer>
+
+<script>
+const PKGS = [
+  {img:'../assets/images/indonesia.png',badge:'15% off',loc:'Nusa Penida, Indonesia',title:'Isolated Mountains',rating:'4.8(136)',days:'4 Days',price:'&#8377;50,000'},
+  {img:'../assets/images/image6.png',badge:'10% off',loc:'Nusa Penida, Indonesia',title:'Kelingking Cliff Explorer',rating:'4.9(108)',days:'3 Days',price:'&#8377;42,000'},
+  {img:'../assets/images/peace.png',badge:'20% off',loc:'Nusa Penida, Indonesia',title:'Manta Ray Diving & Beach',rating:'4.8(92)',days:'5 Days',price:'&#8377;58,000'}
+];
+const ADV = [
+  {href:'ubud.html',icon:'green',img:'../assets/images/ubud-icon.svg',name:'Ubud',meta:'20+ Activities, 18 Sight Seeings'},
+  {href:'kuta.html',icon:'orange',img:'../assets/images/kuta-gali-icon.svg',name:'Kuta, Gali',meta:'16+ Activities, 20 Sight Seeings'},
+  {href:'lombok.html',icon:'blue',img:'../assets/images/lombok-icon.svg',name:'Lombok',meta:'15+ Activities, 10 Sight Seeings'},
+  {href:'seminyak.html',icon:'purple',img:'../assets/images/ubud-icon.svg',name:'Seminyak',meta:'25+ Activities, 12 Sight Seeings'},
+  {href:'canggu.html',icon:'pink',img:'../assets/images/kuta-gali-icon.svg',name:'Canggu',meta:'22+ Activities, 14 Sight Seeings'}
+];
+const ARTS = [
+  {img:'../assets/images/indonesia.png',badge:'Adventure',title:'Kelingking Beach: The Ultimate Guide',date:'June 18, 2026'},
+  {img:'../assets/images/image6.png',badge:'Nature',title:'Swimming with Mantas at Nusa Penida',date:'May 30, 2026'},
+  {img:'../assets/images/peace.png',badge:'Travel Tips',title:'How to Get to Nusa Penida from Bali',date:'May 12, 2026'}
+];
+document.getElementById('pkg-grid').innerHTML=PKGS.map(p=>`<div class="ld-pkg-card" onclick="location.href='../packages.html'"><div class="ld-pkg-img-wrap"><img src="${p.img}" alt="${p.title}"><span class="ld-pkg-badge">${p.badge}</span></div><div class="ld-pkg-body"><div class="ld-pkg-loc"><i class="fa-solid fa-location-dot"></i>${p.loc}</div><div class="ld-pkg-title">${p.title}</div><div class="ld-pkg-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <small style="color:#667085">${p.rating}</small></div><div class="ld-pkg-footer"><div class="ld-pkg-days"><i class="fa-regular fa-clock"></i>${p.days}</div><div class="ld-pkg-price"><span>from</span>${p.price}</div></div></div><button class="ld-pkg-book-btn">Book Now</button></div>`).join('');
+document.getElementById('adv-grid').innerHTML=ADV.map(a=>`<div class="ld-adv-card" onclick="location.href='${a.href}'"><div class="ld-adv-icon ${a.icon}"><img src="${a.img}" alt="${a.name}"></div><div class="ld-adv-text"><h3>${a.name}</h3><p>${a.meta}</p></div></div>`).join('');
+document.getElementById('art-grid').innerHTML=ARTS.map(a=>`<div class="ld-article-card"><img class="ld-article-img" src="${a.img}" alt="${a.title}"><div class="ld-article-body"><span class="ld-article-badge">${a.badge}</span><div class="ld-article-title">${a.title}</div><div class="ld-article-meta"><i class="fa-regular fa-calendar"></i> ${a.date}</div></div></div>`).join('');
+document.getElementById('mob-toggle').addEventListener('click',function(){const n=document.querySelector('.ld-nav-links');n.style.display=n.style.display==='flex'?'none':'flex';if(n.style.display==='flex')n.style.cssText='display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:#fff;padding:20px 24px;gap:16px;box-shadow:0 8px 20px rgba(0,0,0,.1);z-index:999;';});
+</script>
+</body></html>
