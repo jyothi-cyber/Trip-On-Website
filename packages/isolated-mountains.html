@@ -159,6 +159,12 @@
       </div>
     </div>
 
+    <!-- Recommended Packages -->
+    <div class="pkg-section">
+      <h2>Recommended Packages</h2>
+      <div class="rec-grid" id="rec-grid"></div>
+    </div>
+
   </div>
 
   <div class="pkg-sidebar">
@@ -173,8 +179,7 @@
       <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-star" style="color:#F79009"></i> Rating</span><span class="sidebar-info-value">4.8 (136 reviews)</span></div>
       <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-tag"></i> Discount</span><span class="sidebar-info-value" style="color:#F79009;font-weight:700">15% Off</span></div>
       <div class="sidebar-divider"></div>
-      <button class="book-btn" onclick="window.location.href='../index.html#packages'">Book This Package</button>
-      <button class="enquire-btn" onclick="window.location.href='../index.html#packages'">Send Enquiry</button>
+      <button class="book-btn" id="book-this-btn">Book This Package</button>
       <div class="sidebar-trust">
         <div class="trust-item"><i class="fa-solid fa-shield-halved"></i> Free cancellation up to 48hrs</div>
         <div class="trust-item"><i class="fa-solid fa-headset"></i> 24/7 customer support</div>
@@ -184,11 +189,182 @@
   </div>
 </div>
 
+<!-- Footer -->
+<footer id="footer" style="padding:40px 0;background:#ffffff;border-top:1px solid #e5e7eb;margin-top:0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;">
+    <div><h1 style="font-family:'Poppins',sans-serif;font-size:32px;color:#007846;font-weight:700;margin:0;">tripon</h1></div>
+    <nav style="display:flex;gap:60px;flex:1;justify-content:center;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">About</a>
+        <a href="../index.html#blogs" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Blogs</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="../index.html#services" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Locations</a>
+        <a href="../index.html#packages" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Packages</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Careers</a>
+        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Contact Us</a>
+      </div>
+    </nav>
+    <div style="text-align:right;">
+      <h4 style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#667085;margin:0 0 12px 0;letter-spacing:0.5px;">FOLLOW OUR TRAVELER COMMUNITY</h4>
+      <div style="display:flex;gap:16px;justify-content:flex-end;">
+        <i class="fa-brands fa-x-twitter" style="font-size:20px;color:#667085;cursor:pointer;"></i>
+        <i class="fa-brands fa-facebook" style="font-size:20px;color:#667085;cursor:pointer;"></i>
+        <i class="fa-brands fa-instagram" style="font-size:20px;color:#667085;cursor:pointer;"></i>
+        <i class="fa-brands fa-youtube" style="font-size:20px;color:#667085;cursor:pointer;"></i>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .rec-card{border:1.5px solid #E4E7EC;border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s}
+  .rec-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+  .rec-card-img{position:relative;height:170px;overflow:hidden}
+  .rec-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .rec-card:hover .rec-card-img img{transform:scale(1.06)}
+  .rec-card-badge{position:absolute;top:10px;left:10px;background:#F79009;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px}
+  .rec-card-body{padding:16px}
+  .rec-card-loc{font-size:12px;color:#667085;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+  .rec-card-loc i{color:#20664e}
+  .rec-card-title{font-size:15px;font-weight:700;color:#101828;margin-bottom:8px}
+  .rec-card-stars{color:#F79009;font-size:12px;margin-bottom:10px}
+  .rec-card-footer{display:flex;justify-content:space-between;align-items:center}
+  .rec-card-days{font-size:12px;color:#667085;display:flex;align-items:center;gap:5px}
+  .rec-card-price{text-align:right}
+  .rec-card-price .from{font-size:11px;color:#98A2B3;display:block}
+  .rec-card-price .amt{font-size:16px;font-weight:700;color:#20664e}
+  .rec-card-btn{display:block;margin:12px 16px 16px;background:#20664e;color:#fff;border:none;border-radius:50px;padding:10px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:background .2s}
+  .rec-card-btn:hover{background:#0E5A36}
+  .bk-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+  .bk-modal{background:#fff;border-radius:20px;padding:36px 32px;width:100%;max-width:500px;position:relative;font-family:'Poppins',sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.25);max-height:90vh;overflow-y:auto}
+  .bk-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#667085;line-height:1}
+  .bk-header{text-align:center;margin-bottom:24px}
+  .bk-icon{width:56px;height:56px;background:#DDF3EA;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px;color:#20664e}
+  .bk-header h3{font-size:20px;font-weight:700;color:#101828;margin-bottom:4px}
+  .bk-header p{font-size:13px;color:#667085}
+  .bk-field{margin-bottom:16px}
+  .bk-field label{font-size:13px;font-weight:600;color:#344054;display:block;margin-bottom:6px}
+  .bk-field input{width:100%;border:1.5px solid #D0D5DD;border-radius:10px;padding:11px 14px;font-family:'Poppins',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+  .bk-field input:focus{border-color:#20664e}
+  .bk-field input[readonly]{background:#f9fafb;color:#667085}
+  .bk-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .bk-submit{width:100%;background:linear-gradient(135deg,#20664e,#0E5A36);color:#fff;border:none;border-radius:50px;padding:14px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;transition:opacity .2s}
+  .bk-submit:hover{opacity:.9}
+  .bk-thankyou{display:none;text-align:center;padding:16px 0}
+  .bk-thankyou .ty-icon{font-size:54px;margin-bottom:14px}
+  .bk-thankyou h3{font-size:20px;font-weight:700;color:#101828;margin-bottom:8px}
+  .bk-thankyou p{font-size:14px;color:#667085;line-height:1.7;margin-bottom:20px}
+  .bk-thankyou button{background:#20664e;color:#fff;border:none;border-radius:50px;padding:12px 36px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer}
+  @media(max-width:600px){.rec-grid{grid-template-columns:1fr}.bk-row{grid-template-columns:1fr}}
+  @media(max-width:768px){footer>div:first-child{grid-template-columns:1fr 1fr !important}}
+  @media(max-width:480px){footer>div:first-child{grid-template-columns:1fr !important}}
+</style>
+
 <script>
   document.getElementById('back-btn').addEventListener('click', () => {
     if (window.history.length > 1) window.history.back();
     else window.location.href = '../index.html#packages';
   });
+
+  const REC = [
+    {img:'../assets/images/ubud.png',badge:'10% off',loc:'Ubud, Indonesia',title:'The Cultural Homeland',rating:'4.8',count:'136',days:'4 Days',price:'&#8377;45,000',slug:'the-cultural-homeland'},
+    {img:'../assets/images/beach.png',badge:'20% off',loc:'Gili Trawangan, Indonesia',title:'The White Beach Land',rating:'4.8',count:'136',days:'6 Days',price:'&#8377;75,000',slug:'the-white-beach-land'}
+  ];
+
+  document.getElementById('rec-grid').innerHTML = REC.map(r => `
+    <div class="rec-card" onclick="window.open('${r.slug}.html','_blank')">
+      <div class="rec-card-img"><img src="${r.img}" alt="${r.title}"><span class="rec-card-badge">${r.badge}</span></div>
+      <div class="rec-card-body">
+        <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i>${r.loc}</div>
+        <div class="rec-card-title">${r.title}</div>
+        <div class="rec-card-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <small style="color:#667085;font-size:12px">${r.rating}(${r.count})</small></div>
+        <div class="rec-card-footer">
+          <div class="rec-card-days"><i class="fa-regular fa-clock"></i>${r.days}</div>
+          <div class="rec-card-price"><span class="from">from</span><span class="amt">${r.price}</span></div>
+        </div>
+      </div>
+      <button class="rec-card-btn" onclick="event.stopPropagation();window.open('${r.slug}.html','_blank')">View Package</button>
+    </div>`).join('');
+
+  document.getElementById('book-this-btn').addEventListener('click', () => showBookingPopup());
+
+  function showBookingPopup() {
+    const overlay = document.createElement('div');
+    overlay.className = 'bk-overlay';
+    overlay.innerHTML = `
+      <div class="bk-modal">
+        <button class="bk-close" id="bk-close">&times;</button>
+        <div class="bk-header">
+          <div class="bk-icon"><i class="fa-solid fa-suitcase-rolling"></i></div>
+          <h3>Book This Package</h3>
+          <p>Isolated Mountains &nbsp;&middot;&nbsp; <strong style="color:#20664e">&#8377;50,000</strong> per person</p>
+        </div>
+        <div id="bk-form-wrap">
+          <div class="bk-field">
+            <label>Destination</label>
+            <input type="text" value="Nusa Penida, Bali — Isolated Mountains" readonly>
+          </div>
+          <div class="bk-field">
+            <label>Your Name *</label>
+            <input type="text" id="bk-name" placeholder="Enter your full name">
+          </div>
+          <div class="bk-field">
+            <label>Phone Number *</label>
+            <input type="tel" id="bk-phone" placeholder="Enter 10-digit phone number" maxlength="10">
+          </div>
+          <div class="bk-row">
+            <div class="bk-field" style="margin:0">
+              <label>Package Price</label>
+              <input type="text" value="&#8377;50,000 / person" readonly>
+            </div>
+            <div class="bk-field" style="margin:0">
+              <label>No. of Travelers *</label>
+              <input type="number" id="bk-travelers" placeholder="e.g. 2" min="1" max="50">
+            </div>
+          </div>
+          <button class="bk-submit" id="bk-submit">Confirm Booking</button>
+        </div>
+        <div class="bk-thankyou" id="bk-thankyou">
+          <div class="ty-icon">✅</div>
+          <h3>Thank You for Your Information!</h3>
+          <p>We've received your booking request for <strong>Isolated Mountains</strong>.<br>Our travel experts will contact you within 24 hours.</p>
+          <button id="bk-done-btn">Close</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
+    overlay.querySelector('#bk-close').addEventListener('click', closePopup);
+    overlay.querySelector('#bk-done-btn').addEventListener('click', closePopup);
+
+    const nameEl = overlay.querySelector('#bk-name');
+    const phoneEl = overlay.querySelector('#bk-phone');
+    const travelersEl = overlay.querySelector('#bk-travelers');
+
+    nameEl.addEventListener('input', function(){ this.value = this.value.replace(/[^A-Za-z\s]/g,''); });
+    phoneEl.addEventListener('input', function(){ this.value = this.value.replace(/[^0-9]/g,''); });
+
+    overlay.querySelector('#bk-submit').addEventListener('click', () => {
+      const name = nameEl.value.trim();
+      const phone = phoneEl.value.trim();
+      const travelers = travelersEl.value;
+      if (!name || !/^[A-Za-z\s]+$/.test(name)) { nameEl.style.borderColor='#F04438'; nameEl.focus(); return; }
+      if (!phone || !/^[0-9]{10}$/.test(phone)) { phoneEl.style.borderColor='#F04438'; phoneEl.focus(); return; }
+      if (!travelers || parseInt(travelers) < 1) { travelersEl.style.borderColor='#F04438'; travelersEl.focus(); return; }
+      overlay.querySelector('#bk-form-wrap').style.display = 'none';
+      overlay.querySelector('#bk-thankyou').style.display = 'block';
+    });
+
+    function closePopup() {
+      overlay.remove();
+      document.body.style.overflow = '';
+    }
+  }
 </script>
 </body>
 </html>

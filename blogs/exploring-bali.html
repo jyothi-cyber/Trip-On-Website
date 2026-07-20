@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dive deep into the heart of Bali — temples, rice terraces, cultural festivals and stunning beaches. A tropical journey by Janna Auniman.">
+  <title>Exploring Bali: A Tropical Journey | Trip On</title>
+  <link rel="canonical" href="https://tripon/destination/bali/blogs/exploring-bali">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:#f9fafb;color:#101828;line-height:1.7}
+    a{text-decoration:none;color:inherit}
+
+    /* ── NAV ── */
+    .blog-nav{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:0 60px;height:70px;display:flex;align-items:center;justify-content:space-between}
+    .blog-nav-logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;color:#20664e}
+    .blog-nav-logo img{height:36px}
+    .blog-nav-breadcrumb{font-size:13px;color:#98A2B3;display:flex;align-items:center;gap:6px}
+    .blog-nav-breadcrumb a{color:#20664e;font-weight:500}
+    .blog-nav-breadcrumb a:hover{text-decoration:underline}
+    .back-btn{display:flex;align-items:center;gap:8px;background:#20664e;color:#fff;border:none;border-radius:50px;padding:10px 20px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+    .back-btn:hover{background:#0E5A36}
+
+    /* ── HERO ── */
+    .blog-hero{position:relative;height:520px;overflow:hidden}
+    .blog-hero img{width:100%;height:100%;object-fit:cover}
+    .blog-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1) 0%,rgba(0,0,0,.72) 100%)}
+    .blog-hero-content{position:absolute;bottom:56px;left:60px;right:60px;color:#fff;max-width:820px}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FF6B6B,#FF8E53);border-radius:50px;padding:5px 16px;font-size:12px;font-weight:700;margin-bottom:16px}
+    .blog-hero-content h1{font-size:46px;font-weight:800;line-height:1.15;margin-bottom:14px}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:20px;font-size:14px;font-weight:500;opacity:.9}
+    .hero-meta span{display:flex;align-items:center;gap:7px}
+
+    /* ── LAYOUT ── */
+    .blog-wrap{max-width:1200px;margin:0 auto;padding:56px 60px;display:grid;grid-template-columns:1fr 320px;gap:52px;align-items:flex-start}
+
+    /* ── ARTICLE ── */
+    .article-section{background:#fff;border-radius:16px;padding:40px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+    .article-section h2{font-size:22px;font-weight:700;color:#101828;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #F2F4F7}
+    .article-section p{font-size:15px;line-height:1.9;color:#667085;margin-bottom:18px}
+    .article-section p:last-child{margin-bottom:0}
+    .article-section h3{font-size:18px;font-weight:700;color:#20664e;margin:28px 0 12px}
+
+    /* pull-quote */
+    .pull-quote{border-left:4px solid #20664e;background:#f7fbf9;border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0;font-size:16px;font-style:italic;color:#344054;line-height:1.7}
+
+    /* highlight box */
+    .highlight-box{background:#f7fbf9;border:1.5px solid #DDF3EA;border-radius:12px;padding:24px;margin:24px 0}
+    .highlight-box h4{font-size:14px;font-weight:700;color:#20664e;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .highlight-box ul{list-style:none}
+    .highlight-box li{font-size:14px;color:#344054;padding:5px 0;display:flex;align-items:flex-start;gap:10px}
+    .highlight-box li::before{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;color:#20664e;font-size:12px;margin-top:3px;flex-shrink:0}
+
+    /* gallery strip */
+    .inline-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
+    .inline-gallery img{width:100%;height:150px;object-fit:cover;border-radius:10px;transition:transform .3s}
+    .inline-gallery img:hover{transform:scale(1.04)}
+
+    /* author card */
+    .author-card{display:flex;align-items:center;gap:20px;background:linear-gradient(135deg,#20664e,#0E5A36);color:#fff;border-radius:16px;padding:24px;margin-top:8px}
+    .author-avatar-icon{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+    .author-info h4{font-size:16px;font-weight:700;margin-bottom:4px}
+    .author-info p{font-size:13px;opacity:.85;margin:0}
+
+    /* ── SIDEBAR ── */
+    .blog-sidebar{position:sticky;top:90px;display:flex;flex-direction:column;gap:24px}
+    .sidebar-box{background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+    .sidebar-box h3{font-size:14px;font-weight:700;color:#101828;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px}
+    .sidebar-meta-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:14px;color:#344054}
+    .sidebar-meta-row i{width:18px;color:#20664e;font-size:15px}
+    .tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{background:#F9FAFB;border:1.5px solid #E4E7EC;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:500;color:#344054;cursor:pointer;transition:all .2s}
+    .tag:hover{background:#DDF3EA;border-color:#20664e;color:#20664e}
+    .related-card{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #F2F4F7;cursor:pointer;transition:opacity .2s}
+    .related-card:last-child{border-bottom:none;padding-bottom:0}
+    .related-card:hover{opacity:.8}
+    .related-card img{width:64px;height:56px;object-fit:cover;border-radius:8px;flex-shrink:0}
+    .related-card-info{flex:1}
+    .related-card-title{font-size:13px;font-weight:600;color:#101828;line-height:1.4;margin-bottom:4px}
+    .related-card-date{font-size:11px;color:#98A2B3}
+    .share-btns{display:flex;gap:10px}
+    .share-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;border-radius:10px;border:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .2s}
+    .share-btn:hover{opacity:.85}
+    .share-btn.fb{background:#1877F2;color:#fff}
+    .share-btn.tw{background:#1DA1F2;color:#fff}
+    .share-btn.wa{background:#25D366;color:#fff}
+
+    /* ── FOOTER ── */
+    .blog-footer{background:#101828;color:#fff;padding:60px}
+    .blog-footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1200px;margin:0 auto 40px}
+    .footer-brand h3{font-size:22px;font-weight:800;margin-bottom:10px}
+    .footer-brand p{font-size:13px;color:#98A2B3;line-height:22px;margin-bottom:18px}
+    .footer-social{display:flex;gap:12px}
+    .footer-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;transition:background .2s}
+    .footer-social a:hover{background:#20664e}
+    .footer-col h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+    .footer-col ul{list-style:none}
+    .footer-col ul li{margin-bottom:10px}
+    .footer-col ul li a{color:#98A2B3;font-size:13px;transition:color .2s}
+    .footer-col ul li a:hover{color:#fff}
+    .footer-bottom{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#98A2B3;max-width:1200px;margin:0 auto}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1100px){.blog-wrap{grid-template-columns:1fr;padding:32px 30px}.blog-sidebar{position:static}.blog-hero-content{left:30px;right:30px}.blog-hero-content h1{font-size:34px}}
+    @media(max-width:768px){.blog-nav{padding:0 20px}.blog-hero{height:380px}.blog-hero-content{left:20px;right:20px;bottom:28px}.blog-hero-content h1{font-size:24px}.blog-wrap{padding:24px 16px}.inline-gallery{grid-template-columns:repeat(2,1fr)}.blog-footer{padding:40px 20px}.blog-footer-inner{grid-template-columns:1fr 1fr;gap:24px}}
+    @media(max-width:480px){.inline-gallery{grid-template-columns:1fr}.blog-footer-inner{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="blog-nav">
+  <a href="../index.html" class="blog-nav-logo">
+    <img src="../assets/images/tripon-logo.png" alt="Trip On">
+  </a>
+  <div class="blog-nav-breadcrumb">
+    <a href="../index.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+    <a href="../index.html#blogs">Blogs</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+    <span>Exploring Bali</span>
+  </div>
+  <button class="back-btn" onclick="if(window.history.length>1)window.history.back();else window.location.href='../index.html#blogs'">
+    <i class="fa-solid fa-arrow-left"></i> Back
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="blog-hero">
+  <img src="../assets/images/janna2.png" alt="Exploring Bali A Tropical Journey">
+  <div class="blog-hero-overlay"></div>
+  <div class="blog-hero-content">
+    <div class="hero-badge"><i class="fa-solid fa-video"></i> Vlogger</div>
+    <h1>Exploring Bali: A Tropical Journey</h1>
+    <div class="hero-meta">
+      <span><i class="fa-solid fa-user"></i> Janna Auniman</span>
+      <span><i class="fa-regular fa-calendar"></i> June 15, 2026</span>
+      <span><i class="fa-regular fa-clock"></i> 8 min read</span>
+      <span><i class="fa-solid fa-eye"></i> 12.5K views</span>
+      <span><i class="fa-solid fa-location-dot"></i> Bali, Indonesia</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="blog-wrap">
+  <div class="blog-left">
+
+    <!-- Overview -->
+    <div class="article-section">
+      <h2>Journey Overview</h2>
+      <p>Dive deep into the heart of Bali with our captivating travel tales. From the majestic temples and lush rice terraces to the vibrant cultural festivals and stunning beaches, we share our journey through Bali's enchanting landscapes. Discover the island's rich heritage, exquisite cuisine, and the warm hospitality of its people through our detailed travel experiences.</p>
+      <div class="pull-quote">"Bali is not just a destination — it is a feeling that changes you forever. Every corner whispers ancient stories, and every sunrise reminds you why you came."</div>
+
+      <div class="highlight-box">
+        <h4><i class="fa-solid fa-star"></i> Journey Highlights</h4>
+        <ul>
+          <li>Visit to Tanah Lot Temple at sunset</li>
+          <li>Exploring Tegallalang Rice Terraces in Ubud</li>
+          <li>Traditional Balinese dance performance at Ubud Palace</li>
+          <li>Sunrise trek at Mount Batur volcano (2am start)</li>
+          <li>Beach hopping in Seminyak and Canggu</li>
+          <li>Authentic local cuisine tasting experience</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Story -->
+    <div class="article-section">
+      <h2>The Full Story</h2>
+
+      <h3><i class="fa-solid fa-torii-gate" style="color:#20664e;margin-right:8px"></i>The Journey Begins — Tanah Lot</h3>
+      <p>Our Bali adventure started with the iconic Tanah Lot Temple, perched dramatically on a rocky outcrop in the sea. Watching the sunset here was nothing short of magical — the sky painted in hues of orange and pink as waves crashed against the ancient temple walls. Balinese priests in white robes lit incense as the last light faded, filling the air with a sacred fragrance.</p>
+      <p>Tanah Lot is one of seven sea temples forming a chain along Bali's south-western coast, each positioned so that they are visible from the next. The temple itself dates to the 16th century and was built by the Hindu sage Dang Hyang Nirartha, who is credited with establishing much of Bali's spiritual architecture.</p>
+
+      <div class="inline-gallery">
+        <img src="../assets/images/festival.png" alt="Bali Festival">
+        <img src="../assets/images/culture.png" alt="Balinese Culture">
+        <img src="../assets/images/image1.png" alt="Bali Temple">
+      </div>
+
+      <h3><i class="fa-solid fa-wheat-awn" style="color:#20664e;margin-right:8px"></i>Ubud's Cultural Heart — Rice Terraces</h3>
+      <p>The Tegallalang Rice Terraces in Ubud left us breathless. Walking through the emerald-green stepped terraces, we witnessed traditional farming methods — the subak irrigation system — that have been practiced for over a thousand years. This ancient system of cooperative water management is now a UNESCO World Heritage Site.</p>
+      <p>The local farmers welcomed us warmly and shared stories about their ancestral land. We learned how the irrigation channels are communally maintained and how rice cycles align with Balinese Hindu ceremonies throughout the year. Watching sunrise over these terraces, with mist rising from the valley below, was a scene of extraordinary beauty.</p>
+
+      <h3><i class="fa-solid fa-masks-theater" style="color:#20664e;margin-right:8px"></i>Traditional Performances — Kecak Fire Dance</h3>
+      <p>We were fortunate to witness a traditional Balinese Kecak dance performance at the Uluwatu Temple, with the Indian Ocean as a backdrop. Over 50 male dancers performed the famous "cak" chanting in perfect rhythmic unison, narrating the Ramayana epic through movement, music, and fire.</p>
+      <p>The intricate movements, elaborate costumes, and hypnotic chanting told ancient stories of gods and demons in a way that transcended language entirely. The dedication these performers bring to their craft — a craft passed down through generations of families — was deeply inspiring and humbling to witness.</p>
+
+      <div class="inline-gallery">
+        <img src="../assets/images/ubud.png" alt="Ubud Bali">
+        <img src="../assets/images/ubud2.png" alt="Ubud Rice Fields">
+        <img src="../assets/images/image2.png" alt="Bali Culture">
+      </div>
+
+      <h3><i class="fa-solid fa-mountain" style="color:#20664e;margin-right:8px"></i>Mount Batur Sunrise Trek</h3>
+      <p>The 2am wake-up call for the Mount Batur trek was worth every second of lost sleep. Hiking up the active volcano by torchlight, through volcanic rock and dense jungle, we reached the crater rim just as the sun broke through the horizon. The moment it illuminated the volcanic landscape and Lake Batur shimmering 700 metres below was indescribable.</p>
+      <p>Our guide cooked breakfast for us using steam rising from the volcanic vents — a simple meal of boiled eggs and instant noodles that tasted like the finest food we'd ever eaten, consumed on the roof of the world with Bali spread beneath our feet. Mount Batur stands at 1,717 metres and is considered sacred by the Balinese people.</p>
+
+      <h3><i class="fa-solid fa-umbrella-beach" style="color:#20664e;margin-right:8px"></i>Beach Paradise — Seminyak & Canggu</h3>
+      <p>Seminyak and Canggu offered the perfect blend of relaxation and adventure. From surfing lessons at Batu Bolong Beach to beachside yoga sessions at dawn, and sunset cocktails at the legendary Potato Head beach club, these coastal towns captured the laid-back Bali lifestyle we'd heard so much about.</p>
+      <p>Canggu in particular has a wonderfully creative energy — rice paddy cafes, surf schools, boutique galleries, and rooftop pools exist side by side in what feels like a village that woke up one day to find itself fashionable. The community of travellers, digital nomads and long-term expats gives it a warmth that many popular destinations lack.</p>
+
+      <h3><i class="fa-solid fa-utensils" style="color:#20664e;margin-right:8px"></i>Culinary Delights</h3>
+      <p>The authentic local cuisine was a continuous highlight of our entire journey. From Babi Guling (suckling pig slow-roasted with turmeric and lemongrass) at Ibu Oka's legendary warung in Ubud, to grilled freshly caught seafood on Jimbaran Beach with the tide washing over our feet — every meal was an adventure in itself.</p>
+      <p>Balinese cooking is distinguished by its rich use of aromatic spice pastes called base genep. Made from shallots, garlic, ginger, galangal, turmeric and chili, these pastes form the foundation of most traditional dishes and fill the kitchen with an intoxicating fragrance. Taking a cooking class and learning these techniques was one of the most memorable mornings of the trip.</p>
+
+      <div class="author-card">
+        <div class="author-avatar-icon"><i class="fa-solid fa-user"></i></div>
+        <div class="author-info">
+          <h4>Written by Janna Auniman</h4>
+          <p>World Traveller &amp; Content Creator &nbsp;·&nbsp; June 15, 2026</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.blog-left -->
+
+  <!-- SIDEBAR -->
+  <aside class="blog-sidebar">
+
+    <div class="sidebar-box">
+      <h3>Article Info</h3>
+      <div class="sidebar-meta-row"><i class="fa-regular fa-calendar"></i> June 15, 2026</div>
+      <div class="sidebar-meta-row"><i class="fa-regular fa-clock"></i> 8 min read</div>
+      <div class="sidebar-meta-row"><i class="fa-solid fa-eye"></i> 12,500 views</div>
+      <div class="sidebar-meta-row"><i class="fa-solid fa-location-dot"></i> Bali, Indonesia</div>
+      <div class="sidebar-meta-row"><i class="fa-solid fa-tag"></i> Vlogger, Travel</div>
+    </div>
+
+    <div class="sidebar-box">
+      <h3>Share This Post</h3>
+      <div class="share-btns">
+        <button class="share-btn fb" onclick="window.open('https://facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank')"><i class="fa-brands fa-facebook-f"></i> FB</button>
+        <button class="share-btn tw" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text=Exploring+Bali+A+Tropical+Journey','_blank')"><i class="fa-brands fa-x-twitter"></i> TW</button>
+        <button class="share-btn wa" onclick="window.open('https://wa.me/?text=Check+out+this+Bali+blog+'+encodeURIComponent(location.href),'_blank')"><i class="fa-brands fa-whatsapp"></i> WA</button>
+      </div>
+    </div>
+
+    <div class="sidebar-box">
+      <h3>Tags</h3>
+      <div class="tag-cloud">
+        <span class="tag">Temples</span><span class="tag">Rice Terraces</span><span class="tag">Culture</span>
+        <span class="tag">Trekking</span><span class="tag">Surfing</span><span class="tag">Sunsets</span>
+        <span class="tag">Food</span><span class="tag">Ubud</span>
+      </div>
+    </div>
+
+    <div class="sidebar-box">
+      <h3>Related Blogs</h3>
+      <div class="related-card" onclick="window.open('secrets-of-ubud.html','_blank')">
+        <img src="../assets/images/secrets.png" alt="Secrets of Ubud">
+        <div class="related-card-info">
+          <div class="related-card-title">Secrets of Ubud: Culture and Nature</div>
+          <div class="related-card-date">May 25, 2026</div>
+        </div>
+      </div>
+      <div class="related-card" onclick="window.open('adventures-beyond-beach.html','_blank')">
+        <img src="../assets/images/adventure2.png" alt="Adventures in Bali">
+        <div class="related-card-info">
+          <div class="related-card-title">Adventures in Bali: Beyond the Beach</div>
+          <div class="related-card-date">May 18, 2026</div>
+        </div>
+      </div>
+      <div class="related-card" onclick="window.open('tech-nomad-guide.html','_blank')">
+        <img src="../assets/images/tech.png" alt="Tech Nomad Guide">
+        <div class="related-card-info">
+          <div class="related-card-title">Tech Nomad's Guide to Bali</div>
+          <div class="related-card-date">June 8, 2026</div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div><!-- /.blog-wrap -->
+
+<!-- FOOTER -->
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div class="footer-brand">
+      <h3>tripon</h3>
+      <p>Your trusted travel partner for unforgettable Bali adventures.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#packages">Packages</a></li>
+        <li><a href="../blogs-detail.html">All Blogs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>More Blogs</h4>
+      <ul>
+        <li><a href="tech-nomad-guide.html">Tech Nomad Guide</a></li>
+        <li><a href="secrets-of-ubud.html">Secrets of Ubud</a></li>
+        <li><a href="adventures-beyond-beach.html">Adventures in Bali</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">+62 123 456 789</a></li>
+        <li><a href="#">info@tripon.com</a></li>
+        <li><a href="#">Bali, Indonesia</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Trip On. All rights reserved. &nbsp;·&nbsp; <span style="color:#98A2B3">tripon/destination/bali/blogs/exploring-bali</span></div>
+</footer>
+
+</body>
+</html>

@@ -54,7 +54,7 @@
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <p class="hero-subtitle">Seek Out</p>
+        <p class="hero-subtitle">New Discovery</p>
         <h1>Plan A Trip<br>To Bali!</h1>
         <p class="hero-tagline">Experience the Greatest culture in the world...</p>
       </div>
@@ -338,6 +338,13 @@
 
       <!-- Reason Tabs — generated from SITE_CONTENT.reasons.tabs in script -->
       <div class="reasons-tabs" id="reasons-tabs"></div>
+
+      <!-- Mobile infinite-scroll carousel (visible ≤768px only) -->
+      <div class="reasons-mobile-carousel" id="reasons-mobile-carousel" aria-label="Reasons to visit Bali">
+        <div class="reasons-carousel-track" id="reasons-carousel-track">
+          <!-- Cards injected by JS -->
+        </div>
+      </div>
 
       <div class="reasons-wrapper">
         <!-- Left Column: Image -->
@@ -2203,12 +2210,31 @@
 
         const selectedDuration = btn.dataset.duration;
 
+        // Map each filter button to the day label shown on the cards
+        // "4 Nights 5 Days" → 5 Days, "5 Nights 6 Days" → 6 Days, etc.
+        const durationDayLabel = {
+          '4': '5 Days',
+          '5': '6 Days',
+          '6': '7 Days',
+          '7': '8 Days'
+        };
+
         // Filter cards with animation
         packageCards.forEach(card => {
           const cardDuration = card.dataset.duration;
           if (cardDuration === selectedDuration) {
             card.style.display = '';
             card.style.animation = 'fadeInUp 0.5s ease forwards';
+
+            // Update the duration label text inside this card to match the active filter
+            const durationEl = card.querySelector('.package-duration');
+            if (durationEl && durationDayLabel[selectedDuration]) {
+              // Preserve the clock icon, only swap the day text
+              const icon = durationEl.querySelector('i');
+              durationEl.innerHTML = '';
+              if (icon) durationEl.appendChild(icon.cloneNode(true));
+              durationEl.appendChild(document.createTextNode(' ' + durationDayLabel[selectedDuration]));
+            }
           } else {
             card.style.animation = 'fadeOutDown 0.3s ease forwards';
             setTimeout(() => {
@@ -2919,18 +2945,18 @@
     const durationRightBtn = document.querySelector('.duration-nav-right');
     let activeDurationIndex = -1; // Initially none selected
 
-    function selectDuration(index) {
+    function highlightDuration(index) {
+      // Only update the visual highlight — no scrolling, no filtering
       if (index < 0 || index >= durationPills.length) return;
       activeDurationIndex = index;
-
-      // Update pill classes
       durationPills.forEach((p, idx) => {
-        if (idx === index) {
-          p.classList.add('selected');
-        } else {
-          p.classList.remove('selected');
-        }
+        p.classList.toggle('selected', idx === index);
       });
+    }
+
+    function selectDuration(index) {
+      if (index < 0 || index >= durationPills.length) return;
+      highlightDuration(index);
 
       // Filter Packages based on selected duration
       const selectedPill = durationPills[index];
@@ -2967,7 +2993,7 @@
         }
       });
 
-      // Smooth scroll to packages section after selection
+      // Smooth scroll to packages section after clicking a pill
       const packagesSection = document.getElementById('packages');
       if (packagesSection) {
         setTimeout(() => {
@@ -2982,18 +3008,16 @@
       });
     });
 
-    // Navigation buttons functionality
+    // Navigation arrow buttons — only cycle through pill highlights, no page scroll
     if (durationLeftBtn && durationRightBtn) {
       durationLeftBtn.addEventListener('click', () => {
-        let newIndex = activeDurationIndex - 1;
-        if (newIndex < 0) newIndex = durationPills.length - 1; // loop back to end
-        selectDuration(newIndex);
+        let newIndex = activeDurationIndex <= 0 ? durationPills.length - 1 : activeDurationIndex - 1;
+        highlightDuration(newIndex);
       });
 
       durationRightBtn.addEventListener('click', () => {
-        let newIndex = activeDurationIndex + 1;
-        if (newIndex >= durationPills.length) newIndex = 0; // loop back to start
-        selectDuration(newIndex);
+        let newIndex = activeDurationIndex >= durationPills.length - 1 ? 0 : activeDurationIndex + 1;
+        highlightDuration(newIndex);
       });
     }
 
@@ -3257,7 +3281,31 @@
       btn.addEventListener('click', () => switchReason(i));
     });
 
-    // ===== MOBILE HERO PILL → OPENS 6-STEP SURVEY =====
+    // ===== REASONS MOBILE INFINITE-SCROLL CAROUSEL =====
+    (function () {
+      const track = document.getElementById('reasons-carousel-track');
+      if (!track) return;
+
+      // Build one set of cards from the reasons data
+      function buildCard(item, idx) {
+        return `
+          <div class="reasons-mob-card">
+            <img class="reasons-mob-card-img" src="${item.img}" alt="${item.alt}" loading="lazy">
+            <div class="reasons-mob-card-body">
+              <div class="reasons-mob-card-num">${String(idx + 1).padStart(2, '0')}</div>
+              <div class="reasons-mob-card-heading">${item.heading}</div>
+              <p class="reasons-mob-card-copy">${item.copy}</p>
+              <div class="reasons-mob-card-tags">
+                ${item.features.map(f => `<span class="reasons-mob-card-tag">${f}</span>`).join('')}
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // Render two full copies so the CSS translateX(-50%) loop is seamless
+      const cardHTML = reasonsData.map((item, i) => buildCard(item, i)).join('');
+      track.innerHTML = cardHTML + cardHTML; // two identical copies
+    })();
     (function () {
       const pillBtn = document.getElementById('hero-mobile-pill-btn');
       const surveyOverlay = document.getElementById('survey-overlay');
@@ -3567,6 +3615,25 @@
         window.open('blogs-detail.html', '_blank');
       });
     }
+
+    // ===== BLOG CARD CLICK NAVIGATION =====
+    // Each card maps to its blog page inside the blogs/ folder.
+    // URL shown in the browser: tripon/destination/bali/blogs/<card-name>
+    const blogCardRoutes = [
+      { selector: '.blog-card-1', url: 'blogs/exploring-bali.html' },
+      { selector: '.blog-card-2', url: 'blogs/tech-nomad-guide.html' },
+      { selector: '.blog-card-3', url: 'blogs/secrets-of-ubud.html' },
+      { selector: '.blog-card-4', url: 'blogs/adventures-beyond-beach.html' }
+    ];
+
+    blogCardRoutes.forEach(({ selector, url }) => {
+      const card = document.querySelector(selector);
+      if (card) {
+        card.addEventListener('click', () => {
+          window.open(url, '_blank');
+        });
+      }
+    });
 
     // ===== FOOTER NAVIGATION =====
     // About - Shows About Us popup with tabs
