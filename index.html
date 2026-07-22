@@ -1318,7 +1318,7 @@
       <div class="footer-nav">
         <div class="footer-column">
           <a href="#" id="footer-about">About</a>
-          <a href="#blogs" id="footer-blogs">Blogs</a>
+          <a href="blogscards.html" target="_blank" id="footer-blogs">Blogs</a>
         </div>
         <div class="footer-column">
           <a href="locations-page.html" id="footer-locations">Locations</a>
@@ -4150,12 +4150,12 @@
       });
     }
 
-    // Blogs - Shows confirmation popup
+    // Blogs - Opens blogscards.html in new tab
     const footerBlogs = document.getElementById('footer-blogs');
     if (footerBlogs) {
       footerBlogs.addEventListener('click', (e) => {
         e.preventDefault();
-        showBlogsConfirmPopup();
+        window.open('blogscards.html', '_blank');
       });
     }
 
@@ -4404,20 +4404,20 @@
       });
     }
 
-    // Footer social media icons with popups (reusing existing showSocialPopup function)
+    // Footer social media icons — direct redirect, no popup
     const socialLinks = {
-      'footer-twitter': { name: 'X (Twitter)', url: 'https://twitter.com/tripon' },
-      'footer-facebook': { name: 'Facebook', url: 'https://facebook.com/tripon' },
-      'footer-instagram': { name: 'Instagram', url: 'https://instagram.com/tripon' },
-      'footer-youtube': { name: 'YouTube', url: 'https://youtube.com/@tripon' }
+      'footer-twitter':   'https://twitter.com/tripon',
+      'footer-facebook':  'https://facebook.com/tripon',
+      'footer-instagram': 'https://instagram.com/tripon',
+      'footer-youtube':   'https://youtube.com/@tripon'
     };
 
     Object.keys(socialLinks).forEach(iconId => {
       const icon = document.getElementById(iconId);
       if (icon) {
+        icon.style.cursor = 'pointer';
         icon.addEventListener('click', () => {
-          const social = socialLinks[iconId];
-          showSocialPopup(social.name, social.url);
+          window.open(socialLinks[iconId], '_blank', 'noopener,noreferrer');
         });
       }
     });

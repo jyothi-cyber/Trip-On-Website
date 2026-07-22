@@ -372,12 +372,18 @@
   const lightboxImg = document.getElementById('lightbox-img');
 
   document.querySelectorAll('.bc-card-img-wrap').forEach(wrap => {
+    const card = wrap.closest('.bc-card');
+    const readBtn = card ? card.querySelector('.bc-read-btn') : null;
+    const url = readBtn ? readBtn.getAttribute('href') : null;
     wrap.addEventListener('click', () => {
-      const src = wrap.dataset.img || wrap.querySelector('img').src;
-      lightboxImg.src = src;
-      lightboxImg.alt = wrap.querySelector('img').alt;
-      lightbox.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+      if (url) window.open(url, '_blank');
+      else {
+        const src = wrap.dataset.img || wrap.querySelector('img').src;
+        lightboxImg.src = src;
+        lightboxImg.alt = wrap.querySelector('img').alt;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
     });
   });
 
