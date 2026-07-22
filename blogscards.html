@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Bali travel blogs — stories, guides and adventures from Trip On travelers.">
+  <title>Bali Travel Blogs | Trip On</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4.0">
+  <style>
+    /* ── page wrapper pushed below fixed header ── */
+    .page-wrap { padding-top: 90px; min-height: 100vh; background: #f9fafb; }
+
+    /* ── hero banner ── */
+    .blogs-hero {
+      background: linear-gradient(135deg, #0E5A36 0%, #20664e 100%);
+      color: #fff;
+      text-align: center;
+      padding: 56px 24px 48px;
+    }
+    .blogs-hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 10px; }
+    .blogs-hero p  { font-size: 16px; opacity: .85; }
+
+    /* ── grid ── */
+    .blogs-grid-section { max-width: 1200px; margin: 0 auto; padding: 48px 24px 64px; }
+    .blogs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 28px;
+    }
+
+    /* ── card ── */
+    .bc-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+      transition: transform .25s, box-shadow .25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .bc-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,.13); }
+
+    /* image */
+    .bc-card-img-wrap { position: relative; overflow: hidden; height: 200px; cursor: pointer; }
+    .bc-card-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .35s;
+    }
+    .bc-card-img-wrap:hover img { transform: scale(1.06); }
+    .bc-img-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.28);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .3s;
+    }
+    .bc-card-img-wrap:hover .bc-img-overlay { opacity: 1; }
+    .bc-img-overlay i { color: #fff; font-size: 28px; }
+
+    /* badge */
+    .bc-badge {
+      position: absolute; top: 14px; left: 14px;
+      background: linear-gradient(135deg,#FF6B6B,#FF8E53);
+      color: #fff; font-size: 11px; font-weight: 700;
+      padding: 4px 12px; border-radius: 50px;
+    }
+
+    /* body */
+    .bc-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .bc-title { font-size: 16px; font-weight: 700; color: #101828; line-height: 1.4; }
+    .bc-meta  { display: flex; gap: 14px; font-size: 12px; color: #98A2B3; }
+    .bc-meta span { display: flex; align-items: center; gap: 5px; }
+    .bc-meta i    { color: #20664e; }
+    .bc-desc  { font-size: 13px; color: #667085; line-height: 1.7; flex: 1; }
+
+    /* author row */
+    .bc-author { display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid #F2F4F7; }
+    .bc-avatar  {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg,#20664e,#0E5A36);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 14px; flex-shrink: 0;
+    }
+    .bc-author-name  { font-size: 13px; font-weight: 600; color: #344054; }
+    .bc-author-role  { font-size: 11px; color: #98A2B3; }
+
+    /* read more */
+    .bc-read-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #20664e; color: #fff;
+      border: none; border-radius: 50px;
+      padding: 10px 20px; font-family: 'Poppins',sans-serif;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: background .2s; text-decoration: none;
+      margin-top: 4px; align-self: flex-start;
+    }
+    .bc-read-btn:hover { background: #0E5A36; }
+
+    /* responsive */
+    @media(max-width:768px){
+      .blogs-hero h1 { font-size: 26px; }
+      .blogs-grid { grid-template-columns: 1fr; }
+      .blogs-grid-section { padding: 32px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ EXACT HOMEPAGE HEADER ═══ -->
+<header id="site-header">
+  <div class="container nav-container">
+    <a href="index.html" class="logo" aria-label="Trip On home">
+      <img src="assets/images/tripon-logo.png" alt="Trip On logo" />
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="people-reviews.html" target="_blank">People Reviews</a>
+      <a href="packages.html" target="_blank">Packages</a>
+    </nav>
+    <button class="nav-btn" id="blog-book-btn">Book a Trip</button>
+    <div class="menu-toggle" id="blog-mobile-btn" aria-label="Toggle mobile menu">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+  <!-- Mobile overlay -->
+  <div class="mobile-menu-overlay" id="blog-mobile-overlay">
+    <div class="mobile-menu-content">
+      <button class="mobile-close-btn" id="blog-mobile-close" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <nav class="mobile-nav-links">
+        <a href="people-reviews.html" target="_blank">People Reviews</a>
+        <a href="packages.html" target="_blank">Packages</a>
+        <a href="#" class="mobile-contact-btn" id="blog-mobile-book">Book a Trip</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- hero -->
+  <div class="blogs-hero">
+    <h1><i class="fa-solid fa-blog" style="margin-right:10px"></i>Blogs All About Bali</h1>
+    <p>Stories, guides and adventures from our travellers and vloggers</p>
+  </div>
+
+  <!-- cards grid -->
+  <section class="blogs-grid-section">
+    <div class="blogs-grid">
+
+      <!-- Card 1 -->
+      <div class="bc-card">
+        <div class="bc-card-img-wrap" data-img="assets/images/janna2.png">
+          <img src="assets/images/janna2.png" alt="Exploring Bali">
+          <span class="bc-badge">Vlogger</span>
+          <div class="bc-img-overlay"><i class="fa-solid fa-expand"></i></div>
+        </div>
+        <div class="bc-body">
+          <div class="bc-title">Exploring Bali: A Tropical Journey</div>
+          <div class="bc-meta">
+            <span><i class="fa-regular fa-calendar"></i> June 15, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 12.5K views</span>
+          </div>
+          <p class="bc-desc">From majestic temples and lush rice terraces to vibrant cultural festivals — a journey through Bali's enchanting landscapes.</p>
+          <div class="bc-author">
+            <div class="bc-avatar"><i class="fa-solid fa-user"></i></div>
+            <div>
+              <div class="bc-author-name">Janna Auniman</div>
+              <div class="bc-author-role">World Traveller</div>
+            </div>
+          </div>
+          <a href="blogs/exploring-bali.html" target="_blank" class="bc-read-btn">
+            Read More <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bc-card">
+        <div class="bc-card-img-wrap" data-img="assets/images/tech.png">
+          <img src="assets/images/tech.png" alt="Tech Nomad Guide">
+          <span class="bc-badge" style="background:linear-gradient(135deg,#667eea,#764ba2)">Digital Nomad</span>
+          <div class="bc-img-overlay"><i class="fa-solid fa-expand"></i></div>
+        </div>
+        <div class="bc-body">
+          <div class="bc-title">Tech Nomad's Guide to Bali</div>
+          <div class="bc-meta">
+            <span><i class="fa-regular fa-calendar"></i> June 8, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 8.2K views</span>
+          </div>
+          <p class="bc-desc">Best coworking spaces, reliable WiFi cafes, visa tips and work-life balance advice for remote workers in Bali.</p>
+          <div class="bc-author">
+            <div class="bc-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)"><i class="fa-solid fa-laptop-code"></i></div>
+            <div>
+              <div class="bc-author-name">Leo Vikram</div>
+              <div class="bc-author-role">Software Engineer</div>
+            </div>
+          </div>
+          <a href="blogs/tech-nomad-guide.html" target="_blank" class="bc-read-btn" style="background:#667eea">
+            Read More <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bc-card">
+        <div class="bc-card-img-wrap" data-img="assets/images/secrets.png">
+          <img src="assets/images/secrets.png" alt="Secrets of Ubud">
+          <span class="bc-badge" style="background:linear-gradient(135deg,#11998e,#38ef7d);color:#101828">Culture</span>
+          <div class="bc-img-overlay"><i class="fa-solid fa-expand"></i></div>
+        </div>
+        <div class="bc-body">
+          <div class="bc-title">Secrets of Ubud: Culture and Nature</div>
+          <div class="bc-meta">
+            <span><i class="fa-regular fa-calendar"></i> May 25, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 15.3K views</span>
+          </div>
+          <p class="bc-desc">Hidden waterfalls, sacred temples, traditional healing and organic farm-to-table dining — Ubud's best-kept secrets revealed.</p>
+          <div class="bc-author">
+            <div class="bc-avatar" style="background:linear-gradient(135deg,#11998e,#38ef7d)"><i class="fa-solid fa-om"></i></div>
+            <div>
+              <div class="bc-author-name">Leo Vikram</div>
+              <div class="bc-author-role">Cultural Explorer</div>
+            </div>
+          </div>
+          <a href="blogs/secrets-of-ubud.html" target="_blank" class="bc-read-btn" style="background:#11998e">
+            Read More <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bc-card">
+        <div class="bc-card-img-wrap" data-img="assets/images/adventure2.png">
+          <img src="assets/images/adventure2.png" alt="Adventures Beyond Beach">
+          <span class="bc-badge" style="background:linear-gradient(135deg,#f7971e,#ffd200);color:#101828">Adventure</span>
+          <div class="bc-img-overlay"><i class="fa-solid fa-expand"></i></div>
+        </div>
+        <div class="bc-body">
+          <div class="bc-title">Adventures in Bali: Beyond the Beach</div>
+          <div class="bc-meta">
+            <span><i class="fa-regular fa-calendar"></i> May 18, 2026</span>
+            <span><i class="fa-solid fa-eye"></i> 18.7K views</span>
+          </div>
+          <p class="bc-desc">Volcano treks, white-water rafting, scuba diving a WWII shipwreck and canyoning — Bali's wilder side awaits.</p>
+          <div class="bc-author">
+            <div class="bc-avatar" style="background:linear-gradient(135deg,#f7971e,#ffd200)"><i class="fa-solid fa-person-hiking"></i></div>
+            <div>
+              <div class="bc-author-name">Sara Kumari</div>
+              <div class="bc-author-role">Adventure Traveller</div>
+            </div>
+          </div>
+          <a href="blogs/adventures-beyond-beach.html" target="_blank" class="bc-read-btn" style="background:#f7971e">
+            Read More <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /.blogs-grid -->
+  </section>
+
+</div><!-- /.page-wrap -->
+
+<!-- ═══ EXACT HOMEPAGE FOOTER ═══ -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-logo">
+      <a href="index.html" class="logo" aria-label="Trip On footer logo">
+        <img src="assets/images/tripon-logo.png" alt="Trip On logo" />
+      </a>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-column">
+        <a href="about.html" target="_blank">About</a>
+        <a href="blogscards.html">Blogs</a>
+      </div>
+      <div class="footer-column">
+        <a href="locations-page.html" target="_blank">Locations</a>
+        <a href="packages.html" target="_blank">Packages</a>
+      </div>
+      <div class="footer-column">
+        <a href="careers.html" target="_blank">Careers</a>
+        <a href="contact.html" target="_blank">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-social">
+      <h4>FOLLOW OUR TRAVELER COMMUNITY</h4>
+      <div class="social-icons">
+        <i class="fa-brands fa-x-twitter"  id="f-twitter"  style="cursor:pointer"></i>
+        <i class="fa-brands fa-facebook"   id="f-facebook"  style="cursor:pointer"></i>
+        <i class="fa-brands fa-instagram"  id="f-instagram" style="cursor:pointer"></i>
+        <i class="fa-brands fa-youtube"    id="f-youtube"   style="cursor:pointer"></i>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ Book a Trip Modal ═══ -->
+<div id="bat-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:20px;padding:40px;max-width:480px;width:90%;max-height:90vh;overflow-y:auto;position:relative">
+    <button onclick="closeBlogBAT()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#667085"><i class="fa-solid fa-xmark"></i></button>
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="width:56px;height:56px;background:#DDF3EA;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px;color:#20664e"><i class="fa-solid fa-plane-departure"></i></div>
+      <h2 style="font-size:22px;font-weight:800;color:#101828;margin-bottom:6px">Book a Trip</h2>
+      <p style="color:#667085;font-size:14px">Fill in your details and we'll plan the perfect trip for you!</p>
+    </div>
+    <form id="bat-form" onsubmit="submitBAT(event)" novalidate>
+      <div style="margin-bottom:16px"><label style="font-size:13px;font-weight:600;color:#344054;display:block;margin-bottom:6px">Full Name *</label><input id="bat-name" type="text" placeholder="Enter your full name" style="width:100%;border:1.5px solid #E4E7EC;border-radius:10px;padding:11px 14px;font-family:'Poppins',sans-serif;font-size:14px;outline:none" required></div>
+      <div style="margin-bottom:16px"><label style="font-size:13px;font-weight:600;color:#344054;display:block;margin-bottom:6px">Destination *</label><select id="bat-dest" style="width:100%;border:1.5px solid #E4E7EC;border-radius:10px;padding:11px 14px;font-family:'Poppins',sans-serif;font-size:14px;outline:none" required><option value="">Select a destination</option><option value="Bali" selected>Bali</option></select></div>
+      <div style="margin-bottom:16px"><label style="font-size:13px;font-weight:600;color:#344054;display:block;margin-bottom:6px">Phone Number *</label><input id="bat-phone" type="tel" placeholder="Enter your phone number" inputmode="numeric" maxlength="15" style="width:100%;border:1.5px solid #E4E7EC;border-radius:10px;padding:11px 14px;font-family:'Poppins',sans-serif;font-size:14px;outline:none" required></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+        <div><label style="font-size:13px;font-weight:600;color:#344054;display:block;margin-bottom:6px">No. of Days *</label><select id="bat-days" style="width:100%;border:1.5px solid #E4E7EC;border-radius:10px;padding:11px 14px;font-family:'Poppins',sans-serif;font-size:14px;outline:none" required><option value="">Select days</option><option>3 Days</option><option>4 Days</option><option>5 Days</option><option>6 Days</option><option>7 Days</option><option>10+ Days</option></select></div>
+        <div><label style="font-size:13px;font-weight:600;color:#344054;display:block;margin-bottom:6px">No. of People *</label><select id="bat-people" style="width:100%;border:1.5px solid #E4E7EC;border-radius:10px;padding:11px 14px;font-family:'Poppins',sans-serif;font-size:14px;outline:none" required><option value="">Select travelers</option><option>1 Person</option><option>2 Persons</option><option>3 Persons</option><option>4 Persons</option><option>5 Persons</option><option>6–10 Persons</option><option>10+ Persons</option></select></div>
+      </div>
+      <div style="margin-bottom:24px"><label style="font-size:13px;font-weight:600;color:#344054;display:block;margin-bottom:6px">Travel On *</label><input id="bat-date" type="date" style="width:100%;border:1.5px solid #E4E7EC;border-radius:10px;padding:11px 14px;font-family:'Poppins',sans-serif;font-size:14px;outline:none" required></div>
+      <button type="submit" style="width:100%;background:#20664e;color:#fff;border:none;border-radius:50px;padding:14px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;cursor:pointer" onmouseover="this.style.background='#0E5A36'" onmouseout="this.style.background='#20664e'"><i class="fa-solid fa-paper-plane"></i> Submit Details</button>
+    </form>
+  </div>
+</div>
+
+<!-- Image lightbox -->
+<div id="img-lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99999;align-items:center;justify-content:center;cursor:zoom-out" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)">
+</div>
+
+<script>
+  /* ── Sticky header ── */
+  const siteHeader = document.getElementById('site-header');
+  window.addEventListener('scroll', () => siteHeader.classList.toggle('header-scrolled', window.scrollY > 100));
+
+  /* ── Mobile menu ── */
+  const mobileBtn     = document.getElementById('blog-mobile-btn');
+  const mobileOverlay = document.getElementById('blog-mobile-overlay');
+  const mobileClose   = document.getElementById('blog-mobile-close');
+  mobileBtn.addEventListener('click',  () => { mobileOverlay.classList.add('active');    document.body.style.overflow = 'hidden'; });
+  mobileClose.addEventListener('click',() => { mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; });
+  mobileOverlay.addEventListener('click', e => { if (e.target === mobileOverlay) { mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; } });
+
+  /* ── Book a Trip modal ── */
+  const batOverlay = document.getElementById('bat-overlay');
+  document.getElementById('blog-book-btn').addEventListener('click', openBlogBAT);
+  document.getElementById('blog-mobile-book').addEventListener('click', e => { e.preventDefault(); mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; openBlogBAT(); });
+  function openBlogBAT()  { batOverlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; document.getElementById('bat-date').min = new Date().toISOString().split('T')[0]; }
+  function closeBlogBAT() { batOverlay.style.display = 'none';  document.body.style.overflow = ''; }
+  batOverlay.addEventListener('click', e => { if (e.target === batOverlay) closeBlogBAT(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeBlogBAT(); closeLightbox(); } });
+
+  document.getElementById('bat-phone').addEventListener('input', function(){ this.value = this.value.replace(/[^0-9]/g,''); });
+  document.getElementById('bat-name').addEventListener('input',  function(){ this.value = this.value.replace(/[^A-Za-z\s]/g,''); });
+
+  function submitBAT(e) {
+    e.preventDefault();
+    const name = document.getElementById('bat-name').value.trim();
+    const phone = document.getElementById('bat-phone').value.trim();
+    const dest  = document.getElementById('bat-dest').value;
+    const days  = document.getElementById('bat-days').value;
+    const ppl   = document.getElementById('bat-people').value;
+    const date  = document.getElementById('bat-date').value;
+    if (!name||!phone||!dest||!days||!ppl||!date) { alert('Please fill in all fields.'); return; }
+    if (!/^[A-Za-z\s]+$/.test(name))  { alert('Name should contain letters only.'); return; }
+    if (!/^[0-9]{7,15}$/.test(phone)) { alert('Please enter a valid phone number.'); return; }
+    closeBlogBAT();
+    alert('Thank you, ' + name + '! Our team will contact you shortly.');
+    document.getElementById('bat-form').reset();
+  }
+
+  /* ── Image lightbox ── */
+  const lightbox    = document.getElementById('img-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.bc-card-img-wrap').forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      const src = wrap.dataset.img || wrap.querySelector('img').src;
+      lightboxImg.src = src;
+      lightboxImg.alt = wrap.querySelector('img').alt;
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  /* ── Footer social icons ── */
+  const socials = {
+    'f-twitter':   'https://twitter.com/tripon',
+    'f-facebook':  'https://facebook.com/tripon',
+    'f-instagram': 'https://instagram.com/tripon',
+    'f-youtube':   'https://youtube.com/@tripon'
+  };
+  Object.keys(socials).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', () => window.open(socials[id], '_blank', 'noopener'));
+  });
+</script>
+</body>
+</html>

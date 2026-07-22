@@ -6,17 +6,13 @@
   <title>The White Beach Land - Bali Package | Trip On</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=4.0">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Poppins',sans-serif;background:#f9fafb;color:#101828}a{text-decoration:none}
-    .nav{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:0 60px;height:70px;display:flex;align-items:center;justify-content:space-between}
-    .nav-logo img{height:36px}
-    .nav-back{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#20664e;cursor:pointer;border:none;background:none}
-    .nav-back:hover{color:#0E5A36}
-    .pkg-hero{position:relative;height:480px;overflow:hidden}
+    .pkg-hero{position:relative;height:480px;overflow:hidden;margin-top:72px}
     .pkg-hero img{width:100%;height:100%;object-fit:cover}
     .pkg-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.65))}
     .pkg-hero-content{position:absolute;bottom:48px;left:60px;color:#fff}
-    .pkg-hero-badge{display:inline-flex;align-items:center;gap:6px;background:#F79009;border-radius:50px;padding:5px 14px;font-size:12px;font-weight:700;margin-bottom:16px}
     .pkg-hero-content h1{font-size:48px;font-weight:800;line-height:1.15;margin-bottom:12px;max-width:700px}
     .pkg-hero-meta{display:flex;gap:24px;font-size:14px;font-weight:500;opacity:.9}
     .pkg-hero-meta span{display:flex;align-items:center;gap:6px}
@@ -41,8 +37,17 @@
     .inc-list li{color:#344054}.inc-list li i{color:#20664e;font-size:13px;flex-shrink:0}
     .exc-list li{color:#667085}.exc-list li i{color:#F04438;font-size:13px;flex-shrink:0}
     .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;transition:transform .3s}
-    .gallery-grid img:hover{transform:scale(1.04)}
+    .gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;transition:transform .3s,box-shadow .3s;cursor:pointer}
+    .gallery-grid img:hover{transform:scale(1.04);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    /* Lightbox */
+    .lb-overlay{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:99999;display:flex;align-items:center;justify-content:center}
+    .lb-img{max-width:90vw;max-height:85vh;border-radius:10px;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5);display:block}
+    .lb-close-btn{position:fixed;top:16px;right:20px;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:26px;line-height:1;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:100000;transition:background .2s}
+    .lb-close-btn:hover{background:rgba(255,255,255,.28)}
+    .lb-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.13);border:none;color:#fff;font-size:22px;cursor:pointer;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:100000;transition:background .2s}
+    .lb-arrow:hover{background:rgba(255,255,255,.28)}
+    .lb-arrow-prev{left:14px}.lb-arrow-next{right:14px}
+    .lb-counter-text{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.65);font-size:13px;font-family:'Poppins',sans-serif;pointer-events:none}
     .pkg-sidebar{position:sticky;top:90px}
     .sidebar-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:24px}
     .sidebar-price-label{font-size:13px;color:#667085;margin-bottom:4px}
@@ -68,16 +73,38 @@
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo"><a href="../index.html"><img src="../assets/images/tripon-logo.png" alt="Trip On"></a></div>
-  <button class="nav-back" id="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Packages</button>
-</nav>
+  <header id="site-header">
+    <div class="container nav-container">
+      <a href="../index.html" class="logo" aria-label="Trip On home">
+        <img src="../assets/images/tripon-logo.png" alt="Trip On logo" />
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="../people-reviews.html">People Reviews</a>
+        <a href="../packages.html">Packages</a>
+      </nav>
+      <button class="nav-btn" id="contact-us-btn">Book a Trip</button>
+      <div class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+      <div class="mobile-menu-content">
+        <button class="mobile-close-btn" id="mobile-close-btn" aria-label="Close menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <nav class="mobile-nav-links">
+          <a href="../people-reviews.html">People Reviews</a>
+          <a href="../packages.html">Packages</a>
+          <a href="#" class="mobile-contact-btn" id="mobile-book-trip-btn">Book a Trip</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
 <div class="pkg-hero">
   <img src="../assets/images/beach.png" alt="The White Beach Land">
   <div class="pkg-hero-overlay"></div>
   <div class="pkg-hero-content">
-    <div class="pkg-hero-badge"><i class="fa-solid fa-tag"></i> 20% Off</div>
     <h1>The White Beach Land</h1>
     <div class="pkg-hero-meta">
       <span><i class="fa-solid fa-location-dot"></i> Gili Trawangan, Indonesia</span>
@@ -150,7 +177,7 @@
 
     <div class="pkg-section">
       <h2>Photo Gallery</h2>
-      <div class="gallery-grid">
+      <div class="gallery-grid" id="gallery-grid">
         <img src="../assets/images/beach.png" alt="Gili Beach">
         <img src="../assets/images/image4.png" alt="Snorkelling">
         <img src="../assets/images/image5.png" alt="Gili Trawangan">
@@ -178,7 +205,6 @@
       <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-location-dot"></i> Location</span><span class="sidebar-info-value">Gili Trawangan</span></div>
       <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-users"></i> Group Size</span><span class="sidebar-info-value">2 – 12 persons</span></div>
       <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-star" style="color:#F79009"></i> Rating</span><span class="sidebar-info-value">4.8 (136 reviews)</span></div>
-      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-tag"></i> Discount</span><span class="sidebar-info-value" style="color:#F79009;font-weight:700">20% Off</span></div>
       <div class="sidebar-divider"></div>
       <button class="book-btn" id="book-this-btn">Book This Package</button>
       <div class="sidebar-trust">
@@ -191,30 +217,34 @@
 </div>
 
 <!-- Footer -->
-<footer id="footer" style="padding:40px 0;background:#ffffff;border-top:1px solid #e5e7eb;margin-top:0;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;">
-    <div><h1 style="font-family:'Poppins',sans-serif;font-size:32px;color:#007846;font-weight:700;margin:0;">tripon</h1></div>
-    <nav style="display:flex;gap:60px;flex:1;justify-content:center;">
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">About</a>
-        <a href="../index.html#blogs" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Blogs</a>
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-logo">
+      <a href="../index.html" class="logo" aria-label="Trip On footer logo">
+        <img src="../assets/images/tripon-logo.png" alt="Trip On logo" />
+      </a>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-column">
+        <a href="../about.html" target="_blank">About</a>
+        <a href="../index.html#blogs">Blogs</a>
       </div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="../index.html#services" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Locations</a>
-        <a href="../index.html#packages" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Packages</a>
+      <div class="footer-column">
+        <a href="../locations-page.html" target="_blank">Locations</a>
+        <a href="../packages.html" target="_blank">Packages</a>
       </div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Careers</a>
-        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Contact Us</a>
+      <div class="footer-column">
+        <a href="../careers.html" target="_blank">Careers</a>
+        <a href="../contact.html" target="_blank">Contact Us</a>
       </div>
-    </nav>
-    <div style="text-align:right;">
-      <h4 style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#667085;margin:0 0 12px 0;letter-spacing:0.5px;">FOLLOW OUR TRAVELER COMMUNITY</h4>
-      <div style="display:flex;gap:16px;justify-content:flex-end;">
-        <i class="fa-brands fa-x-twitter" style="font-size:20px;color:#667085;cursor:pointer;"></i>
-        <i class="fa-brands fa-facebook" style="font-size:20px;color:#667085;cursor:pointer;"></i>
-        <i class="fa-brands fa-instagram" style="font-size:20px;color:#667085;cursor:pointer;"></i>
-        <i class="fa-brands fa-youtube" style="font-size:20px;color:#667085;cursor:pointer;"></i>
+    </div>
+    <div class="footer-social">
+      <h4>FOLLOW OUR TRAVELER COMMUNITY</h4>
+      <div class="social-icons">
+        <i class="fa-brands fa-x-twitter" style="cursor:pointer;" onclick="window.open('https://twitter.com/tripon','_blank')"></i>
+        <i class="fa-brands fa-facebook" style="cursor:pointer;" onclick="window.open('https://facebook.com/tripon','_blank')"></i>
+        <i class="fa-brands fa-instagram" style="cursor:pointer;" onclick="window.open('https://instagram.com/tripon','_blank')"></i>
+        <i class="fa-brands fa-youtube" style="cursor:pointer;" onclick="window.open('https://youtube.com/tripon','_blank')"></i>
       </div>
     </div>
   </div>
@@ -227,7 +257,6 @@
   .rec-card-img{position:relative;height:170px;overflow:hidden}
   .rec-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
   .rec-card:hover .rec-card-img img{transform:scale(1.06)}
-  .rec-card-badge{position:absolute;top:10px;left:10px;background:#F79009;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px}
   .rec-card-body{padding:16px}
   .rec-card-loc{font-size:12px;color:#667085;margin-bottom:5px;display:flex;align-items:center;gap:5px}
   .rec-card-loc i{color:#20664e}
@@ -266,19 +295,14 @@
 </style>
 
 <script>
-  document.getElementById('back-btn').addEventListener('click', () => {
-    if (window.history.length > 1) window.history.back();
-    else window.location.href = '../index.html#packages';
-  });
-
+  /* ── Recommended packages ── */
   const REC = [
-    {img:'../assets/images/ubud.png',badge:'10% off',loc:'Ubud, Indonesia',title:'The Cultural Homeland',rating:'4.8',count:'136',days:'4 Days',price:'&#8377;45,000',slug:'the-cultural-homeland'},
-    {img:'../assets/images/indonesia.png',badge:'15% off',loc:'Nusa Penida, Indonesia',title:'Isolated Mountains',rating:'4.8',count:'136',days:'5 Days',price:'&#8377;50,000',slug:'isolated-mountains'}
+    {img:'../assets/images/ubud.png',loc:'Ubud, Indonesia',title:'The Cultural Homeland',rating:'4.8',count:'136',days:'4 Days',price:'&#8377;45,000',slug:'the-cultural-homeland'},
+    {img:'../assets/images/indonesia.png',loc:'Nusa Penida, Indonesia',title:'Isolated Mountains',rating:'4.8',count:'136',days:'5 Days',price:'&#8377;50,000',slug:'isolated-mountains'}
   ];
-
   document.getElementById('rec-grid').innerHTML = REC.map(r => `
     <div class="rec-card" onclick="window.open('${r.slug}.html','_blank')">
-      <div class="rec-card-img"><img src="${r.img}" alt="${r.title}"><span class="rec-card-badge">${r.badge}</span></div>
+      <div class="rec-card-img"><img src="${r.img}" alt="${r.title}"></div>
       <div class="rec-card-body">
         <div class="rec-card-loc"><i class="fa-solid fa-location-dot"></i>${r.loc}</div>
         <div class="rec-card-title">${r.title}</div>
@@ -291,9 +315,53 @@
       <button class="rec-card-btn" onclick="event.stopPropagation();window.open('${r.slug}.html','_blank')">View Package</button>
     </div>`).join('');
 
-  document.getElementById('book-this-btn').addEventListener('click', () => showBookingPopup());
+  /* ── Photo Gallery Lightbox ── */
+  (function(){
+    const imgs = Array.from(document.querySelectorAll('.gallery-grid img'));
+    let cur = 0;
+    function open(idx){
+      cur = idx;
+      const lb = document.createElement('div');
+      lb.className = 'lb-overlay';
+      lb.id = 'lb-overlay';
+      lb.innerHTML = `
+        <button class="lb-close-btn" aria-label="Close">&times;</button>
+        <button class="lb-arrow lb-arrow-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+        <img class="lb-img" src="${imgs[cur].src}" alt="${imgs[cur].alt}">
+        <button class="lb-arrow lb-arrow-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="lb-counter-text">${cur+1} / ${imgs.length}</div>`;
+      document.body.appendChild(lb);
+      document.body.style.overflow='hidden';
+      lb.querySelector('.lb-close-btn').addEventListener('click', close);
+      lb.querySelector('.lb-arrow-prev').addEventListener('click', ()=>nav(-1));
+      lb.querySelector('.lb-arrow-next').addEventListener('click', ()=>nav(1));
+      lb.addEventListener('click', e=>{ if(e.target===lb) close(); });
+    }
+    function nav(dir){
+      cur=(cur+dir+imgs.length)%imgs.length;
+      const lb=document.getElementById('lb-overlay');
+      lb.querySelector('.lb-img').src=imgs[cur].src;
+      lb.querySelector('.lb-img').alt=imgs[cur].alt;
+      lb.querySelector('.lb-counter-text').textContent=(cur+1)+' / '+imgs.length;
+    }
+    function close(){
+      const lb=document.getElementById('lb-overlay');
+      if(lb){lb.remove();}
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{
+      if(!document.getElementById('lb-overlay')) return;
+      if(e.key==='ArrowLeft') nav(-1);
+      else if(e.key==='ArrowRight') nav(1);
+      else if(e.key==='Escape') close();
+    });
+    imgs.forEach((img,i)=>{ img.style.cursor='pointer'; img.addEventListener('click',()=>open(i)); });
+  })();
 
-  function showBookingPopup() {
+  /* ── Book This Package popup ── */
+  document.getElementById('book-this-btn').addEventListener('click', showBookingPopup);
+
+  function showBookingPopup(){
     const overlay = document.createElement('div');
     overlay.className = 'bk-overlay';
     overlay.innerHTML = `
@@ -302,32 +370,36 @@
         <div class="bk-header">
           <div class="bk-icon"><i class="fa-solid fa-suitcase-rolling"></i></div>
           <h3>Book This Package</h3>
-          <p>The White Beach Land &nbsp;&middot;&nbsp; <strong style="color:#20664e">&#8377;75,000</strong> per person</p>
+          <p>The White Beach Land &nbsp;&middot;&nbsp; Bali, Indonesia</p>
         </div>
         <div id="bk-form-wrap">
           <div class="bk-field">
+            <label>Full Name *</label>
+            <input type="text" id="bk-name" placeholder="Enter your full name" autocomplete="name">
+          </div>
+          <div class="bk-field">
             <label>Destination</label>
-            <input type="text" value="Gili Trawangan, Indonesia — The White Beach Land" readonly>
-          </div>
-          <div class="bk-field">
-            <label>Your Name *</label>
-            <input type="text" id="bk-name" placeholder="Enter your full name">
-          </div>
-          <div class="bk-field">
-            <label>Phone Number *</label>
-            <input type="tel" id="bk-phone" placeholder="Enter 10-digit phone number" maxlength="10">
+            <input type="text" value="Bali" readonly>
           </div>
           <div class="bk-row">
             <div class="bk-field" style="margin:0">
-              <label>Package Price</label>
-              <input type="text" value="&#8377;75,000 / person" readonly>
+              <label>No. of Adults *</label>
+              <input type="number" id="bk-adults" placeholder="e.g. 2" min="1" max="50">
             </div>
             <div class="bk-field" style="margin:0">
-              <label>No. of Travelers *</label>
-              <input type="number" id="bk-travelers" placeholder="e.g. 2" min="1" max="50">
+              <label>No. of Children</label>
+              <input type="number" id="bk-children" placeholder="e.g. 0" min="0" max="20">
             </div>
           </div>
-          <button class="bk-submit" id="bk-submit">Confirm Booking</button>
+          <div class="bk-field">
+            <label>Phone Number *</label>
+            <input type="tel" id="bk-phone" placeholder="Enter 10-digit phone number" maxlength="10" inputmode="numeric">
+          </div>
+          <div class="bk-field">
+            <label>Email Address *</label>
+            <input type="email" id="bk-email" placeholder="Enter your email address" autocomplete="email">
+          </div>
+          <button class="bk-submit" id="bk-submit"><i class="fa-solid fa-paper-plane"></i> &nbsp;Confirm Booking</button>
         </div>
         <div class="bk-thankyou" id="bk-thankyou">
           <div class="ty-icon">✅</div>
@@ -339,32 +411,38 @@
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 
-    overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
+    const nameEl   = overlay.querySelector('#bk-name');
+    const adultsEl = overlay.querySelector('#bk-adults');
+    const childEl  = overlay.querySelector('#bk-children');
+    const phoneEl  = overlay.querySelector('#bk-phone');
+    const emailEl  = overlay.querySelector('#bk-email');
+
+    nameEl.addEventListener('input',  function(){ this.value=this.value.replace(/[^A-Za-z\s]/g,''); resetBorder(this); });
+    phoneEl.addEventListener('input', function(){ this.value=this.value.replace(/[^0-9]/g,''); resetBorder(this); });
+    [adultsEl,childEl,emailEl].forEach(el=>el.addEventListener('input',()=>resetBorder(el)));
+
     overlay.querySelector('#bk-close').addEventListener('click', closePopup);
+    overlay.addEventListener('click', e=>{ if(e.target===overlay) closePopup(); });
     overlay.querySelector('#bk-done-btn').addEventListener('click', closePopup);
 
-    const nameEl = overlay.querySelector('#bk-name');
-    const phoneEl = overlay.querySelector('#bk-phone');
-    const travelersEl = overlay.querySelector('#bk-travelers');
-
-    nameEl.addEventListener('input', function(){ this.value = this.value.replace(/[^A-Za-z\s]/g,''); });
-    phoneEl.addEventListener('input', function(){ this.value = this.value.replace(/[^0-9]/g,''); });
-
-    overlay.querySelector('#bk-submit').addEventListener('click', () => {
-      const name = nameEl.value.trim();
+    overlay.querySelector('#bk-submit').addEventListener('click', ()=>{
+      let ok = true;
+      const name  = nameEl.value.trim();
       const phone = phoneEl.value.trim();
-      const travelers = travelersEl.value;
-      if (!name || !/^[A-Za-z\s]+$/.test(name)) { nameEl.style.borderColor='#F04438'; nameEl.focus(); return; }
-      if (!phone || !/^[0-9]{10}$/.test(phone)) { phoneEl.style.borderColor='#F04438'; phoneEl.focus(); return; }
-      if (!travelers || parseInt(travelers) < 1) { travelersEl.style.borderColor='#F04438'; travelersEl.focus(); return; }
-      overlay.querySelector('#bk-form-wrap').style.display = 'none';
-      overlay.querySelector('#bk-thankyou').style.display = 'block';
+      const email = emailEl.value.trim();
+      const adults= parseInt(adultsEl.value)||0;
+      if(!name  || !/^[A-Za-z\s]+$/.test(name))            { markErr(nameEl);   ok=false; }
+      if(!phone || !/^[0-9]{10}$/.test(phone))              { markErr(phoneEl);  ok=false; }
+      if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ markErr(emailEl); ok=false; }
+      if(adults < 1)                                         { markErr(adultsEl); ok=false; }
+      if(!ok) return;
+      overlay.querySelector('#bk-form-wrap').style.display='none';
+      overlay.querySelector('#bk-thankyou').style.display='block';
     });
 
-    function closePopup() {
-      overlay.remove();
-      document.body.style.overflow = '';
-    }
+    function markErr(el){ el.style.borderColor='#F04438'; el.focus(); }
+    function resetBorder(el){ el.style.borderColor=''; }
+    function closePopup(){ overlay.remove(); document.body.style.overflow=''; }
   }
 </script>
 </body>

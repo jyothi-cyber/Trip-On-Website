@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers – Trip On</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4.0">
+  <style>
+    .sub-hero{background:linear-gradient(135deg,#0E5A36,#1a7a4a);padding:160px 0 80px;text-align:center;position:relative;overflow:hidden;}
+    .sub-hero::before{content:'';position:absolute;inset:0;background:url('assets/images/bggg.png') center/cover no-repeat;opacity:0.12;}
+    .sub-hero-content{position:relative;z-index:2;}
+    .sub-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:8px 20px;border-radius:999px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;}
+    .sub-hero h1{font-family:'Poppins',sans-serif;font-size:52px;font-weight:800;color:#fff;margin-bottom:14px;line-height:1.1;}
+    .sub-hero p{font-family:'Poppins',sans-serif;font-size:18px;color:rgba(255,255,255,0.85);max-width:560px;margin:0 auto;line-height:1.6;}
+    .perks-section{padding:80px 0;background:#fafdfb;}
+    .section-head{text-align:center;margin-bottom:48px;}
+    .sec-badge{display:inline-block;background:#E6F3EC;color:#0E5A36;font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:999px;margin-bottom:12px;}
+    .sec-title{font-family:'Poppins',sans-serif;font-size:40px;font-weight:800;color:#101828;margin-bottom:10px;line-height:1.15;}
+    .sec-sub{font-family:'Poppins',sans-serif;font-size:16px;color:#667085;max-width:520px;margin:0 auto;line-height:1.6;}
+    .perks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .perk-card{background:#fff;border-radius:20px;padding:32px;border:1px solid #e8f0eb;box-shadow:0 4px 16px rgba(14,90,54,0.06);text-align:center;transition:transform 0.3s,box-shadow 0.3s;}
+    .perk-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(14,90,54,0.12);}
+    .perk-icon{width:60px;height:60px;border-radius:50%;background:#E6F3EC;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;color:#0E5A36;}
+    .perk-card h3{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:#101828;margin-bottom:8px;}
+    .perk-card p{font-family:'Poppins',sans-serif;font-size:14px;color:#667085;line-height:1.7;}
+    .roles-section{padding:80px 0;background:#fff;}
+    .no-roles-card{background:linear-gradient(135deg,#fafdfb,#E6F3EC);border-radius:24px;padding:60px 40px;text-align:center;border:2px dashed #0E5A36;}
+    .no-roles-icon{font-size:64px;color:#0E5A36;margin-bottom:24px;}
+    .no-roles-card h2{font-family:'Poppins',sans-serif;font-size:32px;font-weight:800;color:#101828;margin-bottom:12px;}
+    .no-roles-card p{font-family:'Poppins',sans-serif;font-size:16px;color:#667085;max-width:520px;margin:0 auto 28px;line-height:1.7;}
+    .notify-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:480px;margin:0 auto;}
+    .notify-input{flex:1;min-width:220px;padding:13px 18px;border:1.5px solid #e2ede8;border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;color:#344054;outline:none;background:#fff;}
+    .notify-input:focus{border-color:#0E5A36;box-shadow:0 0 0 3px rgba(14,90,54,0.08);}
+    .notify-btn{padding:13px 28px;background:linear-gradient(135deg,#0E5A36,#16A34A);color:#fff;border:none;border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.3s;white-space:nowrap;}
+    .notify-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(14,90,54,0.28);}
+    .culture-section{padding:80px 0;background:#fafdfb;}
+    .culture-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+    .culture-img img{width:100%;height:380px;object-fit:cover;display:block;cursor:zoom-in;transition:transform 0.3s ease;}
+    .culture-img img:hover{transform:scale(1.03);}
+    .culture-img{border-radius:24px;overflow:hidden;box-shadow:0 16px 48px rgba(14,90,54,0.12);}
+    .culture-text h2{font-family:'Poppins',sans-serif;font-size:36px;font-weight:800;color:#101828;margin-bottom:14px;line-height:1.2;}
+    .culture-text p{font-family:'Poppins',sans-serif;font-size:16px;color:#667085;line-height:1.8;margin-bottom:14px;}
+    @media(max-width:768px){.perks-grid{grid-template-columns:1fr;}.culture-grid{grid-template-columns:1fr;gap:28px;}.sub-hero h1{font-size:36px;}.sec-title{font-size:28px;}}
+    @media(max-width:480px){.sub-hero h1{font-size:28px;}.no-roles-card{padding:40px 24px;}}
+
+    /* ── Booking Modal ── */
+    .bm-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:10000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s ease;}
+    .bm-overlay.active{opacity:1;visibility:visible;}
+    .bm-modal{background:#fff;border-radius:24px;max-width:500px;width:92%;max-height:90vh;overflow-y:auto;padding:40px;position:relative;transform:scale(0.9) translateY(20px);transition:all 0.3s ease;}
+    .bm-overlay.active .bm-modal{transform:scale(1) translateY(0);}
+    .bm-modal-close{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;background:#f3f4f6;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.3s;}
+    .bm-modal-close:hover{background:#e5e7eb;transform:rotate(90deg);}
+    .bm-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0E5A36,#16A34A);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;color:#fff;}
+    .bm-modal h3{font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:#101828;text-align:center;margin-bottom:8px;}
+    .bm-modal .bm-sub{font-family:'Poppins',sans-serif;font-size:14px;color:#667085;text-align:center;margin-bottom:28px;}
+    .bm-group{margin-bottom:18px;}
+    .bm-group label{display:block;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;color:#344054;margin-bottom:7px;}
+    .bm-group input,.bm-group select{width:100%;padding:12px 16px;border:1.5px solid #e2ede8;border-radius:12px;font-family:'Poppins',sans-serif;font-size:14px;color:#101828;background:#fff;transition:border-color 0.2s;}
+    .bm-group input:focus,.bm-group select:focus{outline:none;border-color:#0E5A36;box-shadow:0 0 0 3px rgba(14,90,54,0.1);}
+    .bm-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .bm-submit-btn{width:100%;padding:14px;background:linear-gradient(135deg,#0E5A36,#16A34A);color:#fff;border:none;border-radius:999px;font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;transition:all 0.3s;}
+    .bm-submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(14,90,54,0.3);}
+    .bm-ty{display:none;text-align:center;}
+    .bm-ty.active{display:block;}
+    .bm-ty-icon{width:80px;height:80px;border-radius:50%;background:#E6F3EC;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:36px;color:#0E5A36;}
+    .bm-ty h3{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:#101828;margin-bottom:10px;}
+    .bm-ty p{font-family:'Poppins',sans-serif;font-size:15px;color:#667085;line-height:1.6;margin-bottom:24px;}
+    .bm-summary{background:#fafdfb;border-radius:16px;padding:20px;margin-bottom:24px;text-align:left;}
+    .bm-srow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #e2ede8;}
+    .bm-srow:last-child{border-bottom:none;}
+    .bm-srow span{font-family:'Poppins',sans-serif;font-size:13px;color:#667085;}
+    .bm-srow strong{font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:#101828;text-align:right;max-width:60%;}
+    /* ── Lightbox ── */
+    .lb-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;animation:lbFadeIn 0.2s ease;}
+    @keyframes lbFadeIn{from{opacity:0}to{opacity:1}}
+    .lb-overlay img{max-width:90vw;max-height:88vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);object-fit:contain;cursor:default;}
+    .lb-close{position:absolute;top:18px;right:22px;color:#fff;font-size:36px;cursor:pointer;line-height:1;opacity:0.85;transition:opacity 0.2s;}
+    .lb-close:hover{opacity:1;}
+    @media(max-width:480px){.bm-row{grid-template-columns:1fr;}.bm-modal{padding:24px;}}
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header id="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><img src="assets/images/tripon-logo.png" alt="Trip On logo"/></a>
+      <nav class="nav-links"><a href="people-reviews.html" target="_blank">People Reviews</a><a href="packages.html" target="_blank">Packages</a></nav>
+      <button class="nav-btn" id="contact-us-btn">Book a Trip</button>
+      <div class="menu-toggle" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></div>
+    </div>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+      <div class="mobile-menu-content">
+        <button class="mobile-close-btn" id="mobile-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <nav class="mobile-nav-links"><a href="people-reviews.html" target="_blank">People Reviews</a><a href="packages.html" target="_blank">Packages</a><a href="#" class="mobile-contact-btn" id="mobile-book-trip-btn">Book a Trip</a></nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="sub-hero">
+    <div class="container sub-hero-content">
+      <div class="sub-badge"><i class="fa-solid fa-plane-departure"></i> Careers</div>
+      <h1>Work With Trip On</h1>
+      <p>Join a team that turns travel dreams into reality. We're always looking for passionate people who love Bali.</p>
+    </div>
+  </section>
+
+  <!-- PERKS -->
+  <section class="perks-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="sec-badge">Why Join Us</span>
+        <h2 class="sec-title">Life at Trip On</h2>
+        <p class="sec-sub">We believe great travel experiences start with a great team. Here's what makes working here special.</p>
+      </div>
+      <div class="perks-grid">
+        <div class="perk-card"><div class="perk-icon"><i class="fa-solid fa-earth-asia"></i></div><h3>Travel Perks</h3><p>Explore Bali yourself with complimentary trips, discounted packages, and exclusive access to partner resorts.</p></div>
+        <div class="perk-card"><div class="perk-icon"><i class="fa-solid fa-laptop"></i></div><h3>Flexible Work</h3><p>Work from anywhere — our team operates remotely and from our Bali office. We trust you to get things done.</p></div>
+        <div class="perk-card"><div class="perk-icon"><i class="fa-solid fa-graduation-cap"></i></div><h3>Learning & Growth</h3><p>Regular training, workshops, and mentorship programs to help you grow professionally and personally.</p></div>
+        <div class="perk-card"><div class="perk-icon"><i class="fa-solid fa-heart"></i></div><h3>Passionate Team</h3><p>Work alongside people who genuinely love travel and culture. The energy here is contagious.</p></div>
+        <div class="perk-card"><div class="perk-icon"><i class="fa-solid fa-coins"></i></div><h3>Competitive Pay</h3><p>Fair compensation, performance bonuses, and commissions for our sales and guide team members.</p></div>
+        <div class="perk-card"><div class="perk-icon"><i class="fa-solid fa-users"></i></div><h3>Tight-Knit Culture</h3><p>Small, agile team where every voice matters. Your ideas directly shape how we serve our travelers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN ROLES -->
+  <section class="roles-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="sec-badge">Open Positions</span>
+        <h2 class="sec-title">Current Openings</h2>
+      </div>
+      <div class="no-roles-card">
+        <div class="no-roles-icon"><i class="fa-solid fa-plane-departure"></i></div>
+        <h2>Our Team Is Out Exploring!</h2>
+        <p>We don't have any open positions right now — our hiring team is literally on a trip in Bali! But great talent is always welcome. Drop us your details and we'll reach out when a role opens up.</p>
+        <form class="notify-form" id="notify-form">
+          <input type="email" class="notify-input" id="notify-email" placeholder="Enter your email address" required>
+          <button type="submit" class="notify-btn"><i class="fa-solid fa-bell"></i> Notify Me</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE -->
+  <section class="culture-section">
+    <div class="container">
+      <div class="culture-grid">
+        <div class="culture-img"><img src="assets/images/festival.png" alt="Bali culture and work" class="lb-img"></div>
+        <div class="culture-text">
+          <span class="sec-badge">Our Culture</span>
+          <h2>A Workplace Inspired by Bali</h2>
+          <p>Imagine starting your Monday with a team meeting overlooking rice terraces. That's the Trip On experience. We bring the Balinese philosophy of <em>Tri Hita Karana</em> — harmony with people, nature, and the divine — into everything we do.</p>
+          <p>Our team is diverse, creative, and deeply connected to the places we serve. We celebrate each other's wins, learn from setbacks, and always keep the traveler at the center of every decision.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram">
+    <div class="heading"><h2>Instagram</h2><p>Follow Us On <span class="tripon-clickable" id="insta-handle" style="cursor:pointer;">@tripon</span></p></div>
+    <div class="insta-slider-wrapper"><div class="insta-slider-track">
+      <div class="insta-slide"><img src="assets/images/image1.png" alt="Bali 1" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image2.png" alt="Bali 2" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image3.png" alt="Bali 3" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image4.png" alt="Bali 4" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image5.png" alt="Bali 5" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image1.png" alt="Bali 1" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image2.png" alt="Bali 2" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image3.png" alt="Bali 3" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image4.png" alt="Bali 4" class="lb-img" style="cursor:pointer;"></div>
+      <div class="insta-slide"><img src="assets/images/image5.png" alt="Bali 5" class="lb-img" style="cursor:pointer;"></div>
+    </div></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-logo"><a href="index.html" class="logo"><img src="assets/images/tripon-logo.png" alt="Trip On logo"/></a></div>
+      <div class="footer-nav">
+        <div class="footer-column"><a href="about.html" target="_blank">About</a><a href="blogs-page.html" target="_blank">Blogs</a></div>
+        <div class="footer-column"><a href="locations-page.html" target="_blank">Locations</a><a href="packages.html" target="_blank">Packages</a></div>
+        <div class="footer-column"><a href="careers.html">Careers</a><a href="contact.html" target="_blank">Contact Us</a></div>
+      </div>
+      <div class="footer-social"><h4>FOLLOW OUR TRAVELER COMMUNITY</h4>
+        <div class="social-icons">
+          <i class="fa-brands fa-x-twitter" onclick="window.open('https://twitter.com/tripon','_blank')" style="cursor:pointer;"></i>
+          <i class="fa-brands fa-facebook" onclick="window.open('https://facebook.com/tripon','_blank')" style="cursor:pointer;"></i>
+          <i class="fa-brands fa-instagram" onclick="window.open('https://instagram.com/tripon','_blank')" style="cursor:pointer;"></i>
+          <i class="fa-brands fa-youtube" onclick="window.open('https://youtube.com/@tripon','_blank')" style="cursor:pointer;"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="toast-notification" id="toast-notification"><i class="fa-solid fa-circle-check"></i><span id="toast-text">Success!</span></div>
+
+  <!-- ══════════ BOOKING MODAL ══════════ -->
+  <div class="bm-overlay" id="bm-overlay" role="dialog" aria-modal="true" aria-labelledby="bm-title">
+    <div class="bm-modal">
+      <button class="bm-modal-close" id="bm-modal-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+
+      <!-- Form view -->
+      <div id="bm-form-view">
+        <div class="bm-icon"><i class="fa-solid fa-plane-departure"></i></div>
+        <h3 id="bm-title">Book Your Bali Trip</h3>
+        <p class="bm-sub">Fill in your details and we'll plan the perfect trip for you!</p>
+        <form id="bm-form" novalidate>
+          <div class="bm-group">
+            <label for="bm-name">Full Name *</label>
+            <input type="text" id="bm-name" placeholder="Enter your full name" autocomplete="name" required>
+          </div>
+          <div class="bm-group">
+            <label for="bm-email">Email Address *</label>
+            <input type="email" id="bm-email" placeholder="Enter your email" autocomplete="email" required>
+          </div>
+          <div class="bm-group">
+            <label for="bm-phone">Phone Number *</label>
+            <input type="tel" id="bm-phone" placeholder="Enter your phone number" inputmode="numeric" maxlength="15" required>
+          </div>
+          <div class="bm-row">
+            <div class="bm-group">
+              <label for="bm-travelers">No. of Travelers *</label>
+              <select id="bm-travelers" required>
+                <option value="">Select</option>
+                <option>1 Person</option><option>2 Persons</option>
+                <option>3 Persons</option><option>4 Persons</option>
+                <option>5+ Persons</option>
+              </select>
+            </div>
+            <div class="bm-group">
+              <label for="bm-duration">Trip Duration *</label>
+              <select id="bm-duration" required>
+                <option value="">Select</option>
+                <option>3 Days</option><option>4 Days</option>
+                <option>5 Days</option><option>6 Days</option>
+                <option>7 Days</option><option>Custom</option>
+              </select>
+            </div>
+          </div>
+          <div class="bm-group">
+            <label for="bm-date">Travel Date *</label>
+            <input type="date" id="bm-date" required>
+          </div>
+          <button type="submit" class="bm-submit-btn">
+            <i class="fa-solid fa-paper-plane"></i> Submit Booking
+          </button>
+        </form>
+      </div>
+
+      <!-- Thank You view -->
+      <div class="bm-ty" id="bm-ty">
+        <div class="bm-ty-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h3>Thank You for Your Information!</h3>
+        <p>We've received your booking details. Our travel experts will contact you shortly to confirm your trip.</p>
+        <div class="bm-summary">
+          <div class="bm-srow"><span><i class="fa-solid fa-user"></i>&nbsp; Name</span><strong id="ts-name">—</strong></div>
+          <div class="bm-srow"><span><i class="fa-solid fa-envelope"></i>&nbsp; Email</span><strong id="ts-email">—</strong></div>
+          <div class="bm-srow"><span><i class="fa-solid fa-phone"></i>&nbsp; Phone</span><strong id="ts-phone">—</strong></div>
+          <div class="bm-srow"><span><i class="fa-solid fa-users"></i>&nbsp; Travelers</span><strong id="ts-travelers">—</strong></div>
+          <div class="bm-srow"><span><i class="fa-solid fa-clock"></i>&nbsp; Duration</span><strong id="ts-duration">—</strong></div>
+          <div class="bm-srow"><span><i class="fa-solid fa-calendar"></i>&nbsp; Travel Date</span><strong id="ts-date">—</strong></div>
+        </div>
+        <button class="bm-submit-btn" id="bm-done-btn"><i class="fa-solid fa-check"></i>&nbsp; Done</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // ── Sticky header ──
+    const siteHeader = document.getElementById('site-header');
+    window.addEventListener('scroll', () => siteHeader.classList.toggle('header-scrolled', window.scrollY > 100));
+
+    // ── Mobile menu ──
+    const mo = document.getElementById('mobile-menu-overlay');
+    function openMM()  { mo.classList.add('active');    document.body.style.overflow = 'hidden'; }
+    function closeMM() { mo.classList.remove('active'); document.body.style.overflow = ''; }
+    document.getElementById('mobile-menu-btn').addEventListener('click', openMM);
+    document.getElementById('mobile-close-btn').addEventListener('click', closeMM);
+    mo.addEventListener('click', e => { if (e.target === mo) closeMM(); });
+
+    // ── Toast ──
+    function showToast(m) {
+      const t = document.getElementById('toast-notification');
+      document.getElementById('toast-text').textContent = m;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3500);
+    }
+
+    // ══════════ BOOKING MODAL ══════════
+    const bmOverlay   = document.getElementById('bm-overlay');
+    const bmModalClose= document.getElementById('bm-modal-close');
+    const bmFormView  = document.getElementById('bm-form-view');
+    const bmTy        = document.getElementById('bm-ty');
+    const bmDoneBtn   = document.getElementById('bm-done-btn');
+    const bmForm      = document.getElementById('bm-form');
+
+    function openBM() {
+      bmOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      bmFormView.style.display = 'block';
+      bmTy.classList.remove('active');
+      bmForm.reset();
+    }
+    function closeBM() {
+      bmOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Header "Book a Trip" button
+    document.getElementById('contact-us-btn').addEventListener('click', openBM);
+
+    // Mobile menu "Book a Trip" button
+    const mobileBookBtn = document.getElementById('mobile-book-trip-btn');
+    if (mobileBookBtn) {
+      mobileBookBtn.addEventListener('click', e => {
+        e.preventDefault();
+        closeMM();
+        openBM();
+      });
+    }
+
+    bmModalClose.addEventListener('click', closeBM);
+    bmDoneBtn.addEventListener('click', closeBM);
+    bmOverlay.addEventListener('click', e => { if (e.target === bmOverlay) closeBM(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeBM(); closeLB(); } });
+
+    // Name – letters only
+    document.getElementById('bm-name').addEventListener('input', function () {
+      this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+    });
+    // Phone – digits only
+    document.getElementById('bm-phone').addEventListener('input', function () {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    // Set min date = today
+    document.getElementById('bm-date').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+    bmForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name      = document.getElementById('bm-name').value.trim();
+      const email     = document.getElementById('bm-email').value.trim();
+      const phone     = document.getElementById('bm-phone').value.trim();
+      const travelers = document.getElementById('bm-travelers').value;
+      const duration  = document.getElementById('bm-duration').value;
+      const date      = document.getElementById('bm-date').value;
+
+      if (!name || !/^[A-Za-z\s]+$/.test(name))           { showToast('⚠️ Enter a valid name (letters only)'); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('⚠️ Enter a valid email address'); return; }
+      if (!phone || !/^[0-9]{7,15}$/.test(phone))          { showToast('⚠️ Enter a valid phone number');      return; }
+      if (!travelers) { showToast('⚠️ Please select number of travelers'); return; }
+      if (!duration)  { showToast('⚠️ Please select a trip duration');     return; }
+      if (!date)      { showToast('⚠️ Please select a travel date');        return; }
+
+      document.getElementById('ts-name').textContent      = name;
+      document.getElementById('ts-email').textContent     = email;
+      document.getElementById('ts-phone').textContent     = phone;
+      document.getElementById('ts-travelers').textContent = travelers;
+      document.getElementById('ts-duration').textContent  = duration;
+      document.getElementById('ts-date').textContent      = new Date(date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      bmFormView.style.display = 'none';
+      bmTy.classList.add('active');
+    });
+
+    // ══════════ LIGHTBOX ══════════
+    let currentLB = null;
+
+    function openLB(src, alt) {
+      closeLB();
+      const overlay = document.createElement('div');
+      overlay.className = 'lb-overlay';
+      overlay.innerHTML = `<span class="lb-close" title="Close">&times;</span><img src="${src}" alt="${alt || ''}">`;
+      document.body.appendChild(overlay);
+      document.body.style.overflow = 'hidden';
+      currentLB = overlay;
+
+      overlay.querySelector('.lb-close').addEventListener('click', closeLB);
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeLB(); });
+    }
+
+    function closeLB() {
+      if (currentLB && currentLB.parentNode) {
+        currentLB.parentNode.removeChild(currentLB);
+        document.body.style.overflow = '';
+        currentLB = null;
+      }
+    }
+
+    // Attach lightbox to all .lb-img images
+    document.querySelectorAll('img.lb-img').forEach(img => {
+      img.addEventListener('click', function () {
+        openLB(this.src, this.alt);
+      });
+    });
+
+    // ══════════ INSTAGRAM handle click ══════════
+    const instaHandle = document.getElementById('insta-handle');
+    if (instaHandle) {
+      instaHandle.addEventListener('click', () => {
+        window.open('https://www.instagram.com/tripon', '_blank', 'noopener,noreferrer');
+      });
+    }
+
+    // ══════════ NOTIFY FORM ══════════
+    document.getElementById('notify-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('notify-email').value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast('⚠️ Please enter a valid email');
+        return;
+      }
+      showToast("🔔 Great! We'll notify you when a role opens up.");
+      document.getElementById('notify-form').reset();
+    });
+
+    // ══════════ FOOTER SOCIAL ICONS ══════════
+    const socials = {
+      'footer-twitter':   'https://twitter.com/tripon',
+      'footer-facebook':  'https://facebook.com/tripon',
+      'footer-instagram': 'https://instagram.com/tripon',
+      'footer-youtube':   'https://youtube.com/@tripon'
+    };
+    document.querySelectorAll('.footer-social .social-icons i').forEach(icon => {
+      icon.style.cursor = 'pointer';
+    });
+
+    // Logo clicks
+    document.querySelectorAll('.footer-logo a, .logo').forEach(a => {
+      if (!a.getAttribute('href') || a.getAttribute('href') === '#') {
+        a.style.cursor = 'pointer';
+      }
+    });
+  </script>
+</body>
+</html>

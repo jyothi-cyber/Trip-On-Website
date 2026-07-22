@@ -789,6 +789,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .adventure-card {
   background-color: var(--bg-white);
   border: 1px solid var(--border-color);
+  cursor: pointer;
   border-radius: var(--border-radius-lg);
   padding: 20px 24px;
   transition: var(--transition);
@@ -2328,6 +2329,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .banner .banner-img-pool {
   width: 250px;
   height: 165px;
+  cursor: pointer;
   object-fit: cover;
   border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -2338,6 +2340,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .banner .banner-img-collage {
   width: 320px;
   height: 180px;
+  cursor: pointer;
   object-fit: cover;
   border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -2347,6 +2350,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .banner .banner-img-statue {
   width: 200px;
   height: 250px;
+  cursor: pointer;
   object-fit: cover;
   border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -2356,6 +2360,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .banner .banner-img-resort {
   width: 260px;
   height: 170px;
+  cursor: pointer;
   object-fit: cover;
   border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -2777,6 +2782,7 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .blog-card {
   background: #fff;
   border: 1px solid #E4E7EC;
+  cursor: pointer;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   box-sizing: border-box;
@@ -3220,6 +3226,7 @@ footer {
   font-size: 16px;
   font-weight: 400;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .footer-column a:hover {
@@ -8629,5 +8636,660 @@ input[type="number"] {
     max-width: 340px !important;
     font-size: 18px !important;
     height: 52px !important;
+  }
+}
+
+/* =============================================
+   BOOK A TRIP MODAL (bat-*)
+============================================= */
+.bat-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9800;
+  background: rgba(0, 0, 0, 0.58);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.bat-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bat-modal {
+  position: relative;
+  background: #ffffff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 40px 36px 32px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.22);
+  transform: scale(0.9) translateY(24px);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  scrollbar-width: thin;
+  scrollbar-color: #d0d5dd transparent;
+}
+
+.bat-modal::-webkit-scrollbar {
+  width: 4px;
+}
+.bat-modal::-webkit-scrollbar-thumb {
+  background: #d0d5dd;
+  border-radius: 4px;
+}
+
+.bat-overlay.active .bat-modal {
+  transform: scale(1) translateY(0);
+}
+
+/* Close button */
+.bat-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f2f4f7;
+  color: #667085;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.bat-close:hover {
+  background: #e0e0e0;
+  color: var(--text-dark);
+  transform: rotate(90deg);
+}
+
+/* Header */
+.bat-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.bat-header-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), #16A34A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  box-shadow: 0 8px 22px rgba(14, 90, 54, 0.28);
+  animation: batIconFloat 3s ease-in-out infinite;
+}
+
+@keyframes batIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+.bat-header-icon i {
+  font-size: 26px;
+  color: #ffffff;
+}
+
+.bat-title {
+  font-family: var(--font-main);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.bat-subtitle {
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* Field group */
+.bat-field-group {
+  margin-bottom: 18px;
+}
+
+.bat-field-group label {
+  display: block;
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  color: #344054;
+  margin-bottom: 6px;
+}
+
+.bat-required {
+  color: #e53935;
+}
+
+.bat-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f7fbf9;
+  border: 1.5px solid #e2ede8;
+  border-radius: 12px;
+  padding: 11px 14px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.bat-input-wrap:focus-within {
+  border-color: var(--primary-color);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(14, 90, 54, 0.08);
+}
+
+.bat-input-wrap.bat-error-field {
+  border-color: #e53935;
+  background: #fff5f5;
+}
+
+.bat-field-icon {
+  color: var(--primary-color);
+  font-size: 14px;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.bat-input-wrap input,
+.bat-input-wrap select {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: var(--text-dark);
+  outline: none;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.bat-input-wrap input::placeholder {
+  color: #aab5af;
+}
+
+.bat-input-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+/* Error message */
+.bat-error {
+  display: none;
+  font-family: var(--font-main);
+  font-size: 11.5px;
+  color: #e53935;
+  margin-top: 4px;
+  margin-left: 2px;
+}
+
+.bat-error.visible {
+  display: block;
+}
+
+/* Two-column row */
+.bat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Submit button */
+.bat-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 0;
+  background: linear-gradient(135deg, var(--primary-color), #16A34A);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 8px 22px rgba(14, 90, 54, 0.28);
+  margin-top: 6px;
+}
+
+.bat-submit-btn:hover {
+  background: linear-gradient(135deg, var(--primary-hover), #0E9A3A);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(14, 90, 54, 0.35);
+}
+
+.bat-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Book a Trip Calendar Picker ── */
+.bat-cal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.bat-cal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bat-cal-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  width: 340px;
+  max-width: 92vw;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.bat-cal-overlay.active .bat-cal-modal {
+  transform: scale(1);
+}
+
+.bat-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.bat-cal-month-year {
+  font-family: var(--font-main);
+  font-size: 17px;
+  font-weight: 700;
+  color: #101828;
+}
+
+.bat-cal-nav {
+  background: #f7fbf9;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--primary-color);
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+
+.bat-cal-nav:hover {
+  background: #DDF3EA;
+}
+
+.bat-cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.bat-cal-weekdays span {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 600;
+  color: #667085;
+  text-align: center;
+  padding: 6px 0;
+}
+
+.bat-cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 18px;
+}
+
+.bat-cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 500;
+  color: #101828;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.bat-cal-day:hover:not(.bat-cal-disabled):not(.bat-cal-other) {
+  background: #DDF3EA;
+  color: var(--primary-color);
+}
+
+.bat-cal-day.bat-cal-other {
+  color: #c3cdc8;
+  cursor: default;
+}
+
+.bat-cal-day.bat-cal-disabled {
+  color: #d0d5dd;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.bat-cal-day.bat-cal-today {
+  border: 2px solid var(--primary-color);
+  font-weight: 700;
+}
+
+.bat-cal-day.bat-cal-selected {
+  background: var(--primary-color);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.bat-cal-day.bat-cal-selected:hover {
+  background: var(--primary-hover);
+}
+
+.bat-cal-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.bat-cal-today-btn,
+.bat-cal-clear-btn {
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.bat-cal-today-btn {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.bat-cal-today-btn:hover {
+  background: var(--primary-hover);
+}
+
+.bat-cal-clear-btn {
+  background: #f7fbf9;
+  color: #344054;
+}
+
+.bat-cal-clear-btn:hover {
+  background: #e4e7ec;
+}
+
+/* ── Book a Trip Thank You Modal ── */
+.bat-ty-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9900;
+  background: rgba(0, 0, 0, 0.58);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.bat-ty-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bat-ty-modal {
+  position: relative;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 44px 36px 32px;
+  width: 100%;
+  max-width: 460px;
+  max-height: 92vh;
+  overflow-y: auto;
+  text-align: center;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.22);
+  transform: scale(0.88) translateY(24px);
+  transition: transform 0.42s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bat-ty-overlay.active .bat-ty-modal {
+  transform: scale(1) translateY(0);
+}
+
+.bat-ty-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f2f4f7;
+  color: #667085;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.bat-ty-close:hover {
+  background: #e0e0e0;
+  transform: rotate(90deg);
+}
+
+/* Animated tick */
+.bat-ty-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+}
+
+.bat-ty-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bat-ty-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: batCircle 0.6s ease 0.1s forwards;
+}
+
+.bat-ty-tick {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: batTick 0.4s ease 0.65s forwards;
+}
+
+@keyframes batCircle { to { stroke-dashoffset: 0; } }
+@keyframes batTick   { to { stroke-dashoffset: 0; } }
+
+.bat-ty-tag {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.bat-ty-title {
+  font-family: var(--font-main);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.bat-ty-sub {
+  font-family: var(--font-main);
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 22px;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Summary card */
+.bat-ty-summary {
+  background: #f7fbf9;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.bat-ty-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-family: var(--font-main);
+  font-size: 13px;
+}
+
+.bat-ty-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.bat-ty-row:first-child {
+  padding-top: 0;
+}
+
+.bat-ty-row span {
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bat-ty-row span i {
+  color: var(--primary-color);
+  font-size: 12px;
+  width: 13px;
+}
+
+.bat-ty-row strong {
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: 13px;
+  text-align: right;
+  max-width: 55%;
+}
+
+/* CTA button */
+.bat-ty-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 0;
+  background: linear-gradient(135deg, var(--primary-color), #16A34A);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 8px 22px rgba(14, 90, 54, 0.25);
+  margin-bottom: 10px;
+}
+
+.bat-ty-btn:hover {
+  background: linear-gradient(135deg, var(--primary-hover), #0E9A3A);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(14, 90, 54, 0.32);
+}
+
+.bat-ty-note {
+  font-family: var(--font-main);
+  font-size: 12px;
+  color: #aab5af;
+}
+
+/* ── Responsive ── */
+@media (max-width: 540px) {
+  .bat-modal {
+    padding: 32px 20px 26px;
+    border-radius: 20px;
+  }
+
+  .bat-title {
+    font-size: 22px;
+  }
+
+  .bat-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .bat-ty-modal {
+    padding: 36px 18px 26px;
+    border-radius: 20px;
+  }
+
+  .bat-ty-title {
+    font-size: 19px;
+  }
+
+  .bat-ty-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+
+  .bat-ty-row strong {
+    max-width: 100%;
+    text-align: left;
   }
 }

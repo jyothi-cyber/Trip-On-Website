@@ -6,9 +6,11 @@
   <title>6 Nights 7 Days Packages - Bali | Trip On</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=4.0">
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Poppins',sans-serif;background:#fff;color:#101828}a{text-decoration:none;color:inherit}
-    .pkg-nav{position:sticky;top:0;z-index:100;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:0 60px;height:70px;display:flex;align-items:center;justify-content:space-between}
+    .pkg-nav{display:none}
+    .card-img-wrap{cursor:pointer}
+    .card-img-wrap img{cursor:pointer}
     .pkg-nav-logo img{height:36px}
     .pkg-nav-links{display:flex;gap:32px;list-style:none}
     .pkg-nav-links a{font-size:15px;font-weight:500;color:#667085;transition:color .2s}
@@ -32,7 +34,6 @@
     .card-img-wrap{position:relative;height:200px;overflow:hidden}
     .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
     .pkg-card:hover .card-img-wrap img{transform:scale(1.06)}
-    .card-badge{position:absolute;top:12px;left:12px;background:#F79009;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px}
     .card-body{padding:20px}
     .card-loc{font-size:12px;color:#667085;margin-bottom:6px;display:flex;align-items:center;gap:6px}
     .card-loc i{color:#20664e}
@@ -50,15 +51,33 @@
   </style>
 </head>
 <body>
-<nav class="pkg-nav">
-  <div class="pkg-nav-logo"><a href="../index.html"><img src="../assets/images/tripon-logo.png" alt="Trip On"></a></div>
-  <ul class="pkg-nav-links">
-    <li><a href="../index.html#home">Bali</a></li>
-    <li><a href="../index.html#testimonials">People Reviews</a></li>
-    <li><a href="6-nights.html" class="active">Packages</a></li>
-  </ul>
-  <button class="pkg-nav-btn" onclick="window.location.href='../index.html'">Contact Us</button>
-</nav>
+<header id="site-header">
+  <div class="container nav-container">
+    <a href="../index.html" class="logo" aria-label="Trip On home">
+      <img src="../assets/images/tripon-logo.png" alt="Trip On logo" />
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="../people-reviews.html" target="_blank">People Reviews</a>
+      <a href="../packages.html" target="_blank" class="active">Packages</a>
+    </nav>
+    <button class="nav-btn" id="contact-us-btn">Book a Trip</button>
+    <div class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+    <div class="mobile-menu-content">
+      <button class="mobile-close-btn" id="mobile-close-btn" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <nav class="mobile-nav-links">
+        <a href="../people-reviews.html" target="_blank">People Reviews</a>
+        <a href="../packages.html" target="_blank">Packages</a>
+        <a href="#" class="mobile-contact-btn" id="mobile-book-trip-btn">Book a Trip</a>
+      </nav>
+    </div>
+  </div>
+</header>
 <div class="breadcrumb">
   <a href="../index.html">Home</a> &rsaquo; <a href="#">Destination</a> &rsaquo; <a href="#">Bali</a> &rsaquo; <span>Packages &mdash; 6 Nights 7 Days</span>
 </div>
@@ -76,13 +95,13 @@
 </div>
 <script>
 const CARDS = [
-  {img:'../assets/images/indonesia.png',badge:'15% off',loc:'Nusa Penida, Indonesia',title:'Isolated Mountains',rating:'4.8',count:'136',days:'5 Days',price:'&#8377;50,000',slug:'isolated-mountains'},
-  {img:'../assets/images/beach.png',badge:'12% off',loc:'Gili Trawangan, Indonesia',title:'The White Beach Land',rating:'4.8',count:'120',days:'6 Days',price:'&#8377;75,000',slug:'the-white-beach-land'}
+  {img:'../assets/images/indonesia.png',loc:'Nusa Penida, Indonesia',title:'Isolated Mountains',rating:'4.8',count:'136',days:'5 Days',price:'&#8377;50,000',slug:'isolated-mountains'},
+  {img:'../assets/images/beach.png',loc:'Gili Trawangan, Indonesia',title:'The White Beach Land',rating:'4.8',count:'120',days:'6 Days',price:'&#8377;75,000',slug:'the-white-beach-land'}
 ];
 const grid = document.getElementById('cards-grid');
 grid.innerHTML = CARDS.map(c => `
-  <div class="pkg-card" onclick="window.open('../packages/${c.slug}.html','_blank')">
-    <div class="card-img-wrap"><img src="${c.img}" alt="${c.title}"><span class="card-badge">${c.badge}</span></div>
+  <div class="pkg-card" onclick="window.open('${c.slug}.html','_blank')">
+    <div class="card-img-wrap"><img src="${c.img}" alt="${c.title}"></div>
     <div class="card-body">
       <div class="card-loc"><i class="fa-solid fa-location-dot"></i>${c.loc}</div>
       <div class="card-title">${c.title}</div>
@@ -92,36 +111,56 @@ grid.innerHTML = CARDS.map(c => `
         <div class="card-price"><span class="from">from</span><span class="amount">${c.price}</span></div>
       </div>
     </div>
-    <button class="card-btn">View Package</button>
+    <button class="card-btn" onclick="event.stopPropagation();window.open('${c.slug}.html','_blank')">View Package</button>
   </div>`).join('');
 </script>
-<footer id="footer" style="padding:40px 0;background:#ffffff;border-top:1px solid #e5e7eb;margin-top:40px;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;">
-    <div><h1 style="font-family:'Poppins',sans-serif;font-size:32px;color:#007846;font-weight:700;margin:0;">tripon</h1></div>
-    <nav style="display:flex;gap:60px;flex:1;justify-content:center;">
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">About</a>
-        <a href="../index.html#blogs" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Blogs</a>
+<style>
+  #footer{background:#fff;padding:48px 0 32px;border-top:1px solid #e5e7eb;margin-top:40px}
+  .footer-container{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+  .footer-logo img{height:36px;width:auto}
+  .footer-nav{display:flex;gap:60px;flex:1;justify-content:center;flex-wrap:wrap}
+  .footer-column{display:flex;flex-direction:column;gap:14px}
+  .footer-column a{font-family:'Poppins',sans-serif;font-size:15px;color:#667085;text-decoration:none;transition:color .2s}
+  .footer-column a:hover{color:#20664e}
+  .footer-social h4{font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;color:#667085;letter-spacing:0.6px;margin-bottom:14px}
+  .social-icons{display:flex;gap:16px}
+  .social-icons i{font-size:20px;color:#667085;cursor:pointer;transition:color .2s}
+  .social-icons i:hover{color:#20664e}
+  @media(max-width:768px){.footer-container{flex-direction:column;align-items:center;text-align:center}.footer-nav{justify-content:center}.social-icons{justify-content:center}}
+</style>
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-logo">
+      <a href="../index.html" aria-label="Trip On home">
+        <img src="../assets/images/tripon-logo.png" alt="Trip On logo" />
+      </a>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-column">
+        <a href="../about.html" target="_blank">About</a>
+        <a href="../index.html#blogs">Blogs</a>
       </div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="../index.html#services" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Locations</a>
-        <a href="../index.html#packages" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Packages</a>
+      <div class="footer-column">
+        <a href="../locations-page.html" target="_blank">Locations</a>
+        <a href="../packages.html" target="_blank">Packages</a>
       </div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Careers</a>
-        <a href="../index.html" style="font-family:'Poppins',sans-serif;color:#667085;font-size:16px;font-weight:400;text-decoration:none;">Contact Us</a>
+      <div class="footer-column">
+        <a href="../careers.html" target="_blank">Careers</a>
+        <a href="../contact.html" target="_blank">Contact Us</a>
       </div>
-    </nav>
-    <div style="text-align:right;">
-      <h4 style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#667085;margin:0 0 12px 0;letter-spacing:0.5px;">FOLLOW OUR TRAVELER COMMUNITY</h4>
-      <div style="display:flex;gap:16px;justify-content:flex-end;">
-        <i class="fa-brands fa-x-twitter" style="font-size:20px;color:#667085;cursor:pointer;"></i>
-        <i class="fa-brands fa-facebook" style="font-size:20px;color:#667085;cursor:pointer;"></i>
-        <i class="fa-brands fa-instagram" style="font-size:20px;color:#667085;cursor:pointer;"></i>
-        <i class="fa-brands fa-youtube" style="font-size:20px;color:#667085;cursor:pointer;"></i>
+    </div>
+    <div class="footer-social">
+      <h4>FOLLOW OUR TRAVELER COMMUNITY</h4>
+      <div class="social-icons">
+        <i class="fa-brands fa-x-twitter" onclick="window.open('https://twitter.com/tripon','_blank')"></i>
+        <i class="fa-brands fa-facebook" onclick="window.open('https://facebook.com/tripon','_blank')"></i>
+        <i class="fa-brands fa-instagram" onclick="window.open('https://instagram.com/tripon','_blank')"></i>
+        <i class="fa-brands fa-youtube" onclick="window.open('https://youtube.com/tripon','_blank')"></i>
       </div>
     </div>
   </div>
 </footer>
+<script src="../js/site-chrome.js"></script>
+<script>initSiteChrome({ base: '../' });</script>
 </body>
 </html>
