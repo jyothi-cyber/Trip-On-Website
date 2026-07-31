@@ -1321,8 +1321,8 @@
           <a href="blogscards.html" target="_blank" id="footer-blogs">Blogs</a>
         </div>
         <div class="footer-column">
-          <a href="locations-page.html" id="footer-locations">Locations</a>
-          <a href="packages.html" target="_blank" id="footer-packages">Packages</a>
+          <a href="javascript:void(0)" id="footer-locations">Locations</a>
+          <a href='/packages' id='footer-packages' target='_blank'>Packages</a>
         </div>
         <div class="footer-column">
           <a href="careers.html" id="footer-careers" target="_blank">Careers</a>
@@ -2454,10 +2454,10 @@
       });
     }
 
-    // Ask Custom Packages button
+    // Ask Custom Packages button - redirects to packages/custom.html
     if (askCustomBtn) {
       askCustomBtn.addEventListener('click', () => {
-        openCustomPackagesPopup();
+        window.open('packages/custom.html', '_blank');
       });
     }
     
@@ -3602,6 +3602,17 @@
 
     // ===== SCROLL ANIMATIONS =====
 
+    // ===== INSTAGRAM IMAGES - PREVENT REDIRECT & OPEN INSTAGRAM =====
+    document.querySelectorAll('.insta-slide img').forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // Open Instagram profile in new tab
+        window.open('https://www.instagram.com/tripon', '_blank', 'noopener,noreferrer');
+      });
+    });
+
     // ===== SCROLL ANIMATIONS =====
     const observerOptions = {
       threshold: 0.15,
@@ -4159,17 +4170,25 @@
       });
     }
 
-    // Locations - Opens locations-page.html in new tab
+    // Locations - Opens footer/locations-page.html in new tab
     const footerLocations = document.getElementById('footer-locations');
     if (footerLocations) {
       footerLocations.addEventListener('click', (e) => {
         e.preventDefault();
-        window.open('locations-page.html', '_blank');
+        window.open('footer/locations-page.html', '_blank');
       });
     }
 
-    // Packages - Direct navigation via href (no JS needed)
-    // The footer link has href="packages.html" target="_blank"
+    // Packages - Opens packages.html in new tab
+    const footerPackages = document.getElementById('footer-packages');
+    console.log('Footer Packages element:', footerPackages); // Debug log
+    if (footerPackages) {
+      footerPackages.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Packages link clicked!'); // Debug log
+        window.open('packages.html', '_blank');
+      });
+    }
 
     // Careers - Opens careers.html in new tab
     const footerCareers = document.getElementById('footer-careers');
@@ -4180,8 +4199,8 @@
       });
     }
 
-    // Contact Us - Direct navigation via href (no JS needed)
-    // The footer link has href="contact.html" target="_blank"
+    // Contact Us - Redirects to contact.html in new tab
+    // The footer link has href="contact.html" target="_blank" (no JS needed)
 
     // Blogs Confirmation Popup
     function showBlogsConfirmPopup() {

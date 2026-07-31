@@ -173,7 +173,197 @@
     </div>
   </footer>
   <div class="toast-notification" id="toast-notification"><i class="fa-solid fa-circle-check"></i><span id="toast-text">Success!</span></div>
+
+  <!-- Book a Trip Modal (Same as Homepage) -->
+  <div class="bat-overlay" id="bat-overlay" role="dialog" aria-modal="true" aria-labelledby="bat-title">
+    <div class="bat-modal" id="bat-modal">
+      <button class="bat-close" id="bat-close" aria-label="Close booking form">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Form View -->
+      <div class="bat-form-view" id="bat-form-view">
+        <div class="bat-header">
+          <div class="bat-header-icon">
+            <i class="fa-solid fa-plane-departure"></i>
+          </div>
+          <h2 class="bat-title" id="bat-title">Book a Trip</h2>
+          <p class="bat-subtitle">Fill in your details and we'll plan the perfect trip for you!</p>
+        </div>
+
+        <form id="bat-form" novalidate>
+          <!-- Name -->
+          <div class="bat-field-group">
+            <label for="bat-name">Full Name <span class="bat-required">*</span></label>
+            <div class="bat-input-wrap" id="bat-field-name">
+              <i class="fa-solid fa-user bat-field-icon"></i>
+              <input type="text" id="bat-name" placeholder="Enter your full name" autocomplete="name" required>
+            </div>
+            <span class="bat-error" id="bat-name-error">Please enter a valid name (letters only)</span>
+          </div>
+
+          <!-- Destination -->
+          <div class="bat-field-group">
+            <label for="bat-destination">Destination <span class="bat-required">*</span></label>
+            <div class="bat-input-wrap" id="bat-field-destination">
+              <i class="fa-solid fa-location-dot bat-field-icon"></i>
+              <select id="bat-destination" required>
+                <option value="">Select a destination</option>
+                <option value="Bali" selected>Bali</option>
+              </select>
+            </div>
+            <span class="bat-error" id="bat-destination-error">Please select a destination</span>
+          </div>
+
+          <!-- Phone -->
+          <div class="bat-field-group">
+            <label for="bat-phone">Phone Number <span class="bat-required">*</span></label>
+            <div class="bat-input-wrap" id="bat-field-phone">
+              <i class="fa-solid fa-phone bat-field-icon"></i>
+              <input type="tel" id="bat-phone" placeholder="Enter your phone number" inputmode="numeric" maxlength="15" required>
+            </div>
+            <span class="bat-error" id="bat-phone-error">Please enter a valid phone number (digits only)</span>
+          </div>
+
+          <!-- Two-column row: Days + People -->
+          <div class="bat-row">
+            <!-- How many days -->
+            <div class="bat-field-group">
+              <label for="bat-days">No. of Days <span class="bat-required">*</span></label>
+              <div class="bat-input-wrap" id="bat-field-days">
+                <i class="fa-solid fa-calendar-days bat-field-icon"></i>
+                <select id="bat-days" required>
+                  <option value="">Select days</option>
+                  <option value="3 Days">3 Days</option>
+                  <option value="4 Days">4 Days</option>
+                  <option value="5 Days">5 Days</option>
+                  <option value="6 Days">6 Days</option>
+                  <option value="7 Days">7 Days</option>
+                  <option value="8 Days">8 Days</option>
+                  <option value="9 Days">9 Days</option>
+                  <option value="10 Days">10 Days</option>
+                  <option value="10+ Days">10+ Days</option>
+                </select>
+              </div>
+              <span class="bat-error" id="bat-days-error">Please select trip duration</span>
+            </div>
+
+            <!-- No. of People -->
+            <div class="bat-field-group">
+              <label for="bat-people">No. of People <span class="bat-required">*</span></label>
+              <div class="bat-input-wrap" id="bat-field-people">
+                <i class="fa-solid fa-users bat-field-icon"></i>
+                <select id="bat-people" required>
+                  <option value="">Select travelers</option>
+                  <option value="1 Person">1 Person</option>
+                  <option value="2 Persons">2 Persons</option>
+                  <option value="3 Persons">3 Persons</option>
+                  <option value="4 Persons">4 Persons</option>
+                  <option value="5 Persons">5 Persons</option>
+                  <option value="6–10 Persons">6–10 Persons</option>
+                  <option value="10+ Persons">10+ Persons</option>
+                </select>
+              </div>
+              <span class="bat-error" id="bat-people-error">Please select no. of people</span>
+            </div>
+          </div>
+
+          <!-- Travel On (date) -->
+          <div class="bat-field-group">
+            <label for="bat-travel-date">Travel On <span class="bat-required">*</span></label>
+            <div class="bat-input-wrap" id="bat-field-travel-date">
+              <i class="fa-solid fa-calendar-check bat-field-icon"></i>
+              <input type="text" id="bat-travel-date" placeholder="Select travel date" readonly required>
+            </div>
+            <span class="bat-error" id="bat-travel-date-error">Please select your travel date</span>
+          </div>
+
+          <button type="submit" class="bat-submit-btn" id="bat-submit-btn">
+            <i class="fa-solid fa-paper-plane"></i>
+            Submit Details
+          </button>
+        </form>
+      </div><!-- /.bat-form-view -->
+    </div>
+  </div>
+
+  <!-- Book a Trip — Calendar Picker -->
+  <div class="bat-cal-overlay" id="bat-cal-overlay">
+    <div class="bat-cal-modal">
+      <div class="bat-cal-header">
+        <button type="button" class="bat-cal-nav" id="bat-cal-prev"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="bat-cal-month-year" id="bat-cal-month-year">July 2026</div>
+        <button type="button" class="bat-cal-nav" id="bat-cal-next"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+      <div class="bat-cal-weekdays">
+        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <div class="bat-cal-days" id="bat-cal-days"></div>
+      <div class="bat-cal-footer">
+        <button type="button" class="bat-cal-today-btn" id="bat-cal-today">Today</button>
+        <button type="button" class="bat-cal-clear-btn" id="bat-cal-clear">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book a Trip — Thank You Popup -->
+  <div class="bat-ty-overlay" id="bat-ty-overlay" role="dialog" aria-modal="true">
+    <div class="bat-ty-modal" id="bat-ty-modal">
+      <button class="bat-ty-close" id="bat-ty-close" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Animated SVG tick -->
+      <div class="bat-ty-icon">
+        <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+          <circle class="bat-ty-circle" cx="26" cy="26" r="24" fill="none" stroke="#0E5A36" stroke-width="2.5"/>
+          <path class="bat-ty-tick" fill="none" stroke="#0E5A36" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" d="M14 27l8 8 16-16"/>
+        </svg>
+      </div>
+
+      <p class="bat-ty-tag">BOOKING RECEIVED</p>
+      <h2 class="bat-ty-title">Thank You for the Information!</h2>
+      <p class="bat-ty-sub">We've received your trip details. Our travel experts will reach out to you shortly to confirm your booking.</p>
+
+      <!-- Summary card -->
+      <div class="bat-ty-summary">
+        <div class="bat-ty-row">
+          <span><i class="fa-solid fa-user"></i> Name</span>
+          <strong id="bat-ty-name">—</strong>
+        </div>
+        <div class="bat-ty-row">
+          <span><i class="fa-solid fa-location-dot"></i> Destination</span>
+          <strong id="bat-ty-destination">—</strong>
+        </div>
+        <div class="bat-ty-row">
+          <span><i class="fa-solid fa-phone"></i> Phone</span>
+          <strong id="bat-ty-phone">—</strong>
+        </div>
+        <div class="bat-ty-row">
+          <span><i class="fa-solid fa-calendar-days"></i> Duration</span>
+          <strong id="bat-ty-days">—</strong>
+        </div>
+        <div class="bat-ty-row">
+          <span><i class="fa-solid fa-users"></i> Travelers</span>
+          <strong id="bat-ty-people">—</strong>
+        </div>
+        <div class="bat-ty-row">
+          <span><i class="fa-solid fa-calendar-check"></i> Travel On</span>
+          <strong id="bat-ty-date">—</strong>
+        </div>
+      </div>
+
+      <button class="bat-ty-btn" id="bat-ty-explore-btn">
+        <i class="fa-solid fa-compass"></i> Explore Packages
+      </button>
+      <p class="bat-ty-note">Our team will call you within 24 hours.</p>
+    </div>
+  </div>
+
+  <script src="js/site-chrome.js"></script>
   <script>
+    initSiteChrome({ base: '' });
     const siteHeader=document.getElementById('site-header');
     window.addEventListener('scroll',()=>siteHeader.classList.toggle('header-scrolled',window.scrollY>100));
     const mo=document.getElementById('mobile-menu-overlay');
@@ -181,7 +371,8 @@
     document.getElementById('mobile-close-btn').addEventListener('click',()=>{mo.classList.remove('active');document.body.style.overflow='';});
     mo.addEventListener('click',e=>{if(e.target===mo){mo.classList.remove('active');document.body.style.overflow='';}});
     function showToast(m){const t=document.getElementById('toast-notification');document.getElementById('toast-text').textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
-    document.getElementById('contact-us-btn').addEventListener('click',()=>window.open('index.html','_self'));
+    
+    // Contact form handling (existing functionality)
     document.getElementById('cf-name').addEventListener('input',function(){this.value=this.value.replace(/[^A-Za-z\s]/g,'');});
     document.getElementById('cf-phone').addEventListener('input',function(){this.value=this.value.replace(/[^0-9+\s\-()]/g,'');});
     document.getElementById('cf-submit').addEventListener('click',()=>{
@@ -197,6 +388,116 @@
       btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Sending...';btn.disabled=true;
       setTimeout(()=>{document.getElementById('cf-form').style.display='none';document.getElementById('cf-success').style.display='block';},1500);
     });
+
+    // ══════════════════════════════════════════════════════════════
+    // BOOK A TRIP MODAL (Same as Homepage)
+    // ══════════════════════════════════════════════════════════════
+    (function () {
+      const batOverlay    = document.getElementById('bat-overlay');
+      const batClose      = document.getElementById('bat-close');
+      const batForm       = document.getElementById('bat-form');
+      const batSubmitBtn  = document.getElementById('bat-submit-btn');
+      const headerBookBtn = document.getElementById('contact-us-btn');
+      const mobileBookBtn = document.getElementById('mobile-book-trip-btn');
+      const batCalOverlay    = document.getElementById('bat-cal-overlay');
+      const batCalDays       = document.getElementById('bat-cal-days');
+      const batCalMonthYear  = document.getElementById('bat-cal-month-year');
+      const batCalPrev       = document.getElementById('bat-cal-prev');
+      const batCalNext       = document.getElementById('bat-cal-next');
+      const batCalToday      = document.getElementById('bat-cal-today');
+      const batCalClear      = document.getElementById('bat-cal-clear');
+      const batTravelDate    = document.getElementById('bat-travel-date');
+      const batTyOverlay    = document.getElementById('bat-ty-overlay');
+      const batTyClose      = document.getElementById('bat-ty-close');
+      const batTyExploreBtn = document.getElementById('bat-ty-explore-btn');
+      const batName         = document.getElementById('bat-name');
+      const batDestination  = document.getElementById('bat-destination');
+      const batPhone        = document.getElementById('bat-phone');
+      const batDays         = document.getElementById('bat-days');
+      const batPeople       = document.getElementById('bat-people');
+      let batCalDate     = new Date();
+      let batSelectedDate = null;
+      const BAT_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      
+      function openBAT() { batOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+      function closeBAT() { batOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+      function closeMobileMenu() { mo.classList.remove('active'); document.body.style.overflow = ''; }
+      
+      if (headerBookBtn) headerBookBtn.addEventListener('click', openBAT);
+      if (mobileBookBtn) { mobileBookBtn.addEventListener('click', (e) => { e.preventDefault(); closeMobileMenu(); setTimeout(openBAT, 300); }); }
+      batClose.addEventListener('click', closeBAT);
+      batOverlay.addEventListener('click', (e) => { if (e.target === batOverlay) closeBAT(); });
+      
+      batName.addEventListener('input', function () { this.value = this.value.replace(/[^A-Za-z\s]/g, ''); clearFieldError('bat-field-name', 'bat-name-error'); });
+      batPhone.addEventListener('input', function () { this.value = this.value.replace(/[^0-9]/g, ''); clearFieldError('bat-field-phone', 'bat-phone-error'); });
+      batDestination.addEventListener('change', () => clearFieldError('bat-field-destination', 'bat-destination-error'));
+      batDays.addEventListener('change', () => clearFieldError('bat-field-days', 'bat-days-error'));
+      batPeople.addEventListener('change', () => clearFieldError('bat-field-people', 'bat-people-error'));
+      
+      function renderBatCalendar(year, month) {
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month + 1, 0).getDate();
+        const prevLast = new Date(year, month, 0).getDate();
+        batCalMonthYear.textContent = `${BAT_MONTHS[month]} ${year}`;
+        batCalDays.innerHTML = '';
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        for (let i = firstDay; i > 0; i--) { const d = document.createElement('div'); d.className = 'bat-cal-day bat-cal-other'; d.textContent = prevLast - i + 1; batCalDays.appendChild(d); }
+        for (let day = 1; day <= lastDate; day++) {
+          const d = document.createElement('div'); d.className = 'bat-cal-day'; d.textContent = day;
+          const thisDate = new Date(year, month, day);
+          if (thisDate < today) { d.classList.add('bat-cal-disabled'); } else {
+            if (batSelectedDate && day === batSelectedDate.getDate() && month === batSelectedDate.getMonth() && year === batSelectedDate.getFullYear()) { d.classList.add('bat-cal-selected'); }
+            if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) { d.classList.add('bat-cal-today'); }
+            d.addEventListener('click', () => { batSelectedDate = new Date(year, month, day); batTravelDate.value = batSelectedDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); batTravelDate.classList.add('has-value'); clearFieldError('bat-field-travel-date', 'bat-travel-date-error'); closeBatCalendar(); });
+          }
+          batCalDays.appendChild(d);
+        }
+        const filled = firstDay + lastDate; const remaining = filled <= 35 ? 35 - filled : 42 - filled;
+        for (let day = 1; day <= remaining; day++) { const d = document.createElement('div'); d.className = 'bat-cal-day bat-cal-other'; d.textContent = day; batCalDays.appendChild(d); }
+      }
+      function openBatCalendar() { batCalOverlay.classList.add('active'); renderBatCalendar(batCalDate.getFullYear(), batCalDate.getMonth()); }
+      function closeBatCalendar() { batCalOverlay.classList.remove('active'); }
+      batTravelDate.addEventListener('click', openBatCalendar);
+      batCalOverlay.addEventListener('click', (e) => { if (e.target === batCalOverlay) closeBatCalendar(); });
+      batCalPrev.addEventListener('click', () => { batCalDate.setMonth(batCalDate.getMonth() - 1); renderBatCalendar(batCalDate.getFullYear(), batCalDate.getMonth()); });
+      batCalNext.addEventListener('click', () => { batCalDate.setMonth(batCalDate.getMonth() + 1); renderBatCalendar(batCalDate.getFullYear(), batCalDate.getMonth()); });
+      batCalToday.addEventListener('click', () => { const t = new Date(); batSelectedDate = t; batCalDate = new Date(t); batTravelDate.value = t.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); batTravelDate.classList.add('has-value'); clearFieldError('bat-field-travel-date', 'bat-travel-date-error'); closeBatCalendar(); });
+      batCalClear.addEventListener('click', () => { batSelectedDate = null; batTravelDate.value = ''; batTravelDate.classList.remove('has-value'); closeBatCalendar(); });
+      
+      function showFieldError(wrapId, errId) { const wrap = document.getElementById(wrapId); const err = document.getElementById(errId); if (wrap) wrap.classList.add('bat-error-field'); if (err) err.classList.add('visible'); }
+      function clearFieldError(wrapId, errId) { const wrap = document.getElementById(wrapId); const err = document.getElementById(errId); if (wrap) wrap.classList.remove('bat-error-field'); if (err) err.classList.remove('visible'); }
+      
+      batForm.addEventListener('submit', (e) => {
+        e.preventDefault(); let valid = true;
+        const name = batName.value.trim(), destination = batDestination.value, phone = batPhone.value.trim(), days = batDays.value, people = batPeople.value, travelDate = batTravelDate.value.trim();
+        if (!name || !/^[A-Za-z\s]+$/.test(name)) { showFieldError('bat-field-name', 'bat-name-error'); valid = false; } else { clearFieldError('bat-field-name', 'bat-name-error'); }
+        if (!destination) { showFieldError('bat-field-destination', 'bat-destination-error'); valid = false; } else { clearFieldError('bat-field-destination', 'bat-destination-error'); }
+        if (!phone || !/^[0-9]{7,15}$/.test(phone)) { showFieldError('bat-field-phone', 'bat-phone-error'); valid = false; } else { clearFieldError('bat-field-phone', 'bat-phone-error'); }
+        if (!days) { showFieldError('bat-field-days', 'bat-days-error'); valid = false; } else { clearFieldError('bat-field-days', 'bat-days-error'); }
+        if (!people) { showFieldError('bat-field-people', 'bat-people-error'); valid = false; } else { clearFieldError('bat-field-people', 'bat-people-error'); }
+        if (!travelDate) { showFieldError('bat-field-travel-date', 'bat-travel-date-error'); valid = false; } else { clearFieldError('bat-field-travel-date', 'bat-travel-date-error'); }
+        if (!valid) { showToast('⚠️ Please fill in all fields correctly'); return; }
+        batSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...'; batSubmitBtn.disabled = true;
+        setTimeout(() => {
+          batSubmitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Details'; batSubmitBtn.disabled = false;
+          closeBAT();
+          document.getElementById('bat-ty-name').textContent = name;
+          document.getElementById('bat-ty-destination').textContent = destination;
+          document.getElementById('bat-ty-phone').textContent = phone;
+          document.getElementById('bat-ty-days').textContent = days;
+          document.getElementById('bat-ty-people').textContent = people;
+          document.getElementById('bat-ty-date').textContent = travelDate;
+          setTimeout(() => { batTyOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }, 200);
+          batForm.reset(); batSelectedDate = null; batTravelDate.value = ''; batTravelDate.classList.remove('has-value');
+        }, 900);
+      });
+      
+      function closeBatTy() { batTyOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+      batTyClose.addEventListener('click', closeBatTy);
+      batTyOverlay.addEventListener('click', (e) => { if (e.target === batTyOverlay) closeBatTy(); });
+      if (batTyExploreBtn) { batTyExploreBtn.addEventListener('click', () => { closeBatTy(); window.open('packages.html', '_blank'); }); }
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (batOverlay.classList.contains('active')) closeBAT(); if (batCalOverlay.classList.contains('active')) closeBatCalendar(); if (batTyOverlay.classList.contains('active')) closeBatTy(); } });
+    })();
   </script>
 </body>
 </html>

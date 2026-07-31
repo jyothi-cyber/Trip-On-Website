@@ -9,14 +9,7 @@
   <link rel="stylesheet" href="../styles.css?v=4.0">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Poppins',sans-serif;background:#f9fafb;color:#101828}a{text-decoration:none}
-    .pkg-hero{position:relative;height:480px;overflow:hidden;margin-top:72px}
-    .pkg-hero img{width:100%;height:100%;object-fit:cover}
-    .pkg-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.65))}
-    .pkg-hero-content{position:absolute;bottom:48px;left:60px;color:#fff}
-    .pkg-hero-content h1{font-size:48px;font-weight:800;line-height:1.15;margin-bottom:12px;max-width:700px}
-    .pkg-hero-meta{display:flex;gap:24px;font-size:14px;font-weight:500;opacity:.9}
-    .pkg-hero-meta span{display:flex;align-items:center;gap:6px}
-    .breadcrumb{background:#fff;padding:14px 60px;font-size:13px;color:#98A2B3;border-bottom:1px solid #F2F4F7}
+    .breadcrumb{background:#fff;padding:14px 60px;font-size:13px;color:#98A2B3;border-bottom:1px solid #F2F4F7;margin-top:72px}
     .breadcrumb a{color:#20664e}.breadcrumb a:hover{text-decoration:underline}
     .pkg-main{max-width:1300px;margin:0 auto;padding:48px 60px;display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:flex-start}
     .pkg-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
@@ -27,18 +20,54 @@
     .highlight-icon{width:36px;height:36px;border-radius:8px;background:#DDF3EA;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#20664e;font-size:15px}
     .highlight-text h4{font-size:13px;font-weight:700;color:#101828;margin-bottom:2px}
     .highlight-text p{font-size:12px;color:#667085;margin:0;line-height:1.5}
+    /* Info Cards */
+    .pkg-info-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .pkg-info-card{background:#fff;border:1.5px solid #E4E7EC;border-radius:12px;padding:20px;text-align:center;transition:all .3s ease}
+    .pkg-info-card:hover{border-color:#20664e;box-shadow:0 4px 16px rgba(32,102,78,.1);transform:translateY(-2px)}
+    .pkg-info-icon{width:48px;height:48px;border-radius:12px;background:#DDF3EA;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;color:#20664e;font-size:20px}
+    .pkg-info-body h3{font-size:14px;font-weight:600;color:#344054;margin-bottom:6px}
+    .pkg-info-body p{font-size:14px;color:#101828;font-weight:500;margin:0}
     .itinerary-day{border-left:3px solid #DDF3EA;padding-left:20px;margin-bottom:24px;position:relative}
     .itinerary-day::before{content:'';width:12px;height:12px;background:#20664e;border-radius:50%;position:absolute;left:-7.5px;top:5px}
     .itinerary-day h4{font-size:15px;font-weight:700;color:#101828;margin-bottom:6px}
     .itinerary-day p{font-size:14px;color:#667085;line-height:24px;margin:0}
+    /* Itinerary Accordion Styles */
+    .itinerary-accordion{display:flex;flex-direction:column;gap:14px}
+    .itinerary-acc-item{border:1.5px solid #E4E7EC;border-radius:12px;overflow:hidden;transition:all .3s ease}
+    .itinerary-acc-item.active{border-color:#20664e;box-shadow:0 4px 16px rgba(32,102,78,.08)}
+    .itinerary-acc-header{display:flex;align-items:center;gap:16px;padding:18px 20px;cursor:pointer;background:#fff;transition:background .2s ease}
+    .itinerary-acc-header:hover{background:#f9fafb}
+    .itinerary-acc-day{background:#F79009;color:#fff;font-size:13px;font-weight:700;padding:6px 14px;border-radius:20px;white-space:nowrap}
+    .itinerary-acc-item.active .itinerary-acc-day{background:#20664e}
+    .itinerary-acc-title{flex:1;font-size:15px;font-weight:600;color:#101828}
+    .itinerary-acc-icon{width:32px;height:32px;border-radius:50%;background:#F2F4F7;display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+    .itinerary-acc-icon i{color:#667085;font-size:14px;transition:transform .3s ease}
+    .itinerary-acc-item.active .itinerary-acc-icon{background:#DDF3EA}
+    .itinerary-acc-item.active .itinerary-acc-icon i{color:#20664e;transform:rotate(180deg)}
+    .itinerary-acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+    .itinerary-acc-item.active .itinerary-acc-body{max-height:600px;padding:0 20px 20px 20px}
+    .itinerary-acc-desc{font-size:14px;line-height:24px;color:#667085;margin-bottom:16px}
+    .itinerary-acc-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0;padding:0}
+    .itinerary-acc-list li{display:flex;align-items:center;gap:10px;font-size:14px;color:#344054}
+    .itinerary-acc-list li i{color:#20664e;font-size:13px;flex-shrink:0}
     .inc-list,.exc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .exc-list{margin-top:16px}
     .inc-list li,.exc-list li{display:flex;align-items:center;gap:10px;font-size:14px}
     .inc-list li{color:#344054}.inc-list li i{color:#20664e;font-size:13px;flex-shrink:0}
     .exc-list li{color:#667085}.exc-list li i{color:#F04438;font-size:13px;flex-shrink:0}
-    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;transition:transform .3s,box-shadow .3s;cursor:pointer}
-    .gallery-grid img:hover{transform:scale(1.04);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    .pkg-breadcrumb-title{background:#fff;border-radius:16px;padding:20px 32px;margin-bottom:20px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+    .pkg-breadcrumb-title h3{font-size:15px;font-weight:600;color:#20664e;margin:0;font-family:'Poppins',sans-serif}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,200px);gap:12px}
+    .gallery-item{position:relative;overflow:hidden;border-radius:10px;cursor:pointer;display:block}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+    .gallery-item:hover img{transform:scale(1.08)}
+    .gallery-item .eye-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
+    .gallery-item:hover .eye-overlay{opacity:1}
+    .gallery-item .eye-icon{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:28px;color:#20664e}
+    .gallery-item:first-child{grid-row:1/3;grid-column:1/2}
+    .gallery-view-more{background:rgba(32,102,78,.9);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .3s;color:#fff;font-size:16px;font-weight:600;text-decoration:none}
+    .gallery-view-more:hover{background:rgba(14,90,54,1)}
+    .gallery-view-more i{margin-right:8px}
     /* Lightbox */
     .lb-overlay{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:99999;display:flex;align-items:center;justify-content:center}
     .lb-img{max-width:90vw;max-height:85vh;border-radius:10px;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5);display:block}
@@ -48,7 +77,7 @@
     .lb-arrow:hover{background:rgba(255,255,255,.28)}
     .lb-arrow-prev{left:14px}.lb-arrow-next{right:14px}
     .lb-counter-text{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.65);font-size:13px;font-family:'Poppins',sans-serif;pointer-events:none}
-    .pkg-sidebar{position:sticky;top:90px}
+    .pkg-sidebar{position:static}
     .sidebar-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:24px}
     .sidebar-price-label{font-size:13px;color:#667085;margin-bottom:4px}
     .sidebar-price{font-size:40px;font-weight:800;color:#20664e;margin-bottom:4px}
@@ -67,8 +96,22 @@
     .trust-item i{color:#20664e;font-size:15px}
     .pkg-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
     .pkg-tag{background:#F9FAFB;border:1.5px solid #E4E7EC;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:500;color:#344054}
-    @media(max-width:1024px){.pkg-main{grid-template-columns:1fr;padding:32px 30px}.pkg-sidebar{position:static}.pkg-hero-content{left:30px}.pkg-hero-content h1{font-size:36px}.breadcrumb{padding:14px 30px}}
-    @media(max-width:768px){.nav{padding:0 20px}.pkg-hero{height:350px}.pkg-hero-content{left:20px;bottom:24px}.pkg-hero-content h1{font-size:26px}.pkg-hero-meta{flex-wrap:wrap;gap:12px}.pkg-main{padding:24px 16px}.highlights-grid,.inc-list,.exc-list{grid-template-columns:1fr}.gallery-grid{grid-template-columns:repeat(2,1fr)}.breadcrumb{padding:14px 16px}}
+    @media(max-width:1024px){.pkg-main{grid-template-columns:1fr;padding:32px 30px}.pkg-sidebar{position:static}.breadcrumb{padding:14px 30px}.pkg-info-cards{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:0 20px}.pkg-main{padding:24px 16px}.highlights-grid,.inc-list,.exc-list{grid-template-columns:1fr}.gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,160px)}.gallery-item:first-child{grid-row:1/3;grid-column:1/2}.breadcrumb{padding:14px 16px}.pkg-info-cards{grid-template-columns:1fr}.pkg-breadcrumb-title{padding:16px 20px}.pkg-breadcrumb-title h3{font-size:13px}}
+    /* Instagram Slider */
+    .instagram-pkg{background:#f9fafb;padding:60px 0;overflow:hidden;margin-top:48px}
+    .instagram-pkg .heading{text-align:center;margin-bottom:40px}
+    .instagram-pkg .heading h2{font-size:32px;font-weight:700;color:#101828;margin-bottom:8px}
+    .instagram-pkg .heading p{font-size:16px;color:#667085}
+    .instagram-pkg .tripon-clickable{color:#20664e;font-weight:600;cursor:pointer;transition:color .2s}
+    .instagram-pkg .tripon-clickable:hover{color:#0E5A36}
+    .insta-slider-wrapper{width:100%;overflow:hidden;position:relative}
+    .insta-slider-track{display:flex;gap:16px;animation:instaScroll 25s linear infinite;will-change:transform}
+    .insta-slide{flex-shrink:0;width:280px;height:280px;border-radius:12px;overflow:hidden}
+    .insta-slide img{width:100%;height:100%;object-fit:cover;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease}
+    .insta-slide img:hover{transform:scale(1.05);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    @keyframes instaScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    @media(max-width:768px){.instagram-pkg{padding:48px 0}.instagram-pkg .heading h2{font-size:26px}.insta-slide{width:220px;height:220px}}
   </style>
 </head>
 <body>
@@ -101,18 +144,7 @@
     </div>
   </header>
 
-<div class="pkg-hero" onclick="window.open(document.querySelector('.pkg-hero img').src,'_blank')" style="cursor:pointer">
-  <img src="../assets/images/beach.png" alt="The White Beach Land" style="cursor:pointer">
-  <div class="pkg-hero-overlay"></div>
-  <div class="pkg-hero-content">
-    <h1>The White Beach Land</h1>
-    <div class="pkg-hero-meta">
-      <span><i class="fa-solid fa-location-dot"></i> Gili Trawangan, Indonesia</span>
-      <span><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</span>
-      <span><i class="fa-solid fa-star" style="color:#F79009"></i> 4.8 (136 reviews)</span>
-    </div>
-  </div>
-</div>
+
 
 <div class="breadcrumb">
   <a href="../index.html">Home</a> &rsaquo; <a href="../index.html#packages">Packages</a> &rsaquo; <a href="#">Destination</a> &rsaquo; <a href="#">Bali</a> &rsaquo; <span>The White Beach Land</span>
@@ -121,7 +153,46 @@
 <div class="pkg-main">
   <div class="pkg-left">
 
+    <!-- Package Breadcrumb Title -->
+    <div class="pkg-breadcrumb-title">
+      <h3>tripon/destination/bali/packages/the-white-beach-land</h3>
+    </div>
+
+    <!-- Photo Gallery Section -->
     <div class="pkg-section">
+      <h2>Bali Exclusive Offers 6 Days/5 Nights</h2>
+      <div class="gallery-grid">
+        <a href="javascript:void(0)" class="gallery-item" onclick="openGallery(0)">
+          <img src="../assets/images/beach.png" alt="White sandy beach">
+          <div class="eye-overlay">
+            <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+          </div>
+        </a>
+        <a href="javascript:void(0)" class="gallery-item" onclick="openGallery(1)">
+          <img src="../assets/images/image4.png" alt="Crystal waters">
+          <div class="eye-overlay">
+            <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+          </div>
+        </a>
+        <a href="javascript:void(0)" class="gallery-item" onclick="openGallery(2)">
+          <img src="../assets/images/image5.png" alt="Beach sunset">
+          <div class="eye-overlay">
+            <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+          </div>
+        </a>
+        <a href="javascript:void(0)" class="gallery-item" onclick="openGallery(3)">
+          <img src="../assets/images/romantic.png" alt="Romantic setting">
+          <div class="eye-overlay">
+            <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+          </div>
+        </a>
+        <a href="javascript:void(0)" class="gallery-view-more" onclick="openGallery(0)">
+          <i class="fa-solid fa-images"></i> View More
+        </a>
+      </div>
+    </div>
+
+    <div class="pkg-section" id="package-overview">
       <h2>Package Overview</h2>
       <p>Escape to the pristine paradise of Gili Trawangan — the largest of the three Gili Islands and one of Southeast Asia's most celebrated beach destinations. This 6-day package delivers the ultimate tropical island experience: powdery white sand, turquoise waters alive with sea turtles, world-class diving and snorkelling, and a wonderfully relaxed atmosphere with no motorised vehicles on the island.</p>
       <p>Gili Trawangan effortlessly combines natural beauty with a vibrant social scene. By day you'll snorkel with hawksbill turtles metres from shore; by evening you'll watch the sun dip behind Bali's sacred Mount Agung from a beachside hammock while sipping fresh coconut. This is island life at its finest.</p>
@@ -143,14 +214,160 @@
       </div>
     </div>
 
+    <!-- Info Cards Section -->
     <div class="pkg-section">
-      <h2>Day-by-Day Itinerary</h2>
-      <div class="itinerary-day"><h4>Day 1 &mdash; Arrival &amp; Island Welcome</h4><p>Fly into Bali. Transfer to Padang Bai harbour. Fast boat to Gili Trawangan (2 hrs). Check-in at beachfront bungalow. Afternoon swim and beach relaxation. Welcome sunset cocktails and seafood dinner on the beach.</p></div>
-      <div class="itinerary-day"><h4>Day 2 &mdash; Snorkelling with Sea Turtles</h4><p>Morning guided snorkelling tour at Turtle Heaven and Shark Point. Encounter wild hawksbill sea turtles in their natural habitat. Afternoon: Relax on the beach or explore the island by bicycle. Evening: Beachside BBQ dinner.</p></div>
-      <div class="itinerary-day"><h4>Day 3 &mdash; Scuba Diving Experience</h4><p>Full-day diving session with certified PADI instructors at Gili's famous dive sites including Halik Reef and Shark Point. Beginners are welcome with a Discover Scuba course option. Afternoon free. Evening: Gili T's famous Swing Bar sunset gathering.</p></div>
-      <div class="itinerary-day"><h4>Day 4 &mdash; Gili Island Hopping</h4><p>Take the local boat to explore Gili Air and Gili Meno — the quieter, more romantic neighbouring islands. Snorkel at Gili Meno's famous underwater sculpture garden. Picnic lunch on a private beach. Return to Trawangan by evening.</p></div>
-      <div class="itinerary-day"><h4>Day 5 &mdash; Cycling &amp; Sunset Horse Ride</h4><p>Morning: Cycle around the entire island (takes about 2 hours at a leisurely pace). Visit local pearl farms and artisan shops. Afternoon: Paddle boarding and kayaking. Evening: Horseback riding on the beach at sunset — a truly magical experience.</p></div>
-      <div class="itinerary-day"><h4>Day 6 &mdash; Last Swim &amp; Departure</h4><p>Final morning swim and breakfast on the beach. Check-out and fast boat back to Bali. Transfer to Ngurah Rai Airport. Depart with the island glow that only Gili Trawangan can give.</p></div>
+      <div class="pkg-info-cards">
+        <div class="pkg-info-card">
+          <div class="pkg-info-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="pkg-info-body">
+            <h3>Duration</h3>
+            <p>6 Days / 5 Nights</p>
+          </div>
+        </div>
+        <div class="pkg-info-card">
+          <div class="pkg-info-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="pkg-info-body">
+            <h3>Group Size</h3>
+            <p>Max 8 People</p>
+          </div>
+        </div>
+        <div class="pkg-info-card">
+          <div class="pkg-info-icon"><i class="fa-solid fa-mountain"></i></div>
+          <div class="pkg-info-body">
+            <h3>Difficulty</h3>
+            <p>Easy & Relaxed</p>
+          </div>
+        </div>
+        <div class="pkg-info-card">
+          <div class="pkg-info-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+          <div class="pkg-info-body">
+            <h3>Price</h3>
+            <p><span style="text-decoration:line-through;color:#98A2B3;font-size:14px;margin-right:8px">₹80,000</span><span style="color:#20664e;font-weight:700;font-size:18px">₹75,000</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pkg-section">
+      <h2>Itinerary</h2>
+      <div class="itinerary-accordion">
+        <div class="itinerary-acc-item active">
+          <div class="itinerary-acc-header">
+            <div class="itinerary-acc-day">Day 01 :</div>
+            <div class="itinerary-acc-title">Arrival & Island Welcome</div>
+            <div class="itinerary-acc-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="itinerary-acc-body">
+            <p class="itinerary-acc-desc">Fly into Bali and transfer to Padang Bai harbour for a 2-hour fast boat journey to the pristine paradise of Gili Trawangan. Check in at your beachfront bungalow and spend the afternoon swimming and relaxing on the powdery white sand. End your day with welcome sunset cocktails and a fresh seafood dinner on the beach.</p>
+            <ul class="itinerary-acc-list">
+              <li><i class="fa-solid fa-circle-check"></i> Arrival in Bali</li>
+              <li><i class="fa-solid fa-circle-check"></i> Transfer to Padang Bai Harbour</li>
+              <li><i class="fa-solid fa-circle-check"></i> Fast Boat to Gili Trawangan (2 hrs)</li>
+              <li><i class="fa-solid fa-circle-check"></i> Check-in at Beachfront Bungalow</li>
+              <li><i class="fa-solid fa-circle-check"></i> Afternoon Swim & Beach Relaxation</li>
+              <li><i class="fa-solid fa-circle-check"></i> Welcome Sunset Cocktails</li>
+              <li><i class="fa-solid fa-circle-check"></i> Seafood Dinner on Beach</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="itinerary-acc-item">
+          <div class="itinerary-acc-header">
+            <div class="itinerary-acc-day">Day 02 :</div>
+            <div class="itinerary-acc-title">Snorkelling with Sea Turtles</div>
+            <div class="itinerary-acc-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="itinerary-acc-body">
+            <p class="itinerary-acc-desc">Join a guided snorkelling tour to encounter wild hawksbill sea turtles in their natural habitat at Turtle Heaven and Shark Point. Spend the afternoon relaxing on the beach or exploring the car-free island by bicycle. Enjoy a beachside BBQ dinner under the stars.</p>
+            <ul class="itinerary-acc-list">
+              <li><i class="fa-solid fa-circle-check"></i> Morning Guided Snorkelling Tour</li>
+              <li><i class="fa-solid fa-circle-check"></i> Turtle Heaven Visit</li>
+              <li><i class="fa-solid fa-circle-check"></i> Shark Point Snorkelling</li>
+              <li><i class="fa-solid fa-circle-check"></i> Encounter Hawksbill Sea Turtles</li>
+              <li><i class="fa-solid fa-circle-check"></i> Afternoon Beach Relaxation</li>
+              <li><i class="fa-solid fa-circle-check"></i> Optional Bicycle Exploration</li>
+              <li><i class="fa-solid fa-circle-check"></i> Beachside BBQ Dinner</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="itinerary-acc-item">
+          <div class="itinerary-acc-header">
+            <div class="itinerary-acc-day">Day 03 :</div>
+            <div class="itinerary-acc-title">Scuba Diving Experience</div>
+            <div class="itinerary-acc-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="itinerary-acc-body">
+            <p class="itinerary-acc-desc">Experience world-class diving at Gili's famous dive sites including Halik Reef and Shark Point with certified PADI instructors. Beginners are welcome with Discover Scuba course option. Free afternoon to relax, followed by Gili T's famous Swing Bar sunset gathering.</p>
+            <ul class="itinerary-acc-list">
+              <li><i class="fa-solid fa-circle-check"></i> Full-day Diving Session</li>
+              <li><i class="fa-solid fa-circle-check"></i> Certified PADI Instructors</li>
+              <li><i class="fa-solid fa-circle-check"></i> Halik Reef Diving</li>
+              <li><i class="fa-solid fa-circle-check"></i> Shark Point Diving</li>
+              <li><i class="fa-solid fa-circle-check"></i> Discover Scuba Course (Beginners)</li>
+              <li><i class="fa-solid fa-circle-check"></i> Free Afternoon</li>
+              <li><i class="fa-solid fa-circle-check"></i> Swing Bar Sunset Gathering</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="itinerary-acc-item">
+          <div class="itinerary-acc-header">
+            <div class="itinerary-acc-day">Day 04 :</div>
+            <div class="itinerary-acc-title">Gili Island Hopping</div>
+            <div class="itinerary-acc-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="itinerary-acc-body">
+            <p class="itinerary-acc-desc">Take the local boat to explore the quieter neighbouring islands of Gili Air and Gili Meno. Snorkel at Gili Meno's famous underwater sculpture garden and enjoy a picnic lunch on a private beach. Return to Trawangan by evening for free time.</p>
+            <ul class="itinerary-acc-list">
+              <li><i class="fa-solid fa-circle-check"></i> Local Boat to Gili Air</li>
+              <li><i class="fa-solid fa-circle-check"></i> Gili Meno Visit</li>
+              <li><i class="fa-solid fa-circle-check"></i> Underwater Sculpture Garden Snorkelling</li>
+              <li><i class="fa-solid fa-circle-check"></i> Picnic Lunch on Private Beach</li>
+              <li><i class="fa-solid fa-circle-check"></i> Return to Trawangan</li>
+              <li><i class="fa-solid fa-circle-check"></i> Free Evening</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="itinerary-acc-item">
+          <div class="itinerary-acc-header">
+            <div class="itinerary-acc-day">Day 05 :</div>
+            <div class="itinerary-acc-title">Cycling & Sunset Horse Ride</div>
+            <div class="itinerary-acc-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="itinerary-acc-body">
+            <p class="itinerary-acc-desc">Cycle around the entire island at a leisurely pace, visiting local pearl farms and artisan shops. Enjoy paddle boarding and kayaking in the afternoon, then experience a magical horseback ride on the beach at sunset — a truly unforgettable moment.</p>
+            <ul class="itinerary-acc-list">
+              <li><i class="fa-solid fa-circle-check"></i> Morning Bicycle Tour Around Island</li>
+              <li><i class="fa-solid fa-circle-check"></i> Visit Local Pearl Farms</li>
+              <li><i class="fa-solid fa-circle-check"></i> Artisan Shops</li>
+              <li><i class="fa-solid fa-circle-check"></i> Afternoon Paddle Boarding</li>
+              <li><i class="fa-solid fa-circle-check"></i> Kayaking</li>
+              <li><i class="fa-solid fa-circle-check"></i> Sunset Horseback Riding on Beach</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="itinerary-acc-item">
+          <div class="itinerary-acc-header">
+            <div class="itinerary-acc-day">Day 06 :</div>
+            <div class="itinerary-acc-title">Last Swim & Departure</div>
+            <div class="itinerary-acc-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </div>
+          <div class="itinerary-acc-body">
+            <p class="itinerary-acc-desc">Enjoy your final morning swim and breakfast on the beach. Check out from your bungalow and board the fast boat back to Bali. Transfer to Ngurah Rai Airport for departure, carrying the island glow that only Gili Trawangan can give.</p>
+            <ul class="itinerary-acc-list">
+              <li><i class="fa-solid fa-circle-check"></i> Final Morning Swim</li>
+              <li><i class="fa-solid fa-circle-check"></i> Breakfast on Beach</li>
+              <li><i class="fa-solid fa-circle-check"></i> Check-out</li>
+              <li><i class="fa-solid fa-circle-check"></i> Fast Boat Back to Bali</li>
+              <li><i class="fa-solid fa-circle-check"></i> Transfer to Ngurah Rai Airport</li>
+              <li><i class="fa-solid fa-circle-check"></i> Departure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="pkg-section">
@@ -175,18 +392,6 @@
       </ul>
     </div>
 
-    <div class="pkg-section">
-      <h2>Photo Gallery</h2>
-      <div class="gallery-grid" id="gallery-grid">
-        <img src="../assets/images/beach.png" alt="Gili Beach">
-        <img src="../assets/images/image4.png" alt="Snorkelling">
-        <img src="../assets/images/image5.png" alt="Gili Trawangan">
-        <img src="../assets/images/romantic.png" alt="Sunset">
-        <img src="../assets/images/image6.png" alt="Ocean">
-        <img src="../assets/images/hotel.png" alt="Resort">
-      </div>
-    </div>
-
     <!-- Recommended Packages -->
     <div class="pkg-section">
       <h2>Recommended Packages</h2>
@@ -198,13 +403,10 @@
   <div class="pkg-sidebar">
     <div class="sidebar-card">
       <div class="sidebar-price-label">Starting from</div>
-      <div class="sidebar-price">&#8377;75,000</div>
+      <div style="margin-bottom:8px;display:flex;align-items:center;gap:12px"><span style="text-decoration:line-through;color:#98A2B3;font-size:20px">₹80,000</span><span style="font-size:40px;font-weight:800;color:#20664e">₹75,000</span></div>
       <div class="sidebar-price-note">per person &middot; taxes included</div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-regular fa-clock"></i> Duration</span><span class="sidebar-info-value">6 Days / 5 Nights</span></div>
-      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-location-dot"></i> Location</span><span class="sidebar-info-value">Gili Trawangan</span></div>
-      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-users"></i> Group Size</span><span class="sidebar-info-value">2 – 12 persons</span></div>
-      <div class="sidebar-info-row"><span class="sidebar-info-label"><i class="fa-solid fa-star" style="color:#F79009"></i> Rating</span><span class="sidebar-info-value">4.8 (136 reviews)</span></div>
       <div class="sidebar-divider"></div>
       <button class="book-btn" id="book-this-btn">Book This Package</button>
       <div class="sidebar-trust">
@@ -215,6 +417,52 @@
     </div>
   </div>
 </div>
+
+<!-- Instagram Slider Section -->
+<section class="instagram-pkg">
+  <div class="heading">
+    <h2>Instagram</h2>
+    <p>Follow Us <span class="tripon-clickable" onclick="window.open('https://instagram.com/tripon','_blank')">@tripon</span></p>
+  </div>
+
+  <!-- Slider wrapper with infinite scroll -->
+  <div class="insta-slider-wrapper" id="insta-slider-wrapper">
+    <div class="insta-slider-track" id="insta-slider-track">
+      <!-- First set of images -->
+      <div class="insta-slide">
+        <img src="../assets/images/image1.png" alt="Instagram 1" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <div class="insta-slide">
+        <img src="../assets/images/image2.png" alt="Instagram 2" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <div class="insta-slide">
+        <img src="../assets/images/image3.png" alt="Instagram 3" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <div class="insta-slide">
+        <img src="../assets/images/image4.png" alt="Instagram 4" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <div class="insta-slide">
+        <img src="../assets/images/image5.png" alt="Instagram 5" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <!-- Duplicate set for seamless infinite loop -->
+      <div class="insta-slide">
+        <img src="../assets/images/image1.png" alt="Instagram 1" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <div class="insta-slide">
+        <img src="../assets/images/image2.png" alt="Instagram 2" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <div class="insta-slide">
+        <img src="../assets/images/image3.png" alt="Instagram 3" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <div class="insta-slide">
+        <img src="../assets/images/image4.png" alt="Instagram 4" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+      <div class="insta-slide">
+        <img src="../assets/images/image5.png" alt="Instagram 5" onclick="window.open('https://instagram.com/tripon','_blank')">
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Footer -->
 <footer id="footer">
@@ -294,6 +542,35 @@
   @media(max-width:480px){footer>div:first-child{grid-template-columns:1fr !important}}
 </style>
 
+<script src="../js/site-chrome.js"></script>
+<script>
+  initSiteChrome({ base: '../' });
+  
+  /* ── Book This Package Button ── */
+  const bookThisBtn = document.getElementById('book-this-btn');
+  if (bookThisBtn) {
+    bookThisBtn.addEventListener('click', () => {
+      openBAT();
+    });
+  }
+  
+  /* ── Itinerary Accordion ── */
+  (function() {
+    const items = document.querySelectorAll('.itinerary-acc-item');
+    items.forEach(item => {
+      const header = item.querySelector('.itinerary-acc-header');
+      header.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        // Close all items
+        items.forEach(i => i.classList.remove('active'));
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+  })();
+</script>
 <script>
   /* ── Recommended packages ── */
   const REC = [
@@ -315,135 +592,73 @@
       <button class="rec-card-btn" onclick="event.stopPropagation();window.open('${r.slug}.html','_blank')">View Package</button>
     </div>`).join('');
 
-  /* ── Photo Gallery Lightbox ── */
-  (function(){
-    const imgs = Array.from(document.querySelectorAll('.gallery-grid img'));
-    let cur = 0;
-    function open(idx){
-      cur = idx;
-      const lb = document.createElement('div');
-      lb.className = 'lb-overlay';
-      lb.id = 'lb-overlay';
-      lb.innerHTML = `
-        <button class="lb-close-btn" aria-label="Close">&times;</button>
-        <button class="lb-arrow lb-arrow-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
-        <img class="lb-img" src="${imgs[cur].src}" alt="${imgs[cur].alt}">
-        <button class="lb-arrow lb-arrow-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
-        <div class="lb-counter-text">${cur+1} / ${imgs.length}</div>`;
-      document.body.appendChild(lb);
-      document.body.style.overflow='hidden';
-      lb.querySelector('.lb-close-btn').addEventListener('click', close);
-      lb.querySelector('.lb-arrow-prev').addEventListener('click', ()=>nav(-1));
-      lb.querySelector('.lb-arrow-next').addEventListener('click', ()=>nav(1));
-      lb.addEventListener('click', e=>{ if(e.target===lb) close(); });
-    }
-    function nav(dir){
-      cur=(cur+dir+imgs.length)%imgs.length;
-      const lb=document.getElementById('lb-overlay');
-      lb.querySelector('.lb-img').src=imgs[cur].src;
-      lb.querySelector('.lb-img').alt=imgs[cur].alt;
-      lb.querySelector('.lb-counter-text').textContent=(cur+1)+' / '+imgs.length;
-    }
-    function close(){
-      const lb=document.getElementById('lb-overlay');
-      if(lb){lb.remove();}
-      document.body.style.overflow='';
-    }
-    document.addEventListener('keydown',e=>{
-      if(!document.getElementById('lb-overlay')) return;
-      if(e.key==='ArrowLeft') nav(-1);
-      else if(e.key==='ArrowRight') nav(1);
-      else if(e.key==='Escape') close();
-    });
-    imgs.forEach((img,i)=>{ img.style.cursor='pointer'; img.addEventListener('click',()=>open(i)); });
-  })();
+  /* ── Lightbox Gallery ── */
+  const galleryImages = [
+    {src:'../assets/images/beach.png', alt:'White sandy beach'},
+    {src:'../assets/images/image4.png', alt:'Crystal waters'},
+    {src:'../assets/images/image5.png', alt:'Beach sunset'},
+    {src:'../assets/images/romantic.png', alt:'Romantic setting'},
+    {src:'../assets/images/image7.png', alt:'Island view'},
+    {src:'../assets/images/image8.png', alt:'Beach activities'}
+  ];
 
-  /* ── Book This Package popup ── */
-  document.getElementById('book-this-btn').addEventListener('click', showBookingPopup);
+  let currentIndex = 0;
 
-  function showBookingPopup(){
+  function openGallery(index) {
+    currentIndex = index;
     const overlay = document.createElement('div');
-    overlay.className = 'bk-overlay';
+    overlay.className = 'lb-overlay';
+    overlay.id = 'lightbox-overlay';
     overlay.innerHTML = `
-      <div class="bk-modal">
-        <button class="bk-close" id="bk-close">&times;</button>
-        <div class="bk-header">
-          <div class="bk-icon"><i class="fa-solid fa-suitcase-rolling"></i></div>
-          <h3>Book This Package</h3>
-          <p>The White Beach Land &nbsp;&middot;&nbsp; Bali, Indonesia</p>
-        </div>
-        <div id="bk-form-wrap">
-          <div class="bk-field">
-            <label>Full Name *</label>
-            <input type="text" id="bk-name" placeholder="Enter your full name" autocomplete="name">
-          </div>
-          <div class="bk-field">
-            <label>Destination</label>
-            <input type="text" value="Bali" readonly>
-          </div>
-          <div class="bk-row">
-            <div class="bk-field" style="margin:0">
-              <label>No. of Adults *</label>
-              <input type="number" id="bk-adults" placeholder="e.g. 2" min="1" max="50">
-            </div>
-            <div class="bk-field" style="margin:0">
-              <label>No. of Children</label>
-              <input type="number" id="bk-children" placeholder="e.g. 0" min="0" max="20">
-            </div>
-          </div>
-          <div class="bk-field">
-            <label>Phone Number *</label>
-            <input type="tel" id="bk-phone" placeholder="Enter 10-digit phone number" maxlength="10" inputmode="numeric">
-          </div>
-          <div class="bk-field">
-            <label>Email Address *</label>
-            <input type="email" id="bk-email" placeholder="Enter your email address" autocomplete="email">
-          </div>
-          <button class="bk-submit" id="bk-submit"><i class="fa-solid fa-paper-plane"></i> &nbsp;Confirm Booking</button>
-        </div>
-        <div class="bk-thankyou" id="bk-thankyou">
-          <div class="ty-icon">✅</div>
-          <h3>Thank You for Your Information!</h3>
-          <p>We've received your booking request for <strong>The White Beach Land</strong>.<br>Our travel experts will contact you within 24 hours.</p>
-          <button id="bk-done-btn">Close</button>
-        </div>
-      </div>`;
+      <button class="lb-close-btn" onclick="closeGallery()">&times;</button>
+      <button class="lb-arrow lb-arrow-prev" onclick="navigateGallery(-1)">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <img src="${galleryImages[currentIndex].src}" alt="${galleryImages[currentIndex].alt}" class="lb-img" id="lb-img">
+      <button class="lb-arrow lb-arrow-next" onclick="navigateGallery(1)">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <div class="lb-counter-text" id="lb-counter">${currentIndex + 1} / ${galleryImages.length}</div>
+    `;
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
-
-    const nameEl   = overlay.querySelector('#bk-name');
-    const adultsEl = overlay.querySelector('#bk-adults');
-    const childEl  = overlay.querySelector('#bk-children');
-    const phoneEl  = overlay.querySelector('#bk-phone');
-    const emailEl  = overlay.querySelector('#bk-email');
-
-    nameEl.addEventListener('input',  function(){ this.value=this.value.replace(/[^A-Za-z\s]/g,''); resetBorder(this); });
-    phoneEl.addEventListener('input', function(){ this.value=this.value.replace(/[^0-9]/g,''); resetBorder(this); });
-    [adultsEl,childEl,emailEl].forEach(el=>el.addEventListener('input',()=>resetBorder(el)));
-
-    overlay.querySelector('#bk-close').addEventListener('click', closePopup);
-    overlay.addEventListener('click', e=>{ if(e.target===overlay) closePopup(); });
-    overlay.querySelector('#bk-done-btn').addEventListener('click', closePopup);
-
-    overlay.querySelector('#bk-submit').addEventListener('click', ()=>{
-      let ok = true;
-      const name  = nameEl.value.trim();
-      const phone = phoneEl.value.trim();
-      const email = emailEl.value.trim();
-      const adults= parseInt(adultsEl.value)||0;
-      if(!name  || !/^[A-Za-z\s]+$/.test(name))            { markErr(nameEl);   ok=false; }
-      if(!phone || !/^[0-9]{10}$/.test(phone))              { markErr(phoneEl);  ok=false; }
-      if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ markErr(emailEl); ok=false; }
-      if(adults < 1)                                         { markErr(adultsEl); ok=false; }
-      if(!ok) return;
-      overlay.querySelector('#bk-form-wrap').style.display='none';
-      overlay.querySelector('#bk-thankyou').style.display='block';
+    
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeGallery();
     });
-
-    function markErr(el){ el.style.borderColor='#F04438'; el.focus(); }
-    function resetBorder(el){ el.style.borderColor=''; }
-    function closePopup(){ overlay.remove(); document.body.style.overflow=''; }
   }
+
+  function navigateGallery(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) currentIndex = galleryImages.length - 1;
+    if (currentIndex >= galleryImages.length) currentIndex = 0;
+    
+    const img = document.getElementById('lb-img');
+    const counter = document.getElementById('lb-counter');
+    if (img) {
+      img.src = galleryImages[currentIndex].src;
+      img.alt = galleryImages[currentIndex].alt;
+    }
+    if (counter) {
+      counter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+    }
+  }
+
+  function closeGallery() {
+    const overlay = document.getElementById('lightbox-overlay');
+    if (overlay) {
+      overlay.remove();
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    const overlay = document.getElementById('lightbox-overlay');
+    if (!overlay) return;
+    if (e.key === 'Escape') closeGallery();
+    if (e.key === 'ArrowLeft') navigateGallery(-1);
+    if (e.key === 'ArrowRight') navigateGallery(1);
+  });
 </script>
 </body>
 </html>

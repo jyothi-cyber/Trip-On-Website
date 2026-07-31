@@ -8,20 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4.0">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #FFFFFF;
-    }
-    
-    /* Header Styles */
-    .packages-header {
+    /* hide old custom header since we use site-header from styles.css */
+    header.packages-header {
+      display: none !important;
       position: fixed;
       top: 0;
       left: 0;
@@ -201,240 +192,42 @@
       min-height: calc(100vh - 80px);
     }
     
-    /* Packages Section */
-    .packages-section {
-      padding: 60px 0 80px;
-      background: #FFFFFF;
-    }
-    
-    .packages-container {
+    /* Packages Section - Override container width for packages page */
+    .packages .container {
       max-width: 1440px;
-      margin: 0 auto;
       padding: 0 60px;
     }
     
-    /* Main Title */
+    /* Ensure packages section is visible */
+    .packages {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    .packages-header {
+      display: block !important;
+      visibility: visible !important;
+    }
+    
+    .packages-filter-row {
+      display: flex !important;
+      visibility: visible !important;
+    }
+    
+    .duration-pills {
+      display: flex !important;
+    }
+    
+    .duration-pill-btn,
+    .ask-custom-btn {
+      display: inline-flex !important;
+      visibility: visible !important;
+    }
+    
     .packages-main-title {
-      font-size: 28px;
-      font-weight: 600;
-      color: #000000;
-      margin-bottom: 32px;
-      text-align: left;
-    }
-    
-    /* Filter Buttons */
-    .filter-buttons {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    
-    .filter-btn {
-      background: #FFFFFF;
-      border: 1px solid #E9E9E9;
-      border-radius: 30px;
-      font-size: 14px;
-      font-weight: 500;
-      color: #344054;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .filter-btn[data-filter="all"] {
-      width: 165px;
-      height: 59px;
-      background: #007846;
-      border-color: #007846;
-      color: #FFFFFF;
-    }
-    
-    .filter-btn[data-filter="5nights"],
-    .filter-btn[data-filter="6nights"],
-    .filter-btn[data-filter="7nights"] {
-      width: 154px;
-      height: 55px;
-      border-color: #E9E9E9;
-    }
-    
-    .filter-btn:hover {
-      background: #F9FAFB;
-      border-color: #98A2B3;
-    }
-    
-    .filter-btn.active {
-      background: #007846;
-      border-color: #007846;
-      color: #FFFFFF;
-    }
-    
-    .filter-btn[data-filter="all"].active {
-      background: #007846;
-      border-color: #007846;
-    }
-    
-    .filter-btn.custom-btn {
-      width: 331px;
-      height: 62px;
-      background: #FFFFFF;
-      border: 1px solid #FF4D03;
-      border-radius: 30px;
-      color: #FF4D03;
-    }
-    
-    .filter-btn.custom-btn:hover {
-      background: #FFF5F0;
-      border-color: #FF4D03;
-    }
-    
-    /* Package Cards Grid */
-    .packages-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    
-    /* Package Card Item */
-    .package-card-item {
-      width: 100%;
-      background: #FFFFFF;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    
-    .package-card-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Card Image */
-    .card-image {
-      position: relative;
-      width: 430px;
-      height: 234px;
-      overflow: hidden;
-      border-radius: 24px;
-    }
-    
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    /* Discount Badge */
-    .discount-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      width: 87px;
-      height: 27px;
-      background: #FFFFFF;
-      color: #FF3737;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 24px;
-      font-size: 13px;
-      font-weight: 500;
-    }
-    
-    /* Card Content */
-    .card-content {
-      padding: 16px;
-    }
-    
-    /* Location Tag */
-    .location-tag {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      color: #667085;
-      margin-bottom: 8px;
-    }
-    
-    .location-tag i {
-      font-size: 14px;
-      color: #667085;
-    }
-    
-    /* Card Title */
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #101828;
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-    
-    /* Rating Stars */
-    .rating-stars {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 16px;
-    }
-    
-    .rating-stars i {
-      color: #FDB022;
-      font-size: 14px;
-    }
-    
-    .rating-count {
-      margin-left: 8px;
-      font-size: 14px;
-      color: #667085;
-    }
-    
-    /* Card Footer */
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 16px;
-      border-top: 1px solid #F2F4F7;
-    }
-    
-    /* Duration */
-    .duration {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      color: #667085;
-    }
-    
-    .duration i {
-      font-size: 14px;
-      color: #667085;
-    }
-    
-    /* Price Tag */
-    .price-tag {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
-    
-    .from-text {
-      font-size: 12px;
-      color: #667085;
-      margin-bottom: 2px;
-    }
-    
-    .price-amount {
-      font-size: 18px;
-      font-weight: 700;
-      color: #101828;
+      display: block !important;
+      visibility: visible !important;
     }
     
     /* Know More About Locations Section */
@@ -1560,7 +1353,36 @@
 </head>
 
 <body>
-  <!-- Header -->
+  <!-- Homepage Header -->
+  <header id="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo" aria-label="Trip On home">
+        <img src="assets/images/tripon-logo.png" alt="Trip On logo" />
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="people-reviews.html" target="_blank">People Reviews</a>
+        <a href="packages.html" class="active">Packages</a>
+      </nav>
+      <button class="nav-btn" id="contact-us-btn">Book a Trip</button>
+      <div class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+      <div class="mobile-menu-content">
+        <button class="mobile-close-btn" id="mobile-close-btn" aria-label="Close menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <nav class="mobile-nav-links">
+          <a href="people-reviews.html" target="_blank">People Reviews</a>
+          <a href="packages.html">Packages</a>
+          <a href="#" class="mobile-contact-btn" id="mobile-book-trip-btn">Book a Trip</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Old custom header (hidden) -->
   <header class="packages-header">
     <div class="header-container">
       <!-- Logo -->
@@ -1605,319 +1427,327 @@
   
   <!-- Page Content -->
   <div class="page-content">
+    
     <!-- Packages Section -->
-    <section class="packages-section">
-      <div class="packages-container">
-        <!-- Title -->
-        <h1 class="packages-main-title">Explore all things to do in Phuket</h1>
-        
-        <!-- Filter Buttons -->
-        <div class="filter-buttons">
-          <button class="filter-btn active" data-filter="all">4 Nights 5 Days</button>
-          <button class="filter-btn" data-filter="5nights">5 Nights 6 Days</button>
-          <button class="filter-btn" data-filter="6nights">6 Nights 7 Days</button>
-          <button class="filter-btn" data-filter="7nights">7 Nights 8 Days</button>
-          <button class="filter-btn custom-btn" id="custom-package-btn">Ask Custom Packages</button>
+    <section class="packages section-padding" id="packages">
+      <div class="container">
+        <div class="packages-header">
+          <h2 class="packages-main-title">Explore all things to do in Phuket</h2>
+          
+          <!-- Duration Pills and Custom Button -->
+          <div class="packages-filter-row">
+            <div class="duration-pills">
+              <button class="duration-pill-btn active" data-duration="4">4 Nights 5 Days</button>
+              <button class="duration-pill-btn" data-duration="5">5 Nights 6 Days</button>
+              <button class="duration-pill-btn" data-duration="6">6 Nights 7 Days</button>
+              <button class="duration-pill-btn" data-duration="7">7 Nights 8 Days</button>
+            </div>
+            <button class="ask-custom-btn" id="ask-custom-packages-btn">Ask Custom Packages</button>
+          </div>
+        </div>
+
+        <div class="packages-grid" id="packages-container">
+          <!-- Package Card 1 -->
+          <div class="package-card" data-duration="4" data-package="the-cultural-homeland">
+            <div class="package-img-wrapper">
+              <img src="assets/images/ubud.png" alt="Ubud resort view">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Ubud, Indonesia
+              </div>
+              <h3>The cultural homeland</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 4 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹45,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Card 2 -->
+          <div class="package-card" data-duration="4" data-package="isolated-mountains">
+            <div class="package-img-wrapper">
+              <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Nusa Penida, Indonesia
+              </div>
+              <h3>Isolated Mountains</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 5 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹50,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Card 3 -->
+          <div class="package-card" data-duration="5" data-package="the-white-beach-land">
+            <div class="package-img-wrapper">
+              <img src="assets/images/beach.png" alt="White sand beach">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Gili Trawangan, Indonesia
+              </div>
+              <h3>The White Beach Land</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 6 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹75,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Card 4 (Row 2) -->
+          <div class="package-card" data-duration="5" data-package="the-cultural-homeland">
+            <div class="package-img-wrapper">
+              <img src="assets/images/ubud.png" alt="Ubud resort view">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Ubud, Indonesia
+              </div>
+              <h3>The cultural homeland</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 4 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹45,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Card 5 -->
+          <div class="package-card" data-duration="6" data-package="isolated-mountains">
+            <div class="package-img-wrapper">
+              <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Nusa Penida, Indonesia
+              </div>
+              <h3>Isolated Mountains</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 5 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹50,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Card 6 -->
+          <div class="package-card" data-duration="6" data-package="the-white-beach-land">
+            <div class="package-img-wrapper">
+              <img src="assets/images/beach.png" alt="White sand beach">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Gili Trawangan, Indonesia
+              </div>
+              <h3>The White Beach Land</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 6 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹75,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Card 7 (Row 3) -->
+          <div class="package-card" data-duration="7" data-package="the-cultural-homeland">
+            <div class="package-img-wrapper">
+              <img src="assets/images/ubud.png" alt="Ubud resort view">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Ubud, Indonesia
+              </div>
+              <h3>The cultural homeland</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 4 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹45,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Card 8 -->
+          <div class="package-card" data-duration="7" data-package="isolated-mountains">
+            <div class="package-img-wrapper">
+              <img src="assets/images/indonesia.png" alt="Indonesia travel scene">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Nusa Penida, Indonesia
+              </div>
+              <h3>Isolated Mountains</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 5 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹50,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package Card 9 -->
+          <div class="package-card" data-duration="all" data-package="the-white-beach-land">
+            <div class="package-img-wrapper">
+              <img src="assets/images/beach.png" alt="White sand beach">
+              <span class="package-badge" style="display:none"></span>
+            </div>
+            <div class="package-info">
+              <div class="package-location">
+                <i class="fa-solid fa-location-dot"></i> Gili Trawangan, Indonesia
+              </div>
+              <h3>The White Beach Land</h3>
+              <div class="package-meta">
+                <div class="package-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8(136)</span>
+                </div>
+              </div>
+              <div class="package-bottom">
+                <div class="package-duration">
+                  <i class="fa-regular fa-clock"></i> 6 Days
+                </div>
+                <div class="package-price">
+                  <span>from</span>
+                  <h4>₹75,000</h4>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         
-        <!-- Package Cards Grid -->
-        <div class="packages-cards-grid" id="packages-cards-grid">
-          <!-- Card 1 - 4 Nights -->
-          <div class="package-card-item" data-nights="4">
-            <div class="card-image">
-              <img src="assets/images/ubud.png" alt="Ubud, Indonesia">
-              <span class="discount-badge">10% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Ubud, Indonesia
-              </div>
-              <h3 class="card-title">The Cultural homeland</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  4 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹45,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 2 - 4 Nights -->
-          <div class="package-card-item" data-nights="4">
-            <div class="card-image">
-              <img src="assets/images/indonesia.png" alt="Nusa Penida, Indonesia">
-              <span class="discount-badge">15% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Nusa Penida, Indonesia
-              </div>
-              <h3 class="card-title">Isolated Mountains</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  5 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹50,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 3 - 5 Nights -->
-          <div class="package-card-item" data-nights="5">
-            <div class="card-image">
-              <img src="assets/images/beach.png" alt="Gili Trawangan, Indonesia">
-              <span class="discount-badge">12% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Gili Trawangan, Indonesia
-              </div>
-              <h3 class="card-title">The White Beach Land</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  6 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹75,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 4 - 5 Nights -->
-          <div class="package-card-item" data-nights="5">
-            <div class="card-image">
-              <img src="assets/images/ubud.png" alt="Ubud, Indonesia">
-              <span class="discount-badge">10% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Ubud, Indonesia
-              </div>
-              <h3 class="card-title">The Cultural homeland</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  4 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹45,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 5 - 6 Nights -->
-          <div class="package-card-item" data-nights="6">
-            <div class="card-image">
-              <img src="assets/images/indonesia.png" alt="Nusa Penida, Indonesia">
-              <span class="discount-badge">15% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Nusa Penida, Indonesia
-              </div>
-              <h3 class="card-title">Isolated Mountains</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  5 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹50,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 6 - 6 Nights -->
-          <div class="package-card-item" data-nights="6">
-            <div class="card-image">
-              <img src="assets/images/beach.png" alt="Gili Trawangan, Indonesia">
-              <span class="discount-badge">12% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Gili Trawangan, Indonesia
-              </div>
-              <h3 class="card-title">The White Beach Land</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  6 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹75,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 7 - 7 Nights -->
-          <div class="package-card-item" data-nights="7">
-            <div class="card-image">
-              <img src="assets/images/ubud.png" alt="Ubud, Indonesia">
-              <span class="discount-badge">10% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Ubud, Indonesia
-              </div>
-              <h3 class="card-title">The Cultural homeland</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  4 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹45,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 8 - 7 Nights -->
-          <div class="package-card-item" data-nights="7">
-            <div class="card-image">
-              <img src="assets/images/indonesia.png" alt="Nusa Penida, Indonesia">
-              <span class="discount-badge">15% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Nusa Penida, Indonesia
-              </div>
-              <h3 class="card-title">Isolated Mountains</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  5 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹50,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 9 - 7 Nights -->
-          <div class="package-card-item" data-nights="7">
-            <div class="card-image">
-              <img src="assets/images/beach.png" alt="Gili Trawangan, Indonesia">
-              <span class="discount-badge">12% off</span>
-            </div>
-            <div class="card-content">
-              <div class="location-tag">
-                <i class="fa-solid fa-location-dot"></i>
-                Gili Trawangan, Indonesia
-              </div>
-              <h3 class="card-title">The White Beach Land</h3>
-              <div class="rating-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span class="rating-count">4.8(136)</span>
-              </div>
-              <div class="card-footer">
-                <div class="duration">
-                  <i class="fa-regular fa-clock"></i>
-                  6 Days
-                </div>
-                <div class="price-tag">
-                  <span class="from-text">from</span>
-                  <span class="price-amount">₹75,000</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- See All Button -->
+        <div class="packages-see-all-wrapper">
+          <button class="packages-see-all-btn" id="packages-see-all-btn">See All</button>
         </div>
       </div>
     </section>
@@ -1931,7 +1761,7 @@
         <div class="locations-slider-wrapper">
           <div class="locations-slider" id="locations-slider">
             <!-- Location Card 1 - Ubud -->
-            <div class="location-card">
+            <div class="location-card" style="cursor:pointer" onclick="window.open('locations/ubud.html','_blank')">
               <div class="location-icon">
                 <img src="assets/images/ubud-icon.svg" alt="Ubud">
               </div>
@@ -1940,7 +1770,7 @@
             </div>
             
             <!-- Location Card 2 - Kuta, Gali -->
-            <div class="location-card">
+            <div class="location-card" style="cursor:pointer" onclick="window.open('locations/kuta.html','_blank')">
               <div class="location-icon">
                 <img src="assets/images/kuta-gali-icon.svg" alt="Kuta, Gali">
               </div>
@@ -1949,7 +1779,7 @@
             </div>
             
             <!-- Location Card 3 - Lombok -->
-            <div class="location-card">
+            <div class="location-card" style="cursor:pointer" onclick="window.open('locations/lombok.html','_blank')">
               <div class="location-icon">
                 <img src="assets/images/lombok-icon.svg" alt="Lombok">
               </div>
@@ -2127,50 +1957,124 @@
     </section>
     
     <!-- Footer -->
-    <footer class="packages-footer">
+    <footer id="footer">
       <div class="footer-container">
-        <div class="footer-left">
-          <img src="assets/images/tripon-logo.png" alt="Trip On" class="footer-logo">
+        <div class="footer-logo">
+          <a href="index.html" class="logo" aria-label="Trip On home">
+            <img src="assets/images/tripon-logo.png" alt="Trip On logo" />
+          </a>
         </div>
-        
-        <div class="footer-links">
+        <div class="footer-nav">
           <div class="footer-column">
-            <a href="#about" class="footer-link">About</a>
-            <a href="blogscards.html" target="_blank" class="footer-link">Blogs</a>
+            <a href="about.html" target="_blank">About</a>
+            <a href="blogscards.html" target="_blank">Blogs</a>
           </div>
-          
           <div class="footer-column">
-            <a href="#what-we-do" class="footer-link">What We Do</a>
-            <a href="packages.html" class="footer-link">Packages</a>
+            <a href="locations-page.html" target="_blank">Locations</a>
+            <a href="packages.html">Packages</a>
           </div>
-          
           <div class="footer-column">
-            <a href="#careers" class="footer-link">Careers</a>
-            <a href="#contact" class="footer-link">Contact Us</a>
+            <a href="careers.html" target="_blank">Careers</a>
+            <a href="contact.html" target="_blank">Contact Us</a>
           </div>
         </div>
-        
         <div class="footer-social">
-          <p class="social-title">FOLLOW OUR TRAVELER COMMUNITY</p>
+          <h4>FOLLOW OUR TRAVELER COMMUNITY</h4>
           <div class="social-icons">
-            <a href="https://twitter.com/tripon" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://www.facebook.com/tripon" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://www.instagram.com/tripon" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.youtube.com/@tripon" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
-              <i class="fa-brands fa-youtube"></i>
-            </a>
+            <i class="fa-brands fa-x-twitter" style="cursor:pointer" onclick="window.open('https://twitter.com/tripon','_blank')"></i>
+            <i class="fa-brands fa-facebook" style="cursor:pointer" onclick="window.open('https://facebook.com/tripon','_blank')"></i>
+            <i class="fa-brands fa-instagram" style="cursor:pointer" onclick="window.open('https://instagram.com/tripon','_blank')"></i>
+            <i class="fa-brands fa-youtube" style="cursor:pointer" onclick="window.open('https://youtube.com/tripon','_blank')"></i>
           </div>
         </div>
       </div>
     </footer>
   </div>
   
+  <!-- Custom Packages Popup -->
+  <div class="custom-packages-overlay" id="custom-packages-overlay">
+    <div class="custom-packages-popup">
+      <button class="custom-packages-close" id="custom-packages-close" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <div class="custom-packages-icon">
+        <i class="fa-solid fa-suitcase-rolling"></i>
+      </div>
+      
+      <h3>Bali Tour Custom Packages</h3>
+      <p class="subtitle">Tell us about your dream Bali vacation and we'll create a personalized package just for you!</p>
+      
+      <form id="custom-packages-form">
+        <div class="custom-form-row">
+          <div class="custom-form-group">
+            <label for="custom-name">Full Name *</label>
+            <input type="text" id="custom-name" placeholder="Enter your full name" required>
+          </div>
+          <div class="custom-form-group">
+            <label for="custom-phone">Phone Number *</label>
+            <input type="tel" id="custom-phone" placeholder="Enter your phone" required>
+          </div>
+        </div>
+        
+        <div class="custom-form-row">
+          <div class="custom-form-group">
+            <label for="custom-email">Email Address *</label>
+            <input type="email" id="custom-email" placeholder="Enter your email" required>
+          </div>
+          <div class="custom-form-group">
+            <label for="custom-travelers">Number of Travelers *</label>
+            <select id="custom-travelers" required>
+              <option value="">Select travelers</option>
+              <option value="1">1 Person</option>
+              <option value="2">2 Persons</option>
+              <option value="3">3 Persons</option>
+              <option value="4">4 Persons</option>
+              <option value="5+">5+ Persons</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="custom-form-row">
+          <div class="custom-form-group">
+            <label for="custom-nights">Number of Nights *</label>
+            <select id="custom-nights" required>
+              <option value="">Select nights</option>
+              <option value="3">3 Nights</option>
+              <option value="4">4 Nights</option>
+              <option value="5">5 Nights</option>
+              <option value="6">6 Nights</option>
+              <option value="7">7 Nights</option>
+              <option value="8+">8+ Nights</option>
+            </select>
+          </div>
+          <div class="custom-form-group">
+            <label for="custom-budget">Budget Range *</label>
+            <select id="custom-budget" required>
+              <option value="">Select budget</option>
+              <option value="30-50k">₹30,000 - ₹50,000</option>
+              <option value="50-75k">₹50,000 - ₹75,000</option>
+              <option value="75-100k">₹75,000 - ₹1,00,000</option>
+              <option value="100k+">₹1,00,000+</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="custom-form-group">
+          <label for="custom-preferences">Special Preferences</label>
+          <textarea id="custom-preferences" placeholder="Tell us about your interests (adventure, culture, relaxation, etc.) and any special requirements..."></textarea>
+        </div>
+        
+        <button type="submit" class="custom-submit-btn">
+          <i class="fa-solid fa-paper-plane"></i>
+          Submit Request
+        </button>
+        
+        <p class="custom-packages-note">Our travel experts will contact you within 24 hours with a customized itinerary.</p>
+      </form>
+    </div>
+  </div>
+
   <!-- Contact Us Modal -->
   <div class="modal-overlay" id="contact-modal">
     <div class="modal-content">
@@ -2321,6 +2225,221 @@
   </div>
   
   <script>
+    // ===== PACKAGE DURATION FILTERING (Homepage Style) =====
+    const durationPillBtns = document.querySelectorAll('.duration-pill-btn');
+    const packageCards = document.querySelectorAll('.package-card');
+    const askCustomBtn = document.getElementById('ask-custom-packages-btn');
+    const seeAllBtn = document.getElementById('packages-see-all-btn');
+
+    // Duration pill filtering
+    durationPillBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active pill
+        durationPillBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selectedDuration = btn.dataset.duration;
+
+        // Map each filter button to the day label shown on the cards
+        // "4 Nights 5 Days" → 5 Days, "5 Nights 6 Days" → 6 Days, etc.
+        const durationDayLabel = {
+          '4': '5 Days',
+          '5': '6 Days',
+          '6': '7 Days',
+          '7': '8 Days'
+        };
+
+        // Filter cards with animation
+        packageCards.forEach(card => {
+          const cardDuration = card.dataset.duration;
+          if (cardDuration === selectedDuration) {
+            card.style.display = '';
+            card.style.animation = 'fadeInUp 0.5s ease forwards';
+
+            // Update the duration label text inside this card to match the active filter
+            const durationEl = card.querySelector('.package-duration');
+            if (durationEl && durationDayLabel[selectedDuration]) {
+              // Preserve the clock icon, only swap the day text
+              const icon = durationEl.querySelector('i');
+              durationEl.innerHTML = '';
+              if (icon) durationEl.appendChild(icon.cloneNode(true));
+              durationEl.appendChild(document.createTextNode(' ' + durationDayLabel[selectedDuration]));
+            }
+          } else {
+            card.style.animation = 'fadeOutDown 0.3s ease forwards';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+        
+        // Show toast notification
+        const nightsText = selectedDuration === '4' ? '4 Nights 5 Days' : 
+                          selectedDuration === '5' ? '5 Nights 6 Days' : 
+                          selectedDuration === '6' ? '6 Nights 7 Days' : '7 Nights 8 Days';
+        showToast(`✨ Showing packages for ${nightsText}`);
+      });
+    });
+
+    // See All button - show all packages
+    if (seeAllBtn) {
+      seeAllBtn.addEventListener('click', () => {
+        // Reset all filters
+        durationPillBtns.forEach(b => b.classList.remove('active'));
+        
+        // Show all cards
+        packageCards.forEach(card => {
+          card.style.display = '';
+          card.style.animation = 'fadeInUp 0.5s ease forwards';
+        });
+        
+        showToast('✨ Showing all packages!');
+      });
+    }
+
+    // Ask Custom Packages button
+    // Ask Custom Packages button - redirects to packages/custom.html
+    if (askCustomBtn) {
+      askCustomBtn.addEventListener('click', () => {
+        window.open('packages/custom.html', '_blank');
+      });
+    }
+
+    // Initialize - show 4-night packages by default
+    if (durationPillBtns.length > 0) {
+      packageCards.forEach(card => {
+        const cardDuration = card.dataset.duration;
+        if (cardDuration === '4' || cardDuration === 'all') {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    
+    // ===== PACKAGE CARD CLICK → PACKAGES FOLDER =====
+    document.querySelectorAll('.package-card[data-package]').forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        const slug = card.dataset.package;
+        window.open('packages/' + slug + '.html', '_blank');
+      });
+      
+      // Make images also cursor pointer
+      const img = card.querySelector('.package-img-wrapper img');
+      if (img) {
+        img.style.cursor = 'pointer';
+      }
+    });
+
+    // ===== CUSTOM PACKAGES POPUP =====
+    const customPackagesOverlay = document.getElementById('custom-packages-overlay');
+    const customPackagesClose = document.getElementById('custom-packages-close');
+    const customPackagesForm = document.getElementById('custom-packages-form');
+    
+    function openCustomPackagesPopup() {
+      if (customPackagesOverlay) {
+        customPackagesOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    
+    function closeCustomPackagesPopup() {
+      if (customPackagesOverlay) {
+        customPackagesOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    
+    if (customPackagesClose) {
+      customPackagesClose.addEventListener('click', closeCustomPackagesPopup);
+    }
+    
+    if (customPackagesOverlay) {
+      customPackagesOverlay.addEventListener('click', (e) => {
+        if (e.target === customPackagesOverlay) {
+          closeCustomPackagesPopup();
+        }
+      });
+    }
+    
+    // Custom packages form submission
+    if (customPackagesForm) {
+      customPackagesForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('custom-name').value.trim();
+        const phone = document.getElementById('custom-phone').value.trim();
+        const email = document.getElementById('custom-email').value.trim();
+        const travelers = document.getElementById('custom-travelers').value;
+        const nights = document.getElementById('custom-nights').value;
+        const budget = document.getElementById('custom-budget').value;
+        
+        // Validate name (letters only)
+        if (!/^[A-Za-z\s]+$/.test(name)) {
+          showToast('⚠️ Please enter a valid name (letters only)');
+          return;
+        }
+        
+        // Validate phone (digits only)
+        if (!/^[0-9]{7,15}$/.test(phone)) {
+          showToast('⚠️ Please enter a valid phone number');
+          return;
+        }
+        
+        // Validate email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showToast('⚠️ Please enter a valid email address');
+          return;
+        }
+        
+        // Close the custom packages popup
+        closeCustomPackagesPopup();
+        
+        // Show success message
+        showToast('✅ Thank you! We will contact you shortly with a custom package.');
+        
+        // Reset form
+        customPackagesForm.reset();
+      });
+      
+      // Name input - letters only
+      const nameInput = document.getElementById('custom-name');
+      if (nameInput) {
+        nameInput.addEventListener('input', function() {
+          this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+        });
+      }
+      
+      // Phone input - digits only
+      const phoneInput = document.getElementById('custom-phone');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
+      }
+    }
+
+    // ===== TOAST NOTIFICATION =====
+    function showToast(message) {
+      // Check if toast already exists
+      let toast = document.getElementById('toast-notification');
+      if (!toast) {
+        // Create toast if it doesn't exist
+        toast = document.createElement('div');
+        toast.id = 'toast-notification';
+        toast.className = 'toast-notification';
+        toast.innerHTML = '<i class="fa-solid fa-circle-check"></i><span id="toast-text"></span>';
+        document.body.appendChild(toast);
+      }
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
     // Mobile Menu Toggle
     const mobileToggle = document.getElementById('mobile-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -2421,144 +2540,6 @@
       });
     });
     
-    // Filter Buttons Functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const packageCards = document.querySelectorAll('.package-card-item');
-    
-    // Function to filter and display cards
-    function filterCards(nights) {
-      packageCards.forEach(card => {
-        const cardNights = card.getAttribute('data-nights');
-        
-        if (nights === 'all') {
-          // Show all 9 cards for "7 Nights 8 Days"
-          card.style.display = 'block';
-        } else if (cardNights === nights) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-    
-    // Filter button click handlers
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Skip if custom button
-        if (button.classList.contains('custom-btn')) {
-          // Redirect to home page and open custom package popup
-          window.location.href = 'index.html#packages';
-          setTimeout(() => {
-            // Trigger custom package popup on home page
-            const askCustomBtn = document.getElementById('ask-custom-packages-btn');
-            if (askCustomBtn) {
-              askCustomBtn.click();
-            }
-          }, 300);
-          return;
-        }
-        
-        // Remove active class from all filter buttons (except custom)
-        filterButtons.forEach(btn => {
-          if (!btn.classList.contains('custom-btn')) {
-            btn.classList.remove('active');
-          }
-        });
-        
-        // Add active class to clicked button
-        button.classList.add('active');
-        
-        // Get filter value and display cards
-        const filterValue = button.getAttribute('data-filter');
-        
-        switch(filterValue) {
-          case 'all':
-            filterCards('4');
-            break;
-          case '5nights':
-            filterCards('5');
-            break;
-          case '6nights':
-            filterCards('6');
-            break;
-          case '7nights':
-            filterCards('all'); // Show all 9 cards
-            break;
-        }
-      });
-    });
-    
-    // Initialize with 4 nights cards (cards 1-2)
-    filterCards('4');
-    
-    // ===== URL PARAMETER HANDLING =====
-    // Check if there's a duration parameter in the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const durationParam = urlParams.get('duration');
-    
-    if (durationParam) {
-      // Scroll to packages section
-      setTimeout(() => {
-        const packagesSection = document.querySelector('.packages-section');
-        if (packagesSection) {
-          packagesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
-      
-      // Handle custom package request
-      if (durationParam === 'custom') {
-        setTimeout(() => {
-          const customBtn = document.getElementById('custom-package-btn');
-          if (customBtn) {
-            customBtn.click();
-          }
-        }, 500);
-      } else {
-        // Filter packages based on duration
-        let filterValue = '4'; // default
-        let buttonToActivate = null;
-        
-        switch(durationParam) {
-          case '4':
-            filterValue = '4';
-            buttonToActivate = document.querySelector('.filter-btn[data-filter="all"]');
-            break;
-          case '5':
-            filterValue = '5';
-            buttonToActivate = document.querySelector('.filter-btn[data-filter="5nights"]');
-            break;
-          case '6':
-            filterValue = '6';
-            buttonToActivate = document.querySelector('.filter-btn[data-filter="6nights"]');
-            break;
-          case '7':
-            filterValue = 'all';
-            buttonToActivate = document.querySelector('.filter-btn[data-filter="7nights"]');
-            break;
-        }
-        
-        // Update filter buttons active state
-        if (buttonToActivate) {
-          filterButtons.forEach(btn => {
-            if (!btn.classList.contains('custom-btn')) {
-              btn.classList.remove('active');
-            }
-          });
-          buttonToActivate.classList.add('active');
-        }
-        
-        // Filter the cards
-        filterCards(filterValue);
-      }
-    }
-    
-    // Package Card Click - Navigate to details page
-    packageCards.forEach(card => {
-      card.addEventListener('click', () => {
-        window.location.href = 'package-details.html';
-      });
-    });
-    
     // Location Slider Functionality
     const locationPrev = document.getElementById('location-prev');
     const locationNext = document.getElementById('location-next');
@@ -2605,8 +2586,39 @@
     const wantMoreBtn = document.getElementById('want-more-btn');
     wantMoreBtn.addEventListener('click', () => {
       // Navigate to blogs page or show more blogs
-      alert('View all blogs functionality - you can link to a dedicated blogs page here!');
+      window.open('blogscards.html', '_blank');
     });
+  </script>
+
+  <script src="js/site-chrome.js"></script>
+  <script>
+    /* ── Homepage header behaviour ── */
+    initSiteChrome({ base: '' });
+
+    /* ── Blog cards → blog detail pages ── */
+    const blogRoutes = [
+      { selector: '.blog-card-1', url: 'blogs/exploring-bali.html' },
+      { selector: '.blog-card-2', url: 'blogs/tech-nomad-guide.html' },
+      { selector: '.blog-card-3', url: 'blogs/secrets-of-ubud.html' },
+      { selector: '.blog-card-4', url: 'blogs/adventures-beyond-beach.html' }
+    ];
+    blogRoutes.forEach(({ selector, url }) => {
+      const card = document.querySelector(selector);
+      if (card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => window.open(url, '_blank'));
+        const img = card.querySelector('img');
+        if (img) img.style.cursor = 'pointer';
+      }
+    });
+
+    /* ── Instagram images → open full size ── */
+    document.querySelectorAll('.instagram-item img').forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => window.open(img.src, '_blank'));
+    });
+
+    /* ── Location cards already wired via onclick ── */
   </script>
 </body>
 </html>
