@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Admin - Trip On</title>
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-left">
+            <div class="logo-section">
+                <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="admin-logo">
+                <p class="tagline">Welcome to Trip</p>
+            </div>
+            <div class="illustration">
+                <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Reception Desk -->
+                    <rect x="50" y="120" width="200" height="60" fill="#E0E0E0"/>
+                    <rect x="50" y="115" width="200" height="5" fill="#BDBDBD"/>
+                    
+                    <!-- Desk Front Panel -->
+                    <rect x="60" y="130" width="180" height="40" fill="#F5F5F5"/>
+                    <rect x="70" y="140" width="30" height="20" rx="2" fill="#9E9E9E"/>
+                    
+                    <!-- Person Standing -->
+                    <circle cx="110" cy="85" r="12" fill="#FFE0B2"/>
+                    <rect x="105" y="97" width="10" height="25" rx="5" fill="#42A5F5"/>
+                    <line x1="105" y1="105" x2="95" y2="115" stroke="#42A5F5" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="115" y1="105" x2="125" y2="115" stroke="#42A5F5" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="110" y1="122" x2="105" y2="140" stroke="#616161" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="110" y1="122" x2="115" y2="140" stroke="#616161" stroke-width="3" stroke-linecap="round"/>
+                    
+                    <!-- Suitcase -->
+                    <rect x="180" y="145" width="35" height="35" rx="3" fill="#EF5350"/>
+                    <rect x="185" y="148" width="25" height="28" fill="#E53935"/>
+                    <rect x="195" y="140" width="5" height="10" rx="2" fill="#C62828"/>
+                    <line x1="197" y1="155" x2="197" y2="170" stroke="#FFCDD2" stroke-width="2"/>
+                    
+                    <!-- Decorative Elements -->
+                    <circle cx="230" cy="100" r="3" fill="#4CAF50" opacity="0.5"/>
+                    <circle cx="245" cy="95" r="2" fill="#4CAF50" opacity="0.5"/>
+                    <circle cx="70" cy="90" r="2" fill="#42A5F5" opacity="0.5"/>
+                </svg>
+            </div>
+        </div>
+        <div class="login-right">
+            <h2>Sign in as <span class="highlight">Admin</span></h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me next time</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn-login">Continue to sign in</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/admin-login.js"></script>
+</body>
+</html>

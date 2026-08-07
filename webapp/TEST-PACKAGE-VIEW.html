@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Package View - Direct Links</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0e5a36 0%, #1a8759 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #0e5a36;
+            font-size: 32px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .package-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .package-link {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: #f8fafb;
+            border: 2px solid #e8f0eb;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .package-link:hover {
+            border-color: #0e5a36;
+            background: #f0fdf4;
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(14, 90, 54, 0.15);
+        }
+        
+        .package-image {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .package-info {
+            flex: 1;
+        }
+        
+        .package-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+        
+        .package-meta {
+            display: flex;
+            gap: 16px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .package-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0e5a36;
+            flex-shrink: 0;
+        }
+        
+        .arrow {
+            color: #0e5a36;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .info-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .info-box h3 {
+            color: #2e7d32;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .info-box ul {
+            margin-left: 20px;
+            color: #374151;
+        }
+        
+        .info-box li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #0e5a36;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0c4a2d;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #0e5a36;
+            border: 2px solid #0e5a36;
+        }
+        
+        .btn-secondary:hover {
+            background: #0e5a36;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📦 Test Package View Page</h1>
+        <p class="subtitle">Click any package below to see the detailed view page</p>
+        
+        <div class="info-box">
+            <h3>🎯 What You'll See:</h3>
+            <ul>
+                <li><strong>Hero Image:</strong> Large package image at the top</li>
+                <li><strong>Price Card:</strong> Sticky price card with "View on Website" link</li>
+                <li><strong>4 Tabs:</strong> Highlights, Itinerary, Budget Details, Hotels/Meals</li>
+                <li><strong>Expandable Sections:</strong> Day-by-day itinerary and policies</li>
+                <li><strong>Activities Grid:</strong> All package inclusions beautifully displayed</li>
+                <li><strong>Fully Responsive:</strong> Works perfectly on all devices</li>
+            </ul>
+        </div>
+        
+        <div class="package-grid">
+            <a href="admin-package-view.html?id=1" class="package-link">
+                <img src="../assets/images/beach.png" alt="Beach" class="package-image">
+                <div class="package-info">
+                    <div class="package-name">The White Beach Land</div>
+                    <div class="package-meta">
+                        <span>📍 Gili Trawangan</span>
+                        <span>⏱️ 6 Days 5 Nights</span>
+                    </div>
+                </div>
+                <div class="package-price">₹75,000</div>
+                <div class="arrow">→</div>
+            </a>
+            
+            <a href="admin-package-view.html?id=2" class="package-link">
+                <img src="../assets/images/ubud.png" alt="Ubud" class="package-image">
+                <div class="package-info">
+                    <div class="package-name">The Cultural Homeland</div>
+                    <div class="package-meta">
+                        <span>📍 Ubud</span>
+                        <span>⏱️ 4 Days 3 Nights</span>
+                    </div>
+                </div>
+                <div class="package-price">₹45,000</div>
+                <div class="arrow">→</div>
+            </a>
+            
+            <a href="admin-package-view.html?id=3" class="package-link">
+                <img src="../assets/images/indonesia.png" alt="Mountains" class="package-image">
+                <div class="package-info">
+                    <div class="package-name">Isolated Mountains</div>
+                    <div class="package-meta">
+                        <span>📍 Nusa Penida</span>
+                        <span>⏱️ 5 Days 4 Nights</span>
+                    </div>
+                </div>
+                <div class="package-price">₹50,000</div>
+                <div class="arrow">→</div>
+            </a>
+            
+            <a href="admin-package-view.html?id=4" class="package-link">
+                <img src="../assets/images/romantic.png" alt="Romantic" class="package-image">
+                <div class="package-info">
+                    <div class="package-name">Romantic Escape Premium</div>
+                    <div class="package-meta">
+                        <span>📍 Seminyak</span>
+                        <span>⏱️ 7 Days 6 Nights</span>
+                        <span>⭐ POPULAR</span>
+                    </div>
+                </div>
+                <div class="package-price">₹1,25,000</div>
+                <div class="arrow">→</div>
+            </a>
+            
+            <a href="admin-package-view.html?id=5" class="package-link">
+                <img src="../assets/images/adventure2.png" alt="Adventure" class="package-image">
+                <div class="package-info">
+                    <div class="package-name">Adventure Seeker Ultimate</div>
+                    <div class="package-meta">
+                        <span>📍 Multiple Locations</span>
+                        <span>⏱️ 6 Days 5 Nights</span>
+                    </div>
+                </div>
+                <div class="package-price">₹95,000</div>
+                <div class="arrow">→</div>
+            </a>
+        </div>
+        
+        <div class="button-group">
+            <a href="admin-packages.html" class="btn btn-primary">
+                ← Back to Packages Dashboard
+            </a>
+            <a href="admin-dashboard.html" class="btn btn-secondary">
+                Go to Admin Dashboard
+            </a>
+        </div>
+    </div>
+</body>
+</html>

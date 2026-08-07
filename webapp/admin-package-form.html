@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Form - Trip On Admin</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="admin-package-form-styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="sidebar-logo">
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/>
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                        <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <line x1="3" y1="8" x2="17" y2="8" stroke="currentColor" stroke-width="1.5"/>
+                        <line x1="8" y1="8" x2="8" y2="17" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    <span>Leads</span>
+                </a>
+                <a href="admin-packages.html" class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2L3 6v7c0 4.5 7 7 7 7s7-2.5 7-7V6l-7-4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    </svg>
+                    <span>Packages</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 class="page-title" id="formPageTitle">Packages</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                                <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <span class="user-name">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Package Form Container -->
+            <div class="package-form-container">
+                <!-- Form Header -->
+                <div class="form-header">
+                    <button class="btn-back" onclick="goBack()">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Back
+                    </button>
+                    <div class="form-header-right">
+                        <button class="btn-save-draft" onclick="saveDraft()">Save as Draft</button>
+                        <button class="btn-submit" onclick="submitPackage()" id="submitBtn">Submit</button>
+                    </div>
+                </div>
+
+                <form id="packageForm" class="package-form">
+                    <!-- Left Column: 3N4D Economy -->
+                    <div class="form-left-info">
+                        <h3 id="formCategoryTitle">3N4D Economy</h3>
+                    </div>
+
+                    <!-- Image Upload Section -->
+                    <div class="form-section">
+                        <h3 class="section-title">Package Image</h3>
+                        <div class="image-upload-area" id="imageUploadArea">
+                            <div class="image-preview" id="imagePreview">
+                                <img id="previewImg" src="" alt="Package Image" style="display: none;">
+                                <div class="upload-placeholder" id="uploadPlaceholder">
+                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <rect x="6" y="10" width="36" height="28" rx="2" stroke="#9ca3af" stroke-width="2"/>
+                                        <circle cx="16" cy="18" r="3" fill="#9ca3af"/>
+                                        <path d="M6 32l10-10 8 8 6-6 12 12" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    <p>Upload Package Image</p>
+                                    <span>Drag and drop or click to browse</span>
+                                </div>
+                            </div>
+                            <input type="file" id="packageImageFile" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                            <button type="button" class="btn-upload" onclick="document.getElementById('packageImageFile').click()">
+                                Choose File
+                            </button>
+                            <input type="text" id="packageImageUrl" class="form-input" placeholder="Or enter image URL" style="margin-top: 12px;">
+                        </div>
+                    </div>
+
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">Basic Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Package Name *</label>
+                                <input type="text" id="packageName" class="form-input" placeholder="Enter package name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Location *</label>
+                                <input type="text" id="packageLocation" class="form-input" placeholder="e.g., Ubud, Indonesia" required>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Duration (Nights) *</label>
+                                <select id="packageDuration" class="form-input" required onchange="updateCategoryTitle()">
+                                    <option value="">Select Duration</option>
+                                    <option value="4nights">3 Nights 4 Days</option>
+                                    <option value="5nights">4 Nights 5 Days</option>
+                                    <option value="6nights">5 Nights 6 Days</option>
+                                    <option value="7nights">6 Nights 7 Days</option>
+                                    <option value="custom">Custom Duration</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Package Type *</label>
+                                <select id="packageType" class="form-input" required onchange="updateCategoryTitle()">
+                                    <option value="">Select Type</option>
+                                    <option value="Economy">Economy</option>
+                                    <option value="Luxury">Luxury</option>
+                                    <option value="Delight">Delight</option>
+                                    <option value="Classic">Classic</option>
+                                    <option value="Premium">Premium</option>
+                                    <option value="Elite">Elite</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Price (INR) *</label>
+                                <input type="number" id="packagePrice" class="form-input" placeholder="e.g., 45000" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Status *</label>
+                                <select id="packageStatus" class="form-input" required>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="draft">Draft</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Package Description *</label>
+                            <textarea id="packageDescription" class="form-textarea" rows="4" placeholder="Brief description of the package..." required></textarea>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="packageFeatured">
+                                <span>Mark as Featured/Popular Package</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Package Type Details -->
+                    <div class="form-section">
+                        <h3 class="section-title">Package Type</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <input type="text" id="typeCategory" class="form-input" placeholder="e.g., Romantic, Adventure">
+                            </div>
+                            <div class="form-group">
+                                <label>Staying</label>
+                                <input type="text" id="typeStaying" class="form-input" placeholder="e.g., 3 Hotels">
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Person</label>
+                                <input type="text" id="typePerson" class="form-input" placeholder="e.g., 4 Adults / 2 Child">
+                            </div>
+                            <div class="form-group">
+                                <label>Other</label>
+                                <input type="text" id="typeOther" class="form-input" placeholder="Additional info">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Hotels</label>
+                            <textarea id="typeHotels" class="form-textarea" rows="2" placeholder="Hotel details..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Meals</label>
+                            <input type="text" id="typeMeals" class="form-input" placeholder="Meal plan details">
+                        </div>
+                    </div>
+
+                    <!-- Day Wise Schedule -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h3 class="section-title">Day Wise Schedule</h3>
+                            <button type="button" class="btn-add-day" onclick="addDay()">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                Add Day
+                            </button>
+                        </div>
+                        <div id="daysContainer">
+                            <!-- Day items will be dynamically added -->
+                        </div>
+                    </div>
+
+                    <!-- Cancellation Policy -->
+                    <div class="form-section">
+                        <h3 class="section-title">Cancellation policy</h3>
+                        <div class="form-group">
+                            <textarea id="cancellationPolicy" class="form-textarea" rows="4" placeholder="Enter cancellation policy details..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Instructions -->
+                    <div class="form-section">
+                        <h3 class="section-title">Instructions</h3>
+                        <div class="form-group">
+                            <textarea id="instructions" class="form-textarea" rows="4" placeholder="Enter instructions for travelers..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button (Bottom) -->
+                    <div class="form-footer">
+                        <button type="button" class="btn-cancel" onclick="goBack()">Cancel</button>
+                        <button type="button" class="btn-submit-final" onclick="submitPackage()">
+                            <span id="submitBtnText">Create Package</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/packages-data.js"></script>
+    <script src="js/admin-package-form.js"></script>
+</body>
+</html>

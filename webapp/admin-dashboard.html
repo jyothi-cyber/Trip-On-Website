@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leads Database - Trip On Admin</title>
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="sidebar-logo">
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/>
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                        <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <line x1="3" y1="8" x2="17" y2="8" stroke="currentColor" stroke-width="1.5"/>
+                        <line x1="8" y1="8" x2="8" y2="17" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    <span>Leads</span>
+                </a>
+                <a href="admin-packages.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2L3 6v7c0 4.5 7 7 7 7s7-2.5 7-7V6l-7-4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    </svg>
+                    <span>Packages</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <h1 class="page-title">Leads DataBase</h1>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                                <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <span class="user-name">Jyothi Duddukunta</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filters-left">
+                    <button class="filter-btn" id="filterToggle">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        Filters
+                    </button>
+                    
+                    <div class="filter-dropdowns">
+                        <select class="filter-select" id="filterAll">
+                            <option value="">All (4508)</option>
+                            <option value="new">New Leads</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="converted">Converted</option>
+                        </select>
+                        
+                        <select class="filter-select" id="filterSheet">
+                            <option value="">Select Sheet</option>
+                            <option value="sheet1">Sheet 1</option>
+                            <option value="sheet2">Sheet 2</option>
+                        </select>
+                        
+                        <select class="filter-select" id="filterAssign">
+                            <option value="">Select Assign</option>
+                            <option value="member1">Team Member1</option>
+                            <option value="member2">Team Member2</option>
+                            <option value="member3">Team Member3</option>
+                            <option value="member4">Team Member4</option>
+                            <option value="unallocated">Un-Allocated</option>
+                        </select>
+                        
+                        <input type="date" class="filter-select" id="filterDate" placeholder="Select date">
+                    </div>
+                    
+                    <div class="showing-count">Showing 1-10 of 4508</div>
+                </div>
+                
+                <div class="filters-right">
+                    <div class="search-box">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+                            <line x1="11" y1="11" x2="15" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <input type="text" placeholder="Search" id="searchInput">
+                    </div>
+                    
+                    <button class="action-btn" id="importBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 12V4M8 4L5 7M8 4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 14h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        Import
+                    </button>
+                    
+                    <button class="action-btn" id="exportBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 4v8M8 12l-3-3M8 12l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 14h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        Export
+                    </button>
+                    
+                    <button class="btn-new-lead" id="addNewBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        New lead
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+                <table class="leads-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" onclick="sortTable('name')">
+                                Full Name
+                                <svg class="sort-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M6 3L8 5H4L6 3Z" fill="currentColor" opacity="0.5"/>
+                                    <path d="M6 9L4 7H8L6 9Z" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </th>
+                            <th class="sortable" onclick="sortTable('date')">
+                                Lead Date
+                                <svg class="sort-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M6 3L8 5H4L6 3Z" fill="currentColor" opacity="0.5"/>
+                                    <path d="M6 9L4 7H8L6 9Z" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </th>
+                            <th class="sortable" onclick="sortTable('guests')">
+                                Guests
+                                <svg class="sort-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M6 3L8 5H4L6 3Z" fill="currentColor" opacity="0.5"/>
+                                    <path d="M6 9L4 7H8L6 9Z" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </th>
+                            <th class="sortable" onclick="sortTable('package')">
+                                Package Type
+                                <svg class="sort-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M6 3L8 5H4L6 3Z" fill="currentColor" opacity="0.5"/>
+                                    <path d="M6 9L4 7H8L6 9Z" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </th>
+                            <th class="sortable" onclick="sortTable('budget')">
+                                Budget
+                                <svg class="sort-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M6 3L8 5H4L6 3Z" fill="currentColor" opacity="0.5"/>
+                                    <path d="M6 9L4 7H8L6 9Z" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </th>
+                            <th class="sortable" onclick="sortTable('status')">
+                                Status
+                                <svg class="sort-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M6 3L8 5H4L6 3Z" fill="currentColor" opacity="0.5"/>
+                                    <path d="M6 9L4 7H8L6 9Z" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </th>
+                            <th class="sortable" onclick="sortTable('assign')">
+                                Assign To
+                                <svg class="sort-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M6 3L8 5H4L6 3Z" fill="currentColor" opacity="0.5"/>
+                                    <path d="M6 9L4 7H8L6 9Z" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="leadsTableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Cards -->
+            <div class="mobile-cards-container" id="mobileCardsContainer">
+                <!-- Populated by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" id="prevBtn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <span class="pagination-info">Page 1 of 451</span>
+                <button class="pagination-btn" id="nextBtn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- View Lead Modal - New Design -->
+    <div id="viewLeadModal" class="modal">
+        <div class="modal-content view-lead-modal">
+            <div class="view-modal-header">
+                <div class="view-header-left">
+                    <span class="view-label">LEAD DETAILS</span>
+                    <span class="view-lead-id" id="viewLeadIdTop">L-02043</span>
+                </div>
+                <button class="view-close-btn" onclick="closeModal('viewLeadModal')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="view-modal-body">
+                <div class="view-left-section">
+                    <div class="view-name-section">
+                        <h2 id="viewName">Divyansh Rathore</h2>
+                        <button class="edit-name-btn" onclick="editLeadFromView()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M11.333 2A1.886 1.886 0 0 1 14 4.667l-9 9-3.667 1 1-3.667 9-9z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="view-info-group">
+                        <label>PHONE</label>
+                        <div class="view-info-value">
+                            <span id="viewContact">8602892488</span>
+                            <button class="copy-btn" onclick="copyToClipboard('viewContact')">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M2 10V3a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="view-info-group">
+                        <label>EMAIL</label>
+                        <div class="view-info-value">
+                            <span id="viewEmail">demonisrevoked1512@gmail.com</span>
+                            <button class="copy-btn" onclick="copyToClipboard('viewEmail')">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M2 10V3a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="view-info-group">
+                        <label>CREATED AT</label>
+                        <div class="view-info-value">
+                            <span id="viewCreatedAt">05 Aug 2026 · 05:58 AM</span>
+                        </div>
+                    </div>
+                    
+                    <div class="view-info-group">
+                        <label>FORM SOURCE</label>
+                        <div class="view-info-value">
+                            <span id="viewFormSource">Homepage</span>
+                        </div>
+                    </div>
+                    
+                    <div class="view-info-group">
+                        <label>COMING WITH</label>
+                        <div class="view-info-value">
+                            <span id="viewGuests">Friends</span>
+                        </div>
+                    </div>
+                    
+                    <div class="view-info-group">
+                        <label>PLANNED VISIT</label>
+                        <div class="view-info-value">
+                            <span id="viewPlannedVisit">This Weekend</span>
+                        </div>
+                    </div>
+                    
+                    <div class="view-info-group">
+                        <label>TICKETS COUNT</label>
+                        <div class="view-info-value">
+                            <span id="viewTicketsCount">6</span>
+                        </div>
+                    </div>
+                    
+                    <div class="view-info-group">
+                        <label>PARAMOTOR INTEREST</label>
+                        <div class="view-info-value">
+                            <span id="viewInterest">Decide on-site</span>
+                        </div>
+                    </div>
+                    
+                    <button class="delete-lead-btn" onclick="deleteLeadFromView()">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334z" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                        Delete
+                    </button>
+                </div>
+                
+                <div class="view-right-section">
+                    <div class="view-assign-status">
+                        <div class="view-field-group">
+                            <label>ASSIGNED TO</label>
+                            <select id="viewAssignedTo" class="view-select" onchange="updateAssignmentFromView()">
+                                <option value="Shipra">Shipra</option>
+                                <option value="Jyothi Duddukunta">Jyothi Duddukunta</option>
+                                <option value="Team Member1">Team Member1</option>
+                                <option value="Team Member2">Team Member2</option>
+                                <option value="Team Member3">Team Member3</option>
+                                <option value="Team Member4">Team Member4</option>
+                                <option value="Un-Allocated">Un-Allocated</option>
+                            </select>
+                        </div>
+                        
+                        <div class="view-field-group">
+                            <label>STATUS</label>
+                            <select id="viewStatus" class="view-select" onchange="updateStatusFromView()">
+                                <option value="new">New</option>
+                                <option value="interested">Interested</option>
+                                <option value="follow-up">Follow-up</option>
+                                <option value="converted">Converted</option>
+                                <option value="special">Special</option>
+                                <option value="no-interest">No Interest</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="view-tabs">
+                        <button class="view-tab active" onclick="switchViewTab('notes')">Notes</button>
+                        <button class="view-tab" onclick="switchViewTab('activity')">Activity</button>
+                    </div>
+                    
+                    <div class="view-notes-section" id="viewNotesSection">
+                        <textarea id="viewNotesInput" placeholder="Note about this lead--preferences, objections, next step..."></textarea>
+                        <div class="view-notes-footer">
+                            <span class="notes-timestamp">05 AUG 26, 11:08 AM</span>
+                            <div class="view-notes-actions">
+                                <button class="clear-notes-btn" onclick="clearNotes()">Clear</button>
+                                <button class="add-notes-btn" onclick="saveNotes()">Add Notes</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="view-activity-section" id="viewActivitySection" style="display: none;">
+                        <div class="activity-empty">
+                            <p>No activity recorded yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-modal-footer">
+                <button class="action-call-btn" onclick="makeCall()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M14.5 11.3v2a1.33 1.33 0 0 1-1.45 1.33 13.2 13.2 0 0 1-5.76-2.05 13 13 0 0 1-4-4 13.2 13.2 0 0 1-2-5.8A1.33 1.33 0 0 1 2.6 1.5h2a1.33 1.33 0 0 1 1.33 1.15c.08.63.24 1.25.46 1.84a1.33 1.33 0 0 1-.3 1.4l-.85.85a10.67 10.67 0 0 0 4 4l.85-.85a1.33 1.33 0 0 1 1.4-.3c.6.22 1.21.38 1.84.46a1.33 1.33 0 0 1 1.15 1.35z" fill="currentColor"/>
+                    </svg>
+                    Call
+                </button>
+                
+                <button class="action-email-btn" onclick="sendEmail()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2.67 2.67h10.66c.74 0 1.34.6 1.34 1.33v8c0 .73-.6 1.33-1.34 1.33H2.67c-.74 0-1.34-.6-1.34-1.33V4c0-.73.6-1.33 1.34-1.33z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M14.67 4L8 8.67 1.33 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Email
+                </button>
+                
+                <button class="action-whatsapp-btn" onclick="sendWhatsApp()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M13.6 2.33A7.33 7.33 0 0 0 1.07 11.4L.67 15l3.66-.96a7.33 7.33 0 0 0 3.5.89h.01a7.33 7.33 0 0 0 5.76-11.6zM7.84 13.6a6.1 6.1 0 0 1-3.11-.85l-.22-.13-2.3.6.62-2.25-.14-.23a6.1 6.1 0 1 1 5.15 2.86zm3.35-4.57c-.18-.09-1.08-.53-1.25-.59-.17-.06-.29-.09-.41.09s-.47.59-.58.71c-.1.12-.21.14-.4.05a5.03 5.03 0 0 1-1.48-.91 5.53 5.53 0 0 1-1.02-1.27c-.11-.18 0-.28.08-.37.08-.08.18-.21.27-.32.09-.1.12-.18.18-.3.06-.12.03-.23-.01-.32-.05-.09-.41-1-.57-1.36-.15-.35-.3-.3-.41-.31h-.35c-.12 0-.32.05-.49.23-.17.18-.65.64-.65 1.55s.67 1.8.76 1.92c.09.12 1.31 2 3.17 2.8.44.19.79.3 1.06.39.45.14.85.12 1.17.07.36-.05 1.08-.44 1.24-.87.15-.43.15-.8.11-.87-.05-.07-.17-.12-.36-.21z" fill="currentColor"/>
+                    </svg>
+                    WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Lead Modal -->
+    <div id="editLeadModal" class="modal">
+        <div class="modal-content edit-modal-content">
+            <div class="edit-modal-header">
+                <button class="back-btn" onclick="closeModal('editLeadModal')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back
+                </button>
+                <button class="edit-save-btn" id="editSaveBtn" onclick="saveEditLead()">Save</button>
+            </div>
+            
+            <div class="edit-modal-body">
+                <form id="editLeadForm">
+                    <div class="edit-field-row">
+                        <label>Lead ID:</label>
+                        <div class="edit-field-value">
+                            <input type="text" id="editLeadId" placeholder="e.g., L-02043" class="lead-id-input" required>
+                            <button type="button" class="generate-ticket-btn" onclick="openBookTripModal()">Generate Ticket</button>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Status:</label>
+                        <div class="edit-field-value">
+                            <select id="editStatus" class="edit-dropdown">
+                                <option value="interested">Interested</option>
+                                <option value="follow-up">Follow-up</option>
+                                <option value="converted">Converted</option>
+                                <option value="special">Special</option>
+                                <option value="no-interest">No Interest</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Assign To:</label>
+                        <div class="edit-field-value">
+                            <select id="editAssignTo" class="edit-dropdown">
+                                <option value="Shipra">Shipra</option>
+                                <option value="Jyothi Duddukunta">Jyothi Duddukunta</option>
+                                <option value="Team Member1">Team Member1</option>
+                                <option value="Team Member2">Team Member2</option>
+                                <option value="Team Member3">Team Member3</option>
+                                <option value="Team Member4">Team Member4</option>
+                                <option value="Un-Allocated">Un-Allocated</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Lead Received on:</label>
+                        <div class="edit-field-value">
+                            <input type="datetime-local" id="editLeadDate" required>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Customer Name:</label>
+                        <div class="edit-field-value">
+                            <input type="text" id="editName" placeholder="Enter customer name" required>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Guests:</label>
+                        <div class="edit-field-value">
+                            <input type="text" id="editGuests" placeholder="e.g., 4-5 People" required>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Package Type:</label>
+                        <div class="edit-field-value">
+                            <input type="text" id="editPackage" placeholder="e.g., 5Nights 6Days" required>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Budget:</label>
+                        <div class="edit-field-value">
+                            <input type="text" id="editBudget" placeholder="e.g., 20K - 30K INR" required>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Phone Number:</label>
+                        <div class="edit-field-value">
+                            <input type="tel" id="editContact" placeholder="+91 99966 63333" required>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Email ID:</label>
+                        <div class="edit-field-value">
+                            <input type="email" id="editEmail" placeholder="yourmailid@email.com" required>
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Address:</label>
+                        <div class="edit-field-value">
+                            <input type="text" id="editAddress" placeholder="Full address with pincode">
+                        </div>
+                    </div>
+
+                    <div class="edit-field-row">
+                        <label>Quick Note:</label>
+                        <div class="edit-field-value">
+                            <textarea id="editNotes" rows="4" placeholder="Add any quick notes or special requirements..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Lead Modal -->
+    <div id="addLeadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Lead</h3>
+                <span class="close" onclick="closeModal('addLeadModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="addLeadForm">
+                    <div class="form-group">
+                        <label for="addName">Name *</label>
+                        <input type="text" id="addName" placeholder="Enter customer name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="addContact">Contact Number *</label>
+                            <input type="tel" id="addContact" placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addEmail">Email ID *</label>
+                            <input type="email" id="addEmail" placeholder="customer@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="addPackage">Package Type *</label>
+                            <select id="addPackage" required>
+                                <option value="">Select Package</option>
+                                <option>Regular Type</option>
+                                <option>Custom Type</option>
+                                <option>Premium Type</option>
+                                <option>Budget Type</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="addDuration">Duration *</label>
+                            <select id="addDuration" required>
+                                <option value="">Select Duration</option>
+                                <option>3 Nights</option>
+                                <option>4 Nights</option>
+                                <option>5 Nights</option>
+                                <option>6 Nights</option>
+                                <option>7 Nights</option>
+                                <option>8+ Nights</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="addGuests">Number of Guests *</label>
+                            <input type="text" id="addGuests" placeholder="e.g., 4-5 People" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addBudget">Budget *</label>
+                            <input type="text" id="addBudget" placeholder="INR - XXK" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addLocation">Preferred Location</label>
+                        <input type="text" id="addLocation" placeholder="e.g., Ubud, Seminyak, Canggu">
+                    </div>
+                    <div class="form-group">
+                        <label for="addAddress">Customer Address</label>
+                        <input type="text" id="addAddress" placeholder="Enter full address">
+                    </div>
+                    <div class="form-group">
+                        <label for="addStatus">Status *</label>
+                        <select id="addStatus" required>
+                            <option value="interested" selected>Interested</option>
+                            <option value="follow-up">Follow-up</option>
+                            <option value="converted">Converted</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="addNotes">Additional Notes</label>
+                        <textarea id="addNotes" rows="4" placeholder="Enter any special requirements or preferences..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('addLeadModal')">Cancel</button>
+                <button class="btn-primary" onclick="saveNewLead()">Create Lead</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book a Trip Modal -->
+    <div class="book-trip-overlay" id="bookTripOverlay">
+        <div class="book-trip-modal">
+            <button class="book-trip-close" onclick="closeBookTripModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
+            <div class="book-trip-header">
+                <div class="book-trip-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M10 15L24 8L38 15V33L24 40L10 33V15Z" stroke="#4CAF50" stroke-width="2.5" fill="none"/>
+                    </svg>
+                </div>
+                <h2>Book a Trip</h2>
+                <p>Fill in your details and we'll plan the perfect trip for you!</p>
+            </div>
+
+            <form id="bookTripForm" class="book-trip-form">
+                <div class="book-trip-field">
+                    <label>Full Name *</label>
+                    <input type="text" id="bookName" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="book-trip-field">
+                    <label>Destination *</label>
+                    <select id="bookDestination" required>
+                        <option value="">Select a destination</option>
+                        <option value="Bali" selected>Bali, Indonesia</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Malaysia">Malaysia</option>
+                    </select>
+                </div>
+
+                <div class="book-trip-field">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="bookPhone" placeholder="+91 XXXXX XXXXX" required>
+                </div>
+
+                <div class="book-trip-row">
+                    <div class="book-trip-field">
+                        <label>No. of Days *</label>
+                        <select id="bookDays" required>
+                            <option value="">Select days</option>
+                            <option value="3">3 Days</option>
+                            <option value="4">4 Days</option>
+                            <option value="5">5 Days</option>
+                            <option value="6">6 Days</option>
+                            <option value="7">7 Days</option>
+                            <option value="8+">8+ Days</option>
+                        </select>
+                    </div>
+
+                    <div class="book-trip-field">
+                        <label>No. of People *</label>
+                        <select id="bookPeople" required>
+                            <option value="">Select travelers</option>
+                            <option value="1">1 Person</option>
+                            <option value="2">2 Persons</option>
+                            <option value="3">3 Persons</option>
+                            <option value="4">4 Persons</option>
+                            <option value="5+">5+ Persons</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="book-trip-field">
+                    <label>Travel Date *</label>
+                    <input type="date" id="bookDate" required>
+                </div>
+
+                <button type="submit" class="book-trip-submit">
+                    Submit Details
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Quick View Modal -->
+    <div class="mobile-quick-view" id="mobileQuickView">
+        <div class="mobile-quick-header">
+            <div class="mobile-quick-info">
+                <h3 id="mobileQuickName">Divyansh Rathore</h3>
+                <span class="mobile-lead-id" id="mobileQuickId">L-02043</span>
+            </div>
+            <span class="mobile-status-badge" id="mobileQuickStatus">New</span>
+        </div>
+        
+        <div class="mobile-quick-details">
+            <div class="mobile-detail-item">
+                <span class="mobile-detail-label">TICKETS</span>
+                <span class="mobile-detail-value" id="mobileQuickTickets">6</span>
+            </div>
+            <div class="mobile-detail-item">
+                <span class="mobile-detail-label">CREATED</span>
+                <span class="mobile-detail-value" id="mobileQuickCreated">05:58 AM · 05 Aug</span>
+            </div>
+        </div>
+        
+        <div class="mobile-quick-actions">
+            <button class="mobile-action-btn mobile-view-btn" onclick="openFullViewFromQuick()">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                View
+            </button>
+            <button class="mobile-action-btn mobile-call-btn" onclick="makeCallFromQuick()">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M14.5 11.3v2a1.33 1.33 0 0 1-1.45 1.33 13.2 13.2 0 0 1-5.76-2.05 13 13 0 0 1-4-4 13.2 13.2 0 0 1-2-5.8A1.33 1.33 0 0 1 2.6 1.5h2a1.33 1.33 0 0 1 1.33 1.15c.08.63.24 1.25.46 1.84a1.33 1.33 0 0 1-.3 1.4l-.85.85a10.67 10.67 0 0 0 4 4l.85-.85a1.33 1.33 0 0 1 1.4-.3c.6.22 1.21.38 1.84.46a1.33 1.33 0 0 1 1.15 1.35z" fill="currentColor"/>
+                </svg>
+            </button>
+            <button class="mobile-action-btn mobile-whatsapp-btn" onclick="sendWhatsAppFromQuick()">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13.6 2.33A7.33 7.33 0 0 0 1.07 11.4L.67 15l3.66-.96a7.33 7.33 0 0 0 3.5.89h.01a7.33 7.33 0 0 0 5.76-11.6zM7.84 13.6a6.1 6.1 0 0 1-3.11-.85l-.22-.13-2.3.6.62-2.25-.14-.23a6.1 6.1 0 1 1 5.15 2.86zm3.35-4.57c-.18-.09-1.08-.53-1.25-.59-.17-.06-.29-.09-.41.09s-.47.59-.58.71c-.1.12-.21.14-.4.05a5.03 5.03 0 0 1-1.48-.91 5.53 5.53 0 0 1-1.02-1.27c-.11-.18 0-.28.08-.37.08-.08.18-.21.27-.32.09-.1.12-.18.18-.3.06-.12.03-.23-.01-.32-.05-.09-.41-1-.57-1.36-.15-.35-.3-.3-.41-.31h-.35c-.12 0-.32.05-.49.23-.17.18-.65.64-.65 1.55s.67 1.8.76 1.92c.09.12 1.31 2 3.17 2.8.44.19.79.3 1.06.39.45.14.85.12 1.17.07.36-.05 1.08-.44 1.24-.87.15-.43.15-.8.11-.87-.05-.07-.17-.12-.36-.21z" fill="currentColor"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/leads-data.js"></script>
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>
