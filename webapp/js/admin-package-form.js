@@ -27,7 +27,70 @@ function initializeForm() {
         menuToggle.addEventListener('click', toggleSidebar);
     }
     
+    // Initialize mobile menu handlers
+    initializeMobileMenu();
+    
+    // Initialize image URL input handler
+    handleImageUrlInput();
+    
     // For new packages, don't add default days yet - they'll be added when mode is confirmed
+}
+
+function initializeMobileMenu() {
+    // Mobile menu button (in mobile header)
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (sidebar) {
+                sidebar.classList.toggle('active');
+            }
+            if (overlay) {
+                overlay.classList.toggle('active');
+            }
+        });
+    }
+    
+    // Close sidebar when clicking overlay
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar) {
+                sidebar.classList.remove('active');
+            }
+            this.classList.remove('active');
+        });
+    }
+    
+    // Mobile profile button
+    const mobileProfileBtn = document.getElementById('mobileProfileBtn');
+    if (mobileProfileBtn) {
+        mobileProfileBtn.addEventListener('click', function() {
+            if (confirm('Do you want to logout?')) {
+                sessionStorage.removeItem('adminLoggedIn');
+                sessionStorage.removeItem('adminEmail');
+                window.location.href = 'admin-login.html';
+            }
+        });
+    }
+    
+    // Close sidebar when clicking a nav link (mobile)
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                if (sidebar) {
+                    sidebar.classList.remove('active');
+                }
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+    });
 }
 
 function toggleSidebar() {
@@ -50,11 +113,30 @@ function checkEditMode() {
         isEditMode = true;
         currentPackageId = parseInt(packageId || editId);
         loadPackageForEdit(currentPackageId);
-        document.getElementById('submitButtonText').textContent = 'Update Package';
-        document.querySelector('.form-category-display h2').textContent = 'Edit Package';
+        
+        // Update UI elements that exist
+        const submitBtn = document.getElementById('submitBtnText');
+        if (submitBtn) {
+            submitBtn.textContent = 'Update Package';
+        }
+        
+        const formTitle = document.getElementById('formCategoryTitle');
+        if (formTitle) {
+            formTitle.textContent = 'Edit Package';
+        }
+        
+        const pageTitle = document.getElementById('formPageTitle');
+        if (pageTitle) {
+            pageTitle.textContent = 'Edit Package';
+        }
     } else {
         isEditMode = false;
-        document.getElementById('submitButtonText').textContent = 'Create Package';
+        
+        const submitBtn = document.getElementById('submitBtnText');
+        if (submitBtn) {
+            submitBtn.textContent = 'Create Package';
+        }
+        
         // Initialize with default days for new package
         initializeDefaultDays();
     }
@@ -197,17 +279,20 @@ function loadPackageForEdit(packageId) {
     document.getElementById('packagePrice').value = pkg.price;
     document.getElementById('packageStatus').value = pkg.status;
     document.getElementById('packageDescription').value = pkg.description;
-    document.getElementById('featuredCheckbox').checked = pkg.featured || false;
+    
+    // Handle featured checkbox
+    const featuredCheckbox = document.getElementById('packageFeatured');
+    if (featuredCheckbox) {
+        featuredCheckbox.checked = pkg.featured || false;
+    }
     
     // Load and display existing image in the upload area
     if (pkg.image) {
-        document.getElementById('imageUrl').value = pkg.image;
-        displayImagePreview(pkg.image);
-    }
-    
-    // Load highlights/inclusions
-    if (pkg.inclusions && pkg.inclusions.length > 0) {
-        document.getElementById('highlights').value = pkg.inclusions.join('\n');
+        const imageUrlInput = document.getElementById('packageImageUrl');
+        if (imageUrlInput) {
+            imageUrlInput.value = pkg.image;
+            displayImagePreview(pkg.image);
+        }
     }
     
     // Load package type info with defaults if not present
@@ -233,18 +318,14 @@ function loadPackageForEdit(packageId) {
     document.getElementById('cancellationPolicy').value = pkg.cancellationPolicy || 'Standard cancellation policy applies. Please contact for details.';
     document.getElementById('instructions').value = pkg.instructions || 'Please carry valid ID proof. Check-in time is 2 PM, check-out is 11 AM.';
     
-    updateCategoryDisplay();
+    updateCategoryTitle();
 }
 
 // ============================================================================
 // IMAGE HANDLING
 // ============================================================================
 
-function triggerImageUpload() {
-    document.getElementById('imageInput').click();
-}
-
-function handleImageSelect(event) {
+function handleImageUpload(event) {
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
@@ -255,33 +336,74 @@ function handleImageSelect(event) {
     }
 }
 
-function handleImageUrl() {
-    const url = document.getElementById('imageUrl').value.trim();
-    if (url) {
-        displayImagePreview(url);
+function displayImagePreview(src) {
+    const preview = document.getElementById('previewImg');
+    const placeholder = document.getElementById('uploadPlaceholder');
+    const overlay = document.getElementById('imageOverlay');
+    
+    if (preview && placeholder) {
+        preview.src = src;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+        
+        // Show overlay on hover
+        if (overlay) {
+            preview.addEventListener('mouseenter', function() {
+                overlay.style.opacity = '1';
+                overlay.style.display = 'flex';
+            });
+            
+            preview.addEventListener('mouseleave', function() {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    if (overlay.style.opacity === '0') {
+                        overlay.style.display = 'none';
+                    }
+                }, 300);
+            });
+        }
+        
+        // Make image clickable to redirect to view page
+        preview.style.cursor = 'pointer';
+        preview.onclick = function() {
+            if (currentPackageId && isEditMode) {
+                // If editing existing package, redirect to view page
+                window.open(`admin-package-view.html?id=${currentPackageId}`, '_blank');
+            } else {
+                // If new package, show message
+                alert('Save the package first to view the details page');
+            }
+        };
+        
+        preview.onerror = function() {
+            this.style.display = 'none';
+            placeholder.style.display = 'flex';
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+            alert('Failed to load image. Please check the URL.');
+        };
     }
 }
 
-function displayImagePreview(src) {
-    const preview = document.getElementById('previewImage');
-    const placeholder = document.getElementById('imagePlaceholder');
-    
-    preview.src = src;
-    preview.style.display = 'block';
-    placeholder.style.display = 'none';
-    
-    preview.onerror = function() {
-        this.style.display = 'none';
-        placeholder.style.display = 'flex';
-        alert('Failed to load image. Please check the URL.');
-    };
+// Handle image URL input
+function handleImageUrlInput() {
+    const imageUrlInput = document.getElementById('packageImageUrl');
+    if (imageUrlInput) {
+        imageUrlInput.addEventListener('input', function() {
+            const url = this.value.trim();
+            if (url) {
+                displayImagePreview(url);
+            }
+        });
+    }
 }
 
 // ============================================================================
 // CATEGORY DISPLAY UPDATE
 // ============================================================================
 
-function updateCategoryDisplay() {
+function updateCategoryTitle() {
     const duration = document.getElementById('packageDuration').value;
     const type = document.getElementById('packageType').value;
     
@@ -296,7 +418,11 @@ function updateCategoryDisplay() {
     }
     
     const displayText = durationText && type ? `${durationText} ${type}` : (isEditMode ? 'Edit Package' : 'New Package');
-    document.getElementById('categoryDisplay').textContent = displayText;
+    
+    const categoryDisplay = document.getElementById('formCategoryTitle');
+    if (categoryDisplay) {
+        categoryDisplay.textContent = displayText;
+    }
 }
 
 // ============================================================================
@@ -400,9 +526,9 @@ function validateForm() {
     }
     
     // Validate image - check if there's a preview image displayed or URL
-    const imageUrl = document.getElementById('imageUrl').value.trim();
-    const previewImage = document.getElementById('previewImage');
-    const hasPreviewImage = previewImage.style.display !== 'none' && previewImage.src;
+    const imageUrl = document.getElementById('packageImageUrl').value.trim();
+    const previewImage = document.getElementById('previewImg');
+    const hasPreviewImage = previewImage && previewImage.style.display !== 'none' && previewImage.src;
     
     if (!imageUrl && !hasPreviewImage) {
         alert('Please upload an image or provide an image URL');
@@ -421,21 +547,17 @@ function collectFormData() {
     const price = parseInt(document.getElementById('packagePrice').value);
     const status = document.getElementById('packageStatus').value;
     const description = document.getElementById('packageDescription').value.trim();
-    const featured = document.getElementById('featuredCheckbox').checked;
+    const featured = document.getElementById('packageFeatured').checked;
     
     // Image - preserve existing or use new
-    const imageUrlInput = document.getElementById('imageUrl').value.trim();
-    const previewImage = document.getElementById('previewImage');
+    const imageUrlInput = document.getElementById('packageImageUrl').value.trim();
+    const previewImage = document.getElementById('previewImg');
     let imageUrl = imageUrlInput;
     
     // If no URL but preview is shown, get the preview src
-    if (!imageUrl && previewImage.style.display !== 'none' && previewImage.src) {
+    if (!imageUrl && previewImage && previewImage.style.display !== 'none' && previewImage.src) {
         imageUrl = previewImage.src;
     }
-    
-    // Highlights
-    const highlightsText = document.getElementById('highlights').value.trim();
-    const inclusions = highlightsText ? highlightsText.split('\n').filter(line => line.trim()) : [];
     
     // Package type info
     const typeCategory = document.getElementById('typeCategory').value.trim();
@@ -489,7 +611,7 @@ function collectFormData() {
         featured,
         image: imageUrl,
         pageUrl: generatePageUrl(name),
-        inclusions,
+        inclusions: ['Accommodation', 'Transportation', 'Sightseeing', 'Tour guide'],
         exclusions,
         itinerary,
         typeCategory,
@@ -545,13 +667,32 @@ function goBack() {
 // EXPORT FUNCTIONS
 // ============================================================================
 
-window.triggerImageUpload = triggerImageUpload;
-window.handleImageSelect = handleImageSelect;
-window.handleImageUrl = handleImageUrl;
-window.updateCategoryDisplay = updateCategoryDisplay;
-window.addDayItem = addDayItem;
+window.handleImageUpload = handleImageUpload;
+window.updateCategoryTitle = updateCategoryTitle;
+window.addDay = addDayItem;
 window.removeDayItem = removeDayItem;
 window.toggleSection = toggleSection;
 window.submitPackage = submitPackage;
+window.saveDraft = function() {
+    if (!validateForm()) {
+        return;
+    }
+    
+    const packageData = collectFormData();
+    packageData.status = 'draft';
+    
+    if (isEditMode) {
+        updatePackage(currentPackageId, packageData);
+        alert('Package saved as draft!');
+    } else {
+        const newPackage = addPackage(packageData);
+        currentPackageId = newPackage.id;
+        isEditMode = true;
+        alert('Package saved as draft!');
+        // Update URL to edit mode
+        const newUrl = `${window.location.pathname}?id=${currentPackageId}`;
+        window.history.replaceState(null, '', newUrl);
+    }
+};
 window.previewPackage = previewPackage;
 window.goBack = goBack;

@@ -540,3 +540,158 @@
     font-size: 14px;
     color: #6b7280;
 }
+
+
+/* ============================================================================
+   MOBILE RESPONSIVE STYLES FOR PACKAGES
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    /* Packages tabs mobile */
+    .packages-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e8f0eb;
+        gap: 8px;
+    }
+    
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    /* Package filters mobile */
+    .packages-filters {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-left,
+    .filter-right {
+        width: 100%;
+    }
+    
+    .duration-filter {
+        width: 100%;
+    }
+    
+    .btn-add-package {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Package grid mobile */
+    .popular-packages-grid,
+    .all-packages-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    /* Package card mobile */
+    .popular-package-card {
+        margin-bottom: 0;
+    }
+    
+    .package-image {
+        height: 200px;
+        cursor: pointer;
+    }
+    
+    .package-content {
+        padding: 15px;
+    }
+    
+    .package-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .package-price {
+        font-size: 18px;
+    }
+    
+    .package-meta {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .meta-item {
+        font-size: 12px;
+    }
+    
+    .package-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-view,
+    .btn-edit {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Empty state mobile */
+    .empty-state {
+        padding: 40px 20px;
+    }
+    
+    .empty-state-icon {
+        font-size: 48px;
+    }
+    
+    .empty-state h3 {
+        font-size: 18px;
+    }
+    
+    .empty-state p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small mobile adjustments */
+    .package-image {
+        height: 180px;
+    }
+    
+    .package-title {
+        font-size: 16px;
+    }
+    
+    .package-location {
+        font-size: 12px;
+    }
+    
+    .package-price {
+        font-size: 16px;
+    }
+    
+    .meta-item {
+        font-size: 11px;
+    }
+    
+    .btn-view,
+    .btn-edit {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
+
+/* Tablet optimization */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .popular-packages-grid,
+    .all-packages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .package-image {
+        height: 220px;
+    }
+}

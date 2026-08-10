@@ -4,6 +4,10 @@
 let leadsData = initializeLeadsData();
 let currentLeadId = null;
 
+// Initialize sorting variables at the top level
+let currentSortColumn = null;
+let currentSortDirection = 'asc';
+
 // Check authentication
 window.addEventListener('DOMContentLoaded', function() {
     if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
@@ -15,6 +19,9 @@ window.addEventListener('DOMContentLoaded', function() {
     
     // Initialize filter listeners
     initializeFilters();
+    
+    // Initialize event listeners after DOM is fully loaded
+    initializeEventListeners();
 });
 
 // Modal functions
@@ -422,16 +429,71 @@ document.addEventListener('click', function() {
     document.querySelectorAll('.three-dots-dropdown').forEach(m => m.classList.remove('active'));
 });
 
-// Capitalize first letter
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+// Initialize Event Listeners
+function initializeEventListeners() {
+    // Add new lead button
+    const addNewBtn = document.getElementById('addNewBtn');
+    if (addNewBtn) {
+        addNewBtn.addEventListener('click', function() {
+            document.getElementById('addLeadForm').reset();
+            openModal('addLeadModal');
+        });
+    }
+    
+    // Input validation for Add Lead form
+    initializeFormValidation();
 }
 
-// Add new lead button
-document.getElementById('addNewBtn').addEventListener('click', function() {
-    document.getElementById('addLeadForm').reset();
-    openModal('addLeadModal');
-});
+// Input validation and formatting for Add Lead form
+function initializeFormValidation() {
+    // Name validation - only letters and spaces
+    const addNameInput = document.getElementById('addName');
+    if (addNameInput) {
+        addNameInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+        });
+    }
+
+    // Contact number validation - only numbers and + symbol
+    const addContactInput = document.getElementById('addContact');
+    if (addContactInput) {
+        addContactInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9+\s]/g, '');
+        });
+    }
+
+    // Budget formatting helper
+    const addBudgetInput = document.getElementById('addBudget');
+    if (addBudgetInput) {
+        addBudgetInput.addEventListener('blur', function() {
+            let value = this.value.trim();
+            // If user enters only numbers, format it as "INR - XXK"
+            if (value && /^\d+$/.test(value)) {
+                const amount = parseInt(value);
+                if (amount >= 1000) {
+                    this.value = `INR - ${Math.round(amount / 1000)}K`;
+                }
+            }
+        });
+    }
+
+    // Travel date formatting helper
+    const addTravelInput = document.getElementById('addTravel');
+    if (addTravelInput) {
+        addTravelInput.addEventListener('blur', function() {
+            let value = this.value.trim().toUpperCase();
+            // Auto-format if user enters date without proper format
+            if (value && !value.includes('-')) {
+                const parts = value.split(/[\s,]+/);
+                if (parts.length >= 2) {
+                    const month = parts[0].length <= 3 ? parts[0] : parts[0].substring(0, 3);
+                    const day = parts[1];
+                    this.value = `${month.toUpperCase()} - ${day}`;
+                }
+            }
+        });
+    }
+}
 
 // Save new lead
 function saveNewLead() {
@@ -503,71 +565,6 @@ window.onclick = function(event) {
         event.target.classList.remove('active');
     }
 }
-
-// Profile and menu button handlers
-document.getElementById('profileBtn').addEventListener('click', function() {
-    if (confirm('Do you want to logout?')) {
-        sessionStorage.removeItem('adminLoggedIn');
-        sessionStorage.removeItem('adminEmail');
-        window.location.href = 'admin-login.html';
-    }
-});
-
-document.getElementById('menuBtn').addEventListener('click', function() {
-    alert('Menu functionality - Coming soon!');
-});
-
-// Input validation and formatting for Add Lead form
-document.addEventListener('DOMContentLoaded', function() {
-    // Name validation - only letters and spaces
-    const addNameInput = document.getElementById('addName');
-    if (addNameInput) {
-        addNameInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^A-Za-z\s]/g, '');
-        });
-    }
-
-    // Contact number validation - only numbers and + symbol
-    const addContactInput = document.getElementById('addContact');
-    if (addContactInput) {
-        addContactInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9+\s]/g, '');
-        });
-    }
-
-    // Budget formatting helper
-    const addBudgetInput = document.getElementById('addBudget');
-    if (addBudgetInput) {
-        addBudgetInput.addEventListener('blur', function() {
-            let value = this.value.trim();
-            // If user enters only numbers, format it as "INR - XXK"
-            if (value && /^\d+$/.test(value)) {
-                const amount = parseInt(value);
-                if (amount >= 1000) {
-                    this.value = `INR - ${Math.round(amount / 1000)}K`;
-                }
-            }
-        });
-    }
-
-    // Travel date formatting helper
-    const addTravelInput = document.getElementById('addTravel');
-    if (addTravelInput) {
-        addTravelInput.addEventListener('blur', function() {
-            let value = this.value.trim().toUpperCase();
-            // Auto-format if user enters date without proper format
-            // Example: "15 feb" -> "FEB - 15"
-            if (value && !value.includes('-')) {
-                const parts = value.split(/[\s,]+/);
-                if (parts.length >= 2) {
-                    const month = parts[0].length <= 3 ? parts[0] : parts[0].substring(0, 3);
-                    const day = parts[1];
-                    this.value = `${month.toUpperCase()} - ${day}`;
-                }
-            }
-        });
-    }
-});
 
 
 // Initialize Filter Functions
@@ -647,7 +644,9 @@ function initializeFilters() {
 // Filter table based on search
 function filterTable(searchTerm) {
     const rows = document.querySelectorAll('#leadsTableBody tr');
+    const mobileCards = document.querySelectorAll('.mobile-lead-card');
     
+    // Filter table rows
     rows.forEach(row => {
         const text = row.textContent.toLowerCase();
         if (text.includes(searchTerm)) {
@@ -656,43 +655,95 @@ function filterTable(searchTerm) {
             row.style.display = 'none';
         }
     });
+    
+    // Filter mobile cards
+    mobileCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
 }
 
 // Apply filters
 function applyFilters() {
-    const filterAll = document.getElementById('filterAll').value;
-    const filterAssign = document.getElementById('filterAssign').value;
+    const filterAll = document.getElementById('filterAll');
+    const filterAssign = document.getElementById('filterAssign');
+    
+    if (!filterAll || !filterAssign) {
+        console.error('Filter elements not found');
+        return;
+    }
+    
+    const filterAllValue = filterAll.value;
+    const filterAssignValue = filterAssign.value;
     
     const rows = document.querySelectorAll('#leadsTableBody tr');
+    const mobileCards = document.querySelectorAll('.mobile-lead-card');
     
+    // Filter table rows
     rows.forEach(row => {
         let showRow = true;
         
-        // Filter by status (if implemented in data)
-        if (filterAll && filterAll !== '') {
-            // Add status filtering logic here
+        // Filter by status
+        if (filterAllValue && filterAllValue !== '') {
+            const statusBadge = row.querySelector('.status-badge');
+            if (statusBadge) {
+                const statusClass = statusBadge.className;
+                if (filterAllValue === 'new' && !statusClass.includes('status-new')) {
+                    showRow = false;
+                } else if (filterAllValue === 'contacted' && !statusClass.includes('status-follow-up')) {
+                    showRow = false;
+                } else if (filterAllValue === 'converted' && !statusClass.includes('status-converted')) {
+                    showRow = false;
+                }
+            }
         }
         
         // Filter by assignment
-        if (filterAssign && filterAssign !== '') {
+        if (filterAssignValue && filterAssignValue !== '') {
             const assignBadge = row.querySelector('.assign-badge');
             if (assignBadge) {
                 const assignText = assignBadge.textContent.trim();
-                if (filterAssign === 'unallocated' && assignText !== 'Un-Allocated') {
+                if (filterAssignValue === 'unallocated' && assignText !== 'Un-Allocated') {
                     showRow = false;
-                } else if (filterAssign === 'member1' && assignText !== 'Team Member1') {
+                } else if (filterAssignValue === 'member1' && assignText !== 'Team Member1') {
                     showRow = false;
-                } else if (filterAssign === 'member2' && assignText !== 'Team Member2') {
+                } else if (filterAssignValue === 'member2' && assignText !== 'Team Member2') {
                     showRow = false;
-                } else if (filterAssign === 'member3' && assignText !== 'Team Member3') {
+                } else if (filterAssignValue === 'member3' && assignText !== 'Team Member3') {
                     showRow = false;
-                } else if (filterAssign === 'member4' && assignText !== 'Team Member4') {
+                } else if (filterAssignValue === 'member4' && assignText !== 'Team Member4') {
                     showRow = false;
                 }
             }
         }
         
         row.style.display = showRow ? '' : 'none';
+    });
+    
+    // Filter mobile cards
+    mobileCards.forEach(card => {
+        let showCard = true;
+        
+        // Filter by status
+        if (filterAllValue && filterAllValue !== '') {
+            const statusBadge = card.querySelector('.mobile-status-badge');
+            if (statusBadge) {
+                const statusClass = statusBadge.className;
+                if (filterAllValue === 'new' && !statusClass.includes('status-new')) {
+                    showCard = false;
+                } else if (filterAllValue === 'contacted' && !statusClass.includes('status-follow-up')) {
+                    showCard = false;
+                } else if (filterAllValue === 'converted' && !statusClass.includes('status-converted')) {
+                    showCard = false;
+                }
+            }
+        }
+        
+        card.style.display = showCard ? '' : 'none';
     });
 }
 
@@ -997,11 +1048,54 @@ document.getElementById('menuToggle')?.addEventListener('click', function() {
     document.querySelector('.sidebar')?.classList.toggle('active');
 });
 
+// Mobile menu button (in mobile header)
+document.getElementById('mobileMenuBtn')?.addEventListener('click', function() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (sidebar) {
+        sidebar.classList.toggle('active');
+    }
+    if (overlay) {
+        overlay.classList.toggle('active');
+    }
+});
+
+// Close sidebar when clicking overlay
+document.getElementById('sidebarOverlay')?.addEventListener('click', function() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+        sidebar.classList.remove('active');
+    }
+    this.classList.remove('active');
+});
+
+// Mobile profile button
+document.getElementById('mobileProfileBtn')?.addEventListener('click', function() {
+    if (confirm('Do you want to logout?')) {
+        sessionStorage.removeItem('adminLoggedIn');
+        sessionStorage.removeItem('adminEmail');
+        window.location.href = 'admin-login.html';
+    }
+});
+
+// Close sidebar when clicking a nav link (mobile)
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (sidebar) {
+                sidebar.classList.remove('active');
+            }
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+        }
+    });
+});
+
 
 // Table Sorting Functionality
-let currentSortColumn = null;
-let currentSortDirection = 'asc';
-
 function sortTable(column) {
     console.log('sortTable called for column:', column); // Debug
     

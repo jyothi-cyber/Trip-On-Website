@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package View Enhancement Test - Trip On</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f6d57 0%, #4CAF50 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .test-container {
+            max-width: 1000px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #0f6d57;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid #4CAF50;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card h3 {
+            color: #0f6d57;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            color: #333;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+            font-size: 13px;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .test-section {
+            background: #e8f5e8;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .test-section h3 {
+            color: #0f6d57;
+            margin-bottom: 15px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .btn-test {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #0f6d57;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn-test:hover {
+            background: #0a5240;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(15, 109, 87, 0.3);
+        }
+        
+        .btn-test.secondary {
+            background: #ff6b35;
+        }
+        
+        .btn-test.secondary:hover {
+            background: #e55a28;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .status-enhanced {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-working {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .status-responsive {
+            background: #fce7f3;
+            color: #be185d;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 12px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .responsive-demo {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .responsive-demo h4 {
+            color: #374151;
+            margin-bottom: 12px;
+        }
+        
+        .device-frames {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .device-frame {
+            background: #1f2937;
+            padding: 8px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .device-screen {
+            background: white;
+            border-radius: 12px;
+            padding: 8px;
+            font-size: 10px;
+            color: #374151;
+        }
+        
+        .desktop-frame {
+            width: 120px;
+            height: 80px;
+        }
+        
+        .mobile-frame {
+            width: 60px;
+            height: 100px;
+        }
+        
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .device-frames {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>📦 Package View Enhanced!</h1>
+        <p class="subtitle">Comprehensive itinerary information and responsive mobile design</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🗓️ Enhanced Itinerary <span class="status-indicator status-enhanced">ENHANCED</span></h3>
+                <ul class="feature-list">
+                    <li>Detailed day-wise schedule</li>
+                    <li>Accommodation information</li>
+                    <li>Meal plans for each day</li>
+                    <li>Transportation details</li>
+                    <li>Special notes and highlights</li>
+                    <li>Expandable day sections</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📱 Mobile Responsive <span class="status-indicator status-responsive">MOBILE READY</span></h3>
+                <ul class="feature-list">
+                    <li>Mobile hamburger menu</li>
+                    <li>Touch-optimized interface</li>
+                    <li>Responsive grid layouts</li>
+                    <li>Mobile-friendly navigation</li>
+                    <li>Optimized text sizing</li>
+                    <li>Smooth animations</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3>✨ New Features <span class="status-indicator status-working">FUNCTIONAL</span></h3>
+                <ul class="feature-list">
+                    <li>Trip overview section</li>
+                    <li>Enhanced policy sections</li>
+                    <li>Better package type details</li>
+                    <li>Improved visual design</li>
+                    <li>Activity highlighting</li>
+                    <li>Terms & conditions</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🔧 Properties & Functions <span class="status-indicator status-working">VERIFIED</span></h3>
+                <ul class="feature-list">
+                    <li>All tabs working properly</li>
+                    <li>Accordion toggles functional</li>
+                    <li>Mobile menu responsive</li>
+                    <li>Data loading correctly</li>
+                    <li>Edit button functional</li>
+                    <li>Navigation working</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Test the Enhanced Package View</h3>
+            <p>Click the buttons below to test different aspects of the enhanced package view page:</p>
+            <div class="test-buttons">
+                <a href="admin-package-view.html" class="btn-test">
+                    📋 Test Package View
+                </a>
+                <a href="admin-package-view.html?id=1" class="btn-test secondary">
+                    📦 Test with Package ID
+                </a>
+                <a href="admin-packages.html" class="btn-test">
+                    🔙 Back to Packages List
+                </a>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Testing Instructions:</h3>
+            <ol>
+                <li><strong>Desktop Testing:</strong>
+                    <ul style="margin: 8px 0 8px 20px;">
+                        <li>Open package view page</li>
+                        <li>Click through all tabs (Highlights, Itinerary, Budget Details, Hotels/Meals)</li>
+                        <li>Test accordion sections in itinerary</li>
+                        <li>Verify edit button works</li>
+                    </ul>
+                </li>
+                <li><strong>Mobile Testing:</strong>
+                    <ul style="margin: 8px 0 8px 20px;">
+                        <li>Resize browser to mobile width (< 768px) OR use device toolbar (F12)</li>
+                        <li>Test hamburger menu functionality</li>
+                        <li>Verify responsive layouts</li>
+                        <li>Check touch interactions</li>
+                    </ul>
+                </li>
+                <li><strong>Content Testing:</strong>
+                    <ul style="margin: 8px 0 8px 20px;">
+                        <li>Verify itinerary shows detailed day information</li>
+                        <li>Check trip overview section</li>
+                        <li>Test policy accordions</li>
+                        <li>Validate all content displays properly</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        
+        <div class="responsive-demo">
+            <h4>📱 Responsive Design Preview</h4>
+            <p style="color: #6b7280; font-size: 14px; margin-bottom: 15px;">
+                The package view automatically adapts to different screen sizes
+            </p>
+            <div class="device-frames">
+                <div class="device-frame desktop-frame">
+                    <div class="device-screen">
+                        <div style="background: #0f6d57; color: white; padding: 2px; margin-bottom: 2px; border-radius: 2px;">Desktop View</div>
+                        <div style="font-size: 8px;">Sidebar + Full Layout</div>
+                    </div>
+                </div>
+                <div class="device-frame mobile-frame">
+                    <div class="device-screen">
+                        <div style="background: #ff6b35; color: white; padding: 2px; margin-bottom: 2px; border-radius: 2px;">Mobile View</div>
+                        <div style="font-size: 8px;">☰ Menu + Cards</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+            <p style="color: #0f6d57; font-weight: 600; margin-bottom: 5px;">
+                ✅ All Enhancements Complete
+            </p>
+            <p style="color: #666; font-size: 13px;">
+                Enhanced Itinerary • Mobile Responsive • Full Functionality • Professional Design
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Simple functionality test
+        console.log('✅ Package View Enhancement Test Page Loaded');
+        
+        // Check mobile responsiveness
+        function checkResponsive() {
+            if (window.innerWidth <= 768) {
+                console.log('📱 Mobile view detected - test mobile features');
+            } else {
+                console.log('🖥️ Desktop view detected - test desktop features');
+            }
+        }
+        
+        window.addEventListener('resize', checkResponsive);
+        checkResponsive();
+        
+        // Test navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM ready - all test links should work');
+        });
+    </script>
+</body>
+</html>

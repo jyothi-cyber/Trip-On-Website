@@ -165,7 +165,6 @@ const defaultLeadsData = [
         assignedTo: 'Jyothi Duddukunta',
         location: 'Ubud, Canggu',
         address: '234, Park Avenue, Pune - 411001',
-        address: '234, Park Avenue, Pune - 411001',
         notes: 'Confirmed booking. Payment received.',
         formSource: 'Instagram',
         plannedVisit: 'This Weekend',

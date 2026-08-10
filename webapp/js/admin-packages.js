@@ -18,6 +18,7 @@ let editingPackageId = null;
 document.addEventListener('DOMContentLoaded', function() {
     initializePage();
     loadPackages();
+    initializeMobileMenu();
 });
 
 function initializePage() {
@@ -30,6 +31,64 @@ function initializePage() {
         menuToggle.addEventListener('click', toggleSidebar);
     }
 }
+
+function initializeMobileMenu() {
+    // Mobile menu button (in mobile header)
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (sidebar) {
+                sidebar.classList.toggle('active');
+            }
+            if (overlay) {
+                overlay.classList.toggle('active');
+            }
+        });
+    }
+    
+    // Close sidebar when clicking overlay
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar) {
+                sidebar.classList.remove('active');
+            }
+            this.classList.remove('active');
+        });
+    }
+    
+    // Mobile profile button
+    const mobileProfileBtn = document.getElementById('mobileProfileBtn');
+    if (mobileProfileBtn) {
+        mobileProfileBtn.addEventListener('click', function() {
+            if (confirm('Do you want to logout?')) {
+                sessionStorage.removeItem('adminLoggedIn');
+                sessionStorage.removeItem('adminEmail');
+                window.location.href = 'admin-login.html';
+            }
+        });
+    }
+    
+    // Close sidebar when clicking a nav link (mobile)
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                if (sidebar) {
+                    sidebar.classList.remove('active');
+                }
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+    });
+}
+
 
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');

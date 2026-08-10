@@ -8,9 +8,30 @@
     <link rel="stylesheet" href="admin-package-form-styles.css">
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="mobile-logo">
+        <div class="mobile-user-avatar" id="mobileProfileBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" fill="currentColor"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay (for mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="dashboard-layout">
         <!-- Left Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="sidebar-logo">
                 <button class="menu-toggle" id="menuToggle">
@@ -86,8 +107,11 @@
                     <div class="form-section">
                         <h3 class="section-title">Package Image</h3>
                         <div class="image-upload-area" id="imageUploadArea">
-                            <div class="image-preview" id="imagePreview">
-                                <img id="previewImg" src="" alt="Package Image" style="display: none;">
+                            <div class="image-preview" id="imagePreview" style="position: relative;">
+                                <img id="previewImg" src="" alt="Package Image" style="display: none; width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid #e0e0e0;">
+                                <div class="image-overlay" id="imageOverlay" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;">
+                                    <span style="color: white; font-size: 14px; padding: 8px 16px; background: rgba(0,0,0,0.7); border-radius: 20px;">Click to view package details</span>
+                                </div>
                                 <div class="upload-placeholder" id="uploadPlaceholder">
                                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
                                         <rect x="6" y="10" width="36" height="28" rx="2" stroke="#9ca3af" stroke-width="2"/>

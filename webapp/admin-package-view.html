@@ -8,9 +8,30 @@
     <link rel="stylesheet" href="admin-package-view-styles.css">
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="mobile-logo">
+        <div class="mobile-user-avatar" id="mobileProfileBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" fill="currentColor"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay (for mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="dashboard-layout">
         <!-- Left Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="sidebar-logo">
                 <button class="menu-toggle" id="menuToggle">
@@ -191,10 +212,45 @@
                     <div class="tab-content" id="itineraryTab">
                         <div class="itinerary-section">
                             <h3 class="section-title">Day Wise Schedule</h3>
-                            <p class="section-description">Trip from Amazing Wonderful Lorem ipsum dolor sit amet consectetur adipisicing</p>
+                            <p class="section-description">Complete day-by-day itinerary with activities, meals, and accommodation details</p>
                             
                             <div class="itinerary-list" id="itineraryList">
                                 <!-- Day items will be dynamically inserted -->
+                            </div>
+
+                            <!-- Trip Overview Section -->
+                            <div class="trip-overview">
+                                <h4 class="overview-title">Trip Overview</h4>
+                                <div class="overview-grid">
+                                    <div class="overview-item">
+                                        <div class="overview-icon">🏨</div>
+                                        <div class="overview-content">
+                                            <h5>Accommodation</h5>
+                                            <p id="overviewAccommodation">3-4 star hotels with modern amenities</p>
+                                        </div>
+                                    </div>
+                                    <div class="overview-item">
+                                        <div class="overview-icon">🚗</div>
+                                        <div class="overview-content">
+                                            <h5>Transportation</h5>
+                                            <p id="overviewTransport">Private AC vehicle for all transfers</p>
+                                        </div>
+                                    </div>
+                                    <div class="overview-item">
+                                        <div class="overview-icon">🍽️</div>
+                                        <div class="overview-content">
+                                            <h5>Meals</h5>
+                                            <p id="overviewMeals">Daily breakfast, selected lunches and dinners</p>
+                                        </div>
+                                    </div>
+                                    <div class="overview-item">
+                                        <div class="overview-icon">🎯</div>
+                                        <div class="overview-content">
+                                            <h5>Activities</h5>
+                                            <p id="overviewActivities">Sightseeing, adventure sports, cultural experiences</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -207,7 +263,7 @@
                                     </svg>
                                 </button>
                                 <div class="policy-content" id="cancellationPolicy">
-                                    <p>Standard cancellation terms apply. Please contact us for specific details.</p>
+                                    <p id="cancellationPolicyText">Standard cancellation terms apply. Please contact us for specific details.</p>
                                 </div>
                             </div>
 
@@ -219,7 +275,19 @@
                                     </svg>
                                 </button>
                                 <div class="policy-content" id="instructionsPolicy">
-                                    <p>Please carry valid ID proof. Check-in time is 2 PM and check-out is 11 AM.</p>
+                                    <p id="instructionsPolicyText">Please carry valid ID proof. Check-in time is 2 PM and check-out is 11 AM.</p>
+                                </div>
+                            </div>
+
+                            <div class="policy-item">
+                                <button class="policy-header" onclick="togglePolicy('terms')">
+                                    <span>Terms & Conditions</span>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div class="policy-content" id="termsPolicy">
+                                    <p>All bookings are subject to availability and confirmation. Changes to itinerary may occur due to weather or unforeseen circumstances. Full payment required at time of booking.</p>
                                 </div>
                             </div>
                         </div>
@@ -299,7 +367,7 @@
         </main>
     </div>
 
-    <script src="js/packages-data.js"></script>
-    <script src="js/admin-package-view.js"></script>
+    <script src="js/packages-data.js?v=3"></script>
+    <script src="js/admin-package-view.js?v=3"></script>
 </body>
 </html>
