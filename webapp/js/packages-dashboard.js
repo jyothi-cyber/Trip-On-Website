@@ -17,13 +17,13 @@ let filteredPackages = [];
 // INITIALIZATION
 // ============================================================================
 
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     // Check authentication
     if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
         window.location.href = 'admin-login.html';
         return;
     }
-    
+
     initializePackagesDashboard();
 });
 
@@ -35,7 +35,7 @@ function initializePackagesDashboard() {
     refreshPackagesTable();
     initializePackageFilters();
     attachPackageEventListeners();
-    
+
     console.log('Packages dashboard initialized');
 }
 
@@ -57,18 +57,18 @@ function attachPackageEventListeners() {
     // Add new package button
     const addNewBtn = document.getElementById('addNewPackageBtn');
     if (addNewBtn) {
-        addNewBtn.addEventListener('click', function() {
+        addNewBtn.addEventListener('click', function () {
             document.getElementById('addPackageForm').reset();
             openModal('addPackageModal');
         });
     }
-    
+
     // Menu toggle
     const menuToggle = document.getElementById('menuToggle');
     if (menuToggle) {
         menuToggle.addEventListener('click', toggleSidebar);
     }
-    
+
     // Close modals on outside click
     window.addEventListener('click', handleOutsideClick);
 }
@@ -107,9 +107,9 @@ function handleOutsideClick(event) {
 function refreshPackagesTable() {
     const tbody = document.getElementById('packagesTableBody');
     if (!tbody) return;
-    
+
     tbody.innerHTML = '';
-    
+
     packagesData.forEach(pkg => {
         const row = tbody.insertRow();
         row.innerHTML = `
@@ -164,9 +164,9 @@ function formatStatus(status) {
 function viewPackage(packageId) {
     const pkg = packagesData.find(p => p.id === packageId);
     if (!pkg) return;
-    
+
     currentPackageId = packageId;
-    
+
     // Populate view modal
     document.getElementById('viewPackageId').textContent = pkg.packageId;
     document.getElementById('viewPackageName').textContent = pkg.name;
@@ -178,16 +178,16 @@ function viewPackage(packageId) {
     document.getElementById('viewStatus').textContent = formatStatus(pkg.status);
     document.getElementById('viewBookings').textContent = pkg.bookingsCount;
     document.getElementById('viewDescription').textContent = pkg.description;
-    
+
     openModal('viewPackageModal');
 }
 
 function editPackage(packageId) {
     const pkg = packagesData.find(p => p.id === packageId);
     if (!pkg) return;
-    
+
     currentPackageId = packageId;
-    
+
     // Populate edit form
     document.getElementById('editPackageId').value = pkg.packageId;
     document.getElementById('editPackageName').value = pkg.name;
@@ -198,7 +198,7 @@ function editPackage(packageId) {
     document.getElementById('editCategory').value = pkg.category;
     document.getElementById('editStatus').value = pkg.status;
     document.getElementById('editDescription').value = pkg.description;
-    
+
     openModal('editPackageModal');
 }
 
@@ -207,7 +207,7 @@ function saveEditPackage() {
         alert('Error: No package selected');
         return;
     }
-    
+
     const updates = {
         packageId: document.getElementById('editPackageId').value,
         name: document.getElementById('editPackageName').value,
@@ -219,9 +219,9 @@ function saveEditPackage() {
         status: document.getElementById('editStatus').value,
         description: document.getElementById('editDescription').value
     };
-    
+
     const updated = updatePackage(packagesData, currentPackageId, updates);
-    
+
     if (updated) {
         alert('✅ Package updated successfully!');
         closeModal('editPackageModal');
@@ -235,7 +235,7 @@ function saveEditPackage() {
 function duplicatePackage(packageId) {
     const pkg = packagesData.find(p => p.id === packageId);
     if (!pkg) return;
-    
+
     if (confirm(`Duplicate package "${pkg.name}"?`)) {
         const newPackage = {
             ...pkg,
@@ -244,7 +244,7 @@ function duplicatePackage(packageId) {
         };
         delete newPackage.id;
         delete newPackage.packageId;
-        
+
         addNewPackage(packagesData, newPackage);
         packagesData = initializePackagesData();
         refreshPackagesTable();
@@ -255,7 +255,7 @@ function duplicatePackage(packageId) {
 function deletePackageFromMenu(packageId) {
     const pkg = packagesData.find(p => p.id === packageId);
     if (!pkg) return;
-    
+
     if (confirm(`Are you sure you want to delete "${pkg.name}"?`)) {
         const success = deletePackage(packagesData, packageId);
         if (success) {

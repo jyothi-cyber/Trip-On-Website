@@ -1,8 +1,8 @@
 // Leads Database - All data stored here for easy editing
 // This file contains all lead records and configuration
 
-// Default leads data (used for initial load or reset)
-const defaultLeadsData = [
+// Legacy leads data (kept for reference/backup; demo data now lives in admin-dashboard.js)
+const legacyLeadsData = [
     {
         id: 1,
         stNumber: 'L-BBLIO-108',
@@ -270,10 +270,10 @@ function initializeLeadsData() {
             return JSON.parse(stored);
         } catch (e) {
             console.error('Error parsing stored data:', e);
-            return [...defaultLeadsData];
+            return [...legacyLeadsData];
         }
     }
-    return [...defaultLeadsData];
+    return [...legacyLeadsData];
 }
 
 // Save leads data to localStorage
@@ -290,7 +290,7 @@ function saveLeadsData(data) {
 // Reset data to defaults
 function resetLeadsData() {
     localStorage.removeItem(STORAGE_KEY);
-    return [...defaultLeadsData];
+    return [...legacyLeadsData];
 }
 
 // Export data as JSON
@@ -458,7 +458,7 @@ function sortLeads(data, column, direction = 'asc') {
 // Export configuration and functions
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        defaultLeadsData,
+        defaultLeadsData: legacyLeadsData,
         leadsConfig,
         initializeLeadsData,
         saveLeadsData,
