@@ -1986,6 +1986,62 @@ body {
     
     .edit-field-row {
         grid-template-columns: 1fr;
+        gap: 6px;
+    }
+    
+    .edit-field-row label {
+        font-size: 12px;
+    }
+
+    .edit-modal-content {
+        width: 95%;
+        max-height: 95vh;
+        margin: 0 auto;
+    }
+
+    .edit-modal-header {
+        padding: 14px 16px;
+    }
+
+    .edit-modal-body {
+        padding: 16px;
+    }
+
+    .edit-field-value {
+        min-width: 0;
+    }
+
+    .edit-field-value input,
+    .edit-field-value select,
+    .edit-field-value textarea {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+
+    .edit-field-value .lead-id-input {
+        font-size: 15px;
+    }
+
+    .generate-ticket-btn {
+        display: block;
+        width: 100%;
+        margin-top: 6px;
+        text-align: center;
+    }
+
+    .edit-field-row .edit-field-value {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .edit-save-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .back-btn {
+        padding: 8px 8px;
+        font-size: 13px;
     }
 }
 
