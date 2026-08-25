@@ -244,6 +244,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const pp = document.getElementById('profilePopup');
             if (pp) pp.classList.remove('show');
         }
+        if (!e.target.closest('.notif-wrapper') && !e.target.closest('.mobile-notif-wrapper')) {
+            closeNotifPanels();
+        }
         if (!e.target.closest('.assign-cell') && !e.target.closest('.assign-dropdown-popup')) {
             closeAssignDropdown();
         }
@@ -1318,6 +1321,136 @@ function openBookTripModal() { openModal('bookTripModal'); }
 function closeBookTripModal() { closeModal('bookTripModal'); }
 
 // ============================================================================
+// NOTIFICATION PANEL
+// ============================================================================
+
+function escapeHtml(s) {
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(s || ''));
+    return d.innerHTML;
+}
+
+function toggleNotifPanel(e) {
+    if (e) e.stopPropagation();
+    var panel = document.getElementById('notifPanel');
+    var mobilePanel = document.getElementById('mobileNotifPanel');
+    var isDesktopOpen = panel && panel.classList.contains('open');
+    var isMobileOpen = mobilePanel && mobilePanel.classList.contains('open');
+    closeNotifPanels();
+    if (!isDesktopOpen && panel) {
+        populateNotifPanel(document.getElementById('notifList'));
+        panel.classList.add('open');
+        showNotifOverlay();
+    }
+    if (!isMobileOpen && mobilePanel) {
+        populateNotifPanel(document.getElementById('mobileNotifList'));
+        mobilePanel.classList.add('open');
+        showNotifOverlay();
+    }
+}
+
+function closeNotifPanels() {
+    var p = document.getElementById('notifPanel');
+    var mp = document.getElementById('mobileNotifPanel');
+    if (p) p.classList.remove('open');
+    if (mp) mp.classList.remove('open');
+    hideNotifOverlay();
+}
+
+function showNotifOverlay() {
+    var ov = document.getElementById('notifOverlay');
+    if (!ov) {
+        ov = document.createElement('div');
+        ov.id = 'notifOverlay';
+        ov.className = 'notif-overlay';
+        ov.addEventListener('click', closeNotifPanels);
+        document.body.appendChild(ov);
+    }
+    ov.classList.add('open');
+}
+
+function hideNotifOverlay() {
+    var ov = document.getElementById('notifOverlay');
+    if (ov) ov.classList.remove('open');
+}
+
+function populateNotifPanel(listEl) {
+    if (!listEl) return;
+    var leads = (allLeads || []).slice();
+    leads.sort(function(a, b) {
+        return parseLeadDate(b.createdAt) - parseLeadDate(a.createdAt);
+    });
+    var recent = leads.slice(0, 4);
+    var unreadCount = Math.min(recent.length, 4);
+    var dot = document.getElementById('notifDot');
+    var mDot = document.getElementById('mobileNotifDot');
+    if (dot) dot.classList.toggle('hidden', unreadCount === 0);
+    if (mDot) mDot.classList.toggle('hidden', unreadCount === 0);
+    if (recent.length === 0) {
+        listEl.innerHTML = '<div class="notif-empty">No notifications yet</div>';
+        return;
+    }
+    var html = '';
+    for (var i = 0; i < recent.length; i++) {
+        var lead = recent[i];
+        var dt = parseLeadDate(lead.createdAt);
+        var mainText = '';
+        var subText = '';
+        var isUnread = i < 4;
+        if (lead.source && lead.source.toLowerCase().indexOf('semi') !== -1) {
+            mainText = 'New Semi Pop Up lead: ' + (lead.name || 'Unknown');
+        } else if (lead.source && lead.source.toLowerCase().indexOf('pop') !== -1) {
+            mainText = 'New Pop Up lead: ' + (lead.name || 'Unknown');
+        } else {
+            mainText = 'New lead: ' + (lead.name || 'Unknown');
+        }
+        var details = [];
+        if (lead.phone) details.push(lead.phone);
+        if (lead.email) details.push(lead.email);
+        subText = details.join(' \u00B7 ');
+        var timeStr = formatNotifTime(dt);
+        html += '<div class="notif-item' + (isUnread ? ' unread' : '') + '" onclick="viewLead(\'' + (lead.id || '') + '\')">';
+        html += '<div class="notif-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>';
+        html += '<div class="notif-content">';
+        html += '<div class="notif-main-text">' + escapeHtml(mainText) + '</div>';
+        if (subText) html += '<div class="notif-sub-text">' + escapeHtml(subText) + '</div>';
+        html += '<div class="notif-time">' + escapeHtml(timeStr) + '</div>';
+        html += '</div></div>';
+    }
+    listEl.innerHTML = html;
+}
+
+function parseLeadDate(str) {
+    if (!str) return new Date(0);
+    var cleaned = str.replace(/^(\d{1,2})\s/, '0$1 ').replace(/(\d{1,2}):(\d{2})\s*(AM|PM)/i, function(m, h, mi, ap) {
+        var hh = parseInt(h, 10);
+        if (ap.toUpperCase() === 'PM' && hh < 12) hh += 12;
+        if (ap.toUpperCase() === 'AM' && hh === 12) hh = 0;
+        return (hh < 10 ? '0' : '') + hh + ':' + mi + ':00';
+    });
+    var d = new Date(cleaned);
+    if (isNaN(d.getTime())) return new Date(0);
+    return d;
+}
+
+function formatNotifTime(dt) {
+    if (!dt || isNaN(dt.getTime())) return '';
+    var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    var day = dt.getDate();
+    var mon = months[dt.getMonth()];
+    var h = dt.getHours();
+    var mi = dt.getMinutes();
+    var ap = h >= 12 ? 'PM' : 'AM';
+    var hh = h % 12 || 12;
+    return day + ' ' + mon + ' \u00B7 ' + (hh < 10 ? '0' : '') + hh + ':' + (mi < 10 ? '0' : '') + mi + ' ' + ap;
+}
+
+function viewAllNotifications() {
+    closeNotifPanels();
+    showToast('Opening all notifications\u2026');
+}
+
+// ============================================================================
 // WINDOW EXPORTS
 // ============================================================================
 
@@ -1373,3 +1506,6 @@ window.closeBookTripModal = closeBookTripModal;
 window.mobileLogout = mobileLogout;
 window.goToMobilePage = goToMobilePage;
 window.logoutAdmin = logoutAdmin;
+window.toggleNotifPanel = toggleNotifPanel;
+window.closeNotifPanels = closeNotifPanels;
+window.viewAllNotifications = viewAllNotifications;

@@ -43,6 +43,26 @@
             </button>
         </div>
         <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="mobile-logo">
+        <div class="mobile-notif-wrapper" id="mobileNotifWrapper">
+            <button class="mobile-notif-btn" id="mobileNotifBtn" title="Notifications" onclick="toggleNotifPanel(event)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="notif-dot mobile-notif-dot" id="mobileNotifDot"></span>
+            </button>
+            <div class="notif-panel notif-panel-mobile" id="mobileNotifPanel">
+                <div class="notif-panel-header">
+                    <h3>Notifications</h3>
+                </div>
+                <div class="notif-panel-list" id="mobileNotifList">
+                    <!-- populated by JS -->
+                </div>
+                <div class="notif-panel-footer">
+                    <button class="notif-view-all" onclick="viewAllNotifications()">View all notifications</button>
+                </div>
+            </div>
+        </div>
         <div class="mobile-user-avatar" id="mobileProfileBtn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="8" r="4" fill="currentColor" />
@@ -99,13 +119,26 @@
                     </svg>
                 </button>
                 <div class="header-right">
-                    <button class="notif-btn" title="Notifications">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span class="notif-dot"></span>
-                    </button>
+                    <div class="notif-wrapper" id="notifWrapper">
+                        <button class="notif-btn" id="notifBtn" title="Notifications" onclick="toggleNotifPanel(event)">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span class="notif-dot" id="notifDot"></span>
+                        </button>
+                        <div class="notif-panel" id="notifPanel">
+                            <div class="notif-panel-header">
+                                <h3>Notifications</h3>
+                            </div>
+                            <div class="notif-panel-list" id="notifList">
+                                <!-- populated by JS -->
+                            </div>
+                            <div class="notif-panel-footer">
+                                <button class="notif-view-all" onclick="viewAllNotifications()">View all notifications</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="user-profile">
                         <div class="user-avatar" id="userAvatar">DJ</div>
                         <div class="profile-popup" id="profilePopup">
