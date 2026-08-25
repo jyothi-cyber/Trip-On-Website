@@ -592,7 +592,6 @@ function renderTable() {
         const status = lead.status || 'New';
         const assignedTo = lead.assignedTo || 'Un-Allocated';
         const destination = lead.destination || 'Andaman';
-        const initials = name.split(' ').map(n => (n[0] || '')).join('').substring(0, 2) || '?';
         const createdParts = (lead.createdAt || '').split(', ');
         const createdDate = createdParts[0] || '';
         const createdTime = createdParts[1] || '';
@@ -608,7 +607,6 @@ function renderTable() {
             </td>
             <td class="col-name">
                 <div class="lead-name-cell">
-                    <div class="lead-avatar">${initials}</div>
                     <div>
                         <div class="lead-name">${hlName}</div>
                         <div class="lead-id">${lead.id}</div>
@@ -1105,27 +1103,47 @@ function bulkAssign(assignee) {
     alert(assignee + ' assigned to ' + selected.length + ' lead(s)');
 }
 
+var pendingBulkDeleteIds = null;
+
 function bulkDelete() {
-    const selected = getSelectedLeads();
+    var selected = getSelectedLeads();
     if (selected.length === 0) return;
-    if (!confirm('Delete ' + selected.length + ' selected lead(s)?')) return;
-    const ids = new Set(selected.map(l => String(l.id)));
-    allLeads = allLeads.filter(l => !ids.has(String(l.id)));
-    saveLeadsToStorage();
-    updateFilterCounts();
-    clearBulkSelection();
-    renderTable();
-    updateResultsInfo();
-    renderPagination();
-    alert(selected.length + ' lead(s) deleted');
+    pendingBulkDeleteIds = selected.map(function(l) { return String(l.id); });
+    var title = document.querySelector('.confirm-title');
+    var desc = document.querySelector('.confirm-desc');
+    if (title) title.textContent = 'Delete ' + selected.length + ' lead(s)?';
+    if (desc) desc.textContent = 'This action cannot be undone. The lead data will be permanently removed.';
+    confirmDeleteLead();
 }
 
-// ============================================================================
-// ACTION HANDLERS
-// ============================================================================
-
-function callLead(phone) { window.open('tel:' + phone); }
-function whatsappLead(phone) { window.open('https://wa.me/' + phone.replace(/\D/g, '')); }
+function executeDeleteLead() {
+    closeConfirmPopup();
+    if (pendingBulkDeleteIds && pendingBulkDeleteIds.length > 0) {
+        var ids = new Set(pendingBulkDeleteIds);
+        allLeads = allLeads.filter(function(l) { return !ids.has(String(l.id)); });
+        saveLeadsToStorage();
+        updateFilterCounts();
+        clearBulkSelection();
+        renderTable();
+        updateResultsInfo();
+        renderPagination();
+        pendingBulkDeleteIds = null;
+        return;
+    }
+    var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
+    if (!leadId) return;
+    var idx = allLeads.findIndex(function(l) { return l.id === leadId; });
+    if (idx !== -1) {
+        allLeads.splice(idx, 1);
+        saveLeadsToStorage();
+        filteredLeads = allLeads.slice();
+        closeModal('viewLeadModal');
+        currentPage = 1;
+        renderTable();
+        updateResultsInfo();
+        renderPagination();
+    }
+}
 
 function importLeads() {
     const input = document.createElement('input');
@@ -1325,24 +1343,11 @@ function confirmDeleteLead() {
 function closeConfirmPopup() {
     var overlay = document.getElementById('confirmOverlay');
     if (overlay) overlay.classList.remove('show');
-}
-
-function executeDeleteLead() {
-    closeConfirmPopup();
-    var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
-    if (!leadId) return;
-    var idx = allLeads.findIndex(function(l) { return l.id === leadId; });
-    if (idx !== -1) {
-        allLeads.splice(idx, 1);
-        saveLeadsToStorage();
-        filteredLeads = allLeads.slice();
-        closeModal('viewLeadModal');
-        currentPage = 1;
-        renderTable();
-        updateResultsInfo();
-        renderPagination();
-        showToast('Lead deleted');
-    }
+    pendingBulkDeleteIds = null;
+    var title = document.querySelector('.confirm-title');
+    var desc = document.querySelector('.confirm-desc');
+    if (title) title.textContent = 'Delete this lead?';
+    if (desc) desc.textContent = 'This action cannot be undone. The lead data will be permanently removed.';
 }
 
 var _nameEditing = false;
