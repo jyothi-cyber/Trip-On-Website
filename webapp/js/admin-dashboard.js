@@ -253,6 +253,10 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.custom-form-dropdown-menu.show').forEach(function(m) { m.classList.remove('show'); });
             document.querySelectorAll('.custom-form-dropdown-trigger.open').forEach(function(t) { t.classList.remove('open'); });
         }
+        if (!e.target.closest('.view-custom-dropdown')) {
+            document.querySelectorAll('.view-dropdown-menu.show').forEach(function(m) { m.classList.remove('show'); });
+            document.querySelectorAll('.view-dropdown-trigger.open').forEach(function(t) { t.classList.remove('open'); });
+        }
         if (!e.target.closest('.assign-cell') && !e.target.closest('.assign-dropdown-popup')) {
             closeAssignDropdown();
         }
@@ -1161,9 +1165,9 @@ window.addEventListener('click', function(e) {
 });
 
 function viewLead(leadId) {
-    let lead = allLeads.find(l => l.id === leadId);
+    var lead = allLeads.find(function(l) { return l.id === leadId; });
     if (!lead) return;
-    const fields = {
+    var fields = {
         'viewLeadIdTop': lead.id, 'viewName': lead.name, 'viewContact': lead.phone,
         'viewEmail': lead.email || 'N/A', 'viewCreatedAt': lead.createdAt,
         'viewFormSource': lead.formSource || 'N/A', 'viewGuests': lead.guests || 'N/A',
@@ -1172,12 +1176,18 @@ function viewLead(leadId) {
         'viewBudget': lead.budget || 'N/A', 'viewLocation': lead.location || 'N/A',
         'viewAddress': lead.address || 'N/A', 'viewComingWith': lead.guests || 'N/A'
     };
-    Object.entries(fields).forEach(([id, val]) => { const el = document.getElementById(id); if (el) el.textContent = val; });
-    const assignSel = document.getElementById('viewAssignedTo');
-    const statusSel = document.getElementById('viewStatus');
-    if (assignSel) assignSel.value = lead.assignedTo;
-    if (statusSel) statusSel.value = lead.status;
-    const notesInput = document.getElementById('viewNotesInput');
+    Object.entries(fields).forEach(function(entry) { var el = document.getElementById(entry[0]); if (el) el.textContent = entry[1]; });
+    var assignVal = document.getElementById('viewAssignedValue');
+    var statusVal = document.getElementById('viewStatusValue');
+    if (assignVal) assignVal.textContent = lead.assignedTo || 'Un-Allocated';
+    if (statusVal) statusVal.textContent = lead.status || 'New';
+    ['viewAssignedMenu', 'viewStatusMenu'].forEach(function(menuId) {
+        var menu = document.getElementById(menuId);
+        if (menu) menu.querySelectorAll('.view-dropdown-item').forEach(function(item) {
+            item.classList.remove('active');
+        });
+    });
+    var notesInput = document.getElementById('viewNotesInput');
     if (notesInput) notesInput.value = lead.notes || '';
     openModal('viewLeadModal');
 }
@@ -1193,19 +1203,46 @@ function showToast(message) {
     const msg = document.getElementById('toastMessage');
     if (!toast) return;
     if (msg) msg.textContent = message || 'Copied!';
+    toast.classList.remove('toast-green');
     toast.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+    toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 2000);
 }
 
-function copyToClipboard(elementId) {
-    const elem = document.getElementById(elementId);
+function showToastGreen(message) {
+    var toast = document.getElementById('toastNotification');
+    var msg = document.getElementById('toastMessage');
+    if (!toast) return;
+    if (msg) msg.textContent = message || 'Done!';
+    toast.classList.add('toast-green', 'show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { toast.classList.remove('show', 'toast-green'); }, 2200);
+}
+
+function copyToClipboard(elementId, btnId) {
+    var elem = document.getElementById(elementId);
     if (!elem) return;
-    const text = elem.textContent || '';
-    const label = elementId === 'viewEmail' ? 'Email' : elementId === 'viewContact' ? 'Phone number' : 'Text';
-    function done() { showToast(label + ' copied!'); }
+    var text = elem.textContent || '';
+    function done() {
+        if (btnId) {
+            var btn = document.getElementById(btnId);
+            if (btn) {
+                var icon = btn.querySelector('.copy-icon');
+                var check = btn.querySelector('.copy-check');
+                if (icon) icon.style.display = 'none';
+                if (check) check.style.display = '';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    if (icon) icon.style.display = '';
+                    if (check) check.style.display = 'none';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+        showToastGreen('Copied to clipboard');
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done).catch(() => {
+        navigator.clipboard.writeText(text).then(done).catch(function() {
             fallbackCopy(text, done);
         });
     } else {
@@ -1251,11 +1288,31 @@ function saveNotes() {
     }
 }
 
-function deleteLeadFromView() {
-    const leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
-    if (leadId && confirm('Are you sure you want to delete this lead?')) {
-        const idx = allLeads.findIndex(l => l.id === leadId);
-        if (idx !== -1) { allLeads.splice(idx, 1); saveLeadsToStorage(); filteredLeads = [...allLeads]; closeModal('viewLeadModal'); currentPage = 1; renderTable(); updateResultsInfo(); renderPagination(); }
+function confirmDeleteLead() {
+    var overlay = document.getElementById('confirmOverlay');
+    if (overlay) overlay.classList.add('show');
+}
+
+function closeConfirmPopup() {
+    var overlay = document.getElementById('confirmOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function executeDeleteLead() {
+    closeConfirmPopup();
+    var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
+    if (!leadId) return;
+    var idx = allLeads.findIndex(function(l) { return l.id === leadId; });
+    if (idx !== -1) {
+        allLeads.splice(idx, 1);
+        saveLeadsToStorage();
+        filteredLeads = allLeads.slice();
+        closeModal('viewLeadModal');
+        currentPage = 1;
+        renderTable();
+        updateResultsInfo();
+        renderPagination();
+        showToast('Lead deleted');
     }
 }
 
@@ -1279,16 +1336,16 @@ function editLeadFromView() {
 }
 
 function updateAssignmentFromView() {
-    const leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
-    const val = (document.getElementById('viewAssignedTo') || {}).value;
-    const lead = allLeads.find(l => l.id === leadId);
+    var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
+    var val = (document.getElementById('viewAssignedValue') || {}).textContent;
+    var lead = allLeads.find(function(l) { return l.id === leadId; });
     if (lead && val) { lead.assignedTo = val; saveLeadsToStorage(); renderTable(); }
 }
 
 function updateStatusFromView() {
-    const leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
-    const val = (document.getElementById('viewStatus') || {}).value;
-    const lead = allLeads.find(l => l.id === leadId);
+    var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
+    var val = (document.getElementById('viewStatusValue') || {}).textContent;
+    var lead = allLeads.find(function(l) { return l.id === leadId; });
     if (lead && val) { lead.status = val; saveLeadsToStorage(); renderTable(); }
 }
 
@@ -1435,6 +1492,38 @@ function selectFormDropdown(fieldId, value) {
     }
     var hidden = document.getElementById(fieldId);
     if (hidden && hidden.tagName === 'INPUT') hidden.value = value;
+}
+
+// ============================================================================
+// VIEW MODAL CUSTOM DROPDOWNS
+// ============================================================================
+
+function toggleViewDropdown(fieldId) {
+    var menu = document.getElementById(fieldId + 'Menu');
+    var trigger = document.getElementById(fieldId + 'Dropdown').querySelector('.view-dropdown-trigger');
+    var isOpen = menu && menu.classList.contains('show');
+    document.querySelectorAll('.view-dropdown-menu.show').forEach(function(m) { m.classList.remove('show'); });
+    document.querySelectorAll('.view-dropdown-trigger.open').forEach(function(t) { t.classList.remove('open'); });
+    if (!isOpen && menu && trigger) {
+        menu.classList.add('show');
+        trigger.classList.add('open');
+    }
+}
+
+function selectViewDropdown(fieldId, value, element) {
+    var valueEl = document.getElementById(fieldId + 'Value');
+    var menu = document.getElementById(fieldId + 'Menu');
+    var trigger = document.getElementById(fieldId + 'Dropdown').querySelector('.view-dropdown-trigger');
+    if (valueEl) valueEl.textContent = value;
+    if (menu) menu.classList.remove('show');
+    if (trigger) trigger.classList.remove('open');
+    if (menu) {
+        menu.querySelectorAll('.view-dropdown-item').forEach(function(item) {
+            item.classList.toggle('active', item.textContent === value);
+        });
+    }
+    if (fieldId === 'viewAssigned') updateAssignmentFromView();
+    if (fieldId === 'viewStatus') updateStatusFromView();
 }
 
 // ============================================================================
@@ -1592,7 +1681,6 @@ window.copyToClipboard = copyToClipboard;
 window.switchViewTab = switchViewTab;
 window.clearNotes = clearNotes;
 window.saveNotes = saveNotes;
-window.deleteLeadFromView = deleteLeadFromView;
 window.editLeadFromView = editLeadFromView;
 window.updateAssignmentFromView = updateAssignmentFromView;
 window.updateStatusFromView = updateStatusFromView;
@@ -1629,3 +1717,8 @@ window.viewAllNotifications = viewAllNotifications;
 window.syncLeads = syncLeads;
 window.toggleFormDropdown = toggleFormDropdown;
 window.selectFormDropdown = selectFormDropdown;
+window.confirmDeleteLead = confirmDeleteLead;
+window.closeConfirmPopup = closeConfirmPopup;
+window.executeDeleteLead = executeDeleteLead;
+window.toggleViewDropdown = toggleViewDropdown;
+window.selectViewDropdown = selectViewDropdown;

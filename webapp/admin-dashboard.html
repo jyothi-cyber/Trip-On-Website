@@ -497,11 +497,13 @@
                         <label>PHONE</label>
                         <div class="view-info-value">
                             <span id="viewContact">8602892488</span>
-                            <button class="copy-btn" onclick="copyToClipboard('viewContact')">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                    <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor"
-                                        stroke-width="1.5" />
+                            <button class="copy-btn" id="copyContactBtn" onclick="copyToClipboard('viewContact','copyContactBtn')">
+                                <svg class="copy-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
                                     <path d="M2 10V3a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.5" />
+                                </svg>
+                                <svg class="copy-check" width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:none">
+                                    <path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </button>
                         </div>
@@ -511,11 +513,13 @@
                         <label>EMAIL</label>
                         <div class="view-info-value">
                             <span id="viewEmail">demonisrevoked1512@gmail.com</span>
-                            <button class="copy-btn" onclick="copyToClipboard('viewEmail')">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                    <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor"
-                                        stroke-width="1.5" />
+                            <button class="copy-btn" id="copyEmailBtn" onclick="copyToClipboard('viewEmail','copyEmailBtn')">
+                                <svg class="copy-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
                                     <path d="M2 10V3a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.5" />
+                                </svg>
+                                <svg class="copy-check" width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:none">
+                                    <path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </button>
                         </div>
@@ -598,7 +602,7 @@
                         </div>
                     </div>
 
-                    <button class="delete-lead-btn" onclick="deleteLeadFromView()">
+                    <button class="delete-lead-btn" onclick="confirmDeleteLead()">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path
                                 d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334z"
@@ -612,27 +616,39 @@
                     <div class="view-assign-status">
                         <div class="view-field-group">
                             <label>ASSIGNED TO</label>
-                            <select id="viewAssignedTo" class="view-select" onchange="updateAssignmentFromView()">
-                                <option value="Shipra">Shipra</option>
-                                <option value="Jyothi Duddukunta">Jyothi Duddukunta</option>
-                                <option value="Team Member1">Team Member1</option>
-                                <option value="Team Member2">Team Member2</option>
-                                <option value="Team Member3">Team Member3</option>
-                                <option value="Team Member4">Team Member4</option>
-                                <option value="Un-Allocated">Un-Allocated</option>
-                            </select>
+                            <div class="view-custom-dropdown" id="viewAssignedDropdown">
+                                <button type="button" class="view-dropdown-trigger" onclick="toggleViewDropdown('viewAssigned')">
+                                    <span id="viewAssignedValue">Un-Allocated</span>
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </button>
+                                <div class="view-dropdown-menu" id="viewAssignedMenu">
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewAssigned','Shipra',this)">Shipra</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewAssigned','Jyothi Duddukunta',this)">Jyothi Duddukunta</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewAssigned','Team Member1',this)">Team Member1</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewAssigned','Team Member2',this)">Team Member2</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewAssigned','Team Member3',this)">Team Member3</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewAssigned','Team Member4',this)">Team Member4</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewAssigned','Un-Allocated',this)">Un-Allocated</div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="view-field-group">
                             <label>STATUS</label>
-                            <select id="viewStatus" class="view-select" onchange="updateStatusFromView()">
-                                <option value="new">New</option>
-                                <option value="interested">Interested</option>
-                                <option value="follow-up">Follow-up</option>
-                                <option value="converted">Converted</option>
-                                <option value="special">Special</option>
-                                <option value="no-interest">No Interest</option>
-                            </select>
+                            <div class="view-custom-dropdown" id="viewStatusDropdown">
+                                <button type="button" class="view-dropdown-trigger" onclick="toggleViewDropdown('viewStatus')">
+                                    <span id="viewStatusValue">New</span>
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </button>
+                                <div class="view-dropdown-menu" id="viewStatusMenu">
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewStatus','New',this)">New</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewStatus','Interested',this)">Interested</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewStatus','Follow-up',this)">Follow-up</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewStatus','Converted',this)">Converted</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewStatus','Special',this)">Special</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('viewStatus','No Interest',this)">No Interest</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1044,6 +1060,25 @@
                         fill="currentColor" />
                 </svg>
             </button>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Popup -->
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-popup">
+            <div class="confirm-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#DC2626" stroke-width="2" fill="none"/>
+                    <line x1="12" y1="8" x2="12" y2="13" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="12" cy="16" r="1" fill="#DC2626"/>
+                </svg>
+            </div>
+            <div class="confirm-title">Delete this lead?</div>
+            <div class="confirm-desc">This action cannot be undone. The lead data will be permanently removed.</div>
+            <div class="confirm-actions">
+                <button class="confirm-cancel" onclick="closeConfirmPopup()">Cancel</button>
+                <button class="confirm-ok" onclick="executeDeleteLead()">Delete</button>
+            </div>
         </div>
     </div>
 
