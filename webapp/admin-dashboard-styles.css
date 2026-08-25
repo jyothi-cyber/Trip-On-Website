@@ -315,6 +315,26 @@
     font-weight: 600;
 }
 
+.assign-dropdown-popup .assign-option.selected {
+    background: #FFF3E8;
+    font-weight: 600;
+}
+
+.assign-dropdown-popup .assign-option.selected .assign-name {
+    color: #FF6B00;
+}
+
+.assign-dropdown-popup .assign-option .assign-name {
+    flex: 1;
+    font-size: 13px;
+    color: #374151;
+}
+
+.assign-dropdown-popup .assign-option .assign-name-orange {
+    color: #FF6B00;
+    font-weight: 600;
+}
+
 .assign-dropdown-popup .assign-option .assign-dot {
     width: 8px;
     height: 8px;

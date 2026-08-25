@@ -802,26 +802,28 @@ function toggleAssignDropdownForLead(leadId, btnElement) {
     closeStatusDropdown();
     closeDestinationDropdown();
 
-    const existing = document.querySelector('.assign-dropdown-popup');
+    var existing = document.querySelector('.assign-dropdown-popup');
     if (existing) { closeAssignDropdown(); return; }
 
-    const lead = allLeads.find(l => l.id === leadId);
+    var lead = allLeads.find(function(l) { return l.id === leadId; });
     if (!lead) return;
     
-    const popup = document.createElement('div');
+    var currentAssignee = lead.assignedTo || 'Un-Allocated';
+    var assignees = ['Shipra (Me)', 'Jyothi Duddukunta', 'Team Member1', 'Team Member2', 'Team Member3', 'Team Member4', 'Tanveer', 'Bedkar', 'Un-Allocated'];
+    
+    var popup = document.createElement('div');
     popup.className = 'assign-dropdown-popup show';
-    popup.innerHTML = `
-        <div class="assign-option" onclick="event.stopPropagation();assignLead('${leadId}', 'Shipra (Me)')">
-            <span class="assign-name assign-name-orange">Shipra (Me)</span>
-        </div>
-        <div class="assign-option" onclick="event.stopPropagation();assignLead('${leadId}', 'Tanveer')">
-            <span class="assign-name">Tanveer</span>
-        </div>
-        <div class="assign-option" onclick="event.stopPropagation();assignLead('${leadId}', 'Bedkar')">
-            <span class="assign-name">Bedkar</span>
-        </div>
-    `;
-
+    var itemsHtml = '';
+    for (var i = 0; i < assignees.length; i++) {
+        var a = assignees[i];
+        var isActive = a === currentAssignee;
+        var colorClass = a === 'Shipra (Me)' ? ' assign-name-orange' : '';
+        itemsHtml += '<div class="assign-option' + (isActive ? ' selected' : '') + '" onclick="event.stopPropagation();assignLead(\'' + leadId + '\', \'' + a.replace(/'/g, "\\'") + '\')">';
+        itemsHtml += '<span class="assign-name' + colorClass + '">' + a + '</span>';
+        if (isActive) itemsHtml += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        itemsHtml += '</div>';
+    }
+    popup.innerHTML = itemsHtml;
     document.body.appendChild(popup);
     trackPopup(popup, btnElement, 0, true);
 }
