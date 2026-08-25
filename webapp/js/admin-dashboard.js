@@ -711,19 +711,9 @@ function renderTable() {
                         <span class="mobile-detail-value">${assignedTo}</span>
                     </div>
                 </div>
-                <div class="mobile-card-actions" onclick="event.stopPropagation()">
-                    <button class="mobile-action-btn mobile-view-btn" onclick="viewLead('${lead.id}')">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3C4.5 3 1.73 5.11 1 8c.73 2.89 3.5 5 7 5s6.27-2.11 7-5c-.73-2.89-3.5-5-7-5z" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
-                        View Details
-                    </button>
-                    <button class="mobile-action-btn mobile-call-btn" onclick="callLead('${phone}')">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.05 11.15l-3.2-3.2c-.4-.4-1-.4-1.4 0l-.8.8c-.4.4-1 .4-1.4 0L5.85 6.35c-.4-.4-.4-1 0-1.4l.8-.8c.4-.4.4-1 0-1.4L3.45.55c-.4-.4-1-.4-1.4 0L.65 1.95c-.6.6-.7 1.5-.1 2.2L2.5 6.1l7.4 7.4 1.95 1.95c.7.6 1.6.5 2.2-.1l1.4-1.4c.4-.4.4-1 0-1.4z" fill="currentColor"/></svg>
-                        Call
-                    </button>
-                    <button class="mobile-action-btn mobile-whatsapp-btn" onclick="whatsappLead('${phone}')">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 0C3.6 0 0 3.6 0 8c0 1.4.4 2.8 1 4L0 16l4.1-1c1.2.6 2.5 1 4 1 4.4 0 8-3.6 8-8S12.4 0 8 0zm4 11.2c-.2.5-.9 1-1.5 1.1-.4 0-.9.1-2.8-.6-1.6-.6-2.9-1.7-4-3.1-.5-.7-.8-1.5-.8-2.3 0-.8.3-1.5.8-2 .2-.2.4-.3.6-.3h.4c.2 0 .4.1.6.4l.8 1.9c.1.3.1.5 0 .7-.1.2-.2.4-.4.6l-.3.3c-.1.1-.1.3 0 .5.3.6.8 1.1 1.3 1.5.5.3 1 .6 1.6.7.2.1.4 0 .5-.1l.6-.7c.2-.2.5-.3.7-.2l1.8.8c.3.1.4.3.5.5.1.1.1.4 0 .7z" fill="currentColor"/></svg>
-                        WhatsApp
-                    </button>
+                <div class="mobile-card-tap-row">
+                    <span class="mobile-tap-text">View Details</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
             </div>`;
         }).join('');

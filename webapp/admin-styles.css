@@ -1216,9 +1216,19 @@ body {
     font-weight: 500;
 }
 
-.mobile-card-actions {
+.mobile-card-tap-row {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 0;
+    margin-top: 8px;
+    border-top: 1px solid #F0F1F3;
+}
+
+.mobile-tap-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #F97316;
 }
 
 .mobile-action-btn {
