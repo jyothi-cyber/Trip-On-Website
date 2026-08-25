@@ -762,14 +762,25 @@
     border: none;
     cursor: pointer;
     color: #999;
-    padding: 6px;
-    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
     transition: all 0.2s;
 }
 
 .view-close-btn:hover {
-    background: #f5f5f5;
+    background: #f0f0f0;
     color: #333;
+}
+
+.view-close-btn:focus,
+.view-close-btn:focus-visible,
+.view-close-btn:active {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(170, 170, 170, 0.45);
 }
 
 .view-modal-body {
@@ -2897,23 +2908,7 @@
     }
 }
 
-/* ── Circular focus ring on close (×) buttons ── */
-.view-close-btn:focus,
-.view-close-btn:focus-visible,
-.close:focus,
-.close:focus-visible,
-.book-trip-close:focus,
-.book-trip-close:focus-visible,
-.mobile-quick-close:focus,
-.mobile-quick-close:focus-visible,
-.bulk-close-btn:focus,
-.bulk-close-btn:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(180, 180, 180, 0.5);
-    border-radius: 50%;
-}
-
-/* ── Smooth focus ring on cancel/back buttons ── */
+/* ── Focus ring on cancel/back buttons ── */
 .back-btn:focus,
 .back-btn:focus-visible,
 .confirm-cancel:focus,
@@ -2921,5 +2916,13 @@
 .btn-secondary:focus,
 .btn-secondary:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(180, 180, 180, 0.45);
+    box-shadow: 0 0 0 3px rgba(170, 170, 170, 0.45);
+}
+
+/* ── Focus ring on bulk close ── */
+.bulk-close-btn:focus,
+.bulk-close-btn:focus-visible,
+.bulk-close-btn:active {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(170, 170, 170, 0.45);
 }

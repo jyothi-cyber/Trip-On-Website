@@ -858,7 +858,6 @@ function assignLead(leadId, assignee) {
         saveLeadsToStorage();
         closeAssignDropdown();
         renderTable();
-        showToastGreen('Assigned to ' + assignee);
     }
 }
 
@@ -902,7 +901,6 @@ function changeStatus(leadId, status) {
         saveLeadsToStorage();
         closeStatusDropdown();
         renderTable();
-        showToastGreen('Status updated to ' + status);
     }
 }
 
@@ -1399,14 +1397,14 @@ function updateAssignmentFromView() {
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     var val = (document.getElementById('viewAssignedValue') || {}).textContent;
     var lead = allLeads.find(function(l) { return l.id === leadId; });
-    if (lead && val) { lead.assignedTo = val; saveLeadsToStorage(); renderTable(); showToastGreen('Assigned to ' + val); }
+    if (lead && val) { lead.assignedTo = val; saveLeadsToStorage(); renderTable(); }
 }
 
 function updateStatusFromView() {
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     var val = (document.getElementById('viewStatusValue') || {}).textContent;
     var lead = allLeads.find(function(l) { return l.id === leadId; });
-    if (lead && val) { lead.status = val; saveLeadsToStorage(); renderTable(); showToastGreen('Status updated to ' + val); }
+    if (lead && val) { lead.status = val; saveLeadsToStorage(); renderTable(); }
 }
 
 function makeCall() { var p = (document.getElementById('viewContact') || {}).textContent; if (p) window.open('tel:' + p.replace(/\D/g, '')); }
