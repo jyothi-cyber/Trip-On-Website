@@ -1429,42 +1429,177 @@ function getStatusBadgeColors(status) {
     return map[status] || { bg: '#f3f4f6', color: '#374151' };
 }
 
+var mobileCurrentLeadIndex = -1;
+
 function openQuickView(leadId) {
-    const lead = allLeads.find(l => l.id === leadId);
+    var lead = allLeads.find(function(l) { return l.id === leadId; });
     if (!lead) return;
-    const nameEl = document.getElementById('mobileQuickName');
-    const idEl = document.getElementById('mobileQuickId');
-    const statusEl = document.getElementById('mobileQuickStatus');
-    const destEl = document.getElementById('mobileQuickDestination');
-    const createdEl = document.getElementById('mobileQuickCreated');
-    if (nameEl) nameEl.textContent = lead.name;
-    if (idEl) idEl.textContent = lead.id;
-    if (statusEl) {
-        const badge = getStatusBadgeColors(lead.status);
-        statusEl.textContent = lead.status;
-        statusEl.style.background = badge.bg;
-        statusEl.style.color = badge.color;
-    }
-    if (destEl) destEl.textContent = lead.destination || 'Andaman';
-    if (createdEl) createdEl.textContent = lead.createdAt;
+    mobileCurrentLeadIndex = allLeads.indexOf(lead);
+    populateMobileSheet(lead);
     var mqv = document.getElementById('mobileQuickView');
     if (mqv) mqv.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function populateMobileSheet(lead) {
+    var nameEl = document.getElementById('mobileQuickName');
+    var idEl = document.getElementById('mobileQuickId');
+    var phoneEl = document.getElementById('mobileQuickPhone');
+    var emailEl = document.getElementById('mobileQuickEmail');
+    var createdEl = document.getElementById('mobileQuickCreated');
+    var sourceEl = document.getElementById('mobileQuickSource');
+    var assignEl = document.getElementById('mobileQuickAssign');
+    var statusEl = document.getElementById('mobileQuickStatus');
+    var notesEl = document.getElementById('mobileQuickNotes');
+    var actTimeEl = document.getElementById('mobileQuickActivityTime');
+    if (nameEl) nameEl.textContent = lead.name || 'Unknown';
+    if (idEl) idEl.textContent = lead.id;
+    if (phoneEl) phoneEl.textContent = lead.phone || '—';
+    if (emailEl) emailEl.textContent = lead.email || 'N/A';
+    if (createdEl) createdEl.textContent = lead.createdAt || '—';
+    if (sourceEl) sourceEl.textContent = lead.formSource || '—';
+    if (assignEl) assignEl.textContent = lead.assignedTo || 'Un-Allocated';
+    if (statusEl) statusEl.textContent = lead.status || 'New';
+    if (notesEl) notesEl.value = lead.notes || '';
+    if (actTimeEl) actTimeEl.textContent = lead.createdAt || '—';
+    switchMobileTab('info', document.querySelector('.mobile-tab'));
+}
+
+function navigateMobileLead(dir) {
+    if (mobileCurrentLeadIndex < 0) return;
+    var nextIndex = mobileCurrentLeadIndex + dir;
+    if (nextIndex < 0 || nextIndex >= allLeads.length) return;
+    mobileCurrentLeadIndex = nextIndex;
+    populateMobileSheet(allLeads[nextIndex]);
+}
+
+function switchMobileTab(tab, btn) {
+    document.querySelectorAll('.mobile-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.mobile-tab-panel').forEach(function(p) { p.style.display = 'none'; });
+    if (btn) btn.classList.add('active');
+    if (tab === 'info') document.getElementById('mobileTabInfo').style.display = '';
+    if (tab === 'notes') document.getElementById('mobileTabNotes').style.display = '';
+    if (tab === 'activity') document.getElementById('mobileTabActivity').style.display = '';
 }
 
 function closeQuickView() {
     var mqv = document.getElementById('mobileQuickView');
     if (mqv) mqv.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function mobileCopyField(elemId) {
+    var el = document.getElementById(elemId);
+    if (!el) return;
+    var text = el.textContent || '';
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+    }
+    var row = el.closest('.mobile-field-value-row');
+    if (row) {
+        var icon = row.querySelector('.copy-icon');
+        var check = row.querySelector('.copy-check');
+        if (icon) icon.style.display = 'none';
+        if (check) check.style.display = '';
+        setTimeout(function() {
+            if (icon) icon.style.display = '';
+            if (check) check.style.display = 'none';
+        }, 1500);
+    }
+}
+
+function saveMobileNotes() {
+    if (mobileCurrentLeadIndex < 0) return;
+    var lead = allLeads[mobileCurrentLeadIndex];
+    var notesEl = document.getElementById('mobileQuickNotes');
+    if (lead && notesEl) { lead.notes = notesEl.value; saveLeadsToStorage(); }
+}
+
+function mobileDeleteLead() {
+    if (mobileCurrentLeadIndex < 0) return;
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (!lead) return;
+    pendingBulkDeleteIds = [String(lead.id)];
+    var title = document.querySelector('.confirm-title');
+    var desc = document.querySelector('.confirm-desc');
+    if (title) title.textContent = 'Delete this lead?';
+    if (desc) desc.textContent = 'This action cannot be undone. The lead data will be permanently removed.';
+    closeQuickView();
+    confirmDeleteLead();
+}
+
+function mobileCallLead() {
+    if (mobileCurrentLeadIndex < 0) return;
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (lead && lead.phone) window.open('tel:' + lead.phone.replace(/\D/g, ''));
+}
+
+function mobileEmailLead() {
+    if (mobileCurrentLeadIndex < 0) return;
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (lead && lead.email && lead.email !== 'N/A') {
+        window.open('mailto:' + lead.email + '?subject=Trip-On%20-%20Lead%20Follow-up&body=Hi%20' + encodeURIComponent(lead.name || '') + ',%0A%0AThank%20you%20for%20your%20interest%20in%20Trip-On.%0A%0ABest%20Regards,%0ATrip-On%20Team');
+    }
+}
+
+function mobileWhatsAppLead() {
+    if (mobileCurrentLeadIndex < 0) return;
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (lead && lead.phone) window.open('https://wa.me/' + lead.phone.replace(/\D/g, ''));
+}
+
+function toggleMobileAssignDropdown() {
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (!lead) return;
+    var assignees = ['Shipra (Me)', 'Jyothi Duddukunta', 'Team Member1', 'Team Member2', 'Team Member3', 'Team Member4', 'Tanveer', 'Bedkar', 'Un-Allocated'];
+    var current = lead.assignedTo || 'Un-Allocated';
+    var popup = document.createElement('div');
+    popup.className = 'mobile-sheet-popup';
+    popup.innerHTML = assignees.map(function(a) {
+        var isActive = a === current;
+        return '<div class="mobile-popup-item' + (isActive ? ' active' : '') + '" onclick="mobileSelectAssign(\'' + a.replace(/'/g, "\\'") + '\')">' + a + (isActive ? ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') + '</div>';
+    }).join('');
+    var btn = document.getElementById('mobileQuickAssignBtn');
+    if (btn) { btn.appendChild(popup); }
+    function close() { if (popup.parentNode) popup.remove(); document.removeEventListener('click', close, true); }
+    setTimeout(function() { document.addEventListener('click', close, true); }, 10);
+}
+
+function mobileSelectAssign(val) {
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (lead) { lead.assignedTo = val; saveLeadsToStorage(); document.getElementById('mobileQuickAssign').textContent = val; }
+    document.querySelectorAll('.mobile-sheet-popup').forEach(function(p) { p.remove(); });
+}
+
+function toggleMobileStatusDropdown() {
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (!lead) return;
+    var statuses = ['New', 'Contacted', 'RNR', 'Follow-up', 'Interested', 'Not Interested'];
+    var current = lead.status || 'New';
+    var popup = document.createElement('div');
+    popup.className = 'mobile-sheet-popup';
+    popup.innerHTML = statuses.map(function(s) {
+        var isActive = s === current;
+        return '<div class="mobile-popup-item' + (isActive ? ' active' : '') + '" onclick="mobileSelectStatus(\'' + s.replace(/'/g, "\\'") + '\')">' + s + (isActive ? ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') + '</div>';
+    }).join('');
+    var btn = document.getElementById('mobileQuickStatusBtn');
+    if (btn) { btn.appendChild(popup); }
+    function close() { if (popup.parentNode) popup.remove(); document.removeEventListener('click', close, true); }
+    setTimeout(function() { document.addEventListener('click', close, true); }, 10);
+}
+
+function mobileSelectStatus(val) {
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (lead) { lead.status = val; saveLeadsToStorage(); document.getElementById('mobileQuickStatus').textContent = val; }
+    document.querySelectorAll('.mobile-sheet-popup').forEach(function(p) { p.remove(); });
 }
 
 function openFullViewFromQuick() {
-    const qid = (document.getElementById('mobileQuickId') || {}).textContent;
-    if (qid) viewLead(qid);
-    var mqv = document.getElementById('mobileQuickView');
-    if (mqv) mqv.classList.remove('active');
+    if (mobileCurrentLeadIndex < 0) return;
+    var lead = allLeads[mobileCurrentLeadIndex];
+    if (lead) viewLead(lead.id);
+    closeQuickView();
 }
-
-function makeCallFromQuick() { const qid = (document.getElementById('mobileQuickId') || {}).textContent; const l = allLeads.find(l => l.id === qid); if (l) callLead(l.phone); }
-function sendWhatsAppFromQuick() { const qid = (document.getElementById('mobileQuickId') || {}).textContent; const l = allLeads.find(l => l.id === qid); if (l) whatsappLead(l.phone); }
 
 function saveEditLead() {
     const leadId = (document.getElementById('editLeadId') || {}).value;

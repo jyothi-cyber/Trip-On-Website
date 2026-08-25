@@ -1389,32 +1389,6 @@
     flex-shrink: 0;
 }
 
-/* Mobile Responsive */
-.mobile-quick-header-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.mobile-quick-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 50%;
-    background: #f5f5f5;
-    color: #666;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background 0.2s;
-}
-
-.mobile-quick-close:active {
-    background: #e0e0e0;
-}
-
 /* ============================================================================
    LEADS PAGE UI (header + filters redesign)
    ============================================================================ */
