@@ -1145,6 +1145,13 @@ function executeDeleteLead() {
     }
 }
 
+// ============================================================================
+// ACTION HANDLERS
+// ============================================================================
+
+function callLead(phone) { window.open('tel:' + phone); }
+function whatsappLead(phone) { window.open('https://wa.me/' + phone.replace(/\D/g, '')); }
+
 function importLeads() {
     const input = document.createElement('input');
     input.type = 'file';
