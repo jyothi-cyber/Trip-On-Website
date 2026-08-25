@@ -2896,3 +2896,30 @@
         justify-content: center;
     }
 }
+
+/* ── Circular focus ring on close (×) buttons ── */
+.view-close-btn:focus,
+.view-close-btn:focus-visible,
+.close:focus,
+.close:focus-visible,
+.book-trip-close:focus,
+.book-trip-close:focus-visible,
+.mobile-quick-close:focus,
+.mobile-quick-close:focus-visible,
+.bulk-close-btn:focus,
+.bulk-close-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(180, 180, 180, 0.5);
+    border-radius: 50%;
+}
+
+/* ── Smooth focus ring on cancel/back buttons ── */
+.back-btn:focus,
+.back-btn:focus-visible,
+.confirm-cancel:focus,
+.confirm-cancel:focus-visible,
+.btn-secondary:focus,
+.btn-secondary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(180, 180, 180, 0.45);
+}

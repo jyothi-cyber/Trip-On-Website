@@ -1241,9 +1241,11 @@ function showToastGreen(message) {
     var msg = document.getElementById('toastMessage');
     if (!toast) return;
     if (msg) msg.textContent = message || 'Done!';
+    toast.classList.remove('show');
+    void toast.offsetWidth;
     toast.classList.add('toast-green', 'show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function() { toast.classList.remove('show', 'toast-green'); }, 2200);
+    toastTimer = setTimeout(function() { toast.classList.remove('show', 'toast-green'); }, 2500);
 }
 
 function copyToClipboard(elementId, btnId) {
