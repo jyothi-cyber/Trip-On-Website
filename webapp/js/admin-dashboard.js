@@ -14,6 +14,8 @@ let allLeads = [];
 let currentSort = { field: null, direction: 'asc' };
 let searchQuery = '';
 let activeDropdownLeadId = null;
+let activeSheetFilter = '';
+let activeDateFilter = '';
 
 const LEAD_STORAGE_KEY = 'tripon_leads_demo_data_v3';
 
@@ -247,6 +249,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!e.target.closest('.notif-wrapper') && !e.target.closest('.mobile-notif-wrapper')) {
             closeNotifPanels();
         }
+        if (!e.target.closest('.custom-form-dropdown')) {
+            document.querySelectorAll('.custom-form-dropdown-menu.show').forEach(function(m) { m.classList.remove('show'); });
+            document.querySelectorAll('.custom-form-dropdown-trigger.open').forEach(function(t) { t.classList.remove('open'); });
+        }
         if (!e.target.closest('.assign-cell') && !e.target.closest('.assign-dropdown-popup')) {
             closeAssignDropdown();
         }
@@ -378,6 +384,11 @@ function selectFilter(filterType, value, element) {
     const dropdown = element.parentElement;
     dropdown.querySelectorAll('.dropdown-item').forEach(item => item.classList.remove('active'));
     element.classList.add('active');
+    if (filterType === 'sheet') {
+        activeSheetFilter = value;
+    } else if (filterType === 'date') {
+        activeDateFilter = value;
+    }
     applyFilters();
     closeAllDropdowns();
 }
@@ -386,7 +397,7 @@ function applyFilters() {
     filteredLeads = [...allLeads];
     if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        filteredLeads = filteredLeads.filter(l => l.name.toLowerCase().includes(q) || l.phone.includes(searchQuery) || l.id.toLowerCase().includes(q));
+        filteredLeads = filteredLeads.filter(l => l.name.toLowerCase().includes(q) || (l.phone || '').includes(searchQuery) || (l.id || '').toLowerCase().includes(q) || (l.email || '').toLowerCase().includes(q));
     }
     const assignEl = document.querySelector('#assignBtn .filter-text');
     const assignFilter = assignEl ? assignEl.textContent : undefined;
@@ -403,6 +414,33 @@ function applyFilters() {
                 filteredLeads = filteredLeads.filter(l => norm(l.status) === statusVal);
                 break;
             }
+        }
+    }
+    if (activeSheetFilter && activeSheetFilter !== 'All Sheets') {
+        const sheetLower = activeSheetFilter.toLowerCase();
+        if (sheetLower !== 'track') {
+            filteredLeads = filteredLeads.filter(l => {
+                const src = (l.source || l.formSource || '').toLowerCase();
+                return src.includes(sheetLower);
+            });
+        }
+    }
+    if (activeDateFilter && activeDateFilter !== 'Select date') {
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const dateRanges = {
+            'Today': [today, new Date(today.getTime() + 86400000)],
+            'Yesterday': [new Date(today.getTime() - 86400000), today],
+            'Last 7 days': [new Date(today.getTime() - 7 * 86400000), new Date(today.getTime() + 86400000)],
+            'This month': [new Date(now.getFullYear(), now.getMonth(), 1), new Date(now.getFullYear(), now.getMonth() + 1, 1)],
+            'Last month': [new Date(now.getFullYear(), now.getMonth() - 1, 1), new Date(now.getFullYear(), now.getMonth(), 1)]
+        };
+        const range = dateRanges[activeDateFilter];
+        if (range) {
+            filteredLeads = filteredLeads.filter(l => {
+                const d = parseLeadDate(l.createdAt);
+                return d >= range[0] && d < range[1];
+            });
         }
     }
     currentPage = 1;
@@ -436,6 +474,8 @@ function performSearch() {
 function refreshSearch() {
     document.getElementById('searchInput').value = '';
     searchQuery = '';
+    activeSheetFilter = '';
+    activeDateFilter = '';
     const allBtn = document.querySelector('#allBtn .filter-text');
     if (allBtn) allBtn.textContent = 'All (' + allLeads.length + ')';
     updateFilterCounts();
@@ -452,9 +492,39 @@ function refreshSearch() {
     renderPagination();
 }
 
+function syncLeads() {
+    const syncEl = document.getElementById('leadsSync');
+    const lastSyncText = document.getElementById('lastSyncText');
+    const dot = syncEl ? syncEl.querySelector('.sync-dot') : null;
+    if (syncEl) syncEl.style.pointerEvents = 'none';
+    if (lastSyncText) lastSyncText.textContent = 'Syncing leads\u2026';
+    if (dot) { dot.style.background = '#EF3340'; dot.style.animation = 'pulse 1s infinite'; }
+    setTimeout(function() {
+        if (dot) { dot.style.background = '#22C55E'; dot.style.animation = ''; }
+        if (lastSyncText) {
+            var now = new Date();
+            var date = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            var time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            lastSyncText.textContent = 'Last sync ' + date + ', ' + time;
+        }
+        refreshSearch();
+        showToast('Leads are updated');
+        if (syncEl) syncEl.style.pointerEvents = '';
+        setTimeout(function() { if (dot) { dot.style.background = ''; dot.style.animation = ''; } }, 2000);
+    }, 1500);
+}
+
 // ============================================================================
 // TABLE RENDERING
 // ============================================================================
+
+function highlightText(text, query) {
+    if (!query || !query.trim()) return escapeHtml(text);
+    var escaped = escapeHtml(text);
+    var q = escapeHtml(query.trim());
+    var regex = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    return escaped.replace(regex, '<mark class="search-highlight">$1</mark>');
+}
 
 function renderTable() {
     closeAssignDropdown();
@@ -506,6 +576,8 @@ function renderTable() {
         const createdParts = (lead.createdAt || '').split(', ');
         const createdDate = createdParts[0] || '';
         const createdTime = createdParts[1] || '';
+        const hlName = highlightText(name, searchQuery);
+        const hlPhone = highlightText(phone, searchQuery);
         return `
         <tr style="cursor:pointer" onclick="viewLead('${lead.id}')">
             <td class="col-checkbox" onclick="event.stopPropagation()">
@@ -518,7 +590,7 @@ function renderTable() {
                 <div class="lead-name-cell">
                     <div class="lead-avatar">${initials}</div>
                     <div>
-                        <div class="lead-name">${name}</div>
+                        <div class="lead-name">${hlName}</div>
                         <div class="lead-id">${lead.id}</div>
                     </div>
                 </div>
@@ -534,7 +606,7 @@ function renderTable() {
                 </div>
             </td>
             <td class="col-phone">
-                <div class="phone-number">${phone}</div>
+                <div class="phone-number">${hlPhone}</div>
             </td>
             <td class="col-created">
                 <div class="created-time">${createdTime}</div>
@@ -881,7 +953,10 @@ function updateResultsInfo() {
     const start = (currentPage - 1) * itemsPerPage + 1;
     const end = Math.min(currentPage * itemsPerPage, filteredLeads.length);
     const total = filteredLeads.length;
-    const text = total > 0 ? `Showing ${start}–${end} of ${total}` : 'No results';
+    var text = total > 0 ? `Showing ${start}–${end} of ${total}` : 'No results';
+    if (searchQuery.trim() && total > 0) {
+        text = `${total} result${total !== 1 ? 's' : ''} found for "${searchQuery}" — ` + text;
+    }
     if (resultsCount) resultsCount.textContent = text;
     if (paginationInfo) paginationInfo.textContent = text;
 }
@@ -1291,18 +1366,25 @@ function saveEditLead() {
 }
 
 function saveNewLead() {
-    const name = (document.getElementById('addName') || {}).value;
-    const contact = (document.getElementById('addContact') || {}).value;
-    if (!name || !contact) { alert('Name and Contact are required!'); return; }
-    const newId = 'L-' + String(allLeads.length + 6701).padStart(5, '0');
+    var name = (document.getElementById('addName') || {}).value || '';
+    var contact = (document.getElementById('addContact') || {}).value || '';
+    if (!name.trim()) { alert('Please enter a valid name (letters only).'); return; }
+    if (!contact.trim() || contact.length < 10) { alert('Please enter a valid 10-digit phone number.'); return; }
+    var pkg = document.getElementById('addPackageValue');
+    var dur = document.getElementById('addDurationValue');
+    var dest = document.getElementById('addDestinationValue');
+    var newId = 'L-' + String(allLeads.length + 6701).padStart(5, '0');
     allLeads.unshift({
-        id: newId, name, phone: contact, tickets: Math.floor(Math.random() * 5) + 1,
+        id: newId, name: name.trim(), phone: contact, tickets: Math.floor(Math.random() * 5) + 1,
         createdAt: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
-        status: (document.getElementById('addStatus') || {}).value || 'New', assignedTo: 'Un-Allocated',
-        destination: (document.getElementById('addDestination') || {}).value || 'Andaman',
-        email: (document.getElementById('addEmail') || {}).value || '', guests: (document.getElementById('addGuests') || {}).value || '',
-        packageType: (document.getElementById('addPackage') || {}).value || '', budget: (document.getElementById('addBudget') || {}).value || '',
-        location: (document.getElementById('addLocation') || {}).value || '', address: (document.getElementById('addAddress') || {}).value || '',
+        status: 'New', assignedTo: 'Un-Allocated',
+        destination: (dest ? dest.textContent : 'Bali'),
+        email: (document.getElementById('addEmail') || {}).value || '',
+        guests: (document.getElementById('addGuests') || {}).value || '',
+        packageType: (pkg ? pkg.textContent : ''),
+        duration: (dur ? dur.textContent : ''),
+        budget: (document.getElementById('addBudget') || {}).value || '',
+        address: (document.getElementById('addAddress') || {}).value || '',
         notes: (document.getElementById('addNotes') || {}).value || '', formSource: 'Direct', plannedVisit: 'Undecided', interest: 'Decide on-site'
     });
     filteredLeads = [...allLeads];
@@ -1311,6 +1393,9 @@ function saveNewLead() {
     closeModal('addLeadModal');
     var addForm = document.getElementById('addLeadForm');
     if (addForm) addForm.reset();
+    selectFormDropdown('addPackage', 'Select Package');
+    selectFormDropdown('addDuration', 'Select Duration');
+    selectFormDropdown('addDestination', 'Bali');
     currentPage = 1;
     renderTable();
     updateResultsInfo();
@@ -1319,6 +1404,38 @@ function saveNewLead() {
 
 function openBookTripModal() { openModal('bookTripModal'); }
 function closeBookTripModal() { closeModal('bookTripModal'); }
+
+// ============================================================================
+// FORM CUSTOM DROPDOWNS
+// ============================================================================
+
+function toggleFormDropdown(fieldId) {
+    var menu = document.getElementById(fieldId + 'Menu');
+    var trigger = document.getElementById(fieldId + 'Dropdown').querySelector('.custom-form-dropdown-trigger');
+    var isOpen = menu && menu.classList.contains('show');
+    document.querySelectorAll('.custom-form-dropdown-menu.show').forEach(function(m) { m.classList.remove('show'); });
+    document.querySelectorAll('.custom-form-dropdown-trigger.open').forEach(function(t) { t.classList.remove('open'); });
+    if (!isOpen && menu && trigger) {
+        menu.classList.add('show');
+        trigger.classList.add('open');
+    }
+}
+
+function selectFormDropdown(fieldId, value) {
+    var valueEl = document.getElementById(fieldId + 'Value');
+    var menu = document.getElementById(fieldId + 'Menu');
+    var trigger = document.getElementById(fieldId + 'Dropdown').querySelector('.custom-form-dropdown-trigger');
+    if (valueEl) valueEl.textContent = value;
+    if (menu) menu.classList.remove('show');
+    if (trigger) trigger.classList.remove('open');
+    if (menu) {
+        menu.querySelectorAll('.custom-form-dropdown-item').forEach(function(item) {
+            item.classList.toggle('active', item.textContent === value);
+        });
+    }
+    var hidden = document.getElementById(fieldId);
+    if (hidden && hidden.tagName === 'INPUT') hidden.value = value;
+}
 
 // ============================================================================
 // NOTIFICATION PANEL
@@ -1509,3 +1626,6 @@ window.logoutAdmin = logoutAdmin;
 window.toggleNotifPanel = toggleNotifPanel;
 window.closeNotifPanels = closeNotifPanels;
 window.viewAllNotifications = viewAllNotifications;
+window.syncLeads = syncLeads;
+window.toggleFormDropdown = toggleFormDropdown;
+window.selectFormDropdown = selectFormDropdown;
