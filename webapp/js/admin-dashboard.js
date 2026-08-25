@@ -1195,10 +1195,7 @@ function viewLead(leadId) {
         var m = now.getMinutes();
         ts.textContent = now.getDate() + ' ' + months[now.getMonth()] + ' ' + String(now.getFullYear()).slice(2) + ', ' + (hh < 10 ? '0' : '') + hh + ':' + (m < 10 ? '0' : '') + m + ' ' + ap;
     }
-    var editBtn = document.getElementById('editNameBtn');
-    var cancelBtn = document.getElementById('cancelNameBtn');
-    if (editBtn) editBtn.style.display = '';
-    if (cancelBtn) cancelBtn.style.display = 'none';
+    exitEditMode();
     openModal('viewLeadModal');
 }
 
@@ -1329,52 +1326,52 @@ function executeDeleteLead() {
 }
 
 var _nameEditing = false;
-var _nameEditOriginal = '';
-function toggleEditName() {
-    var nameEl = document.getElementById('viewName');
-    var editBtn = document.getElementById('editNameBtn');
-    var cancelBtn = document.getElementById('cancelNameBtn');
-    if (!nameEl) return;
-    if (!_nameEditing) {
-        _nameEditOriginal = nameEl.textContent;
-        nameEl.setAttribute('contenteditable', 'true');
-        nameEl.focus();
-        nameEl.classList.add('editing');
-        if (editBtn) editBtn.style.display = 'none';
-        if (cancelBtn) cancelBtn.style.display = '';
-        _nameEditing = true;
-    }
-}
-function cancelEditName() {
-    var nameEl = document.getElementById('viewName');
-    var editBtn = document.getElementById('editNameBtn');
-    var cancelBtn = document.getElementById('cancelNameBtn');
-    if (!nameEl) return;
-    nameEl.textContent = _nameEditOriginal;
-    nameEl.removeAttribute('contenteditable');
-    nameEl.classList.remove('editing');
-    if (editBtn) editBtn.style.display = '';
-    if (cancelBtn) cancelBtn.style.display = 'none';
-    _nameEditing = false;
-}
-function editLeadFromView() {
-    var nameEl = document.getElementById('viewName');
+function enterEditMode() {
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     var lead = allLeads.find(function(l) { return l.id === leadId; });
-    if (lead && nameEl && nameEl.textContent.trim()) {
-        lead.name = nameEl.textContent.trim();
-        saveLeadsToStorage();
-        renderTable();
-        showToastGreen('Name updated');
-    }
-    nameEl.removeAttribute('contenteditable');
-    nameEl.classList.remove('editing');
-    var editBtn = document.getElementById('editNameBtn');
-    var cancelBtn = document.getElementById('cancelNameBtn');
-    if (editBtn) editBtn.style.display = '';
-    if (cancelBtn) cancelBtn.style.display = 'none';
-    _nameEditing = false;
+    if (!lead) return;
+    document.getElementById('editModeName').value = lead.name || '';
+    document.getElementById('editModePhone').value = lead.phone || '';
+    document.getElementById('editModeEmail').value = lead.email || '';
+    document.getElementById('editModeCreatedAt').textContent = lead.createdAt || '';
+    document.getElementById('editModeFormSource').textContent = lead.formSource || 'N/A';
+    document.getElementById('editComingWithValue').textContent = lead.guests || 'Select coming with';
+    document.getElementById('editModeGroupSize').value = lead.guests ? lead.guests.replace(/\D/g, '') : '';
+    document.getElementById('editModePlannedVisit').value = lead.plannedVisit || '';
+    document.getElementById('editModeLocation').value = lead.location || '';
+    document.getElementById('viewModeContent').style.display = 'none';
+    document.getElementById('editModeContent').style.display = '';
 }
+function exitEditMode() {
+    document.getElementById('editModeContent').style.display = 'none';
+    document.getElementById('viewModeContent').style.display = '';
+}
+function saveEditChanges() {
+    var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
+    var lead = allLeads.find(function(l) { return l.id === leadId; });
+    if (!lead) return;
+    lead.name = document.getElementById('editModeName').value.trim() || lead.name;
+    lead.phone = document.getElementById('editModePhone').value.trim() || lead.phone;
+    lead.email = document.getElementById('editModeEmail').value.trim() || lead.email;
+    var gs = document.getElementById('editModeGroupSize').value;
+    lead.guests = gs ? gs + ' People' : lead.guests;
+    lead.plannedVisit = document.getElementById('editModePlannedVisit').value.trim() || lead.plannedVisit;
+    lead.location = document.getElementById('editModeLocation').value.trim() || lead.location;
+    var cv = document.getElementById('editComingWithValue').textContent;
+    if (cv && cv !== 'Select coming with') lead.guests = cv;
+    saveLeadsToStorage();
+    document.getElementById('viewName').textContent = lead.name;
+    document.getElementById('viewContact').textContent = lead.phone;
+    document.getElementById('viewEmail').textContent = lead.email || 'N/A';
+    document.getElementById('viewCreatedAt').textContent = lead.createdAt;
+    document.getElementById('viewFormSource').textContent = lead.formSource || 'N/A';
+    exitEditMode();
+    renderTable();
+    showToastGreen('Lead updated');
+}
+function toggleEditName() { enterEditMode(); }
+function cancelEditName() { exitEditMode(); }
+function editLeadFromView() { enterEditMode(); }
 
 function updateAssignmentFromView() {
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
@@ -1725,6 +1722,9 @@ window.saveNotes = saveNotes;
 window.editLeadFromView = editLeadFromView;
 window.toggleEditName = toggleEditName;
 window.cancelEditName = cancelEditName;
+window.enterEditMode = enterEditMode;
+window.exitEditMode = exitEditMode;
+window.saveEditChanges = saveEditChanges;
 window.updateAssignmentFromView = updateAssignmentFromView;
 window.updateStatusFromView = updateStatusFromView;
 window.makeCall = makeCall;

@@ -791,11 +791,6 @@
     outline: none;
 }
 
-.view-name-section h2.editing {
-    border-bottom: 2px solid #FF6B00;
-    padding-bottom: 2px;
-}
-
 .view-name-underline {
     height: 2px;
     background: #FF6B00;
@@ -833,10 +828,69 @@
     color: #DC2626;
     padding: 0;
     transition: all 0.2s;
+    flex-shrink: 0;
 }
 
 .cancel-name-btn:hover {
     background: #FECACA;
+}
+
+.edit-name-input {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0F172A;
+    border: none;
+    border-bottom: 2px solid #FF6B00;
+    background: transparent;
+    outline: none;
+    padding: 2px 0;
+    flex: 1;
+    font-family: inherit;
+}
+
+.edit-field-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #E1E5EA;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #0F172A;
+    background: #FFFFFF;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.edit-field-input:focus {
+    border-color: #FF6B00;
+}
+
+.edit-field-input::placeholder {
+    color: #9CA3AF;
+}
+
+.save-changes-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 20px;
+    background: #FF6B00;
+    border: none;
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 24px;
+    font-family: inherit;
+}
+
+.save-changes-btn:hover {
+    background: #E55A00;
 }
 
 .view-info-group {

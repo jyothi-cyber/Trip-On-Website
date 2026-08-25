@@ -483,75 +483,151 @@
 
             <div class="view-modal-body">
                 <div class="view-left-section">
-                    <div class="view-name-section">
-                        <div class="view-name-edit-row">
-                            <h2 id="viewName">Semalt Indexjump Bixot</h2>
-                            <button class="edit-name-btn" id="editNameBtn" onclick="toggleEditName()">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M11.333 2A1.886 1.886 0 0 1 14 4.667l-9 9-3.667 1 1-3.667 9-9z" stroke="currentColor" stroke-width="1.5" />
-                                </svg>
-                            </button>
-                            <button class="cancel-name-btn" id="cancelNameBtn" style="display:none" onclick="cancelEditName()">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                    <path d="M10.5 3.5L3.5 10.5M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                </svg>
-                            </button>
+                    <!-- VIEW MODE -->
+                    <div class="view-mode-content" id="viewModeContent">
+                        <div class="view-name-section">
+                            <div class="view-name-edit-row">
+                                <h2 id="viewName">Semalt Indexjump Bixot</h2>
+                                <button class="edit-name-btn" id="editNameBtn" onclick="enterEditMode()">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M11.333 2A1.886 1.886 0 0 1 14 4.667l-9 9-3.667 1 1-3.667 9-9z" stroke="currentColor" stroke-width="1.5" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="view-name-underline"></div>
                         </div>
-                        <div class="view-name-underline"></div>
+
+                        <div class="view-info-group">
+                            <label>PHONE</label>
+                            <div class="view-info-text">
+                                <span id="viewContact">8602892488</span>
+                                <button class="copy-btn" id="copyContactBtn" onclick="copyToClipboard('viewContact','copyContactBtn')">
+                                    <svg class="copy-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
+                                        <path d="M2 10V3a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.5" />
+                                    </svg>
+                                    <svg class="copy-check" width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:none">
+                                        <path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="view-info-group">
+                            <label>EMAIL</label>
+                            <div class="view-info-text">
+                                <span id="viewEmail">start@semalt.com</span>
+                                <button class="copy-btn" id="copyEmailBtn" onclick="copyToClipboard('viewEmail','copyEmailBtn')">
+                                    <svg class="copy-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
+                                        <path d="M2 10V3a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.5" />
+                                    </svg>
+                                    <svg class="copy-check" width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:none">
+                                        <path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="view-info-group">
+                            <label>CREATED AT</label>
+                            <div class="view-info-text">
+                                <span id="viewCreatedAt">25 Aug 2026 · 03:48 PM</span>
+                            </div>
+                        </div>
+
+                        <div class="view-info-group">
+                            <label>FORM SOURCE</label>
+                            <div class="view-info-text">
+                                <span id="viewFormSource">Contact Form</span>
+                            </div>
+                        </div>
+
+                        <button class="delete-lead-btn" onclick="confirmDeleteLead()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334z" stroke="currentColor" stroke-width="1.5" />
+                            </svg>
+                            Delete
+                        </button>
                     </div>
 
-                    <div class="view-info-group">
-                        <label>PHONE</label>
-                        <div class="view-info-text">
-                            <span id="viewContact">8602892488</span>
-                            <button class="copy-btn" id="copyContactBtn" onclick="copyToClipboard('viewContact','copyContactBtn')">
-                                <svg class="copy-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                    <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
-                                    <path d="M2 10V3a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.5" />
-                                </svg>
-                                <svg class="copy-check" width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:none">
-                                    <path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
+                    <!-- EDIT MODE -->
+                    <div class="edit-mode-content" id="editModeContent" style="display:none">
+                        <div class="view-name-section">
+                            <div class="view-name-edit-row">
+                                <input type="text" class="edit-name-input" id="editModeName" value="" />
+                                <button class="cancel-name-btn" id="cancelEditBtn" onclick="exitEditMode()">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <path d="M10.5 3.5L3.5 10.5M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="view-name-underline"></div>
                         </div>
-                    </div>
 
-                    <div class="view-info-group">
-                        <label>EMAIL</label>
-                        <div class="view-info-text">
-                            <span id="viewEmail">start@semalt.com</span>
-                            <button class="copy-btn" id="copyEmailBtn" onclick="copyToClipboard('viewEmail','copyEmailBtn')">
-                                <svg class="copy-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                    <rect x="4" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
-                                    <path d="M2 10V3a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.5" />
-                                </svg>
-                                <svg class="copy-check" width="14" height="14" viewBox="0 0 24 24" fill="none" style="display:none">
-                                    <path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
+                        <div class="view-info-group">
+                            <label>PHONE</label>
+                            <input type="text" class="edit-field-input" id="editModePhone" value="" />
                         </div>
-                    </div>
 
-                    <div class="view-info-group">
-                        <label>CREATED AT</label>
-                        <div class="view-info-text">
-                            <span id="viewCreatedAt">25 Aug 2026 · 03:48 PM</span>
+                        <div class="view-info-group">
+                            <label>EMAIL</label>
+                            <input type="email" class="edit-field-input" id="editModeEmail" value="" />
                         </div>
-                    </div>
 
-                    <div class="view-info-group">
-                        <label>FORM SOURCE</label>
-                        <div class="view-info-text">
-                            <span id="viewFormSource">Contact Form</span>
+                        <div class="view-info-group">
+                            <label>CREATED AT</label>
+                            <div class="view-info-text">
+                                <span id="editModeCreatedAt">25 Aug 2026 · 03:48 PM</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <button class="delete-lead-btn" onclick="confirmDeleteLead()">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334z" stroke="currentColor" stroke-width="1.5" />
-                        </svg>
-                        Delete
-                    </button>
+                        <div class="view-info-group">
+                            <label>FORM SOURCE</label>
+                            <div class="view-info-text">
+                                <span id="editModeFormSource">Contact Form</span>
+                            </div>
+                        </div>
+
+                        <div class="view-info-group">
+                            <label>COMING WITH</label>
+                            <div class="view-custom-dropdown" id="editComingWithDropdown">
+                                <button type="button" class="view-dropdown-trigger" onclick="toggleViewDropdown('editComingWith')">
+                                    <span id="editComingWithValue">Select coming with</span>
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </button>
+                                <div class="view-dropdown-menu" id="editComingWithMenu">
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('editComingWith','Solo',this)">Solo</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('editComingWith','Friends',this)">Friends</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('editComingWith','Family',this)">Family</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('editComingWith','Couple',this)">Couple</div>
+                                    <div class="view-dropdown-item" onclick="selectViewDropdown('editComingWith','Group',this)">Group</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="view-info-group">
+                            <label>GROUP SIZE</label>
+                            <input type="number" class="edit-field-input" id="editModeGroupSize" placeholder="" min="0" max="99" />
+                        </div>
+
+                        <div class="view-info-group">
+                            <label>PLANNED VISIT</label>
+                            <input type="text" class="edit-field-input" id="editModePlannedVisit" value="" />
+                        </div>
+
+                        <div class="view-info-group">
+                            <label>LOCATION</label>
+                            <input type="text" class="edit-field-input" id="editModeLocation" value="" />
+                        </div>
+
+                        <button class="save-changes-btn" onclick="saveEditChanges()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M13.333 4L6 11.333 2.667 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Save Changes
+                        </button>
+                    </div>
                 </div>
 
                 <div class="view-right-section">
