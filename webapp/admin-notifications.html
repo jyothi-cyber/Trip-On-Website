@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Trip On Admin</title>
+    <link rel="stylesheet" href="admin-styles.css?v=20260820">
+    <link rel="stylesheet" href="admin-notifications-styles.css?v=20260820">
+</head>
+
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+        </button>
+        <div class="mobile-menu-dropdown" id="mobileMenuDropdown">
+            <a href="admin-dashboard.html" class="mobile-menu-item" id="mobileMenuLeads">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                    <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" />
+                    <line x1="3" y1="8" x2="17" y2="8" stroke="currentColor" stroke-width="1.5" />
+                    <line x1="8" y1="8" x2="8" y2="17" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+                <span>Leads</span>
+            </a>
+            <a href="admin-packages.html" class="mobile-menu-item" id="mobileMenuPackages">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2L3 6v7c0 4.5 7 7 7 7s7-2.5 7-7V6l-7-4z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                </svg>
+                <span>Packages</span>
+            </a>
+            <div class="mobile-menu-divider"></div>
+            <button class="mobile-menu-item" onclick="mobileLogout()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 4h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2M10 17l5-5-5-5M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>Logout</span>
+            </button>
+        </div>
+        <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="mobile-logo">
+        <div class="mobile-user-avatar" id="mobileProfileBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="4" fill="currentColor" />
+                <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" fill="currentColor" />
+            </svg>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="dashboard-layout">
+        <!-- Left Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/images/tripon-logo.png" alt="Trip On Logo" class="sidebar-logo">
+                <button class="menu-toggle" id="menuToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" />
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" />
+                        <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" />
+                        <line x1="3" y1="8" x2="17" y2="8" stroke="currentColor" stroke-width="1.5" />
+                        <line x1="8" y1="8" x2="8" y2="17" stroke="currentColor" stroke-width="1.5" />
+                    </svg>
+                    <span>Leads</span>
+                </a>
+                <a href="admin-packages.html" class="nav-item">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2L3 6v7c0 4.5 7 7 7 7s7-2.5 7-7V6l-7-4z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                    </svg>
+                    <span>Packages</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="top-header">
+                <button class="top-menu-btn" id="topMenuBtn" title="Toggle sidebar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+                <div class="header-right">
+                    <a href="admin-dashboard.html" class="header-back-btn" title="Back to Dashboard">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="user-profile">
+                        <div class="user-avatar" id="userAvatar">DJ</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Notifications Content -->
+            <div class="notif-page">
+                <!-- Page Header -->
+                <div class="notif-page-header">
+                    <div class="notif-page-header-left">
+                        <h1 class="notif-page-title">Notifications</h1>
+                        <span class="notif-page-unread" id="notifUnreadCount">1 unread</span>
+                    </div>
+                    <div class="notif-page-actions">
+                        <button class="notif-action-btn notif-mark-read" onclick="markAllRead()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Mark all read
+                        </button>
+                        <button class="notif-action-btn notif-clear-all" onclick="clearAllNotifications()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Clear all
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notifications List -->
+                <div class="notif-page-list" id="notifPageList">
+                    <!-- populated by JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M13.5 4L6.5 11L2.5 7" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </span>
+        <span class="toast-message" id="toastMessage">Done!</span>
+    </div>
+
+    <script>
+    // ── Leads data (same storage key as dashboard) ──
+    var STORAGE_KEY = 'tripon_leads_demo_data_v3';
+    var allLeads = [];
+    var readIds = [];
+
+    function loadLeads() {
+        try {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                var parsed = JSON.parse(raw);
+                if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            }
+        } catch(e) {}
+        return [];
+    }
+
+    function loadReadIds() {
+        try {
+            var raw = localStorage.getItem('tripon_notif_read_ids');
+            if (raw) return JSON.parse(raw);
+        } catch(e) {}
+        return [];
+    }
+
+    function saveReadIds() {
+        try { localStorage.setItem('tripon_notif_read_ids', JSON.stringify(readIds)); } catch(e) {}
+    }
+
+    function parseDate(str) {
+        if (!str) return new Date(0);
+        var cleaned = str.replace(/^(\d{1,2})\s/, '0$1 ').replace(/(\d{1,2}):(\d{2})\s*(AM|PM)/i, function(m, h, mi, ap) {
+            var hh = parseInt(h, 10);
+            if (ap.toUpperCase() === 'PM' && hh < 12) hh += 12;
+            if (ap.toUpperCase() === 'AM' && hh === 12) hh = 0;
+            return (hh < 10 ? '0' : '') + hh + ':' + mi + ':00';
+        });
+        var d = new Date(cleaned);
+        return isNaN(d.getTime()) ? new Date(0) : d;
+    }
+
+    function formatTime(dt) {
+        var h = dt.getHours(), mi = dt.getMinutes();
+        var ap = h >= 12 ? 'PM' : 'AM';
+        var hh = h % 12 || 12;
+        return (hh < 10 ? '0' : '') + hh + ':' + (mi < 10 ? '0' : '') + mi + ' ' + ap;
+    }
+
+    function formatDate(dt) {
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        return dt.getDate() + ' ' + months[dt.getMonth()];
+    }
+
+    function isToday(dt) {
+        var now = new Date();
+        return dt.getDate() === now.getDate() && dt.getMonth() === now.getMonth() && dt.getFullYear() === now.getFullYear();
+    }
+
+    function isYesterday(dt) {
+        var now = new Date();
+        var y = new Date(now);
+        y.setDate(y.getDate() - 1);
+        return dt.getDate() === y.getDate() && dt.getMonth() === y.getMonth() && dt.getFullYear() === y.getFullYear();
+    }
+
+    function escapeHtml(s) {
+        var d = document.createElement('div');
+        d.appendChild(document.createTextNode(s || ''));
+        return d.innerHTML;
+    }
+
+    function generateNotifications() {
+        var leads = allLeads.slice();
+        leads.sort(function(a, b) { return parseDate(b.createdAt) - parseDate(a.createdAt); });
+        var notifs = [];
+        for (var i = 0; i < leads.length; i++) {
+            var lead = leads[i];
+            var dt = parseDate(lead.createdAt);
+            var mainText = '';
+            var subText = '';
+            if (lead.source && lead.source.toLowerCase().indexOf('semi') !== -1) {
+                mainText = 'New Semi Pop Up lead: ' + (lead.name || 'Unknown');
+            } else if (lead.source && lead.source.toLowerCase().indexOf('pop') !== -1) {
+                mainText = 'New Pop Up lead: ' + (lead.name || 'Unknown');
+            } else if (lead.source && lead.source.toLowerCase().indexOf('paramotor') !== -1) {
+                mainText = 'New Paramotoring lead: ' + (lead.name || 'Unknown');
+            } else {
+                mainText = 'New lead: ' + (lead.name || 'Unknown');
+            }
+            notifs.push({
+                id: lead.id,
+                mainText: mainText,
+                subText: '',
+                dt: dt,
+                timeStr: formatTime(dt) + ' \u00B7 ' + formatDate(dt),
+                unread: readIds.indexOf(lead.id) === -1,
+                leadId: lead.id
+            });
+        }
+        return notifs;
+    }
+
+    function groupNotifications(notifs) {
+        var today = [], yesterday = [], older = [];
+        for (var i = 0; i < notifs.length; i++) {
+            var n = notifs[i];
+            if (isToday(n.dt)) today.push(n);
+            else if (isYesterday(n.dt)) yesterday.push(n);
+            else older.push(n);
+        }
+        var groups = [];
+        if (today.length) groups.push({ label: 'TODAY', items: today });
+        if (yesterday.length) groups.push({ label: 'YESTERDAY', items: yesterday });
+        if (older.length) groups.push({ label: 'EARLIER', items: older });
+        return groups;
+    }
+
+    function renderNotifPage() {
+        var notifs = generateNotifications();
+        var groups = groupNotifications(notifs);
+        var unreadCount = 0;
+        for (var i = 0; i < notifs.length; i++) {
+            if (notifs[i].unread) unreadCount++;
+        }
+        var countEl = document.getElementById('notifUnreadCount');
+        if (countEl) {
+            countEl.textContent = unreadCount + ' unread';
+            countEl.style.display = unreadCount > 0 ? '' : 'none';
+        }
+
+        var listEl = document.getElementById('notifPageList');
+        if (!listEl) return;
+
+        if (notifs.length === 0) {
+            listEl.innerHTML = '<div class="notif-page-empty">No notifications yet</div>';
+            return;
+        }
+
+        var html = '';
+        for (var g = 0; g < groups.length; g++) {
+            var group = groups[g];
+            html += '<div class="notif-page-section">';
+            html += '<div class="notif-page-section-label">' + group.label + '</div>';
+            for (var j = 0; j < group.items.length; j++) {
+                var item = group.items[j];
+                html += '<div class="notif-page-item' + (item.unread ? ' unread' : '') + '" data-id="' + escapeHtml(item.id) + '" onclick="viewLeadFromNotif(\'' + escapeHtml(item.leadId) + '\')">';
+                html += '<div class="notif-page-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>';
+                html += '<div class="notif-page-item-content">';
+                html += '<div class="notif-page-item-main">' + escapeHtml(item.mainText) + '</div>';
+                html += '<div class="notif-page-item-time">' + escapeHtml(item.timeStr) + '</div>';
+                html += '</div>';
+                if (item.unread) {
+                    html += '<div class="notif-page-item-dot"></div>';
+                }
+                html += '</div>';
+            }
+            html += '</div>';
+        }
+        listEl.innerHTML = html;
+    }
+
+    function markAllRead() {
+        var notifs = generateNotifications();
+        for (var i = 0; i < notifs.length; i++) {
+            if (readIds.indexOf(notifs[i].id) === -1) readIds.push(notifs[i].id);
+        }
+        saveReadIds();
+        renderNotifPage();
+        showToast('All notifications marked as read');
+    }
+
+    function clearAllNotifications() {
+        readIds = [];
+        var notifs = generateNotifications();
+        for (var i = 0; i < notifs.length; i++) {
+            readIds.push(notifs[i].id);
+        }
+        saveReadIds();
+        renderNotifPage();
+        showToast('All notifications cleared');
+    }
+
+    function viewLeadFromNotif(leadId) {
+        // Mark as read
+        if (readIds.indexOf(leadId) === -1) {
+            readIds.push(leadId);
+            saveReadIds();
+        }
+        window.location.href = 'admin-dashboard.html?viewLead=' + encodeURIComponent(leadId);
+    }
+
+    function showToast(msg) {
+        var t = document.getElementById('toastNotification');
+        var m = document.getElementById('toastMessage');
+        if (t && m) { m.textContent = msg; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 2200); }
+    }
+
+    function mobileLogout() { window.location.href = 'admin-login.html'; }
+    function logoutAdmin() { window.location.href = 'admin-login.html'; }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        allLeads = loadLeads();
+        readIds = loadReadIds();
+        renderNotifPage();
+
+        var menuBtn = document.getElementById('mobileMenuBtn');
+        var dropdown = document.getElementById('mobileMenuDropdown');
+        if (menuBtn && dropdown) {
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('open');
+            });
+        }
+        document.addEventListener('click', function(e) {
+            if (dropdown && !e.target.closest('.mobile-header')) {
+                dropdown.classList.remove('open');
+            }
+        });
+        var topMenuBtn = document.getElementById('topMenuBtn');
+        if (topMenuBtn) topMenuBtn.addEventListener('click', function() {
+            var sb = document.getElementById('sidebar');
+            if (sb) sb.classList.toggle('collapsed');
+        });
+    });
+    </script>
+</body>
+
+</html>

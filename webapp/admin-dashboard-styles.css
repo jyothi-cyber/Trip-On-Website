@@ -1621,6 +1621,32 @@
     margin-top: 2px;
 }
 
+.profile-popup-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px 0;
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.profile-popup-profile:hover {
+    background: #F0F7FF;
+    color: #2563EB;
+    border-color: #BFDBFE;
+}
+
 .profile-popup-logout {
     display: flex;
     align-items: center;

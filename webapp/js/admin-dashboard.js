@@ -1447,7 +1447,7 @@ function formatNotifTime(dt) {
 
 function viewAllNotifications() {
     closeNotifPanels();
-    showToast('Opening all notifications\u2026');
+    window.location.href = 'admin-notifications.html';
 }
 
 // ============================================================================
