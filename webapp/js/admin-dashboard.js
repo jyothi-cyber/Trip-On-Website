@@ -1172,9 +1172,7 @@ function viewLead(leadId) {
         'viewEmail': lead.email || 'N/A', 'viewCreatedAt': lead.createdAt,
         'viewFormSource': lead.formSource || 'N/A', 'viewGuests': lead.guests || 'N/A',
         'viewPlannedVisit': lead.plannedVisit || 'N/A', 'viewDestination': lead.destination || 'N/A',
-        'viewInterest': lead.interest || 'N/A', 'viewPackageType': lead.packageType || 'N/A',
-        'viewBudget': lead.budget || 'N/A', 'viewLocation': lead.location || 'N/A',
-        'viewAddress': lead.address || 'N/A', 'viewComingWith': lead.guests || 'N/A'
+        'viewComingWith': lead.guests || 'N/A'
     };
     Object.entries(fields).forEach(function(entry) { var el = document.getElementById(entry[0]); if (el) el.textContent = entry[1]; });
     var assignVal = document.getElementById('viewAssignedValue');
@@ -1189,6 +1187,18 @@ function viewLead(leadId) {
     });
     var notesInput = document.getElementById('viewNotesInput');
     if (notesInput) notesInput.value = lead.notes || '';
+    var ts = document.getElementById('viewNotesTimestamp');
+    if (ts) {
+        var now = new Date();
+        var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        var h = now.getHours(); var ap = h >= 12 ? 'PM' : 'AM'; var hh = h % 12 || 12;
+        var m = now.getMinutes();
+        ts.textContent = now.getDate() + ' ' + months[now.getMonth()] + ' ' + String(now.getFullYear()).slice(2) + ', ' + (hh < 10 ? '0' : '') + hh + ':' + (m < 10 ? '0' : '') + m + ' ' + ap;
+    }
+    var editBtn = document.getElementById('editNameBtn');
+    var cancelBtn = document.getElementById('cancelNameBtn');
+    if (editBtn) editBtn.style.display = '';
+    if (cancelBtn) cancelBtn.style.display = 'none';
     openModal('viewLeadModal');
 }
 
@@ -1280,11 +1290,13 @@ function switchViewTab(tab) {
 function clearNotes() { const n = document.getElementById('viewNotesInput'); if (n) n.value = ''; }
 
 function saveNotes() {
-    const notesInput = document.getElementById('viewNotesInput');
-    const leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
+    var notesInput = document.getElementById('viewNotesInput');
+    var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     if (notesInput && notesInput.value && notesInput.value.trim()) {
-        const lead = allLeads.find(l => l.id === leadId);
-        if (lead) { lead.notes = notesInput.value.trim(); saveLeadsToStorage(); alert('Notes saved!'); }
+        var lead = allLeads.find(function(l) { return l.id === leadId; });
+        if (lead) { lead.notes = notesInput.value.trim(); saveLeadsToStorage(); showToastGreen('Notes saved!'); }
+    } else {
+        showToast('Please write a note first');
     }
 }
 
@@ -1316,23 +1328,52 @@ function executeDeleteLead() {
     }
 }
 
+var _nameEditing = false;
+var _nameEditOriginal = '';
+function toggleEditName() {
+    var nameEl = document.getElementById('viewName');
+    var editBtn = document.getElementById('editNameBtn');
+    var cancelBtn = document.getElementById('cancelNameBtn');
+    if (!nameEl) return;
+    if (!_nameEditing) {
+        _nameEditOriginal = nameEl.textContent;
+        nameEl.setAttribute('contenteditable', 'true');
+        nameEl.focus();
+        nameEl.classList.add('editing');
+        if (editBtn) editBtn.style.display = 'none';
+        if (cancelBtn) cancelBtn.style.display = '';
+        _nameEditing = true;
+    }
+}
+function cancelEditName() {
+    var nameEl = document.getElementById('viewName');
+    var editBtn = document.getElementById('editNameBtn');
+    var cancelBtn = document.getElementById('cancelNameBtn');
+    if (!nameEl) return;
+    nameEl.textContent = _nameEditOriginal;
+    nameEl.removeAttribute('contenteditable');
+    nameEl.classList.remove('editing');
+    if (editBtn) editBtn.style.display = '';
+    if (cancelBtn) cancelBtn.style.display = 'none';
+    _nameEditing = false;
+}
 function editLeadFromView() {
-    const leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
-    const lead = allLeads.find(l => l.id === leadId);
-    if (!lead) return;
-    document.getElementById('editLeadId').value = lead.id;
-    document.getElementById('editStatus').value = lead.status;
-    document.getElementById('editAssignTo').value = lead.assignedTo;
-    document.getElementById('editName').value = lead.name;
-    document.getElementById('editContact').value = lead.phone;
-    document.getElementById('editEmail').value = lead.email || '';
-    document.getElementById('editGuests').value = lead.guests || '';
-    document.getElementById('editPackage').value = lead.packageType || '';
-    document.getElementById('editBudget').value = lead.budget || '';
-    document.getElementById('editAddress').value = lead.address || '';
-    document.getElementById('editNotes').value = lead.notes || '';
-    closeModal('viewLeadModal');
-    openModal('editLeadModal');
+    var nameEl = document.getElementById('viewName');
+    var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
+    var lead = allLeads.find(function(l) { return l.id === leadId; });
+    if (lead && nameEl && nameEl.textContent.trim()) {
+        lead.name = nameEl.textContent.trim();
+        saveLeadsToStorage();
+        renderTable();
+        showToastGreen('Name updated');
+    }
+    nameEl.removeAttribute('contenteditable');
+    nameEl.classList.remove('editing');
+    var editBtn = document.getElementById('editNameBtn');
+    var cancelBtn = document.getElementById('cancelNameBtn');
+    if (editBtn) editBtn.style.display = '';
+    if (cancelBtn) cancelBtn.style.display = 'none';
+    _nameEditing = false;
 }
 
 function updateAssignmentFromView() {
@@ -1349,9 +1390,9 @@ function updateStatusFromView() {
     if (lead && val) { lead.status = val; saveLeadsToStorage(); renderTable(); }
 }
 
-function makeCall() { const p = (document.getElementById('viewContact') || {}).textContent; if (p) window.open('tel:' + p.replace(/\D/g, '')); }
-function sendEmail() { const e = (document.getElementById('viewEmail') || {}).textContent; if (e && e !== 'N/A') window.open('mailto:' + e); }
-function sendWhatsApp() { const p = (document.getElementById('viewContact') || {}).textContent; if (p) window.open('https://wa.me/' + p.replace(/\D/g, '')); }
+function makeCall() { var p = (document.getElementById('viewContact') || {}).textContent; if (p) window.open('tel:' + p.replace(/\D/g, '')); }
+function sendEmail() { var e = (document.getElementById('viewEmail') || {}).textContent; if (e && e !== 'N/A') { window.open('mailto:' + e + '?subject=Trip-On%20-%20Lead%20Follow-up&body=Hi%20' + encodeURIComponent((document.getElementById('viewName') || {}).textContent || '') + ',%0A%0AThank%20you%20for%20your%20interest%20in%20Trip-On.%0A%0ABest%20Regards,%0ATrip-On%20Team'); showToastGreen('Opening email client...'); } else { showToast('No email address available'); } }
+function sendWhatsApp() { var p = (document.getElementById('viewContact') || {}).textContent; if (p) window.open('https://wa.me/' + p.replace(/\D/g, '')); }
 
 function getStatusBadgeColors(status) {
     const map = {
@@ -1682,6 +1723,8 @@ window.switchViewTab = switchViewTab;
 window.clearNotes = clearNotes;
 window.saveNotes = saveNotes;
 window.editLeadFromView = editLeadFromView;
+window.toggleEditName = toggleEditName;
+window.cancelEditName = cancelEditName;
 window.updateAssignmentFromView = updateAssignmentFromView;
 window.updateStatusFromView = updateStatusFromView;
 window.makeCall = makeCall;

@@ -699,13 +699,16 @@
 
 /* View Modal Overrides */
 .view-lead-modal {
-    max-width: 900px;
+    max-width: 920px;
     width: 95%;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
 }
 
 .view-modal-header {
-    padding: 20px 30px;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 18px 28px;
+    border-bottom: 1px solid #E8EBF0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -718,20 +721,20 @@
 }
 
 .view-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #999;
+    font-size: 14px;
+    font-weight: 700;
+    color: #8A94A6;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .view-lead-id {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    color: #333;
-    background: #f3f4f6;
-    padding: 4px 10px;
-    border-radius: 4px;
+    color: #FF6B00;
+    background: #FFF3E8;
+    padding: 4px 12px;
+    border-radius: 20px;
 }
 
 .view-close-btn {
@@ -753,33 +756,51 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
-    min-height: 400px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
 }
 
 .view-left-section {
-    padding: 24px 30px;
-    border-right: 1px solid #e0e0e0;
+    padding: 24px 28px;
+    border-right: 1px solid #E8EBF0;
     overflow-y: auto;
 }
 
 .view-right-section {
-    padding: 24px 30px;
+    padding: 24px 28px;
     display: flex;
     flex-direction: column;
 }
 
 .view-name-section {
-    display: flex;
-    align-items: center;
-    gap: 8px;
     margin-bottom: 20px;
 }
 
+.view-name-edit-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .view-name-section h2 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #1a1a2e;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0F172A;
     margin: 0;
+    outline: none;
+}
+
+.view-name-section h2.editing {
+    border-bottom: 2px solid #FF6B00;
+    padding-bottom: 2px;
+}
+
+.view-name-underline {
+    height: 2px;
+    background: #FF6B00;
+    margin-top: 8px;
+    border-radius: 1px;
 }
 
 .edit-name-btn {
@@ -790,11 +811,32 @@
     padding: 4px;
     border-radius: 4px;
     transition: all 0.2s;
+    display: flex;
+    align-items: center;
 }
 
 .edit-name-btn:hover {
     background: #f5f5f5;
-    color: #333;
+    color: #FF6B00;
+}
+
+.cancel-name-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #FEE2E2;
+    border: none;
+    cursor: pointer;
+    color: #DC2626;
+    padding: 0;
+    transition: all 0.2s;
+}
+
+.cancel-name-btn:hover {
+    background: #FECACA;
 }
 
 .view-info-group {
@@ -804,22 +846,37 @@
 .view-info-group label {
     display: block;
     font-size: 11px;
-    font-weight: 600;
-    color: #999;
+    font-weight: 700;
+    color: #8A94A6;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
-.view-info-value {
+.view-info-box {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #FFFFFF;
+    border: 1px solid #E1E5EA;
+    border-radius: 12px;
+    min-height: 42px;
 }
 
-.view-info-value span {
+.view-info-box span {
     font-size: 14px;
-    color: #333;
+    color: #0F172A;
+    font-weight: 500;
+}
+
+.view-info-text {
+    padding: 4px 0;
+}
+
+.view-info-text span {
+    font-size: 15px;
+    color: #0F172A;
     font-weight: 500;
 }
 
@@ -842,20 +899,22 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 16px;
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    color: #d32f2f;
+    padding: 10px 20px;
+    background: #FFFFFF;
+    border: 1.5px solid #DC2626;
+    border-radius: 10px;
+    color: #DC2626;
     font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    margin-top: 20px;
+    margin-top: 24px;
+    width: 100%;
+    justify-content: center;
 }
 
 .delete-lead-btn:hover {
-    background: #fef2f2;
-    border-color: #d32f2f;
+    background: #FEF2F2;
 }
 
 /* View Right Section - Assign/Status */
@@ -869,35 +928,18 @@
 .view-field-group label {
     display: block;
     font-size: 11px;
-    font-weight: 600;
-    color: #999;
+    font-weight: 700;
+    color: #8A94A6;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 6px;
-}
-
-.view-select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #d0d0d0;
-    border-radius: 6px;
-    font-size: 14px;
-    color: #333;
-    background: white;
-    cursor: pointer;
-    transition: border-color 0.2s;
-}
-
-.view-select:focus {
-    outline: none;
-    border-color: #ff6b35;
 }
 
 /* View Tabs */
 .view-tabs {
     display: flex;
     gap: 0;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #E8EBF0;
     margin-bottom: 16px;
 }
 
@@ -907,84 +949,99 @@
     border: none;
     border-bottom: 2px solid transparent;
     font-size: 14px;
-    font-weight: 500;
-    color: #999;
+    font-weight: 600;
+    color: #8A94A6;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .view-tab.active {
-    color: #333;
-    border-bottom-color: #ff6b35;
+    color: #FF6B00;
+    border-bottom-color: #FF6B00;
 }
 
 .view-tab:hover {
-    color: #333;
+    color: #FF6B00;
 }
 
 /* View Notes */
+.view-notes-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 .view-notes-section textarea {
     width: 100%;
-    min-height: 120px;
-    padding: 12px 15px;
-    border: 1px solid #d0d0d0;
-    border-radius: 8px;
+    min-height: 130px;
+    padding: 14px 16px;
+    border: 1px solid #E1E5EA;
+    border-radius: 12px;
     font-size: 14px;
-    color: #333;
+    color: #0F172A;
     resize: vertical;
     transition: border-color 0.2s;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.view-notes-section textarea::placeholder {
+    color: #9CA3AF;
 }
 
 .view-notes-section textarea:focus {
     outline: none;
-    border-color: #ff6b35;
+    border-color: #FF6B00;
 }
 
-.view-notes-footer {
+.view-notes-timestamp-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
+    justify-content: flex-end;
+    margin-top: 8px;
 }
 
 .notes-timestamp {
-    font-size: 12px;
-    color: #999;
+    font-size: 11px;
+    color: #9CA3AF;
+    font-weight: 500;
 }
 
 .view-notes-actions {
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    margin-top: 12px;
 }
 
 .clear-notes-btn {
-    padding: 8px 16px;
-    background: #f5f5f5;
+    padding: 8px 18px;
+    background: #F4F5F7;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 13px;
-    color: #666;
+    font-weight: 600;
+    color: #6B7280;
     cursor: pointer;
     transition: background 0.2s;
 }
 
 .clear-notes-btn:hover {
-    background: #e0e0e0;
+    background: #E5E7EB;
 }
 
 .add-notes-btn {
-    padding: 8px 16px;
-    background: #ff6b35;
+    padding: 8px 18px;
+    background: #FFF3E8;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 13px;
-    color: white;
+    font-weight: 700;
+    color: #FF6B00;
     cursor: pointer;
     transition: background 0.2s;
 }
 
 .add-notes-btn:hover {
-    background: #e55a28;
+    background: #FFE4CC;
 }
 
 /* View Activity */
@@ -998,10 +1055,10 @@
 /* View Modal Footer Actions */
 .view-modal-footer {
     display: flex;
-    gap: 10px;
-    padding: 16px 30px;
-    border-top: 1px solid #e0e0e0;
-    justify-content: flex-start;
+    gap: 12px;
+    padding: 16px 28px;
+    border-top: 1px solid #E8EBF0;
+    justify-content: center;
 }
 
 .action-call-btn,
@@ -1010,40 +1067,40 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 12px 28px;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .action-call-btn {
-    background: #dcfce7;
-    color: #16a34a;
+    background: #FF6B00;
+    color: #FFFFFF;
 }
 
 .action-call-btn:hover {
-    background: #bbf7d0;
+    background: #E55A00;
 }
 
 .action-email-btn {
-    background: #e0f2fe;
-    color: #0284c7;
+    background: #FF6B00;
+    color: #FFFFFF;
 }
 
 .action-email-btn:hover {
-    background: #bae6fd;
+    background: #E55A00;
 }
 
 .action-whatsapp-btn {
-    background: #dcfce7;
-    color: #25d366;
+    background: #25D366;
+    color: #FFFFFF;
 }
 
 .action-whatsapp-btn:hover {
-    background: #bbf7d0;
+    background: #20BD5A;
 }
 
 /* Toast Notification */
@@ -2750,5 +2807,15 @@
     #viewLeadModal .view-modal-footer {
         padding: 12px 16px;
         flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #viewLeadModal .action-call-btn,
+    #viewLeadModal .action-email-btn,
+    #viewLeadModal .action-whatsapp-btn {
+        padding: 10px 18px;
+        font-size: 13px;
+        flex: 1 1 30%;
+        justify-content: center;
     }
 }
