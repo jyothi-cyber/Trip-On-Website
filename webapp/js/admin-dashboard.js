@@ -824,7 +824,7 @@ function toggleAssignDropdownForLead(leadId, btnElement) {
         var colorClass = a === 'Shipra (Me)' ? ' assign-name-orange' : '';
         itemsHtml += '<div class="assign-option' + (isActive ? ' selected' : '') + '" onclick="event.stopPropagation();assignLead(\'' + leadId + '\', \'' + a.replace(/'/g, "\\'") + '\')">';
         itemsHtml += '<span class="assign-name' + colorClass + '">' + a + '</span>';
-        if (isActive) itemsHtml += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        if (isActive) itemsHtml += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#009C1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         itemsHtml += '</div>';
     }
     popup.innerHTML = itemsHtml;
@@ -866,7 +866,7 @@ function toggleStatusDropdownForLead(leadId, btnElement) {
         <div class="status-option-item" onclick="event.stopPropagation();changeStatus('${leadId}', 'New')"><span class="status-dot" style="background:#3B82F6"></span>New</div>
         <div class="status-option-item" onclick="event.stopPropagation();changeStatus('${leadId}', 'Contacted')"><span class="status-dot" style="background:#8B5CF6"></span>Contacted</div>
         <div class="status-option-item" onclick="event.stopPropagation();changeStatus('${leadId}', 'RNR')"><span class="status-dot" style="background:#F59E0B"></span>RNR</div>
-        <div class="status-option-item" onclick="event.stopPropagation();changeStatus('${leadId}', 'Follow-up')"><span class="status-dot" style="background:#F97316"></span>Follow Up</div>
+        <div class="status-option-item" onclick="event.stopPropagation();changeStatus('${leadId}', 'Follow-up')"><span class="status-dot" style="background:#009C1A"></span>Follow Up</div>
         <div class="status-option-item" onclick="event.stopPropagation();changeStatus('${leadId}', 'Interested')"><span class="status-dot" style="background:#10B981"></span>Interested</div>
         <div class="status-option-item" onclick="event.stopPropagation();changeStatus('${leadId}', 'Not Interested')"><span class="status-dot" style="background:#EF4444"></span>Not Interested</div>
     `;
@@ -909,7 +909,7 @@ function toggleDestinationDropdownForLead(leadId, btnElement) {
     const popup = document.createElement('div');
     popup.className = 'destination-dropdown-popup';
     popup.innerHTML = `
-        <div class="destination-option" onclick="event.stopPropagation();setDestination('${leadId}', 'Bali')"><span class="dest-dot" style="background:#f97316"></span>Bali</div>
+        <div class="destination-option" onclick="event.stopPropagation();setDestination('${leadId}', 'Bali')"><span class="dest-dot" style="background:#009C1A"></span>Bali</div>
         <div class="destination-option" onclick="event.stopPropagation();setDestination('${leadId}', 'Indonesia')"><span class="dest-dot" style="background:#0ea5e9"></span>Indonesia</div>
         <div class="destination-option" onclick="event.stopPropagation();setDestination('${leadId}', 'Andaman')"><span class="dest-dot" style="background:#10b981"></span>Andaman</div>
     `;
@@ -1417,9 +1417,9 @@ function getStatusBadgeColors(status) {
     const map = {
         'New': { bg: '#dbeafe', color: '#2563eb' },
         'Contacted': { bg: '#ede9fe', color: '#7c3aed' },
-        'RNR': { bg: '#fef3c7', color: '#d97706' },
-        'Follow-up': { bg: '#fff7ed', color: '#ea580c' },
-        'Follow Up': { bg: '#fff7ed', color: '#ea580c' },
+        'RNR': { bg: '#fef3c7', color: '#26CC00' },
+        'Follow-up': { bg: '#D2F2D4', color: '#22B600' },
+        'Follow Up': { bg: '#D2F2D4', color: '#22B600' },
         'Interested': { bg: '#dcfce7', color: '#16a34a' },
         'Not Interested': { bg: '#fee2e2', color: '#dc2626' }
     };
@@ -1554,7 +1554,7 @@ function toggleMobileAssignDropdown() {
     popup.className = 'mobile-sheet-popup';
     popup.innerHTML = assignees.map(function(a) {
         var isActive = a === current;
-        return '<div class="mobile-popup-item' + (isActive ? ' active' : '') + '" onclick="mobileSelectAssign(\'' + a.replace(/'/g, "\\'") + '\')">' + a + (isActive ? ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') + '</div>';
+        return '<div class="mobile-popup-item' + (isActive ? ' active' : '') + '" onclick="mobileSelectAssign(\'' + a.replace(/'/g, "\\'") + '\')">' + a + (isActive ? ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#009C1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') + '</div>';
     }).join('');
     var btn = document.getElementById('mobileQuickAssignBtn');
     if (btn) { btn.appendChild(popup); }
@@ -1577,7 +1577,7 @@ function toggleMobileStatusDropdown() {
     popup.className = 'mobile-sheet-popup';
     popup.innerHTML = statuses.map(function(s) {
         var isActive = s === current;
-        return '<div class="mobile-popup-item' + (isActive ? ' active' : '') + '" onclick="mobileSelectStatus(\'' + s.replace(/'/g, "\\'") + '\')">' + s + (isActive ? ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') + '</div>';
+        return '<div class="mobile-popup-item' + (isActive ? ' active' : '') + '" onclick="mobileSelectStatus(\'' + s.replace(/'/g, "\\'") + '\')">' + s + (isActive ? ' <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#009C1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') + '</div>';
     }).join('');
     var btn = document.getElementById('mobileQuickStatusBtn');
     if (btn) { btn.appendChild(popup); }

@@ -121,12 +121,12 @@
 }
 
 .notif-page-item.unread {
-    border-color: #FF7A00;
-    background: #FFFAF5;
+    border-color: #7BE382;
+    background: #D2F2D4;
 }
 
 .notif-page-item.unread:hover {
-    background: #FFF5EC;
+    background: #D2F2D4;
 }
 
 /* Icon */
@@ -135,14 +135,14 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #FFF4EC;
+    background: #D2F2D4;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .notif-page-item-icon svg {
-    color: #FF6B00;
+    color: #009C1A;
 }
 
 /* Content */
@@ -171,7 +171,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #FF7A00;
+    background: #7BE382;
 }
 
 /* Empty */
@@ -260,8 +260,8 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #FFF0D8;
-    color: #D95F00;
+    background: #D2F2D4;
+    color: #26CC00;
     display: flex;
     align-items: center;
     justify-content: center;

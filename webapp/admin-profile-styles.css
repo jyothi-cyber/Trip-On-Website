@@ -19,7 +19,7 @@
 
 .profile-banner {
     height: 100px;
-    background: linear-gradient(135deg, #FF7A00 0%, #E85D00 50%, #D44B00 100%);
+    background: linear-gradient(135deg, #7BE382 0%, #22B600 50%, #26CC00 100%);
     border-radius: 25px 25px 0 0;
 }
 
@@ -32,8 +32,8 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: #FFF0D8;
-    color: #D95F00;
+    background: #D2F2D4;
+    color: #26CC00;
     font-size: 40px;
     font-weight: 700;
     display: flex;
@@ -130,13 +130,13 @@
 }
 
 .profile-edit-btn.saving {
-    background: #FF7A00;
+    background: #7BE382;
     color: #FFFFFF;
-    border-color: #FF7A00;
+    border-color: #7BE382;
 }
 
 .profile-edit-btn.saving:hover {
-    background: #E86E00;
+    background: #22B600;
 }
 
 /* Fields */
@@ -255,8 +255,8 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #FFF0D8;
-    color: #D95F00;
+    background: #D2F2D4;
+    color: #26CC00;
     display: flex;
     align-items: center;
     justify-content: center;

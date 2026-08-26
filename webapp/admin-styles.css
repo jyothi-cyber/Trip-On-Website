@@ -166,7 +166,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background-color: #ff6b35;
+    background-color: #22B600;
     color: white;
     border: none;
     border-radius: 6px;
@@ -177,7 +177,7 @@ body {
 }
 
 .filter-btn:hover {
-    background-color: #e55a28;
+    background-color: #1E8A16;
 }
 
 .filter-dropdowns {
@@ -384,8 +384,8 @@ body {
 }
 
 .status-follow-up {
-    background-color: #fff3e0;
-    color: #f57c00;
+    background-color: #D2F2D4;
+    color: #26CC00;
 }
 
 .status-converted {
@@ -718,7 +718,7 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #45a049;
+    background-color: #3E9E3E;
 }
 
 .btn-secondary {
@@ -797,7 +797,7 @@ body {
 }
 
 .edit-save-btn:hover {
-    background-color: #45a049;
+    background-color: #3E9E3E;
 }
 
 .edit-modal-body {
@@ -850,7 +850,7 @@ body {
 .generate-ticket-btn {
     margin-left: 15px;
     padding: 8px 16px;
-    background-color: #ff6b35;
+    background-color: #22B600;
     color: white;
     border: none;
     border-radius: 6px;
@@ -860,7 +860,7 @@ body {
 }
 
 .generate-ticket-btn:hover {
-    background-color: #e55a28;
+    background-color: #1E8A16;
 }
 
 /* Form Styles */
@@ -1033,7 +1033,7 @@ body {
 }
 
 .book-trip-submit:hover {
-    background-color: #45a049;
+    background-color: #3E9E3E;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
@@ -1110,7 +1110,7 @@ body {
 }
 
 .btn-login:hover {
-    background-color: #45a049;
+    background-color: #3E9E3E;
 }
 
 .remember-me {
@@ -1228,7 +1228,7 @@ body {
 .mobile-tap-text {
     font-size: 13px;
     font-weight: 500;
-    color: #F97316;
+    color: #009C1A;
 }
 
 .mobile-action-btn {
@@ -1256,12 +1256,12 @@ body {
 }
 
 .mobile-call-btn {
-    background-color: #ff6b35;
+    background-color: #22B600;
     color: white;
 }
 
 .mobile-call-btn:active {
-    background-color: #e55a28;
+    background-color: #1E8A16;
 }
 
 .mobile-whatsapp-btn {
@@ -1334,8 +1334,8 @@ body {
 .mobile-sheet-id {
     font-size: 12px;
     font-weight: 600;
-    color: #F97316;
-    background: #FFF3E8;
+    color: #009C1A;
+    background: #D2F2D4;
     padding: 3px 10px;
     border-radius: 12px;
 }
@@ -1389,7 +1389,7 @@ body {
 }
 
 .mobile-sheet-dropdown:active {
-    border-color: #F97316;
+    border-color: #009C1A;
 }
 
 .mobile-sheet-tabs {
@@ -1414,7 +1414,7 @@ body {
 }
 
 .mobile-tab.active {
-    color: #F97316;
+    color: #009C1A;
 }
 
 .mobile-tab.active::after {
@@ -1424,7 +1424,7 @@ body {
     left: 0;
     right: 0;
     height: 2px;
-    background: #F97316;
+    background: #009C1A;
     border-radius: 1px;
 }
 
@@ -1514,7 +1514,7 @@ body {
 
 .mobile-notes-area textarea:focus {
     outline: none;
-    border-color: #F97316;
+    border-color: #009C1A;
 }
 
 .mobile-notes-save {
@@ -1523,7 +1523,7 @@ body {
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background: #F97316;
+    background: #009C1A;
     color: #FFFFFF;
     font-size: 14px;
     font-weight: 600;
@@ -1588,11 +1588,11 @@ body {
 }
 
 .mobile-sheet-actions .mobile-call-btn {
-    background: #F97316;
+    background: #009C1A;
 }
 
 .mobile-sheet-actions .mobile-email-btn {
-    background: #F97316;
+    background: #009C1A;
 }
 
 .mobile-sheet-actions .mobile-whatsapp-btn {
@@ -1630,7 +1630,7 @@ body {
 }
 
 .mobile-popup-item.active {
-    color: #F97316;
+    color: #009C1A;
     font-weight: 600;
 }
 
