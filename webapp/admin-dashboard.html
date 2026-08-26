@@ -874,112 +874,143 @@
 
     <!-- Add New Lead Modal -->
     <div id="addLeadModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content add-lead-modal">
+            <div class="add-lead-header">
                 <h3>Add New Lead</h3>
                 <span class="close" onclick="closeModal('addLeadModal')">&times;</span>
             </div>
-            <div class="modal-body">
+            <div class="add-lead-body">
                 <form id="addLeadForm" onsubmit="return false;">
-                    <div class="form-group">
-                        <label for="addName">Name *</label>
-                        <input type="text" id="addName" placeholder="Enter customer name" required oninput="this.value=this.value.replace(/[^A-Za-z ]/g,'')" maxlength="60">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="addContact">Contact Number *</label>
-                            <input type="tel" id="addContact" placeholder="10-digit phone number" required oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="10" pattern="[0-9]{10}">
-                        </div>
-                        <div class="form-group">
-                            <label for="addEmail">Email ID</label>
-                            <input type="email" id="addEmail" placeholder="customer@email.com">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Package Type *</label>
-                            <div class="custom-form-dropdown" id="addPackageDropdown">
-                                <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addPackage')">
-                                    <span id="addPackageValue">Select Package</span>
-                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </button>
-                                <div class="custom-form-dropdown-menu" id="addPackageMenu">
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addPackage','Regular Type')">Regular Type</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addPackage','Custom Type')">Custom Type</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addPackage','Premium Type')">Premium Type</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addPackage','Budget Type')">Budget Type</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Duration *</label>
-                            <div class="custom-form-dropdown" id="addDurationDropdown">
-                                <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addDuration')">
-                                    <span id="addDurationValue">Select Duration</span>
-                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </button>
-                                <div class="custom-form-dropdown-menu" id="addDurationMenu">
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDuration','3 Nights')">3 Nights</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDuration','4 Nights')">4 Nights</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDuration','5 Nights')">5 Nights</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDuration','6 Nights')">6 Nights</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDuration','7 Nights')">7 Nights</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDuration','8+ Nights')">8+ Nights</div>
-                                </div>
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">WHO'S COMING?</label>
+                        <div class="custom-form-dropdown" id="addWhoDropdown">
+                            <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addWho')">
+                                <span id="addWhoValue">Select group type</span>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <div class="custom-form-dropdown-menu" id="addWhoMenu">
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addWho','Solo')">Solo</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addWho','Couple')">Couple</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addWho','Family')">Family</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addWho','Friends')">Friends</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addWho','Group')">Group</div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="addGuests">Number of Guests *</label>
-                            <input type="number" id="addGuests" placeholder="0-99" required min="0" max="99" oninput="if(this.value>99)this.value=99;if(this.value<0)this.value=0">
-                        </div>
-                        <div class="form-group">
-                            <label>Budget *</label>
-                            <div class="custom-form-dropdown" id="addBudgetDropdown">
-                                <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addBudget')">
-                                    <span id="addBudgetValue">Select Budget</span>
-                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </button>
-                                <div class="custom-form-dropdown-menu" id="addBudgetMenu">
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addBudget','Under 10K')">Under 10K</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addBudget','10K - 20K')">10K - 20K</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addBudget','20K - 50K')">20K - 50K</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addBudget','50K - 1L')">50K - 1L</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addBudget','1L - 2L')">1L - 2L</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addBudget','2L - 5L')">2L - 5L</div>
-                                    <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addBudget','5L+')">5L+</div>
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">FULL NAME *</label>
+                        <input type="text" id="addName" placeholder="Enter full name" required oninput="this.value=this.value.replace(/[^A-Za-z ]/g,'')" maxlength="60" class="add-lead-input">
                     </div>
-                    <div class="form-group">
-                        <label>Destination</label>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">PHONE NUMBER *</label>
+                        <input type="tel" id="addContact" placeholder="Enter phone number" required oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="10" pattern="[0-9]{10}" class="add-lead-input">
+                    </div>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">EMAIL</label>
+                        <input type="email" id="addEmail" placeholder="Enter email" class="add-lead-input">
+                    </div>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">DESTINATION</label>
                         <div class="custom-form-dropdown" id="addDestinationDropdown">
                             <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addDestination')">
-                                <span id="addDestinationValue">Bali</span>
+                                <span id="addDestinationValue">Select destination</span>
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </button>
                             <div class="custom-form-dropdown-menu" id="addDestinationMenu">
-                                <div class="custom-form-dropdown-item active" onclick="selectFormDropdown('addDestination','Bali')">Bali</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDestination','Bali')">Bali</div>
                                 <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDestination','Indonesia')">Indonesia</div>
                                 <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addDestination','Andaman')">Andaman</div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="addAddress">Customer Address</label>
-                        <input type="text" id="addAddress" placeholder="Enter full address">
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">WHEN DO THEY WANT TO VISIT?</label>
+                        <div class="custom-form-dropdown" id="addVisitDropdown">
+                            <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addVisit')">
+                                <span id="addVisitValue">Select visit window</span>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <div class="custom-form-dropdown-menu" id="addVisitMenu">
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addVisit','This Week')">This Week</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addVisit','This Month')">This Month</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addVisit','Next Month')">Next Month</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addVisit','Within 3 Months')">Within 3 Months</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addVisit','Within 6 Months')">Within 6 Months</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addVisit','Undecided')">Undecided</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="addNotes">Additional Notes</label>
-                        <textarea id="addNotes" rows="4" placeholder="Enter any special requirements or preferences..."></textarea>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">ADD PARAMOTORING TO THE TRIP?</label>
+                        <div class="custom-form-dropdown" id="addParamotoringDropdown">
+                            <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addParamotoring')">
+                                <span id="addParamotoringValue">Select</span>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <div class="custom-form-dropdown-menu" id="addParamotoringMenu">
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addParamotoring','Yes')">Yes</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addParamotoring','No')">No</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addParamotoring','Maybe')">Maybe</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="add-lead-divider">
+                        <span class="add-lead-divider-text">ADMIN ONLY</span>
+                    </div>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">SOURCE</label>
+                        <div class="custom-form-dropdown" id="addSourceDropdown">
+                            <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addSource')">
+                                <span id="addSourceValue">Select source</span>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <div class="custom-form-dropdown-menu" id="addSourceMenu">
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addSource','Pop Up')">Pop Up</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addSource','Semi Pop Up')">Semi Pop Up</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addSource','Paramotoring')">Paramotoring</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addSource','Ads Pop Up')">Ads Pop Up</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addSource','General')">General</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">FORM SOURCE (SLUG)</label>
+                        <input type="text" id="addFormSource" placeholder="#Homepage / #Service / ..." class="add-lead-input">
+                    </div>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">CATEGORY</label>
+                        <div class="custom-form-dropdown" id="addCategoryDropdown">
+                            <button type="button" class="custom-form-dropdown-trigger" onclick="toggleFormDropdown('addCategory')">
+                                <span id="addCategoryValue">Select category</span>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <div class="custom-form-dropdown-menu" id="addCategoryMenu">
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addCategory','Regular')">Regular</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addCategory','Custom')">Custom</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addCategory','Premium')">Premium</div>
+                                <div class="custom-form-dropdown-item" onclick="selectFormDropdown('addCategory','Budget')">Budget</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="add-lead-section">
+                        <label class="add-lead-label">MESSAGE</label>
+                        <textarea id="addNotes" rows="4" placeholder="Enter message" class="add-lead-textarea"></textarea>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" onclick="closeModal('addLeadModal')">Cancel</button>
-                <button class="btn-primary" onclick="saveNewLead()">Create Lead</button>
+            <div class="add-lead-footer">
+                <button class="add-lead-submit-btn" onclick="saveNewLead()">Add lead</button>
             </div>
         </div>
     </div>

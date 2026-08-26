@@ -1744,30 +1744,37 @@ function saveEditLead() {
 function saveNewLead() {
     var name = (document.getElementById('addName') || {}).value || '';
     var contact = (document.getElementById('addContact') || {}).value || '';
-    var pkg = document.getElementById('addPackageValue');
-    var dur = document.getElementById('addDurationValue');
-    var dest = document.getElementById('addDestinationValue');
-    var budgetEl = document.getElementById('addBudgetValue');
-    var guestsEl = document.getElementById('addGuests');
+    var email = (document.getElementById('addEmail') || {}).value || '';
+    var destEl = document.getElementById('addDestinationValue');
+    var whoEl = document.getElementById('addWhoValue');
+    var visitEl = document.getElementById('addVisitValue');
+    var paramEl = document.getElementById('addParamotoringValue');
+    var sourceEl = document.getElementById('addSourceValue');
+    var formSourceEl = document.getElementById('addFormSource');
+    var categoryEl = document.getElementById('addCategoryValue');
+    var notesEl = document.getElementById('addNotes');
     if (!name.trim()) { showToast('Please enter a valid name'); return; }
     if (!contact.trim() || contact.trim().length < 10) { showToast('Please enter a valid 10-digit phone number'); return; }
-    if (!pkg || pkg.textContent === 'Select Package') { showToast('Please select a package type'); return; }
-    if (!dur || dur.textContent === 'Select Duration') { showToast('Please select a duration'); return; }
-    if (!guestsEl || !guestsEl.value) { showToast('Please enter number of guests'); return; }
-    if (!budgetEl || budgetEl.textContent === 'Select Budget') { showToast('Please select a budget range'); return; }
     var newId = 'L-' + String(allLeads.length + 6701).padStart(5, '0');
     allLeads.unshift({
-        id: newId, name: name.trim(), phone: contact, tickets: Math.floor(Math.random() * 5) + 1,
+        id: newId, name: name.trim(), phone: contact,
         createdAt: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
         status: 'New', assignedTo: 'Un-Allocated',
-        destination: (dest ? dest.textContent : 'Bali'),
-        email: (document.getElementById('addEmail') || {}).value || '',
-        guests: guestsEl.value + ' People',
-        packageType: pkg.textContent,
-        duration: dur.textContent,
-        budget: budgetEl.textContent,
-        address: (document.getElementById('addAddress') || {}).value || '',
-        notes: (document.getElementById('addNotes') || {}).value || '', formSource: 'Direct', plannedVisit: 'Undecided', interest: 'Decide on-site'
+        destination: (destEl ? destEl.textContent : 'Select destination'),
+        email: email,
+        guests: (whoEl ? whoEl.textContent : ''),
+        packageType: (sourceEl ? sourceEl.textContent : 'Select source'),
+        duration: (visitEl ? visitEl.textContent : ''),
+        budget: '',
+        address: '',
+        notes: notesEl ? notesEl.value : '',
+        formSource: (formSourceEl ? formSourceEl.value : ''),
+        plannedVisit: (visitEl ? visitEl.textContent : 'Undecided'),
+        interest: 'Decide on-site',
+        whoComing: (whoEl ? whoEl.textContent : ''),
+        paramotoring: (paramEl ? paramEl.textContent : ''),
+        source: (sourceEl ? sourceEl.textContent : ''),
+        category: (categoryEl ? categoryEl.textContent : '')
     });
     filteredLeads = [...allLeads];
     saveLeadsToStorage();
@@ -1775,14 +1782,17 @@ function saveNewLead() {
     closeModal('addLeadModal');
     var addForm = document.getElementById('addLeadForm');
     if (addForm) addForm.reset();
-    selectFormDropdown('addPackage', 'Select Package');
-    selectFormDropdown('addDuration', 'Select Duration');
-    selectFormDropdown('addDestination', 'Bali');
-    selectFormDropdown('addBudget', 'Select Budget');
+    selectFormDropdown('addWho', 'Select group type');
+    selectFormDropdown('addDestination', 'Select destination');
+    selectFormDropdown('addVisit', 'Select visit window');
+    selectFormDropdown('addParamotoring', 'Select');
+    selectFormDropdown('addSource', 'Select source');
+    selectFormDropdown('addCategory', 'Select category');
     currentPage = 1;
     renderTable();
     updateResultsInfo();
     renderPagination();
+    addActivity(newId, 'created', 'Lead created by Jyothi Duddukunta');
 }
 
 function openBookTripModal() { openModal('bookTripModal'); }
