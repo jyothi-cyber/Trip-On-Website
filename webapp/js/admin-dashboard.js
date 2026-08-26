@@ -1464,6 +1464,14 @@ function showRowActionPopup(leadId, checkboxEl) {
             popup.style.top = '100px';
             popup.style.right = '24px';
         }
+        var lead = allLeads.find(function(l) { return String(l.id) === String(leadId); });
+        if (lead) {
+            selectFormDropdown('rowAssign', lead.assignedTo || 'Un-Allocated');
+            selectFormDropdown('rowStatus', lead.status || 'New');
+        } else {
+            selectFormDropdown('rowAssign', 'Select assign');
+            selectFormDropdown('rowStatus', 'Select status');
+        }
     }
 }
 
@@ -1482,14 +1490,42 @@ function rowActionViewLead() {
 function rowActionDeleteLead() {
     var id = rowActionLeadId;
     if (!id) return;
-    pendingBulkDeleteIds = null;
     pendingBulkDeleteIds = [id];
     var lead = allLeads.find(function(l) { return String(l.id) === String(id); });
     var title = document.querySelector('.confirm-title');
     var desc = document.querySelector('.confirm-desc');
     if (title) title.textContent = 'Delete this lead?';
     if (desc) desc.textContent = (lead ? lead.name + ' — ' : '') + id + ' will be permanently removed.';
+    hideRowActionPopup();
     confirmDeleteLead();
+}
+
+function selectRowAssign(value) {
+    if (!rowActionLeadId) return;
+    var lead = allLeads.find(function(l) { return String(l.id) === String(rowActionLeadId); });
+    if (lead) {
+        lead.assignedTo = value;
+        saveLeadsToStorage();
+        addActivity(rowActionLeadId, 'assign', 'Assigned to ' + value + ' by Jyothi Duddukunta');
+        filteredLeads = [...allLeads];
+        renderTable();
+        updateResultsInfo();
+    }
+    selectFormDropdown('rowAssign', value);
+}
+
+function selectRowStatus(value) {
+    if (!rowActionLeadId) return;
+    var lead = allLeads.find(function(l) { return String(l.id) === String(rowActionLeadId); });
+    if (lead) {
+        lead.status = value;
+        saveLeadsToStorage();
+        addActivity(rowActionLeadId, 'status', 'Status changed to ' + value + ' by Jyothi Duddukunta');
+        filteredLeads = [...allLeads];
+        renderTable();
+        updateResultsInfo();
+    }
+    selectFormDropdown('rowStatus', value);
 }
 
 document.addEventListener('click', function(e) {
