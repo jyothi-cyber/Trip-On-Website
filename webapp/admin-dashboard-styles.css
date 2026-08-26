@@ -3193,3 +3193,89 @@
     width: 100%;
     justify-content: space-between;
 }
+
+/* ============================================================================
+   ROW ACTION POPUP
+   ============================================================================ */
+
+.row-action-popup {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    background: #FFFFFF;
+    border: 1px solid #E2E5EB;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    min-width: 180px;
+    padding: 0;
+    animation: popupFadeIn 0.15s ease;
+    top: 100px;
+    right: 24px;
+}
+
+@keyframes popupFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.row-action-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #EEF0F4;
+}
+
+.row-action-popup-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #17243A;
+}
+
+.row-action-popup-id {
+    font-size: 11px;
+    font-weight: 500;
+    color: #6B7A90;
+    background: #F5F6FA;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.row-action-popup-actions {
+    display: flex;
+    gap: 6px;
+    padding: 8px 10px;
+}
+
+.row-action-popup-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex: 1;
+    justify-content: center;
+}
+
+.row-action-view {
+    background: #F0FDF4;
+    color: #009C1A;
+}
+
+.row-action-view:hover {
+    background: #DCFCE7;
+}
+
+.row-action-delete {
+    background: #FEF2F2;
+    color: #DC2626;
+}
+
+.row-action-delete:hover {
+    background: #FEE2E2;
+}

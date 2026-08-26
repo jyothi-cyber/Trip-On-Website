@@ -1227,6 +1227,24 @@
         </div>
     </div>
 
+    <!-- Row Action Popup (for checkbox selection) -->
+    <div class="row-action-popup" id="rowActionPopup">
+        <div class="row-action-popup-header">
+            <span class="row-action-popup-title" id="rowActionPopupTitle">Lead selected</span>
+            <span class="row-action-popup-id" id="rowActionPopupId"></span>
+        </div>
+        <div class="row-action-popup-actions">
+            <button class="row-action-popup-btn row-action-view" onclick="rowActionViewLead()">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3C4.5 3 1.73 5.11 1 8c.73 2.89 3.5 5 7 5s6.27-2.11 7-5c-.73-2.89-3.5-5-7-5z" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+                View
+            </button>
+            <button class="row-action-popup-btn row-action-delete" onclick="rowActionDeleteLead()">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M5.333 4V2.667a1.333 1.333 0 0 1 1.334-1.334h2.666a1.333 1.333 0 0 1 1.334 1.334V4m2 0v9.333a1.333 1.333 0 0 1-1.334 1.334H4.667a1.333 1.333 0 0 1-1.334-1.334V4h9.334z" stroke="currentColor" stroke-width="1.5"/></svg>
+                Delete
+            </button>
+        </div>
+    </div>
+
     <!-- Delete Confirmation Popup -->
     <div class="confirm-overlay" id="confirmOverlay">
         <div class="confirm-popup">

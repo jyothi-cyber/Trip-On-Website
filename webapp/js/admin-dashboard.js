@@ -292,6 +292,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const checked = document.querySelectorAll('input[name="leadCheck"]:checked');
             if (selectAll) selectAll.checked = all.length > 0 && all.length === checked.length;
             updateBulkBar();
+            if (checked.length === 1) {
+                showRowActionPopup(checked[0].value, checked[0]);
+            } else {
+                hideRowActionPopup();
+            }
         }
     });
 
@@ -1030,6 +1035,7 @@ function clearBulkSelection() {
     if (selectAll) selectAll.checked = false;
     closeBulkMenus();
     updateBulkBar();
+    hideRowActionPopup();
 }
 
 function getSelectedLeads() {
@@ -1436,6 +1442,64 @@ function closeConfirmPopup() {
     if (title) title.textContent = 'Delete this lead?';
     if (desc) desc.textContent = 'This action cannot be undone. The lead data will be permanently removed.';
 }
+
+// Row Action Popup (shown when a single checkbox is checked)
+var rowActionLeadId = null;
+
+function showRowActionPopup(leadId, checkboxEl) {
+    rowActionLeadId = leadId;
+    var popup = document.getElementById('rowActionPopup');
+    var idEl = document.getElementById('rowActionPopupId');
+    if (idEl) idEl.textContent = leadId;
+    if (popup) {
+        popup.style.display = 'flex';
+        var td = checkboxEl.closest('td');
+        if (td) {
+            var rect = td.getBoundingClientRect();
+            var top = rect.top + window.scrollY;
+            popup.style.top = Math.max(80, top - 10) + 'px';
+            popup.style.right = '24px';
+            popup.style.left = 'auto';
+        } else {
+            popup.style.top = '100px';
+            popup.style.right = '24px';
+        }
+    }
+}
+
+function hideRowActionPopup() {
+    rowActionLeadId = null;
+    var popup = document.getElementById('rowActionPopup');
+    if (popup) popup.style.display = 'none';
+}
+
+function rowActionViewLead() {
+    var id = rowActionLeadId;
+    hideRowActionPopup();
+    if (id) viewLead(id);
+}
+
+function rowActionDeleteLead() {
+    var id = rowActionLeadId;
+    if (!id) return;
+    pendingBulkDeleteIds = null;
+    pendingBulkDeleteIds = [id];
+    var lead = allLeads.find(function(l) { return String(l.id) === String(id); });
+    var title = document.querySelector('.confirm-title');
+    var desc = document.querySelector('.confirm-desc');
+    if (title) title.textContent = 'Delete this lead?';
+    if (desc) desc.textContent = (lead ? lead.name + ' — ' : '') + id + ' will be permanently removed.';
+    confirmDeleteLead();
+}
+
+document.addEventListener('click', function(e) {
+    var popup = document.getElementById('rowActionPopup');
+    if (popup && popup.style.display !== 'none') {
+        if (!popup.contains(e.target) && !e.target.closest('.col-checkbox')) {
+            hideRowActionPopup();
+        }
+    }
+});
 
 var _nameEditing = false;
 function enterEditMode() {
