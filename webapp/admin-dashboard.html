@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leads - Trip On Admin</title>
-    <link rel="stylesheet" href="admin-styles.css?v=20260825h">
-    <link rel="stylesheet" href="admin-dashboard-styles.css?v=20260825h">
+    <link rel="stylesheet" href="admin-styles.css?v=20260826a">
+    <link rel="stylesheet" href="admin-dashboard-styles.css?v=20260826a">
 </head>
 
 <body>
@@ -1225,8 +1225,12 @@
         <span class="toast-message" id="toastMessage">Copied!</span>
     </div>
 
-    <script src="js/leads-data.js?v=20260825h"></script>
-    <script src="js/admin-dashboard.js?v=20260825h"></script>
+    <script>
+    function openModal(modalId) { var m = document.getElementById(modalId); if (m) m.style.display = 'flex'; }
+    function closeModal(modalId) { var m = document.getElementById(modalId); if (m) m.style.display = 'none'; }
+    </script>
+    <script src="js/leads-data.js?v=20260826a"></script>
+    <script src="js/admin-dashboard.js?v=20260826a"></script>
 </body>
 
 </html>
