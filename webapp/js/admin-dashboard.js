@@ -236,6 +236,7 @@ function logoutAdmin() {
 document.addEventListener('DOMContentLoaded', function() {
     try {
         allLeads = loadLeadsFromStorage() || [...defaultLeadsData];
+        loadActivityFromStorage();
         applyDemoDestinations();
         filteredLeads = [...allLeads];
         const allFilterText = document.querySelector('#allBtn .filter-text');
@@ -244,7 +245,6 @@ document.addEventListener('DOMContentLoaded', function() {
         renderTable();
         updateResultsInfo();
         renderPagination();
-        renderNotesPanel();
         initializeMobileMenu();
     } catch (err) {
         reportError(err);
@@ -972,24 +972,6 @@ function updateResultsInfo() {
     if (paginationInfo) paginationInfo.textContent = text;
 }
 
-function renderNotesPanel() {
-    var body = document.getElementById('notesPanelBody');
-    if (!body) return;
-    var notes = [];
-    allLeads.forEach(function(lead) {
-        if (lead.notes && lead.notes.trim()) {
-            notes.push({ leadId: lead.id, name: lead.name, text: lead.notes });
-        }
-    });
-    if (notes.length === 0) {
-        body.innerHTML = '<p class="notes-panel-empty">No notes yet. Click "View Details" on a lead and add a note.</p>';
-        return;
-    }
-    body.innerHTML = notes.slice().reverse().map(function(n) {
-        return '<div class="note-entry"><span class="note-entry-lead">' + n.leadId + '</span><span class="note-entry-text">' + n.text + '</span><span class="note-entry-meta">' + n.name + '</span></div>';
-    }).join('');
-}
-
 function renderPagination() {
     const paginationNumbers = document.getElementById('paginationNumbers');
     const prevBtn = document.getElementById('prevBtn');
@@ -1115,6 +1097,7 @@ function bulkAssign(assignee) {
 var pendingBulkDeleteIds = null;
 var currentViewLeadIndex = -1;
 var activityLog = {};
+var ACTIVITY_STORAGE_KEY = 'tripon_activity_log_v1';
 
 function formatTimestamp() {
     var now = new Date();
@@ -1124,9 +1107,21 @@ function formatTimestamp() {
     return now.getDate() + ' ' + months[now.getMonth()] + ' ' + String(now.getFullYear()).slice(2) + ', ' + (hh < 10 ? '0' : '') + hh + ':' + (m < 10 ? '0' : '') + m + ' ' + ap;
 }
 
+function saveActivityToStorage() {
+    try { localStorage.setItem(ACTIVITY_STORAGE_KEY, JSON.stringify(activityLog)); } catch(e) {}
+}
+
+function loadActivityFromStorage() {
+    try {
+        var data = localStorage.getItem(ACTIVITY_STORAGE_KEY);
+        if (data) activityLog = JSON.parse(data);
+    } catch(e) { activityLog = {}; }
+}
+
 function addActivity(leadId, type, detail) {
     if (!activityLog[leadId]) activityLog[leadId] = [];
     activityLog[leadId].push({ type: type, detail: detail, time: formatTimestamp(), by: 'Jyothi Duddukunta' });
+    saveActivityToStorage();
 }
 
 function renderActivityTab(leadId) {
@@ -1298,8 +1293,10 @@ function viewLead(leadId) {
 function updateViewNavButtons() {
     var prev = document.getElementById('viewPrevBtn');
     var next = document.getElementById('viewNextBtn');
+    var label = document.getElementById('viewNavLabel');
     if (prev) prev.disabled = currentViewLeadIndex <= 0;
     if (next) next.disabled = currentViewLeadIndex >= allLeads.length - 1;
+    if (label) label.textContent = (currentViewLeadIndex + 1) + ' of ' + allLeads.length + ' leads';
 }
 
 function navigateViewLead(dir) {
@@ -1410,7 +1407,6 @@ function saveNotes() {
             addActivity(leadId, 'note', 'Note added: "' + noteText.substring(0, 60) + (noteText.length > 60 ? '...' : '') + '"');
             saveLeadsToStorage();
             renderActivityTab(leadId);
-            renderNotesPanel();
             showToastGreen('Notes saved!');
         }
     } else {
@@ -1740,11 +1736,17 @@ function saveEditLead() {
 function saveNewLead() {
     var name = (document.getElementById('addName') || {}).value || '';
     var contact = (document.getElementById('addContact') || {}).value || '';
-    if (!name.trim()) { alert('Please enter a valid name (letters only).'); return; }
-    if (!contact.trim() || contact.length < 10) { alert('Please enter a valid 10-digit phone number.'); return; }
     var pkg = document.getElementById('addPackageValue');
     var dur = document.getElementById('addDurationValue');
     var dest = document.getElementById('addDestinationValue');
+    var budgetEl = document.getElementById('addBudgetValue');
+    var guestsEl = document.getElementById('addGuests');
+    if (!name.trim()) { showToast('Please enter a valid name'); return; }
+    if (!contact.trim() || contact.trim().length < 10) { showToast('Please enter a valid 10-digit phone number'); return; }
+    if (!pkg || pkg.textContent === 'Select Package') { showToast('Please select a package type'); return; }
+    if (!dur || dur.textContent === 'Select Duration') { showToast('Please select a duration'); return; }
+    if (!guestsEl || !guestsEl.value) { showToast('Please enter number of guests'); return; }
+    if (!budgetEl || budgetEl.textContent === 'Select Budget') { showToast('Please select a budget range'); return; }
     var newId = 'L-' + String(allLeads.length + 6701).padStart(5, '0');
     allLeads.unshift({
         id: newId, name: name.trim(), phone: contact, tickets: Math.floor(Math.random() * 5) + 1,
@@ -1752,10 +1754,10 @@ function saveNewLead() {
         status: 'New', assignedTo: 'Un-Allocated',
         destination: (dest ? dest.textContent : 'Bali'),
         email: (document.getElementById('addEmail') || {}).value || '',
-        guests: (document.getElementById('addGuests') || {}).value || '',
-        packageType: (pkg ? pkg.textContent : ''),
-        duration: (dur ? dur.textContent : ''),
-        budget: (document.getElementById('addBudget') || {}).value || '',
+        guests: guestsEl.value + ' People',
+        packageType: pkg.textContent,
+        duration: dur.textContent,
+        budget: budgetEl.textContent,
         address: (document.getElementById('addAddress') || {}).value || '',
         notes: (document.getElementById('addNotes') || {}).value || '', formSource: 'Direct', plannedVisit: 'Undecided', interest: 'Decide on-site'
     });
@@ -1768,6 +1770,7 @@ function saveNewLead() {
     selectFormDropdown('addPackage', 'Select Package');
     selectFormDropdown('addDuration', 'Select Duration');
     selectFormDropdown('addDestination', 'Bali');
+    selectFormDropdown('addBudget', 'Select Budget');
     currentPage = 1;
     renderTable();
     updateResultsInfo();
