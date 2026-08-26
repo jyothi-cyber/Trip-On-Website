@@ -184,7 +184,7 @@
                         </svg>
                         Export
                     </button>
-                    <button class="header-action-btn btn-new-lead" id="addNewBtn" onclick="document.getElementById('addLeadModal').style.display='flex'">
+                    <button class="header-action-btn btn-new-lead" id="addNewBtn" onclick="var m=document.getElementById('addLeadModal');if(m){m.classList.add('active');m.style.display='flex';}">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                             <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
@@ -1226,8 +1226,8 @@
     </div>
 
     <script>
-    function openModal(modalId) { var m = document.getElementById(modalId); if (m) m.style.display = 'flex'; }
-    function closeModal(modalId) { var m = document.getElementById(modalId); if (m) m.style.display = 'none'; }
+    function openModal(modalId) { var m = document.getElementById(modalId); if (m) { m.classList.add('active'); m.style.display='flex'; } }
+    function closeModal(modalId) { var m = document.getElementById(modalId); if (m) { m.classList.remove('active'); m.style.display='none'; } }
     </script>
     <script src="js/leads-data.js?v=20260826a"></script>
     <script src="js/admin-dashboard.js?v=20260826a"></script>

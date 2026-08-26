@@ -1241,15 +1241,15 @@ function exportLeads() {
 
 function openModal(modalId) {
     document.querySelectorAll('.modal.active, .modal[style*="flex"]').forEach(function(m) {
-        if (m.id !== modalId) m.style.display = 'none';
+        if (m.id !== modalId) { m.classList.remove('active'); m.style.display = 'none'; }
     });
     const m = document.getElementById(modalId);
-    if (m) m.style.display = 'flex';
+    if (m) { m.classList.add('active'); m.style.display = 'flex'; }
 }
-function closeModal(modalId) { const m = document.getElementById(modalId); if (m) m.style.display = 'none'; }
+function closeModal(modalId) { const m = document.getElementById(modalId); if (m) { m.classList.remove('active'); m.style.display = 'none'; } }
 
 window.addEventListener('click', function(e) {
-    if (e.target.classList.contains('modal')) e.target.style.display = 'none';
+    if (e.target.classList.contains('modal')) { e.target.classList.remove('active'); e.target.style.display = 'none'; }
 });
 
 function viewLead(leadId) {
