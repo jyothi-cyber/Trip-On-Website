@@ -1239,7 +1239,13 @@ function exportLeads() {
 // MODAL FUNCTIONALITY
 // ============================================================================
 
-function openModal(modalId) { const m = document.getElementById(modalId); if (m) m.style.display = 'flex'; }
+function openModal(modalId) {
+    document.querySelectorAll('.modal.active, .modal[style*="flex"]').forEach(function(m) {
+        if (m.id !== modalId) m.style.display = 'none';
+    });
+    const m = document.getElementById(modalId);
+    if (m) m.style.display = 'flex';
+}
 function closeModal(modalId) { const m = document.getElementById(modalId); if (m) m.style.display = 'none'; }
 
 window.addEventListener('click', function(e) {
@@ -1249,6 +1255,8 @@ window.addEventListener('click', function(e) {
 function viewLead(leadId) {
     var lead = allLeads.find(function(l) { return l.id === leadId; });
     if (!lead) return;
+    closeModal('addLeadModal');
+    closeModal('editLeadModal');
     currentViewLeadIndex = allLeads.indexOf(lead);
     var fields = {
         'viewLeadIdTop': lead.id, 'viewName': lead.name, 'viewContact': lead.phone,
