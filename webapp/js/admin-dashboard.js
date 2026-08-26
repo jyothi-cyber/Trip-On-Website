@@ -244,6 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderTable();
         updateResultsInfo();
         renderPagination();
+        renderNotesPanel();
         initializeMobileMenu();
     } catch (err) {
         reportError(err);
@@ -971,6 +972,24 @@ function updateResultsInfo() {
     if (paginationInfo) paginationInfo.textContent = text;
 }
 
+function renderNotesPanel() {
+    var body = document.getElementById('notesPanelBody');
+    if (!body) return;
+    var notes = [];
+    allLeads.forEach(function(lead) {
+        if (lead.notes && lead.notes.trim()) {
+            notes.push({ leadId: lead.id, name: lead.name, text: lead.notes });
+        }
+    });
+    if (notes.length === 0) {
+        body.innerHTML = '<p class="notes-panel-empty">No notes yet. Click "View Details" on a lead and add a note.</p>';
+        return;
+    }
+    body.innerHTML = notes.slice().reverse().map(function(n) {
+        return '<div class="note-entry"><span class="note-entry-lead">' + n.leadId + '</span><span class="note-entry-text">' + n.text + '</span><span class="note-entry-meta">' + n.name + '</span></div>';
+    }).join('');
+}
+
 function renderPagination() {
     const paginationNumbers = document.getElementById('paginationNumbers');
     const prevBtn = document.getElementById('prevBtn');
@@ -1094,6 +1113,39 @@ function bulkAssign(assignee) {
 }
 
 var pendingBulkDeleteIds = null;
+var currentViewLeadIndex = -1;
+var activityLog = {};
+
+function formatTimestamp() {
+    var now = new Date();
+    var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    var h = now.getHours(); var ap = h >= 12 ? 'PM' : 'AM'; var hh = h % 12 || 12;
+    var m = now.getMinutes();
+    return now.getDate() + ' ' + months[now.getMonth()] + ' ' + String(now.getFullYear()).slice(2) + ', ' + (hh < 10 ? '0' : '') + hh + ':' + (m < 10 ? '0' : '') + m + ' ' + ap;
+}
+
+function addActivity(leadId, type, detail) {
+    if (!activityLog[leadId]) activityLog[leadId] = [];
+    activityLog[leadId].push({ type: type, detail: detail, time: formatTimestamp(), by: 'Jyothi Duddukunta' });
+}
+
+function renderActivityTab(leadId) {
+    var container = document.getElementById('viewActivitySection');
+    if (!container) return;
+    var logs = activityLog[leadId] || [];
+    if (logs.length === 0) {
+        container.innerHTML = '<div class="activity-empty"><p>No activity recorded yet</p></div>';
+        return;
+    }
+    container.innerHTML = logs.slice().reverse().map(function(entry) {
+        var icon = '📝';
+        if (entry.type === 'assign') icon = '👤';
+        else if (entry.type === 'status') icon = '🔄';
+        else if (entry.type === 'delete') icon = '🗑️';
+        else if (entry.type === 'edit') icon = '✏️';
+        return '<div class="activity-item"><div class="activity-icon">' + icon + '</div><div class="activity-details"><div class="activity-text">' + entry.detail + '</div><div class="activity-meta">' + entry.by + ' · ' + entry.time + '</div></div></div>';
+    }).join('');
+}
 
 function bulkDelete() {
     var selected = getSelectedLeads();
@@ -1109,6 +1161,7 @@ function bulkDelete() {
 function executeDeleteLead() {
     closeConfirmPopup();
     if (pendingBulkDeleteIds && pendingBulkDeleteIds.length > 0) {
+        pendingBulkDeleteIds.forEach(function(id) { addActivity(id, 'delete', 'Lead deleted'); });
         var ids = new Set(pendingBulkDeleteIds);
         allLeads = allLeads.filter(function(l) { return !ids.has(String(l.id)); });
         saveLeadsToStorage();
@@ -1122,6 +1175,7 @@ function executeDeleteLead() {
     }
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     if (!leadId) return;
+    addActivity(leadId, 'delete', 'Lead deleted');
     var idx = allLeads.findIndex(function(l) { return l.id === leadId; });
     if (idx !== -1) {
         allLeads.splice(idx, 1);
@@ -1200,14 +1254,25 @@ window.addEventListener('click', function(e) {
 function viewLead(leadId) {
     var lead = allLeads.find(function(l) { return l.id === leadId; });
     if (!lead) return;
+    currentViewLeadIndex = allLeads.indexOf(lead);
     var fields = {
         'viewLeadIdTop': lead.id, 'viewName': lead.name, 'viewContact': lead.phone,
         'viewEmail': lead.email || 'N/A', 'viewCreatedAt': lead.createdAt,
         'viewFormSource': lead.formSource || 'N/A', 'viewGuests': lead.guests || 'N/A',
-        'viewPlannedVisit': lead.plannedVisit || 'N/A', 'viewDestination': lead.destination || 'N/A',
-        'viewComingWith': lead.guests || 'N/A'
+        'viewPlannedVisit': lead.plannedVisit || 'N/A', 'viewComingWith': lead.guests || 'N/A'
     };
     Object.entries(fields).forEach(function(entry) { var el = document.getElementById(entry[0]); if (el) el.textContent = entry[1]; });
+    var destEl = document.getElementById('viewDestination');
+    if (destEl) destEl.textContent = lead.destination || 'N/A';
+    var assignedEl = document.getElementById('viewAssignedDisplay');
+    if (assignedEl) assignedEl.textContent = lead.assignedTo || 'Un-Allocated';
+    var statusEl = document.getElementById('viewStatusDisplay');
+    if (statusEl) {
+        statusEl.textContent = lead.status || 'New';
+        var badge = getStatusBadgeColors(lead.status || 'New');
+        statusEl.style.background = badge.bg;
+        statusEl.style.color = badge.color;
+    }
     var assignVal = document.getElementById('viewAssignedValue');
     var statusVal = document.getElementById('viewStatusValue');
     if (assignVal) assignVal.textContent = lead.assignedTo || 'Un-Allocated';
@@ -1221,15 +1286,27 @@ function viewLead(leadId) {
     var notesInput = document.getElementById('viewNotesInput');
     if (notesInput) notesInput.value = lead.notes || '';
     var ts = document.getElementById('viewNotesTimestamp');
-    if (ts) {
-        var now = new Date();
-        var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-        var h = now.getHours(); var ap = h >= 12 ? 'PM' : 'AM'; var hh = h % 12 || 12;
-        var m = now.getMinutes();
-        ts.textContent = now.getDate() + ' ' + months[now.getMonth()] + ' ' + String(now.getFullYear()).slice(2) + ', ' + (hh < 10 ? '0' : '') + hh + ':' + (m < 10 ? '0' : '') + m + ' ' + ap;
-    }
+    if (ts) ts.textContent = formatTimestamp();
+    renderActivityTab(lead.id);
+    updateViewNavButtons();
+    var counter = document.getElementById('viewLeadCounter');
+    if (counter) counter.textContent = (currentViewLeadIndex + 1) + ' / ' + allLeads.length;
     exitEditMode();
     openModal('viewLeadModal');
+}
+
+function updateViewNavButtons() {
+    var prev = document.getElementById('viewPrevBtn');
+    var next = document.getElementById('viewNextBtn');
+    if (prev) prev.disabled = currentViewLeadIndex <= 0;
+    if (next) next.disabled = currentViewLeadIndex >= allLeads.length - 1;
+}
+
+function navigateViewLead(dir) {
+    var nextIndex = currentViewLeadIndex + dir;
+    if (nextIndex < 0 || nextIndex >= allLeads.length) return;
+    currentViewLeadIndex = nextIndex;
+    viewLead(allLeads[nextIndex].id);
 }
 
 // ============================================================================
@@ -1326,7 +1403,16 @@ function saveNotes() {
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     if (notesInput && notesInput.value && notesInput.value.trim()) {
         var lead = allLeads.find(function(l) { return l.id === leadId; });
-        if (lead) { lead.notes = notesInput.value.trim(); saveLeadsToStorage(); showToastGreen('Notes saved!'); }
+        if (lead) {
+            var noteText = notesInput.value.trim();
+            var stamp = formatTimestamp();
+            lead.notes = noteText;
+            addActivity(leadId, 'note', 'Note added: "' + noteText.substring(0, 60) + (noteText.length > 60 ? '...' : '') + '"');
+            saveLeadsToStorage();
+            renderActivityTab(leadId);
+            renderNotesPanel();
+            showToastGreen('Notes saved!');
+        }
     } else {
         showToast('Please write a note first');
     }
@@ -1372,15 +1458,25 @@ function saveEditChanges() {
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     var lead = allLeads.find(function(l) { return l.id === leadId; });
     if (!lead) return;
-    lead.name = document.getElementById('editModeName').value.trim() || lead.name;
-    lead.phone = document.getElementById('editModePhone').value.trim() || lead.phone;
-    lead.email = document.getElementById('editModeEmail').value.trim() || lead.email;
+    var changes = [];
+    var newName = document.getElementById('editModeName').value.trim();
+    var newPhone = document.getElementById('editModePhone').value.trim();
+    var newEmail = document.getElementById('editModeEmail').value.trim();
+    var newPlannedVisit = document.getElementById('editModePlannedVisit').value.trim();
+    var newLocation = document.getElementById('editModeLocation').value.trim();
     var gs = document.getElementById('editModeGroupSize').value;
-    lead.guests = gs ? gs + ' People' : lead.guests;
-    lead.plannedVisit = document.getElementById('editModePlannedVisit').value.trim() || lead.plannedVisit;
-    lead.location = document.getElementById('editModeLocation').value.trim() || lead.location;
+    var newGuests = gs ? gs + ' People' : lead.guests;
     var cv = document.getElementById('editComingWithValue').textContent;
-    if (cv && cv !== 'Select coming with') lead.guests = cv;
+    if (cv && cv !== 'Select coming with') newGuests = cv;
+    if (newName && newName !== lead.name) { changes.push('Name: "' + lead.name + '" → "' + newName + '"'); lead.name = newName; }
+    if (newPhone && newPhone !== lead.phone) { changes.push('Phone: "' + lead.phone + '" → "' + newPhone + '"'); lead.phone = newPhone; }
+    if (newEmail && newEmail !== lead.email) { changes.push('Email updated'); lead.email = newEmail; }
+    if (newLocation && newLocation !== lead.location) { changes.push('Location updated'); lead.location = newLocation; }
+    if (newPlannedVisit && newPlannedVisit !== lead.plannedVisit) { changes.push('Planned Visit updated'); lead.plannedVisit = newPlannedVisit; }
+    if (newGuests !== lead.guests) { changes.push('Guests updated'); lead.guests = newGuests; }
+    if (changes.length > 0) {
+        addActivity(leadId, 'edit', 'Edit: ' + changes.join(', '));
+    }
     saveLeadsToStorage();
     document.getElementById('viewName').textContent = lead.name;
     document.getElementById('viewContact').textContent = lead.phone;
@@ -1389,6 +1485,7 @@ function saveEditChanges() {
     document.getElementById('viewFormSource').textContent = lead.formSource || 'N/A';
     exitEditMode();
     renderTable();
+    renderActivityTab(leadId);
     showToastGreen('Lead updated');
 }
 function toggleEditName() { enterEditMode(); }
@@ -1399,14 +1496,37 @@ function updateAssignmentFromView() {
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     var val = (document.getElementById('viewAssignedValue') || {}).textContent;
     var lead = allLeads.find(function(l) { return l.id === leadId; });
-    if (lead && val) { lead.assignedTo = val; saveLeadsToStorage(); renderTable(); }
+    if (lead && val && lead.assignedTo !== val) {
+        var old = lead.assignedTo || 'Un-Allocated';
+        lead.assignedTo = val;
+        addActivity(leadId, 'assign', 'Assigned changed from "' + old + '" to "' + val + '"');
+        saveLeadsToStorage();
+        renderTable();
+        var displayEl = document.getElementById('viewAssignedDisplay');
+        if (displayEl) displayEl.textContent = val;
+        renderActivityTab(leadId);
+    }
 }
 
 function updateStatusFromView() {
     var leadId = (document.getElementById('viewLeadIdTop') || {}).textContent;
     var val = (document.getElementById('viewStatusValue') || {}).textContent;
     var lead = allLeads.find(function(l) { return l.id === leadId; });
-    if (lead && val) { lead.status = val; saveLeadsToStorage(); renderTable(); }
+    if (lead && val && lead.status !== val) {
+        var old = lead.status || 'New';
+        lead.status = val;
+        addActivity(leadId, 'status', 'Status changed from "' + old + '" to "' + val + '"');
+        saveLeadsToStorage();
+        renderTable();
+        var displayEl = document.getElementById('viewStatusDisplay');
+        if (displayEl) {
+            displayEl.textContent = val;
+            var badge = getStatusBadgeColors(val);
+            displayEl.style.background = badge.bg;
+            displayEl.style.color = badge.color;
+        }
+        renderActivityTab(leadId);
+    }
 }
 
 function makeCall() { var p = (document.getElementById('viewContact') || {}).textContent; if (p) window.open('tel:' + p.replace(/\D/g, '')); }
@@ -1891,6 +2011,7 @@ window.openFullViewFromQuick = openFullViewFromQuick;
 window.openQuickView = openQuickView;
 window.closeQuickView = closeQuickView;
 window.navigateMobileLead = navigateMobileLead;
+window.navigateViewLead = navigateViewLead;
 window.switchMobileTab = switchMobileTab;
 window.mobileCopyField = mobileCopyField;
 window.saveMobileNotes = saveMobileNotes;

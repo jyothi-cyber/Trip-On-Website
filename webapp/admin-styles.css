@@ -552,11 +552,11 @@ body {
 }
 
 .dots-option-delete {
-    color: #d32f2f;
+    color: #009C1A;
 }
 
 .dots-option-delete svg {
-    color: #d32f2f;
+    color: #009C1A;
 }
 
 /* Pagination */
@@ -1484,10 +1484,10 @@ body {
     gap: 8px;
     width: 100%;
     padding: 12px;
-    border: 1.5px solid #FCA5A5;
+    border: 1.5px solid #009C1A;
     border-radius: 12px;
     background: #FFFFFF;
-    color: #DC2626;
+    color: #009C1A;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -1497,7 +1497,7 @@ body {
 }
 
 .mobile-delete-btn:active {
-    background: #FEF2F2;
+    background: #D2F2D4;
 }
 
 .mobile-notes-area textarea {
