@@ -216,7 +216,7 @@ body {
 }
 
 .svc-table-wrap {
-    overflow-x: auto;
+    overflow: visible;
 }
 
 .svc-table {
