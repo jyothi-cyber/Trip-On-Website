@@ -139,11 +139,11 @@ body {
     background: none;
     border: none;
     padding: 7px 2px;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
-    color: #555555;
+    color: #222222;
     cursor: pointer;
-    border-bottom: 2.5px solid transparent;
+    border-bottom: 3px solid transparent;
     margin-bottom: -1px;
     transition: color 0.2s, border-color 0.2s;
 }
@@ -154,7 +154,7 @@ body {
 
 .svc-tab-active {
     color: #222222;
-    border-bottom-color: #222222;
+    border-bottom-color: #C9C9C9;
 }
 
 /* ─── Info ─── */
@@ -163,16 +163,16 @@ body {
 }
 
 .svc-info-title {
-    font-size: 13px;
+    font-size: 9px;
     font-weight: 700;
-    color: #222222;
+    color: #333333;
     margin-bottom: 4px;
 }
 
 .svc-info-desc {
-    font-size: 12px;
+    font-size: 8px;
     color: #555555;
-    line-height: 1.5;
+    line-height: 11px;
     max-width: 640px;
 }
 
@@ -189,28 +189,30 @@ body {
 }
 
 .svc-table-title {
-    font-size: 13px;
+    font-size: 9px;
     font-weight: 700;
-    color: #222222;
+    color: #333333;
 }
 
 .svc-table-add-btn {
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 6px 14px;
-    background-color: #64C4A5;
+    padding: 0 12px;
+    width: 103px;
+    height: 23px;
+    background-color: #67C5A5;
     color: #FFFFFF;
     border: none;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 8px;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
 }
 
 .svc-table-add-btn:hover {
-    background-color: #50B493;
+    background-color: #57B695;
 }
 
 .svc-table-wrap {
@@ -223,19 +225,19 @@ body {
 }
 
 .svc-table thead th {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 9px;
+    font-weight: 600;
     color: #333333;
     text-align: left;
     padding: 8px 10px;
-    border-bottom: 1px solid #DDDDDD;
+    border-bottom: 1px solid #E2E2E2;
     white-space: nowrap;
 }
 
 .svc-table tbody td {
-    font-size: 12px;
+    font-size: 8px;
     color: #333333;
-    padding: 9px 10px;
+    padding: 7px 10px;
     border-bottom: 1px solid #E5E5E5;
     vertical-align: middle;
 }
@@ -269,7 +271,7 @@ body {
 
 .svc-image-count {
     color: #999999;
-    font-size: 11px;
+    font-size: 8px;
 }
 
 .svc-td-name {
@@ -286,6 +288,16 @@ body {
     color: #555555;
 }
 
+.svc-rating-badge {
+    display: inline-block;
+    background-color: #F1F1F1;
+    color: #444444;
+    font-size: 8px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
 .svc-cat-tags {
     display: flex;
     gap: 4px;
@@ -296,7 +308,7 @@ body {
     display: inline-block;
     background-color: #F0F0F0;
     color: #444444;
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 600;
     padding: 2px 8px;
     border-radius: 5px;
@@ -387,13 +399,13 @@ body {
 }
 
 .svc-view-btn {
-    padding: 5px 12px;
-    font-size: 11px;
+    padding: 3px 12px;
+    font-size: 8px;
     font-weight: 600;
-    color: #147D5E;
+    color: #287D65;
     background-color: #FFFFFF;
     border: 1px solid #64C4A5;
-    border-radius: 9px;
+    border-radius: 12px;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
 }

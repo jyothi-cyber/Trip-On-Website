@@ -16,8 +16,8 @@ var defaultServicesData = {
         { id: 4, image: 'Parasailing.png', imageCount: 4, name: 'Parasailing', location: 'Andaman', categories: ['Adventure'], status: 'Featured' }
     ],
     hotels: [
-        { id: 1, image: 'SeaView.png', imageCount: 3, name: 'Sea View Resort', location: 'Havelock', categories: ['Premium', 'Couple'], status: 'Static' },
-        { id: 2, image: 'BeachHouse.png', imageCount: 2, name: 'Beach House', location: 'Bali', categories: ['Luxury'], status: 'Popular' }
+        { id: 1, image: 'hotel-pictures114.png', imageCount: 3, name: 'Hotel Name', location: 'Havelock', categories: ['Premium', 'Couple'], status: 'Static', rating: '3 Star' },
+        { id: 2, image: 'hotel-pictures124.png', imageCount: 3, name: 'Hotel Name', location: 'Havelock', categories: ['Luxury'], status: 'Popular', rating: '3 Star' }
     ],
     sightseeings: [
         { id: 1, image: 'SunsetPoint.png', imageCount: 2, name: 'Sunset Point', location: 'Havelock', categories: ['Couple'], status: 'Static' },
@@ -56,25 +56,83 @@ function switchServiceTab(tab) {
         }
     }
 
-    var labels = { activities: 'Activities', hotels: 'Hotels', sightseeings: 'Sight Seeings' };
-    var titles = { activities: 'Most Liked Activities', hotels: 'Most Liked Hotels', sightseeings: 'Most Liked Sight Seeings' };
-    var infoTexts = {
-        activities: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        hotels: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-        sightseeings: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.'
-    };
-
+    var config = tabConfigFor(tab);
     var infoTitle = document.querySelector('.svc-info-title');
     var infoDesc = document.querySelector('.svc-info-desc');
     var tableTitle = document.querySelector('.svc-table-title');
     var addBtn = document.querySelector('.svc-table-add-btn');
 
-    if (infoTitle) { infoTitle.textContent = labels[tab]; }
-    if (infoDesc) { infoDesc.textContent = infoTexts[tab]; }
-    if (tableTitle) { tableTitle.textContent = titles[tab]; }
-    if (addBtn) { addBtn.textContent = 'New ' + labels[tab].replace('Sight Seeings', 'Sightseeing'); }
+    if (infoTitle) { infoTitle.textContent = config.infoTitle; }
+    if (infoDesc) { infoDesc.textContent = config.infoText; }
+    if (tableTitle) { tableTitle.textContent = config.tableTitle; }
+    if (addBtn) { addBtn.textContent = config.addBtn; }
 
     renderTable();
+}
+
+/* ─── Per-tab config ─── */
+function tabConfigFor(tab) {
+    return {
+        activities: {
+            prefix: 'ACT',
+            infoTitle: 'Activities Description',
+            infoText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            tableTitle: 'List of Activities',
+            addBtn: 'New Activity',
+            columns: [
+                { label: 'Activity ID', key: 'id' },
+                { label: 'Image', key: 'image' },
+                { label: 'Name', key: 'name' },
+                { label: 'Location', key: 'location' },
+                { label: 'Category', key: 'categories' },
+                { label: 'Status', key: 'status' },
+                { label: 'Action', key: 'action' }
+            ]
+        },
+        hotels: {
+            prefix: 'HTL',
+            infoTitle: 'Hotels Description',
+            infoText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            tableTitle: 'List of Hotels',
+            addBtn: 'New Hotel',
+            columns: [
+                { label: 'Hotel ID', key: 'id' },
+                { label: 'Image', key: 'image' },
+                { label: 'Name', key: 'name' },
+                { label: 'Location', key: 'location' },
+                { label: 'Rating', key: 'rating' },
+                { label: 'Action', key: 'action' }
+            ]
+        },
+        sightseeings: {
+            prefix: 'STG',
+            infoTitle: 'Sight Seeings Description',
+            infoText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            tableTitle: 'List of Sight Seeings',
+            addBtn: 'New Sightseeing',
+            columns: [
+                { label: 'Sight ID', key: 'id' },
+                { label: 'Image', key: 'image' },
+                { label: 'Name', key: 'name' },
+                { label: 'Location', key: 'location' },
+                { label: 'Action', key: 'action' }
+            ]
+        }
+    }[tab] || { prefix: 'ACT', infoTitle: 'Services', infoText: '', tableTitle: 'List', addBtn: 'New', columns: [] };
+}
+
+function renderColumnHeaders() {
+    var thead = document.getElementById('svcTableHeadRow');
+    if (!thead) { return; }
+    var cfg = tabConfigFor(servicesTab);
+    thead.innerHTML = '';
+    for (var i = 0; i < cfg.columns.length; i++) {
+        var label = cfg.columns[i].label;
+        var th = document.createElement('th');
+        if (label === 'Activity ID' || label === 'Hotel ID' || label === 'Sight ID') { th.className = 'svc-th-id'; }
+        th.textContent = label;
+        thead.appendChild(th);
+    }
 }
 
 /* ─── Render table ─── */
@@ -83,14 +141,16 @@ function renderTable() {
     if (!tbody) { return; }
 
     var rows = servicesData[servicesTab] || [];
-    var prefix = { activities: 'ACT', hotels: 'HTL', sightseeings: 'STG' };
-    var idPrefix = prefix[servicesTab] || 'ACT';
+    var cfg = tabConfigFor(servicesTab);
+    var idPrefix = cfg.prefix;
+
+    renderColumnHeaders();
 
     tbody.innerHTML = '';
 
     if (rows.length === 0) {
         var emptyRow = document.createElement('tr');
-        emptyRow.innerHTML = '<td colspan="7" style="text-align:center;color:#777777;padding:24px 10px;">No records found</td>';
+        emptyRow.innerHTML = '<td colspan="' + cfg.columns.length + '" style="text-align:center;color:#777777;padding:24px 10px;">No records found</td>';
         tbody.appendChild(emptyRow);
         return;
     }
@@ -98,21 +158,36 @@ function renderTable() {
     for (var i = 0; i < rows.length; i++) {
         var item = rows[i];
         var tr = document.createElement('tr');
+        tr.innerHTML = buildRowHtml(cfg, item, idPrefix);
+        tbody.appendChild(tr);
+    }
+}
 
-        var catHtml = '';
-        for (var c = 0; c < item.categories.length; c++) {
-            catHtml += '<span class="svc-cat-tag">' + escapeHtml(item.categories[c]) + '</span>';
-        }
-
-        tr.innerHTML =
-            '<td class="svc-td-id" onclick="openViewModal(\'' + servicesTab + '\',' + item.id + ')">#' + idPrefix + '-' + padZero(item.id) + '</td>' +
-            '<td class="svc-td-image"><span class="svc-image-chip">' +
+function buildRowHtml(cfg, item, idPrefix) {
+    var html = '';
+    for (var k = 0; k < cfg.columns.length; k++) {
+        var col = cfg.columns[k];
+        var key = col.key;
+        var cell = '';
+        if (key === 'id') {
+            cell = '<td class="svc-td-id" onclick="openViewModal(\'' + servicesTab + '\',' + item.id + ')">#' + idPrefix + '-' + padZero(item.id) + '</td>';
+        } else if (key === 'image') {
+            cell = '<td class="svc-td-image"><span class="svc-image-chip">' +
                 '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.2" fill="currentColor"/><path d="M3 12l3.5-3.5 2.5 2 4-4L14 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>' +
-                escapeHtml(item.image) + '</span><span class="svc-image-count">+' + item.imageCount + '</span></td>' +
-            '<td class="svc-td-name" onclick="openViewModal(\'' + servicesTab + '\',' + item.id + ')">' + escapeHtml(item.name) + '</td>' +
-            '<td class="svc-td-location">' + escapeHtml(item.location) + '</td>' +
-            '<td><div class="svc-cat-tags">' + catHtml + '</div></td>' +
-            '<td><div class="svc-status-wrap">' +
+                escapeHtml(item.image) + '</span><span class="svc-image-count">+' + (item.imageCount || 1) + '</span></td>';
+        } else if (key === 'name') {
+            cell = '<td class="svc-td-name" onclick="openViewModal(\'' + servicesTab + '\',' + item.id + ')">' + escapeHtml(item.name) + '</td>';
+        } else if (key === 'location') {
+            cell = '<td class="svc-td-location">' + escapeHtml(item.location) + '</td>';
+        } else if (key === 'categories') {
+            var catHtml = '';
+            var cats = item.categories || [];
+            for (var c = 0; c < cats.length; c++) {
+                catHtml += '<span class="svc-cat-tag">' + escapeHtml(cats[c]) + '</span>';
+            }
+            cell = '<td><div class="svc-cat-tags">' + catHtml + '</div></td>';
+        } else if (key === 'status') {
+            cell = '<td><div class="svc-status-wrap">' +
                 '<div class="svc-status-pill" onclick="toggleStatusMenu(' + item.id + ')"><span>' + escapeHtml(item.status) + '</span>' +
                 '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
                 '<div class="svc-status-menu" id="svcStatusMenu_' + item.id + '">' +
@@ -121,11 +196,15 @@ function renderTable() {
                     '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Inactive\')">Inactive</button>' +
                     '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Featured\')">Featured</button>' +
                 '</div>' +
-            '</div></td>' +
-            '<td class="svc-td-action"><button class="svc-view-btn" onclick="openViewModal(\'' + servicesTab + '\',' + item.id + ')">View Details</button></td>';
-
-        tbody.appendChild(tr);
+            '</div></td>';
+        } else if (key === 'rating') {
+            cell = '<td><span class="svc-rating-badge">' + escapeHtml(item.rating || '3 Star') + '</span></td>';
+        } else if (key === 'action') {
+            cell = '<td class="svc-td-action"><button class="svc-view-btn" onclick="openViewModal(\'' + servicesTab + '\',' + item.id + ')">View Details</button></td>';
+        }
+        html += cell;
     }
+    return html;
 }
 
 /* ─── Status menu ─── */
