@@ -20,8 +20,9 @@ var defaultServicesData = {
         { id: 2, image: 'hotel-pictures124.png', imageCount: 3, name: 'Hotel Name', location: 'Havelock', categories: ['Luxury'], status: 'Popular', rating: '3 Star', checkIn: '25 Mar, Sat 2 PM', checkOut: '26 Mar, Sat 2 PM', food: 'Breakfast, Dinner', roomSize: '5 People', bedType: 'Kings', inclusions: ['Complimentary Dinner is available.', 'Beach View Reserved Table.'], details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.' }
     ],
     sightseeings: [
-        { id: 1, image: 'SunsetPoint.png', imageCount: 2, name: 'Sunset Point', location: 'Havelock', categories: ['Couple'], status: 'Static' },
-        { id: 2, image: 'Waterfall.png', imageCount: 3, name: 'Waterfall Trek', location: 'Andaman', categories: ['Adventure'], status: 'Featured' }
+        { id: 1, image: 'HavelockBeach.png', imageCount: 3, name: 'Havelock Beach', location: 'Havelock', categories: ['Basic', 'Couple'], status: 'Static' },
+        { id: 2, image: 'SunsetPoint.png', imageCount: 2, name: 'Sunset Point', location: 'Havelock', categories: ['Couple'], status: 'Popular' },
+        { id: 3, image: 'Waterfall.png', imageCount: 3, name: 'Waterfall Trek', location: 'Andaman', categories: ['Adventure'], status: 'Popular' }
     ]
 };
 
@@ -65,7 +66,9 @@ function switchServiceTab(tab) {
     if (infoTitle) { infoTitle.textContent = config.infoTitle; }
     if (infoDesc) { infoDesc.textContent = config.infoText; }
     if (tableTitle) { tableTitle.textContent = config.tableTitle; }
-    if (addBtn) { addBtn.textContent = config.addBtn; }
+    if (addBtn) {
+        addBtn.innerHTML = '<svg width="11" height="11" viewBox="0 0 12 12" fill="none"><line x1="6" y1="2" x2="6" y2="10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="2" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> ' + config.addBtn;
+    }
 
     renderTable();
 }
@@ -106,15 +109,17 @@ function tabConfigFor(tab) {
         },
         sightseeings: {
             prefix: 'STG',
-            infoTitle: 'Sight Seeings Description',
-            infoText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            tableTitle: 'List of Sight Seeings',
-            addBtn: 'New Sightseeing',
+            infoTitle: 'Sight Seeings:',
+            infoText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet nulla pulvinar, molestie ipsum nec, semper ex. Donec pellentesque, massa non varius elementum, update deletion will might effect database of the packages',
+            tableTitle: 'Most Liked Sights :',
+            addBtn: 'New Sight Seeing',
             columns: [
-                { label: 'Sight ID', key: 'id' },
+                { label: 'Sights ID', key: 'id' },
                 { label: 'Image', key: 'image' },
                 { label: 'Name', key: 'name' },
                 { label: 'Location', key: 'location' },
+                { label: 'Category', key: 'categories' },
+                { label: 'Status', key: 'status' },
                 { label: 'Action', key: 'action' }
             ]
         }
@@ -129,7 +134,7 @@ function renderColumnHeaders() {
     for (var i = 0; i < cfg.columns.length; i++) {
         var label = cfg.columns[i].label;
         var th = document.createElement('th');
-        if (label === 'Activity ID' || label === 'Hotel ID' || label === 'Sight ID') { th.className = 'svc-th-id'; }
+        if (label === 'Activity ID' || label === 'Hotel ID' || label === 'Sight ID' || label === 'Sights ID') { th.className = 'svc-th-id'; }
         th.textContent = label;
         thead.appendChild(th);
     }
