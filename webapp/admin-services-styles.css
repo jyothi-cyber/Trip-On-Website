@@ -908,15 +908,17 @@ body {
 .svc-edit-back {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
     background-color: #FFFFFF;
     border: 1px solid #ECECEC;
-    border-radius: 5px;
-    padding: 8px 14px;
-    font-size: 8px;
+    border-radius: 6px;
+    width: 80px;
+    height: 28px;
+    font-size: 10px;
     color: #555555;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: background 0.2s;
 }
 
@@ -933,26 +935,28 @@ body {
 .svc-edit-cancel {
     background: none;
     border: none;
-    font-size: 8px;
-    color: #222222;
+    font-size: 9px;
+    color: #555555;
     cursor: pointer;
     padding: 4px 6px;
     transition: color 0.2s;
 }
 
 .svc-edit-cancel:hover {
-    color: #555555;
+    color: #222222;
 }
 
 .svc-edit-save {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
     background-color: #68C6A7;
     border: 1px solid #68C6A7;
     border-radius: 5px;
-    padding: 6px 14px;
-    font-size: 8px;
+    width: 78px;
+    height: 26px;
+    font-size: 9px;
     color: #FFFFFF;
     cursor: pointer;
     transition: background 0.2s;
@@ -965,11 +969,13 @@ body {
 .svc-edit-delete {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     background-color: #FF6B59;
     border: 1px solid #FF6B59;
     border-radius: 5px;
-    padding: 4px 12px;
-    font-size: 7px;
+    width: 130px;
+    height: 21px;
+    font-size: 8px;
     color: #FFFFFF;
     cursor: pointer;
     transition: background 0.2s;
@@ -999,14 +1005,14 @@ body {
 }
 
 .svc-edit-label {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     color: #222222;
     min-width: 70px;
 }
 
 .svc-edit-val-id {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 600;
     color: #28765F;
 }
@@ -1016,10 +1022,11 @@ body {
     padding: 6px 10px;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 10px;
+    font-size: 11px;
     color: #333333;
     font-family: inherit;
-    height: 27px;
+    height: 29px;
+    box-sizing: border-box;
 }
 
 .svc-edit-input:focus {
@@ -1033,16 +1040,162 @@ body {
     padding: 6px 10px;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 10px;
+    font-size: 11px;
     color: #333333;
     font-family: inherit;
     line-height: 1.4;
     resize: vertical;
+    box-sizing: border-box;
 }
 
 .svc-edit-textarea:focus {
     outline: none;
     border-color: #68C6A7;
+}
+
+/* images row: four circular icons */
+.svc-edit-images {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.svc-edit-img-ico {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    color: #B9B9B9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+}
+
+.svc-edit-img-ico:hover {
+    color: #287D65;
+    background-color: #F0FAF6;
+}
+
+/* two-column pairs */
+.svc-edit-pair {
+    display: flex;
+    gap: 16px;
+}
+
+.svc-edit-fgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+}
+
+.svc-edit-fgroup .svc-edit-label {
+    min-width: 0;
+}
+
+/* select wrap with icon/dropdown */
+.svc-edit-selectwrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.svc-edit-input-sm {
+    width: 100%;
+    height: 27px;
+    padding-right: 28px;
+    font-size: 11px;
+}
+
+.svc-edit-ico {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.svc-edit-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    height: 27px;
+    padding: 0 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #D0D0D0;
+    border-radius: 6px;
+    font-size: 11px;
+    color: #333333;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 0.2s, border 0.2s;
+}
+
+.svc-edit-dropdown svg {
+    color: #9CA3AF;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.svc-edit-dropdown:hover {
+    background-color: #F9FAFB;
+}
+
+.svc-edit-dropdown.svc-open {
+    border-color: #68C6A7;
+}
+
+.svc-edit-dropdown.svc-open svg {
+    transform: rotate(180deg);
+}
+
+.svc-edit-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #E1E5EA;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 4px;
+    z-index: 70;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.svc-edit-dropdown-menu.svc-open {
+    display: block;
+}
+
+.svc-edit-dropdown-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 6px 10px;
+    border: none;
+    background: none;
+    font-size: 11px;
+    color: #374151;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.svc-edit-dropdown-option:hover {
+    background-color: #D2F2D4;
+    color: #009C1A;
 }
 
 /* type pill */

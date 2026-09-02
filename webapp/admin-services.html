@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Activities | Trip On Admin</title>
-    <link rel="stylesheet" href="admin-styles.css?v=20260902p">
-    <link rel="stylesheet" href="admin-services-styles.css?v=20260902p">
+    <link rel="stylesheet" href="admin-styles.css?v=20260902q">
+    <link rel="stylesheet" href="admin-services-styles.css?v=20260902q">
 </head>
 
 <body>
@@ -290,7 +290,7 @@
         </div>
     </div>
 
-    <!-- Activity Edit Modal -->
+    <!-- Hotel Edit Modal -->
     <div class="svc-edit-overlay" id="svcEditModal">
         <div class="svc-edit-card">
 
@@ -301,48 +301,43 @@
                     Back
                 </button>
                 <div class="svc-edit-actions">
-                    <button class="svc-edit-cancel" onclick="closeEditModal()">Cancel</button>
+                    <button class="svc-edit-cancel" onclick="closeEditModal()">× Cancel</button>
                     <button class="svc-edit-save" onclick="saveEditChanges()">
                         Save
                         <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8 8.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
-                    <button class="svc-edit-delete" onclick="confirmDeleteActivity()">Delete For Ever</button>
+                    <button class="svc-edit-delete" onclick="confirmDeleteActivity()">Delete Forever</button>
                 </div>
             </div>
 
             <!-- edit form -->
             <div class="svc-edit-form">
                 <div class="svc-edit-field svc-edit-field-inline">
-                    <span class="svc-edit-label">Activity :</span>
-                    <span class="svc-edit-val-id" id="svcEditId">#ACT-001</span>
-                </div>
-
-                <div class="svc-edit-field svc-edit-field-inline">
-                    <span class="svc-edit-label">Type :</span>
-                    <div class="svc-edit-type-wrap">
-                        <div class="svc-edit-type" id="svcEditType" onclick="toggleEditTypeMenu()">
-                            <span id="svcEditTypeVal">Popular</span>
-                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </div>
-                        <div class="svc-edit-type-menu" id="svcEditTypeMenu">
-                            <button class="svc-edit-type-option" onclick="setEditType('Static')">Static</button>
-                            <button class="svc-edit-type-option" onclick="setEditType('Popular')">Popular</button>
-                            <button class="svc-edit-type-option" onclick="setEditType('Inactive')">Inactive</button>
-                            <button class="svc-edit-type-option" onclick="setEditType('Featured')">Featured</button>
-                        </div>
-                    </div>
+                    <span class="svc-edit-label">Hotel :</span>
+                    <span class="svc-edit-val-id" id="svcEditId">#HotelID</span>
                 </div>
 
                 <div class="svc-edit-field svc-edit-field-inline">
                     <span class="svc-edit-label">Images :</span>
-                    <button class="svc-edit-img-add" title="Upload images" onclick="addImagePrompt()">
-                        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M7 4v6M4 7h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-                    </button>
+                    <div class="svc-edit-images">
+                        <button class="svc-edit-img-ico" title="Manage image 1" onclick="addImagePrompt()">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.2" fill="currentColor"/><path d="M3 12l3.5-3.5 2.5 2 4-4L14 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                        </button>
+                        <button class="svc-edit-img-ico" title="Manage image 2" onclick="addImagePrompt()">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.2" fill="currentColor"/><path d="M3 12l3.5-3.5 2.5 2 4-4L14 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                        </button>
+                        <button class="svc-edit-img-ico" title="Manage image 3" onclick="addImagePrompt()">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.2" fill="currentColor"/><path d="M3 12l3.5-3.5 2.5 2 4-4L14 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                        </button>
+                        <button class="svc-edit-img-ico" title="Manage image 4" onclick="addImagePrompt()">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="6" r="1.2" fill="currentColor"/><path d="M3 12l3.5-3.5 2.5 2 4-4L14 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="svc-edit-field">
                     <span class="svc-edit-label">Title :</span>
-                    <input type="text" id="svcEditTitle" class="svc-edit-input" placeholder="Activity title">
+                    <input type="text" id="svcEditTitle" class="svc-edit-input" placeholder="Hotel title">
                 </div>
 
                 <div class="svc-edit-field">
@@ -366,6 +361,82 @@
                     <span class="svc-edit-label">Details:</span>
                     <textarea id="svcEditDetails" class="svc-edit-textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.</textarea>
                 </div>
+
+                <div class="svc-edit-pair">
+                    <div class="svc-edit-fgroup">
+                        <span class="svc-edit-label">Check In :</span>
+                        <div class="svc-edit-selectwrap">
+                            <input type="text" id="svcEditCheckIn" class="svc-edit-input svc-edit-input-sm" value="25 Mar, Sat 2 PM">
+                            <span class="svc-edit-ico">
+                                <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="2.5" width="11" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5.5h11M4 1v3M10 1v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="svc-edit-fgroup">
+                        <span class="svc-edit-label">Check Out :</span>
+                        <div class="svc-edit-selectwrap">
+                            <input type="text" id="svcEditCheckOut" class="svc-edit-input svc-edit-input-sm" value="26 Mar, Sat 2 PM">
+                            <span class="svc-edit-ico">
+                                <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="2.5" width="11" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5.5h11M4 1v3M10 1v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-edit-pair">
+                    <div class="svc-edit-fgroup">
+                        <span class="svc-edit-label">Food :</span>
+                        <div class="svc-edit-selectwrap">
+                            <div class="svc-edit-dropdown" id="svcEditFood" onclick="toggleEditFoodMenu()">
+                                <span id="svcEditFoodVal">Breakfast, Dinner</span>
+                                <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="svc-edit-dropdown-menu" id="svcEditFoodMenu">
+                                <button class="svc-edit-dropdown-option" onclick="setEditFood('Breakfast')">Breakfast</button>
+                                <button class="svc-edit-dropdown-option" onclick="setEditFood('Breakfast, Dinner')">Breakfast, Dinner</button>
+                                <button class="svc-edit-dropdown-option" onclick="setEditFood('Dinner')">Dinner</button>
+                                <button class="svc-edit-dropdown-option" onclick="setEditFood('All Included')">All Included</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="svc-edit-fgroup">
+                        <span class="svc-edit-label">Room Size :</span>
+                        <div class="svc-edit-selectwrap">
+                            <div class="svc-edit-dropdown" id="svcEditRoom" onclick="toggleEditRoomMenu()">
+                                <span id="svcEditRoomVal">5 People</span>
+                                <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="svc-edit-dropdown-menu" id="svcEditRoomMenu">
+                                <button class="svc-edit-dropdown-option" onclick="setEditRoom('2 People')">2 People</button>
+                                <button class="svc-edit-dropdown-option" onclick="setEditRoom('3 People')">3 People</button>
+                                <button class="svc-edit-dropdown-option" onclick="setEditRoom('5 People')">5 People</button>
+                                <button class="svc-edit-dropdown-option" onclick="setEditRoom('7 People')">7 People</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-edit-field">
+                    <span class="svc-edit-label">Bed Type :</span>
+                    <div class="svc-edit-selectwrap">
+                        <div class="svc-edit-dropdown" id="svcEditBed" onclick="toggleEditBedMenu()">
+                            <span id="svcEditBedVal">Kings</span>
+                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="svc-edit-dropdown-menu" id="svcEditBedMenu">
+                            <button class="svc-edit-dropdown-option" onclick="setEditBed('Kings')">Kings</button>
+                            <button class="svc-edit-dropdown-option" onclick="setEditBed('Queen')">Queen</button>
+                            <button class="svc-edit-dropdown-option" onclick="setEditBed('Twin')">Twin</button>
+                            <button class="svc-edit-dropdown-option" onclick="setEditBed('Single')">Single</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-edit-field">
+                    <span class="svc-edit-label">Inclusions:</span>
+                    <textarea id="svcEditInclusions" class="svc-edit-textarea" placeholder="Enter inclusions">Complimentary Dinner is available.
+Beach View Reserved Table.</textarea>
+                </div>
             </div>
 
         </div>
@@ -383,7 +454,7 @@
         </div>
     </div>
 
-    <script src="js/admin-services.js?v=20260902p"></script>
+    <script src="js/admin-services.js?v=20260902q"></script>
 </body>
 
 </html>

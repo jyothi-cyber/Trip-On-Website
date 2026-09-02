@@ -357,14 +357,22 @@ function openEditModal() {
     }
     if (!item) { return; }
 
-    var prefix = { activities: 'ACT', hotels: 'HTL', sightseeings: 'STG' };
-    var idPrefix = prefix[viewTab] || 'ACT';
+    var cfg = tabConfigFor(viewTab);
+    var idPrefix = cfg.prefix;
+
+    var idLabel = document.querySelector('.svc-edit-form .svc-edit-label');
+    if (idLabel) { idLabel.textContent = serviceLabelFor(viewTab) + ' :'; }
 
     document.getElementById('svcEditId').textContent = '#' + idPrefix + '-' + padZero(item.id);
-    document.getElementById('svcEditTypeVal').textContent = item.status;
     document.getElementById('svcEditTitle').value = item.name;
     document.getElementById('svcEditLocation').value = item.location;
     document.getElementById('svcEditDetails').value = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
+    document.getElementById('svcEditCheckIn').value = item.checkIn || '25 Mar, Sat 2 PM';
+    document.getElementById('svcEditCheckOut').value = item.checkOut || '26 Mar, Sat 2 PM';
+    document.getElementById('svcEditFoodVal').textContent = item.food || 'Breakfast, Dinner';
+    document.getElementById('svcEditRoomVal').textContent = item.roomSize || '5 People';
+    document.getElementById('svcEditBedVal').textContent = item.bedType || 'Kings';
+    document.getElementById('svcEditInclusions').value = (item.inclusions && item.inclusions.length) ? item.inclusions.join('\n') : 'Complimentary Dinner is available.\nBeach View Reserved Table.';
 
     renderEditCatTags(item.categories || ['Basic']);
     renderEditCatMenu();
@@ -399,7 +407,8 @@ function closeEditTypeMenu() {
 }
 
 function setEditType(status) {
-    document.getElementById('svcEditTypeVal').textContent = status;
+    var valEl = document.getElementById('svcEditTypeVal');
+    if (valEl) { valEl.textContent = status; }
     closeEditTypeMenu();
 }
 
@@ -511,14 +520,84 @@ function saveEditChanges() {
 
     item.name = title;
     item.location = document.getElementById('svcEditLocation').value.trim();
-    item.status = document.getElementById('svcEditTypeVal').textContent;
     item.categories = editCategories.slice();
     item.details = document.getElementById('svcEditDetails').value;
+    item.checkIn = document.getElementById('svcEditCheckIn').value;
+    item.checkOut = document.getElementById('svcEditCheckOut').value;
+    item.food = document.getElementById('svcEditFoodVal').textContent;
+    item.roomSize = document.getElementById('svcEditRoomVal').textContent;
+    item.bedType = document.getElementById('svcEditBedVal').textContent;
+    var inclusionsRaw = document.getElementById('svcEditInclusions').value;
+    var inclusions = [];
+    var parts = inclusionsRaw.split('\n');
+    for (var bi = 0; bi < parts.length; bi++) {
+        var p = parts[bi].trim();
+        if (p) { inclusions.push(p); }
+    }
+    item.inclusions = inclusions.length ? inclusions : [];
 
     saveServicesData(servicesData);
     closeEditModal();
     renderTable();
-    showToast('Activity saved');
+    showToast(serviceLabelFor(viewTab) + ' saved');
+}
+
+/* ─── Edit Food / Room / Bed dropdowns ─── */
+function toggleEditFoodMenu() {
+    var dd = document.getElementById('svcEditFood');
+    var menu = document.getElementById('svcEditFoodMenu');
+    if (!menu) { return; }
+    var already = menu.classList.contains('svc-open');
+    closeEditFoodMenu();
+    if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
+}
+function closeEditFoodMenu() {
+    var menu = document.getElementById('svcEditFoodMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+    var dd = document.getElementById('svcEditFood');
+    if (dd) { dd.classList.remove('svc-open'); }
+}
+function setEditFood(val) {
+    document.getElementById('svcEditFoodVal').textContent = val;
+    closeEditFoodMenu();
+}
+
+function toggleEditRoomMenu() {
+    var dd = document.getElementById('svcEditRoom');
+    var menu = document.getElementById('svcEditRoomMenu');
+    if (!menu) { return; }
+    var already = menu.classList.contains('svc-open');
+    closeEditRoomMenu();
+    if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
+}
+function closeEditRoomMenu() {
+    var menu = document.getElementById('svcEditRoomMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+    var dd = document.getElementById('svcEditRoom');
+    if (dd) { dd.classList.remove('svc-open'); }
+}
+function setEditRoom(val) {
+    document.getElementById('svcEditRoomVal').textContent = val;
+    closeEditRoomMenu();
+}
+
+function toggleEditBedMenu() {
+    var dd = document.getElementById('svcEditBed');
+    var menu = document.getElementById('svcEditBedMenu');
+    if (!menu) { return; }
+    var already = menu.classList.contains('svc-open');
+    closeEditBedMenu();
+    if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
+}
+function closeEditBedMenu() {
+    var menu = document.getElementById('svcEditBedMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+    var dd = document.getElementById('svcEditBed');
+    if (dd) { dd.classList.remove('svc-open'); }
+}
+function setEditBed(val) {
+    document.getElementById('svcEditBedVal').textContent = val;
+    closeEditBedMenu();
 }
 
 /* ─── Delete ─── */
@@ -872,6 +951,13 @@ document.addEventListener('click', function (e) {
         closeEditCatMenu();
     }
 
+    /* close edit food/room/bed dropdowns on outside click */
+    if (!target.closest('.svc-edit-dropdown-menu') && !target.closest('.svc-edit-dropdown')) {
+        closeEditFoodMenu();
+        closeEditRoomMenu();
+        closeEditBedMenu();
+    }
+
     /* close new type menu on outside click */
     if (!target.closest('.svc-new-type-menu') && !target.closest('.svc-new-type')) {
         closeNewTypeMenu();
@@ -898,6 +984,9 @@ document.addEventListener('keydown', function (e) {
         closeViewTypeMenu();
         closeEditTypeMenu();
         closeEditCatMenu();
+        closeEditFoodMenu();
+        closeEditRoomMenu();
+        closeEditBedMenu();
         closeNewTypeMenu();
         closeNewCatMenu();
         closeProfileMenu();
