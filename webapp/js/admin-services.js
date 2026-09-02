@@ -162,6 +162,10 @@ function setStatus(id, status) {
 }
 
 /* ─── View modal ─── */
+var viewTab = 'activities';
+var viewItemId = null;
+var viewEditing = false;
+
 function openViewModal(tab, id) {
     var list = servicesData[tab] || [];
     var item = null;
@@ -170,29 +174,147 @@ function openViewModal(tab, id) {
     }
     if (!item) { return; }
 
+    viewTab = tab;
+    viewItemId = id;
+    viewEditing = false;
+
     var prefix = { activities: 'ACT', hotels: 'HTL', sightseeings: 'STG' };
     var idPrefix = prefix[tab] || 'ACT';
     var label = { activities: 'Activity', hotels: 'Hotel', sightseeings: 'Sightseeing' };
 
-    document.getElementById('svcViewStatus').textContent = item.status;
     document.getElementById('svcViewId').textContent = '#' + idPrefix + '-' + padZero(item.id);
-    document.getElementById('svcViewName').textContent = item.name;
+    document.getElementById('svcViewTypeVal').textContent = item.status;
+    document.getElementById('svcViewTitle').textContent = item.name;
     document.getElementById('svcViewLocation').textContent = item.location;
-    document.getElementById('svcViewCategory').textContent = item.categories.join(', ');
-    document.getElementById('svcViewDesc').textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus.';
+    document.getElementById('svcViewDetails').textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
 
-    var titleEl = document.querySelector('#svcViewModal .svc-modal-title');
-    if (titleEl) {
-        titleEl.textContent = serviceLabelFor(tab) + ' Details';
+    renderViewImages(item);
+
+    /* save current values for edit restore */
+    document.getElementById('svcViewEditLabel').textContent = 'Edit';
+    renderViewBody();
+
+    openViewOverlay('svcViewModal');
+}
+
+function renderViewImages(item) {
+    var wrap = document.getElementById('svcViewImages');
+    if (!wrap) { return; }
+    wrap.innerHTML = '';
+    var n = item.imageCount || 1;
+    for (var i = 0; i < n; i++) {
+        var chip = document.createElement('span');
+        chip.className = 'svc-view-img';
+        chip.textContent = item.image || 'image.png';
+        wrap.appendChild(chip);
     }
-
-    openModal('svcViewModal');
 }
 
 function serviceLabelFor(tab) {
     if (tab === 'hotels') { return 'Hotel'; }
     if (tab === 'sightseeings') { return 'Sightseeing'; }
     return 'Activity';
+}
+
+/* ─── View type dropdown ─── */
+function toggleViewTypeMenu() {
+    var menu = document.getElementById('svcViewTypeMenu');
+    if (menu) {
+        closeViewTypeMenu();
+        menu.classList.add('svc-open');
+    }
+}
+
+function closeViewTypeMenu() {
+    var menu = document.getElementById('svcViewTypeMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+}
+
+function setViewType(status) {
+    var list = servicesData[viewTab];
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].id === viewItemId) {
+            list[i].status = status;
+            break;
+        }
+    }
+    saveServicesData(servicesData);
+    document.getElementById('svcViewTypeVal').textContent = status;
+    closeViewTypeMenu();
+    showToast('Type updated to ' + status);
+}
+
+/* ─── View edit mode ─── */
+function toggleViewEdit() {
+    if (viewEditing) {
+        /* save */
+        saveViewChanges();
+        viewEditing = false;
+        document.getElementById('svcViewEditLabel').textContent = 'Edit';
+        renderViewBody(false);
+    } else {
+        viewEditing = true;
+        document.getElementById('svcViewEditLabel').textContent = 'Save';
+        renderViewBody(true);
+    }
+}
+
+function saveViewChanges() {
+    var list = servicesData[viewTab];
+    if (!list) { return; }
+    var item = null;
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].id === viewItemId) { item = list[i]; break; }
+    }
+    if (!item) { return; }
+
+    var titleInput = document.getElementById('svcViewTitle');
+    var locInput = document.getElementById('svcViewLocation');
+    var detInput = document.getElementById('svcViewDetails');
+
+    if (titleInput && titleInput.value) { item.name = titleInput.value; }
+    if (locInput && locInput.value) { item.location = locInput.value; }
+    if (detInput && detInput.value) {
+        item.details = detInput.value;
+    }
+
+    saveServicesData(servicesData);
+    renderTable();
+    showToast('Activity updated');
+}
+
+function renderViewBody(editMode) {
+    var list = servicesData[viewTab];
+    if (!list) { return; }
+    var item = null;
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].id === viewItemId) { item = list[i]; break; }
+    }
+    if (!item) { return; }
+    document.getElementById('svcViewId').textContent = '#' + (viewTab === 'hotels' ? 'HTL' : viewTab === 'sightseeings' ? 'STG' : 'ACT') + '-' + padZero(item.id);
+
+    var detailsText = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
+
+    if (!editMode) {
+        document.getElementById('svcViewTitle').outerHTML = '<span class="svc-view-val" id="svcViewTitle">' + escapeHtml(item.name) + '</span>';
+        document.getElementById('svcViewLocation').outerHTML = '<span class="svc-view-val" id="svcViewLocation">' + escapeHtml(item.location) + '</span>';
+        document.getElementById('svcViewDetails').outerHTML = '<span class="svc-view-val svc-view-details" id="svcViewDetails">' + escapeHtml(detailsText) + '</span>';
+        return;
+    }
+
+    /* edit mode: swap to inputs */
+    document.getElementById('svcViewTitle').outerHTML = viewEditField('svcViewTitle', item.name);
+    document.getElementById('svcViewLocation').outerHTML = viewEditField('svcViewLocation', item.location);
+    document.getElementById('svcViewDetails').outerHTML = '<textarea class="svc-view-input svc-view-textarea" id="svcViewDetails">' + escapeHtml(detailsText) + '</textarea>';
+}
+
+function viewEditField(id, value) {
+    return '<input type="text" class="svc-view-input" id="' + id + '" value="' + escapeAttr(value) + '">';
+}
+
+function closeViewModal() {
+    closeViewTypeMenu();
+    closeViewOverlay('svcViewModal');
 }
 
 /* ─── New item modal ─── */
@@ -316,6 +438,33 @@ function escapeHtml(text) {
         .replace(/'/g, '&#39;');
 }
 
+function escapeAttr(text) {
+    if (!text) { return ''; }
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;');
+}
+
+/* ─── View overlay helpers ─── */
+function openViewOverlay(id) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.classList.add('svc-show');
+        el.style.display = 'flex';
+    }
+}
+
+function closeViewOverlay(id) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.classList.remove('svc-show');
+        el.style.display = 'none';
+    }
+    closeViewTypeMenu();
+}
+
 /* ─── Global events ─── */
 document.addEventListener('click', function (e) {
     var target = e.target;
@@ -324,6 +473,11 @@ document.addEventListener('click', function (e) {
     /* close status menus on outside click */
     if (!target.closest('.svc-status-menu') && !target.closest('.svc-status-pill')) {
         closeAllStatusMenus();
+    }
+
+    /* close view type menu on outside click */
+    if (!target.closest('.svc-view-type-menu') && !target.closest('.svc-view-type')) {
+        closeViewTypeMenu();
     }
 
     /* close profile menu on outside click */
@@ -335,20 +489,29 @@ document.addEventListener('click', function (e) {
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
         closeModal('svcNewItemModal');
-        closeModal('svcViewModal');
+        closeViewModal();
         closeAllStatusMenus();
+        closeViewTypeMenu();
         closeProfileMenu();
     }
 });
 
 /* open modals on overlay click */
-var overlayIds = ['svcNewItemModal', 'svcViewModal'];
+var overlayIds = ['svcNewItemModal'];
 for (var oi = 0; oi < overlayIds.length; oi++) {
     (function (id) {
         document.getElementById(id).addEventListener('click', function (e) {
             if (e.target === this) { closeModal(id); }
         });
     })(overlayIds[oi]);
+}
+
+/* open view modal on overlay click */
+var viewOverlay = document.getElementById('svcViewModal');
+if (viewOverlay) {
+    viewOverlay.addEventListener('click', function (e) {
+        if (e.target === this) { closeViewModal(); }
+    });
 }
 
 /* ─── Init ─── */

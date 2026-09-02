@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Activities | Trip On Admin</title>
-    <link rel="stylesheet" href="admin-styles.css?v=20260902d">
-    <link rel="stylesheet" href="admin-services-styles.css?v=20260902d">
+    <link rel="stylesheet" href="admin-styles.css?v=20260902e">
+    <link rel="stylesheet" href="admin-services-styles.css?v=20260902e">
 </head>
 
 <body>
@@ -187,44 +187,64 @@
     </div>
 
     <!-- View Details Modal -->
-    <div class="svc-modal-overlay" id="svcViewModal">
-        <div class="svc-modal svc-view-modal">
-            <div class="svc-modal-header">
-                <h3 class="svc-modal-title">Activity Details</h3>
-                <button class="svc-modal-close" onclick="closeModal('svcViewModal')">&times;</button>
+    <div class="svc-view-overlay" id="svcViewModal">
+        <div class="svc-view-card">
+
+            <!-- top action bar -->
+            <div class="svc-view-topbar">
+                <button class="svc-view-back" onclick="closeViewModal()">
+                    <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M8 1L2 5l6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Back
+                </button>
+                <button class="svc-view-edit" id="svcViewEditBtn" onclick="toggleViewEdit()">
+                    <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M7.3 1.2a1 1 0 0 1 1.4 1.4L3.2 8.1l-2 .5.5-2 5.6-5.4z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                    <span id="svcViewEditLabel">Edit</span>
+                </button>
             </div>
-            <div class="svc-modal-body">
-                <div class="svc-view-banner">
-                    <span class="svc-view-badge" id="svcViewStatus">Static</span>
+
+            <!-- details body (read mode) -->
+            <div class="svc-view-body" id="svcViewBody">
+                <div class="svc-view-row">
+                    <span class="svc-view-label">Activity :</span>
+                    <span class="svc-view-val svc-view-val-id" id="svcViewId">#ACT-001</span>
                 </div>
-                <div class="svc-view-field">
-                    <span class="svc-view-label">Activity ID</span>
-                    <span class="svc-view-value" id="svcViewId">#ACT-001</span>
+                <div class="svc-view-row">
+                    <span class="svc-view-label">Type :</span>
+                    <div class="svc-view-type-wrap">
+                        <div class="svc-view-type" id="svcViewType" onclick="toggleViewTypeMenu()">
+                            <span id="svcViewTypeVal">Popular</span>
+                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="svc-view-type-menu" id="svcViewTypeMenu">
+                            <button class="svc-view-type-option" onclick="setViewType('Static')">Static</button>
+                            <button class="svc-view-type-option" onclick="setViewType('Popular')">Popular</button>
+                            <button class="svc-view-type-option" onclick="setViewType('Inactive')">Inactive</button>
+                            <button class="svc-view-type-option" onclick="setViewType('Featured')">Featured</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="svc-view-field">
-                    <span class="svc-view-label">Name</span>
-                    <span class="svc-view-value" id="svcViewName">Havelock Beach</span>
+                <div class="svc-view-row svc-view-row-images">
+                    <span class="svc-view-label">Images* :</span>
+                    <div class="svc-view-images" id="svcViewImages"></div>
                 </div>
-                <div class="svc-view-field">
-                    <span class="svc-view-label">Location</span>
-                    <span class="svc-view-value" id="svcViewLocation">Havelock</span>
+                <div class="svc-view-row">
+                    <span class="svc-view-label">Title :</span>
+                    <span class="svc-view-val" id="svcViewTitle">Deep Sea Diving</span>
                 </div>
-                <div class="svc-view-field">
-                    <span class="svc-view-label">Category</span>
-                    <span class="svc-view-value" id="svcViewCategory">Basic, Couple</span>
+                <div class="svc-view-row">
+                    <span class="svc-view-label">Location :</span>
+                    <span class="svc-view-val" id="svcViewLocation">Havelock</span>
                 </div>
-                <div class="svc-view-field">
-                    <span class="svc-view-label">Description</span>
-                    <span class="svc-view-value" id="svcViewDesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus.</span>
+                <div class="svc-view-row svc-view-row-details">
+                    <span class="svc-view-label">Details:</span>
+                    <span class="svc-view-val svc-view-details" id="svcViewDetails">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.</span>
                 </div>
             </div>
-            <div class="svc-modal-footer">
-                <button class="svc-btn-cancel" onclick="closeModal('svcViewModal')">Close</button>
-            </div>
+
         </div>
     </div>
 
-    <script src="js/admin-services.js?v=20260902d"></script>
+    <script src="js/admin-services.js?v=20260902e"></script>
 </body>
 
 </html>
