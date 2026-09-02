@@ -695,3 +695,121 @@
         height: 220px;
     }
 }
+
+/* ── Admin Profile Popup (matches Leads) ── */
+.user-profile {
+    position: relative;
+}
+
+.user-avatar {
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    user-select: none;
+    background: #D2F2D4;
+    color: #26CC00;
+}
+
+.profile-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 240px;
+    background: #FFFFFF;
+    border: 1px solid #E1E5EA;
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(11, 31, 58, 0.14);
+    padding: 16px;
+    z-index: 120;
+    box-sizing: border-box;
+}
+
+.profile-popup.show {
+    display: block;
+}
+
+.profile-popup-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-popup-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #D2F2D4;
+    color: #26CC00;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.profile-popup-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0B1F3A;
+    line-height: 1.2;
+}
+
+.profile-popup-role {
+    font-size: 13px;
+    color: #8A98AA;
+    margin-top: 2px;
+}
+
+.profile-popup-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px 0;
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.profile-popup-profile:hover {
+    background: #F0F7FF;
+    color: #2563EB;
+    border-color: #BFDBFE;
+}
+
+.profile-popup-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 14px;
+    padding: 10px 0;
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: #4B5565;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.profile-popup-logout:hover {
+    background: #D2F2D4;
+    color: #26CC00;
+    border-color: #FFD9B3;
+}

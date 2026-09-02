@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Packages - Trip On Admin</title>
-    <link rel="stylesheet" href="admin-styles.css">
-    <link rel="stylesheet" href="admin-packages-styles.css">
+    <link rel="stylesheet" href="admin-styles.css?v=20260902v">
+    <link rel="stylesheet" href="admin-packages-styles.css?v=20260902v">
 </head>
 <body>
     <!-- Mobile Header -->
@@ -70,13 +70,29 @@
                 <h1 class="page-title">Packages</h1>
                 <div class="header-right">
                     <div class="user-profile">
-                        <div class="user-avatar">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="8" r="4" fill="currentColor"/>
-                                <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" fill="currentColor"/>
-                            </svg>
+                        <div class="user-avatar" id="userAvatar">DJ</div>
+                        <div class="profile-popup" id="profilePopup">
+                            <div class="profile-popup-head">
+                                <div class="profile-popup-avatar">DJ</div>
+                                <div class="profile-popup-info">
+                                    <div class="profile-popup-name">Duddukunta Jyothi</div>
+                                    <div class="profile-popup-role">Administrator</div>
+                                </div>
+                            </div>
+                            <a href="admin-profile.html" class="profile-popup-profile">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" fill="none"/>
+                                </svg>
+                                My Profile
+                            </a>
+                            <button class="profile-popup-logout" onclick="logoutAdmin()">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M10 2H13a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-3M6 11l3-3-3-3M9 8H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Logout
+                            </button>
                         </div>
-                        <span class="user-name">Admin</span>
                     </div>
                 </div>
             </header>
@@ -165,6 +181,6 @@
     </div>
 
     <script src="js/packages-data.js"></script>
-    <script src="js/admin-packages.js"></script>
+    <script src="js/admin-packages.js?v=20260902v"></script>
 </body>
 </html>

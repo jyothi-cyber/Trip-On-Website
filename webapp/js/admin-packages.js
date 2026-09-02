@@ -322,3 +322,33 @@ window.closePackageModal = closePackageModal;
 window.openEditPackageModal = openEditPackageModal;
 window.savePackage = savePackage;
 window.viewPackageDetails = viewPackageDetails;
+
+// ============================================================================
+// ADMIN PROFILE POPUP
+// ============================================================================
+
+function logoutAdmin() {
+    if (confirm('Do you want to logout?')) {
+        sessionStorage.removeItem('adminLoggedIn');
+        window.location.href = 'admin-login.html';
+    }
+}
+
+(function initAdminProfile() {
+    var avatar = document.getElementById('userAvatar');
+    if (avatar) {
+        avatar.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var popup = document.getElementById('profilePopup');
+            if (popup) { popup.classList.toggle('show'); }
+        });
+    }
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.user-profile')) {
+            var popup = document.getElementById('profilePopup');
+            if (popup) { popup.classList.remove('show'); }
+        }
+    });
+})();
+
+window.logoutAdmin = logoutAdmin;
