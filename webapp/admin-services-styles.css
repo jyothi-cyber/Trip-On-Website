@@ -66,12 +66,12 @@ body {
 }
 
 .svc-avatar {
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background: linear-gradient(135deg, #14684F, #64C4A5);
     color: #FFFFFF;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -85,13 +85,13 @@ body {
 }
 
 .svc-profile-name {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: #333333;
 }
 
 .svc-profile-role {
-    font-size: 10px;
+    font-size: 12px;
     color: #999999;
 }
 
@@ -138,8 +138,8 @@ body {
 .svc-tab {
     background: none;
     border: none;
-    padding: 7px 2px;
-    font-size: 11px;
+    padding: 8px 2px;
+    font-size: 13px;
     font-weight: 600;
     color: #222222;
     cursor: pointer;
@@ -163,16 +163,16 @@ body {
 }
 
 .svc-info-title {
-    font-size: 9px;
+    font-size: 14px;
     font-weight: 700;
     color: #333333;
     margin-bottom: 4px;
 }
 
 .svc-info-desc {
-    font-size: 8px;
+    font-size: 13px;
     color: #555555;
-    line-height: 11px;
+    line-height: 18px;
     max-width: 640px;
 }
 
@@ -189,7 +189,7 @@ body {
 }
 
 .svc-table-title {
-    font-size: 9px;
+    font-size: 14px;
     font-weight: 700;
     color: #333333;
 }
@@ -197,15 +197,15 @@ body {
 .svc-table-add-btn {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 0 12px;
-    width: 103px;
-    height: 23px;
+    gap: 6px;
+    padding: 0 14px;
+    width: 116px;
+    height: 32px;
     background-color: #67C5A5;
     color: #FFFFFF;
     border: none;
-    border-radius: 5px;
-    font-size: 8px;
+    border-radius: 6px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
@@ -225,19 +225,19 @@ body {
 }
 
 .svc-table thead th {
-    font-size: 9px;
+    font-size: 13px;
     font-weight: 600;
     color: #333333;
     text-align: left;
-    padding: 8px 10px;
+    padding: 10px 12px;
     border-bottom: 1px solid #E2E2E2;
     white-space: nowrap;
 }
 
 .svc-table tbody td {
-    font-size: 8px;
+    font-size: 13px;
     color: #333333;
-    padding: 7px 10px;
+    padding: 10px 12px;
     border-bottom: 1px solid #E5E5E5;
     vertical-align: middle;
 }
@@ -271,7 +271,7 @@ body {
 
 .svc-image-count {
     color: #999999;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .svc-td-name {
@@ -292,15 +292,15 @@ body {
     display: inline-block;
     background-color: #F1F1F1;
     color: #444444;
-    font-size: 8px;
-    padding: 2px 8px;
+    font-size: 12px;
+    padding: 3px 10px;
     border-radius: 8px;
     white-space: nowrap;
 }
 
 .svc-cat-tags {
     display: flex;
-    gap: 4px;
+    gap: 5px;
     flex-wrap: wrap;
 }
 
@@ -308,9 +308,9 @@ body {
     display: inline-block;
     background-color: #F0F0F0;
     color: #444444;
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 600;
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 5px;
 }
 
@@ -325,8 +325,8 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 6px;
-    padding: 4px 10px;
-    font-size: 11px;
+    padding: 5px 12px;
+    font-size: 13px;
     font-weight: 500;
     color: #374151;
     background-color: #F4F5F7;
@@ -334,7 +334,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.2s, border 0.2s;
-    min-width: 78px;
+    min-width: 88px;
 }
 
 .svc-status-pill svg {
@@ -378,10 +378,10 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 7px 10px;
+    padding: 8px 12px;
     border: none;
     background: none;
-    font-size: 12px;
+    font-size: 13px;
     color: #374151;
     border-radius: 6px;
     cursor: pointer;
@@ -399,8 +399,8 @@ body {
 }
 
 .svc-view-btn {
-    padding: 3px 12px;
-    font-size: 8px;
+    padding: 5px 14px;
+    font-size: 12px;
     font-weight: 600;
     color: #287D65;
     background-color: #FFFFFF;
@@ -457,8 +457,8 @@ body {
     background-color: #FFFFFF;
     border-radius: 10px;
     width: 92%;
-    max-width: 460px;
-    max-height: 86vh;
+    max-width: 620px;
+    max-height: 88vh;
     overflow-y: auto;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
     animation: svcModalIn 0.2s ease;
@@ -512,7 +512,7 @@ body {
 
 .svc-field-label {
     display: block;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     color: #555555;
     margin-bottom: 4px;
@@ -601,12 +601,12 @@ body {
 
 .svc-view-card {
     background-color: #FFFFFF;
-    width: 443px;
-    max-width: 100%;
+    width: 700px;
+    max-width: 96%;
     border-top: 2px solid #64C4A5;
     border-radius: 4px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    padding: 14px 16px;
+    padding: 16px 20px;
 }
 
 /* top action bar */
@@ -625,9 +625,9 @@ body {
     background-color: #FFFFFF;
     border: 1px solid #ECECEC;
     border-radius: 6px;
-    width: 90px;
-    height: 30px;
-    font-size: 10px;
+    width: 96px;
+    height: 34px;
+    font-size: 13px;
     color: #555555;
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -646,9 +646,9 @@ body {
     background-color: #176B52;
     border: 1px solid #176B52;
     border-radius: 6px;
-    width: 90px;
-    height: 29px;
-    font-size: 10px;
+    width: 96px;
+    height: 33px;
+    font-size: 13px;
     color: #FFFFFF;
     cursor: pointer;
     transition: background 0.2s;
@@ -676,11 +676,11 @@ body {
 }
 
 .svc-view-label {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
     color: #222222;
     flex-shrink: 0;
-    min-width: 72px;
+    min-width: 80px;
     padding-top: 3px;
 }
 
@@ -746,13 +746,13 @@ body {
     background-color: #F4F5F7;
     border: none;
     border-radius: 8px;
-    padding: 3px 9px;
-    font-size: 9px;
+    padding: 5px 11px;
+    font-size: 12px;
     font-weight: 500;
     color: #374151;
     cursor: pointer;
     transition: background 0.2s, border 0.2s;
-    min-width: 74px;
+    min-width: 90px;
 }
 
 .svc-view-type svg {
@@ -796,10 +796,10 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 6px 9px;
+    padding: 7px 11px;
     border: none;
     background: none;
-    font-size: 11px;
+    font-size: 13px;
     color: #374151;
     border-radius: 6px;
     cursor: pointer;
@@ -833,13 +833,13 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 120px;
-    height: 88px;
+    min-width: 130px;
+    height: 92px;
     background-color: #F4F4F4;
     border: 1px solid #E5E5E5;
     border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
     color: #555555;
 }
 
@@ -847,10 +847,10 @@ body {
 .svc-view-input {
     flex: 1;
     width: 100%;
-    padding: 4px 8px;
+    padding: 6px 10px;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
-    font-size: 8px;
+    font-size: 13px;
     color: #333333;
     font-family: inherit;
 }
@@ -861,9 +861,9 @@ body {
 }
 
 .svc-view-textarea {
-    min-height: 52px;
+    min-height: 60px;
     resize: vertical;
-    line-height: 11px;
+    line-height: 14px;
 }
 
 /* ─── Edit modal ─── */
@@ -892,9 +892,9 @@ body {
     border-top: 2px solid #64C4A5;
     border-radius: 4px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    padding: 12px 16px;
-    width: 520px;
-    max-width: 100%;
+    padding: 14px 18px;
+    width: 680px;
+    max-width: 96%;
 }
 
 /* top action bar */
@@ -913,9 +913,9 @@ body {
     background-color: #FFFFFF;
     border: 1px solid #ECECEC;
     border-radius: 6px;
-    width: 80px;
-    height: 28px;
-    font-size: 10px;
+    width: 88px;
+    height: 32px;
+    font-size: 12px;
     color: #555555;
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -935,10 +935,10 @@ body {
 .svc-edit-cancel {
     background: none;
     border: none;
-    font-size: 9px;
+    font-size: 12px;
     color: #555555;
     cursor: pointer;
-    padding: 4px 6px;
+    padding: 6px 8px;
     transition: color 0.2s;
 }
 
@@ -954,9 +954,9 @@ body {
     background-color: #68C6A7;
     border: 1px solid #68C6A7;
     border-radius: 5px;
-    width: 78px;
-    height: 26px;
-    font-size: 9px;
+    width: 86px;
+    height: 30px;
+    font-size: 12px;
     color: #FFFFFF;
     cursor: pointer;
     transition: background 0.2s;
@@ -973,9 +973,9 @@ body {
     background-color: #FF6B59;
     border: 1px solid #FF6B59;
     border-radius: 5px;
-    width: 130px;
-    height: 21px;
-    font-size: 8px;
+    width: 140px;
+    height: 28px;
+    font-size: 12px;
     color: #FFFFFF;
     cursor: pointer;
     transition: background 0.2s;
@@ -1005,27 +1005,27 @@ body {
 }
 
 .svc-edit-label {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 700;
     color: #222222;
-    min-width: 70px;
+    min-width: 80px;
 }
 
 .svc-edit-val-id {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 600;
     color: #28765F;
 }
 
 .svc-edit-input {
     width: 100%;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 13px;
     color: #333333;
     font-family: inherit;
-    height: 29px;
+    height: 34px;
     box-sizing: border-box;
 }
 
@@ -1036,11 +1036,11 @@ body {
 
 .svc-edit-textarea {
     width: 100%;
-    min-height: 57px;
-    padding: 6px 10px;
+    min-height: 64px;
+    padding: 8px 12px;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 13px;
     color: #333333;
     font-family: inherit;
     line-height: 1.4;
@@ -1107,9 +1107,9 @@ body {
 
 .svc-edit-input-sm {
     width: 100%;
-    height: 27px;
+    height: 32px;
     padding-right: 28px;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 .svc-edit-ico {
@@ -1129,12 +1129,12 @@ body {
     justify-content: space-between;
     gap: 8px;
     width: 100%;
-    height: 27px;
-    padding: 0 10px;
+    height: 32px;
+    padding: 0 12px;
     background-color: #FFFFFF;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 13px;
     color: #333333;
     cursor: pointer;
     box-sizing: border-box;
@@ -1183,10 +1183,10 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 6px 10px;
+    padding: 7px 12px;
     border: none;
     background: none;
-    font-size: 11px;
+    font-size: 13px;
     color: #374151;
     border-radius: 6px;
     cursor: pointer;
@@ -1211,13 +1211,13 @@ body {
     background-color: #F4F5F7;
     border: none;
     border-radius: 8px;
-    padding: 3px 9px;
-    font-size: 9px;
+    padding: 5px 11px;
+    font-size: 12px;
     font-weight: 500;
     color: #374151;
     cursor: pointer;
     transition: background 0.2s, border 0.2s;
-    min-width: 74px;
+    min-width: 90px;
 }
 
 .svc-edit-type svg {
@@ -1261,10 +1261,10 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 6px 9px;
+    padding: 7px 11px;
     border: none;
     background: none;
-    font-size: 11px;
+    font-size: 13px;
     color: #374151;
     border-radius: 6px;
     cursor: pointer;
@@ -1329,23 +1329,23 @@ body {
     gap: 4px;
     background-color: #D2F2D4;
     color: #009C1A;
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 500;
     border-radius: 5px;
-    padding: 2px 7px;
+    padding: 3px 8px;
 }
 
 .svc-edit-cat-tag-remove {
     background: none;
     border: none;
-    font-size: 10px;
+    font-size: 12px;
     color: #009C1A;
     cursor: pointer;
     line-height: 1;
 }
 
 .svc-edit-cat-clear {
-    font-size: 8px;
+    font-size: 12px;
     color: #009C1A;
     font-weight: 600;
     cursor: pointer;
@@ -1391,10 +1391,10 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 7px 10px;
+    padding: 8px 12px;
     border: none;
     background: none;
-    font-size: 11px;
+    font-size: 13px;
     color: #374151;
     border-radius: 6px;
     cursor: pointer;
@@ -1437,9 +1437,9 @@ body {
     border-top: 2px solid #64C4A5;
     border-radius: 4px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    padding: 12px 16px;
-    width: 520px;
-    max-width: 100%;
+    padding: 14px 18px;
+    width: 680px;
+    max-width: 96%;
 }
 
 /* top action bar */
@@ -1457,9 +1457,9 @@ body {
     background-color: #FFFFFF;
     border: 1px solid #ECECEC;
     border-radius: 5px;
-    width: 80px;
-    height: 28px;
-    font-size: 10px;
+    width: 88px;
+    height: 32px;
+    font-size: 12px;
     color: #555555;
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -1479,10 +1479,10 @@ body {
 .svc-new-cancel {
     background: none;
     border: none;
-    font-size: 9px;
+    font-size: 12px;
     color: #222222;
     cursor: pointer;
-    padding: 4px 6px;
+    padding: 6px 8px;
     transition: color 0.2s;
 }
 
@@ -1498,9 +1498,9 @@ body {
     background-color: #68C6A7;
     border: 1px solid #68C6A7;
     border-radius: 5px;
-    width: 78px;
-    height: 26px;
-    font-size: 9px;
+    width: 86px;
+    height: 30px;
+    font-size: 12px;
     color: #FFFFFF;
     cursor: pointer;
     transition: background 0.2s;
@@ -1530,27 +1530,27 @@ body {
 }
 
 .svc-new-label {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 700;
     color: #222222;
-    min-width: 70px;
+    min-width: 80px;
 }
 
 .svc-new-val-id {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 600;
     color: #28765F;
 }
 
 .svc-new-input {
     width: 100%;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 13px;
     color: #333333;
     font-family: inherit;
-    height: 29px;
+    height: 34px;
     box-sizing: border-box;
 }
 
@@ -1569,11 +1569,11 @@ body {
 
 .svc-new-textarea {
     width: 100%;
-    min-height: 64px;
-    padding: 6px 10px;
+    min-height: 70px;
+    padding: 8px 12px;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 13px;
     color: #333333;
     font-family: inherit;
     line-height: 1.4;
@@ -1607,13 +1607,13 @@ body {
     background-color: #F4F5F7;
     border: none;
     border-radius: 8px;
-    padding: 3px 9px;
-    font-size: 9px;
+    padding: 5px 11px;
+    font-size: 12px;
     font-weight: 500;
     color: #374151;
     cursor: pointer;
     transition: background 0.2s, border 0.2s;
-    min-width: 74px;
+    min-width: 90px;
 }
 
 .svc-new-type svg {
@@ -1665,10 +1665,10 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 6px 9px;
+    padding: 7px 11px;
     border: none;
     background: none;
-    font-size: 11px;
+    font-size: 13px;
     color: #374151;
     border-radius: 6px;
     cursor: pointer;
@@ -1729,9 +1729,9 @@ body {
 
 .svc-new-input-sm {
     width: 100%;
-    height: 27px;
+    height: 32px;
     padding-right: 28px;
-    font-size: 11px;
+    font-size: 13px;
     box-sizing: border-box;
 }
 
@@ -1756,12 +1756,12 @@ body {
     justify-content: space-between;
     gap: 8px;
     width: 100%;
-    height: 27px;
-    padding: 0 10px;
+    height: 32px;
+    padding: 0 12px;
     background-color: #FFFFFF;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 13px;
     color: #333333;
     cursor: pointer;
     box-sizing: border-box;
@@ -1810,10 +1810,10 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 6px 10px;
+    padding: 7px 12px;
     border: none;
     background: none;
-    font-size: 11px;
+    font-size: 13px;
     color: #374151;
     border-radius: 6px;
     cursor: pointer;
@@ -1859,29 +1859,29 @@ body {
     gap: 4px;
     background-color: #D2F2D4;
     color: #009C1A;
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 500;
     border-radius: 5px;
-    padding: 2px 7px;
+    padding: 3px 8px;
 }
 
 .svc-new-cat-tag-remove {
     background: none;
     border: none;
-    font-size: 10px;
+    font-size: 12px;
     color: #009C1A;
     cursor: pointer;
     line-height: 1;
 }
 
 .svc-new-cat-placeholder {
-    font-size: 10px;
+    font-size: 13px;
     color: #A9A9A9;
     flex: 1;
 }
 
 .svc-new-cat-clear {
-    font-size: 8px;
+    font-size: 12px;
     color: #009C1A;
     font-weight: 600;
     cursor: pointer;
@@ -1927,10 +1927,10 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 7px 10px;
+    padding: 8px 12px;
     border: none;
     background: none;
-    font-size: 11px;
+    font-size: 13px;
     color: #374151;
     border-radius: 6px;
     cursor: pointer;
