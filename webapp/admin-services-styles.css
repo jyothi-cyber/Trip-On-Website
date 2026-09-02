@@ -311,32 +311,49 @@ body {
 .svc-status-pill {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 6px;
-    padding: 3px 10px;
+    padding: 4px 10px;
     font-size: 11px;
-    font-weight: 600;
-    color: #287D65;
-    background-color: #FFFFFF;
-    border: 1px solid #C9E4D8;
-    border-radius: 10px;
+    font-weight: 500;
+    color: #374151;
+    background-color: #F4F5F7;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, border 0.2s;
+    min-width: 78px;
+}
+
+.svc-status-pill svg {
+    color: #9CA3AF;
+    transition: transform 0.2s;
+    flex-shrink: 0;
 }
 
 .svc-status-pill:hover {
-    background-color: #F0FAF6;
+    background-color: #EBEDF0;
+}
+
+.svc-status-pill.svc-open {
+    background-color: #FFFFFF;
+    border: 1px solid #D9E0E8;
+}
+
+.svc-status-pill.svc-open svg {
+    transform: rotate(180deg);
 }
 
 .svc-status-menu {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
     background-color: #FFFFFF;
-    border: 1px solid #E5E5E5;
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    min-width: 110px;
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
     padding: 4px;
     z-index: 40;
 }
@@ -349,18 +366,19 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 6px 10px;
+    padding: 7px 10px;
     border: none;
     background: none;
     font-size: 12px;
-    color: #333333;
-    border-radius: 4px;
+    color: #374151;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.15s, color 0.15s;
 }
 
 .svc-status-option:hover {
-    background-color: #F0FAF6;
-    color: #287D65;
+    background-color: #D2F2D4;
+    color: #009C1A;
 }
 
 /* ─── View Details ─── */
@@ -678,32 +696,49 @@ body {
 .svc-view-type {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background-color: #FFFFFF;
-    border: 1px solid #D9E9E2;
-    border-radius: 6px;
-    padding: 3px 8px;
-    font-size: 7px;
+    justify-content: space-between;
+    gap: 8px;
+    background-color: #F4F5F7;
+    border: none;
+    border-radius: 8px;
+    padding: 3px 9px;
+    font-size: 9px;
     font-weight: 500;
-    color: #287D65;
+    color: #374151;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, border 0.2s;
+    min-width: 74px;
+}
+
+.svc-view-type svg {
+    color: #9CA3AF;
+    transition: transform 0.2s;
+    flex-shrink: 0;
 }
 
 .svc-view-type:hover {
-    background-color: #F0FAF6;
+    background-color: #EBEDF0;
+}
+
+.svc-view-type.svc-open {
+    background-color: #FFFFFF;
+    border: 1px solid #D9E0E8;
+}
+
+.svc-view-type.svc-open svg {
+    transform: rotate(180deg);
 }
 
 .svc-view-type-menu {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
     background-color: #FFFFFF;
-    border: 1px solid #E5E5E5;
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    min-width: 100px;
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    min-width: 110px;
     padding: 4px;
     z-index: 50;
 }
@@ -716,18 +751,19 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 5px 9px;
+    padding: 6px 9px;
     border: none;
     background: none;
     font-size: 11px;
-    color: #333333;
-    border-radius: 4px;
+    color: #374151;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.15s, color 0.15s;
 }
 
 .svc-view-type-option:hover {
-    background-color: #F0FAF6;
-    color: #287D65;
+    background-color: #D2F2D4;
+    color: #009C1A;
 }
 
 /* images area */
@@ -963,30 +999,48 @@ body {
 .svc-edit-type {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background-color: #FFFFFF;
-    border: 1px solid #D9E9E2;
+    justify-content: space-between;
+    gap: 8px;
+    background-color: #F4F5F7;
+    border: none;
     border-radius: 8px;
-    padding: 3px 10px;
-    font-size: 8px;
-    color: #287D65;
+    padding: 3px 9px;
+    font-size: 9px;
+    font-weight: 500;
+    color: #374151;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, border 0.2s;
+    min-width: 74px;
+}
+
+.svc-edit-type svg {
+    color: #9CA3AF;
+    transition: transform 0.2s;
+    flex-shrink: 0;
 }
 
 .svc-edit-type:hover {
-    background-color: #F0FAF6;
+    background-color: #EBEDF0;
+}
+
+.svc-edit-type.svc-open {
+    background-color: #FFFFFF;
+    border: 1px solid #D9E0E8;
+}
+
+.svc-edit-type.svc-open svg {
+    transform: rotate(180deg);
 }
 
 .svc-edit-type-menu {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
     background-color: #FFFFFF;
-    border: 1px solid #E5E5E5;
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     min-width: 110px;
     padding: 4px;
     z-index: 60;
@@ -1000,18 +1054,19 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 5px 9px;
+    padding: 6px 9px;
     border: none;
     background: none;
     font-size: 11px;
-    color: #333333;
-    border-radius: 4px;
+    color: #374151;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.15s, color 0.15s;
 }
 
 .svc-edit-type-option:hover {
-    background-color: #F0FAF6;
-    color: #287D65;
+    background-color: #D2F2D4;
+    color: #009C1A;
 }
 
 /* images add button */
@@ -1041,14 +1096,16 @@ body {
     gap: 6px;
     width: 100%;
     min-height: 30px;
-    padding: 3px 8px;
-    border: 1px solid #E0E0E0;
-    border-radius: 6px;
+    padding: 3px 10px;
+    background-color: #F4F5F7;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
 }
 
-.svc-edit-cat:focus-within {
-    border-color: #68C6A7;
+.svc-edit-cat.svc-open {
+    background-color: #FFFFFF;
+    border: 1px solid #D9E0E8;
 }
 
 .svc-edit-cat-tags {
@@ -1063,10 +1120,11 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background-color: #F0F0F0;
-    color: #333333;
+    background-color: #D2F2D4;
+    color: #009C1A;
     font-size: 8px;
-    border-radius: 4px;
+    font-weight: 500;
+    border-radius: 5px;
     padding: 2px 7px;
 }
 
@@ -1074,14 +1132,15 @@ body {
     background: none;
     border: none;
     font-size: 10px;
-    color: #555555;
+    color: #009C1A;
     cursor: pointer;
     line-height: 1;
 }
 
 .svc-edit-cat-clear {
     font-size: 8px;
-    color: #287D65;
+    color: #009C1A;
+    font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
     display: none;
@@ -1090,24 +1149,31 @@ body {
 .svc-edit-cat-arrow {
     background: none;
     border: none;
-    color: #555555;
+    color: #9CA3AF;
     cursor: pointer;
     display: flex;
     align-items: center;
+    transition: transform 0.2s;
+}
+
+.svc-edit-cat.svc-open .svc-edit-cat-arrow {
+    transform: rotate(180deg);
 }
 
 .svc-edit-cat-menu {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
     width: 100%;
     background-color: #FFFFFF;
-    border: 1px solid #E5E5E5;
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     padding: 4px;
     z-index: 60;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .svc-edit-cat-menu.svc-open {
@@ -1118,21 +1184,23 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 6px 10px;
+    padding: 7px 10px;
     border: none;
     background: none;
     font-size: 11px;
-    color: #333333;
-    border-radius: 4px;
+    color: #374151;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.15s, color 0.15s;
 }
 
 .svc-edit-cat-option:hover {
-    background-color: #F0FAF6;
+    background-color: #D2F2D4;
+    color: #009C1A;
 }
 
 .svc-edit-cat-option.svc-selected {
-    color: #287D65;
+    color: #009C1A;
     font-weight: 600;
 }
 
@@ -1322,36 +1390,56 @@ body {
 .svc-new-type {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background-color: #FFFFFF;
-    border: 1px solid #E5E5E5;
+    justify-content: space-between;
+    gap: 8px;
+    background-color: #F4F5F7;
+    border: none;
     border-radius: 8px;
-    padding: 3px 10px;
-    font-size: 8px;
-    color: #A9A9A9;
+    padding: 3px 9px;
+    font-size: 9px;
+    font-weight: 500;
+    color: #374151;
     cursor: pointer;
-    transition: background 0.2s;
-    min-width: 67px;
-    height: 17px;
+    transition: background 0.2s, border 0.2s;
+    min-width: 74px;
 }
 
-.svc-new-type.svc-has-value {
-    color: #287D65;
+.svc-new-type svg {
+    color: #9CA3AF;
+    transition: transform 0.2s;
+    flex-shrink: 0;
 }
 
 .svc-new-type:hover {
-    background-color: #F0FAF6;
+    background-color: #EBEDF0;
+}
+
+.svc-new-type.svc-open {
+    background-color: #FFFFFF;
+    border: 1px solid #D9E0E8;
+}
+
+.svc-new-type.svc-open svg {
+    transform: rotate(180deg);
+}
+
+.svc-new-type.svc-has-value {
+    color: #374151;
+}
+
+.svc-new-type:not(.svc-has-value) {
+    color: #A9A9A9;
 }
 
 .svc-new-type-menu {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
     background-color: #FFFFFF;
-    border: 1px solid #E5E5E5;
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     min-width: 110px;
     padding: 4px;
     z-index: 60;
@@ -1365,18 +1453,19 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 5px 9px;
+    padding: 6px 9px;
     border: none;
     background: none;
     font-size: 11px;
-    color: #333333;
-    border-radius: 4px;
+    color: #374151;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.15s, color 0.15s;
 }
 
 .svc-new-type-option:hover {
-    background-color: #F0FAF6;
-    color: #287D65;
+    background-color: #D2F2D4;
+    color: #009C1A;
 }
 
 /* image slots */
@@ -1409,14 +1498,16 @@ body {
     gap: 6px;
     width: 100%;
     min-height: 27px;
-    padding: 3px 8px;
-    border: 1px solid #D0D0D0;
-    border-radius: 6px;
+    padding: 3px 10px;
+    background-color: #F4F5F7;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
 }
 
-.svc-new-cat:focus-within {
-    border-color: #68C6A7;
+.svc-new-cat.svc-open {
+    background-color: #FFFFFF;
+    border: 1px solid #D9E0E8;
 }
 
 .svc-new-cat-tags {
@@ -1431,10 +1522,11 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background-color: #F0F0F0;
-    color: #333333;
+    background-color: #D2F2D4;
+    color: #009C1A;
     font-size: 8px;
-    border-radius: 4px;
+    font-weight: 500;
+    border-radius: 5px;
     padding: 2px 7px;
 }
 
@@ -1442,7 +1534,7 @@ body {
     background: none;
     border: none;
     font-size: 10px;
-    color: #555555;
+    color: #009C1A;
     cursor: pointer;
     line-height: 1;
 }
@@ -1455,7 +1547,8 @@ body {
 
 .svc-new-cat-clear {
     font-size: 8px;
-    color: #287D65;
+    color: #009C1A;
+    font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
     display: none;
@@ -1464,24 +1557,31 @@ body {
 .svc-new-cat-arrow {
     background: none;
     border: none;
-    color: #555555;
+    color: #9CA3AF;
     cursor: pointer;
     display: flex;
     align-items: center;
+    transition: transform 0.2s;
+}
+
+.svc-new-cat.svc-open .svc-new-cat-arrow {
+    transform: rotate(180deg);
 }
 
 .svc-new-cat-menu {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
     width: 100%;
     background-color: #FFFFFF;
-    border: 1px solid #E5E5E5;
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border: 1px solid #E1E5EA;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     padding: 4px;
     z-index: 60;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .svc-new-cat-menu.svc-open {
@@ -1492,21 +1592,23 @@ body {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 6px 10px;
+    padding: 7px 10px;
     border: none;
     background: none;
     font-size: 11px;
-    color: #333333;
-    border-radius: 4px;
+    color: #374151;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.15s, color 0.15s;
 }
 
 .svc-new-cat-option:hover {
-    background-color: #F0FAF6;
+    background-color: #D2F2D4;
+    color: #009C1A;
 }
 
 .svc-new-cat-option.svc-selected {
-    color: #287D65;
+    color: #009C1A;
     font-weight: 600;
 }
 

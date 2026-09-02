@@ -134,13 +134,21 @@ function toggleStatusMenu(id) {
     if (!menu) { return; }
     var open = menu.classList.contains('svc-open');
     closeAllStatusMenus();
-    if (!open) { menu.classList.add('svc-open'); }
+    if (!open) {
+        menu.classList.add('svc-open');
+        var wrap = menu.parentElement;
+        var pill = wrap ? wrap.querySelector('.svc-status-pill') : null;
+        if (pill) { pill.classList.add('svc-open'); }
+    }
 }
 
 function closeAllStatusMenus() {
-    var menus = document.querySelectorAll('.svc-status-menu');
-    for (var i = 0; i < menus.length; i++) {
-        menus[i].classList.remove('svc-open');
+    var wraps = document.querySelectorAll('.svc-status-wrap');
+    for (var i = 0; i < wraps.length; i++) {
+        var pill = wraps[i].querySelector('.svc-status-pill');
+        var menu = wraps[i].querySelector('.svc-status-menu');
+        if (pill) { pill.classList.remove('svc-open'); }
+        if (menu) { menu.classList.remove('svc-open'); }
     }
 }
 
@@ -208,15 +216,25 @@ function serviceLabelFor(tab) {
 /* ─── View type dropdown ─── */
 function toggleViewTypeMenu() {
     var menu = document.getElementById('svcViewTypeMenu');
-    if (menu) {
-        closeViewTypeMenu();
+    var wrap = null;
+    if (menu) { wrap = menu.parentElement; }
+    var already = menu ? menu.classList.contains('svc-open') : false;
+    closeViewTypeMenu();
+    if (!already) {
         menu.classList.add('svc-open');
+        var trigger = wrap ? wrap.querySelector('.svc-view-type') : null;
+        if (trigger) { trigger.classList.add('svc-open'); }
     }
 }
 
 function closeViewTypeMenu() {
     var menu = document.getElementById('svcViewTypeMenu');
-    if (menu) { menu.classList.remove('svc-open'); }
+    if (menu) {
+        menu.classList.remove('svc-open');
+        var wrap = menu.parentElement;
+        var trigger = wrap ? wrap.querySelector('.svc-view-type') : null;
+        if (trigger) { trigger.classList.remove('svc-open'); }
+    }
 }
 
 function setViewType(status) {
@@ -268,15 +286,20 @@ function closeEditModal() {
 /* ─── Edit type dropdown ─── */
 function toggleEditTypeMenu() {
     var menu = document.getElementById('svcEditTypeMenu');
-    if (menu) {
-        closeEditTypeMenu();
+    var already = menu ? menu.classList.contains('svc-open') : false;
+    closeEditTypeMenu();
+    if (!already) {
         menu.classList.add('svc-open');
+        var trigger = document.getElementById('svcEditType');
+        if (trigger) { trigger.classList.add('svc-open'); }
     }
 }
 
 function closeEditTypeMenu() {
     var menu = document.getElementById('svcEditTypeMenu');
     if (menu) { menu.classList.remove('svc-open'); }
+    var trigger = document.getElementById('svcEditType');
+    if (trigger) { trigger.classList.remove('svc-open'); }
 }
 
 function setEditType(status) {
@@ -355,14 +378,18 @@ function toggleEditCatMenu() {
     renderEditCatMenu();
     var menu = document.getElementById('svcEditCatMenu');
     if (menu) {
-        if (menu.classList.contains('svc-open')) { menu.classList.remove('svc-open'); }
-        else { menu.classList.add('svc-open'); }
+        var open = menu.classList.contains('svc-open');
+        menu.classList.toggle('svc-open');
+        var box = document.getElementById('svcEditCat');
+        if (box) { box.classList.toggle('svc-open', !open); }
     }
 }
 
 function closeEditCatMenu() {
     var menu = document.getElementById('svcEditCatMenu');
     if (menu) { menu.classList.remove('svc-open'); }
+    var box = document.getElementById('svcEditCat');
+    if (box) { box.classList.remove('svc-open'); }
 }
 
 /* ─── Edit images ─── */
@@ -446,6 +473,8 @@ function openNewItemModal() {
 
     document.getElementById('svcNewId').textContent = '#' + idPrefix + '-AUTO';
     document.getElementById('svcNewTypeVal').textContent = 'Select';
+    var pill = document.getElementById('svcNewType');
+    if (pill) { pill.classList.remove('svc-has-value'); }
     document.getElementById('svcItemName').value = '';
     document.getElementById('svcItemLocation').value = '';
     document.getElementById('svcItemDetails').value = '';
@@ -465,15 +494,20 @@ function closeNewModal() {
 /* ─── New type dropdown ─── */
 function toggleNewTypeMenu() {
     var menu = document.getElementById('svcNewTypeMenu');
-    if (menu) {
-        closeNewTypeMenu();
+    var already = menu ? menu.classList.contains('svc-open') : false;
+    closeNewTypeMenu();
+    if (!already) {
         menu.classList.add('svc-open');
+        var trigger = document.getElementById('svcNewType');
+        if (trigger) { trigger.classList.add('svc-open'); }
     }
 }
 
 function closeNewTypeMenu() {
     var menu = document.getElementById('svcNewTypeMenu');
     if (menu) { menu.classList.remove('svc-open'); }
+    var trigger = document.getElementById('svcNewType');
+    if (trigger) { trigger.classList.remove('svc-open'); }
 }
 
 function setNewType(status) {
@@ -550,14 +584,18 @@ function toggleNewCatMenu() {
     renderNewCatMenu();
     var menu = document.getElementById('svcNewCatMenu');
     if (menu) {
-        if (menu.classList.contains('svc-open')) { menu.classList.remove('svc-open'); }
-        else { menu.classList.add('svc-open'); }
+        var open = menu.classList.contains('svc-open');
+        menu.classList.toggle('svc-open');
+        var box = document.getElementById('svcNewCat');
+        if (box) { box.classList.toggle('svc-open', !open); }
     }
 }
 
 function closeNewCatMenu() {
     var menu = document.getElementById('svcNewCatMenu');
     if (menu) { menu.classList.remove('svc-open'); }
+    var box = document.getElementById('svcNewCat');
+    if (box) { box.classList.remove('svc-open'); }
 }
 
 /* ─── Save new activity ─── */
