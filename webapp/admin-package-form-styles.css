@@ -313,6 +313,149 @@
     font-weight: 600;
 }
 
+/* ── Hotel Type Selection ── */
+.hotel-type-wrap {
+    position: relative;
+}
+
+.hotel-type-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 620px;
+    max-width: 100%;
+    height: 25px;
+    padding: 0 10px;
+    background: #FFFFFF;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    font-size: 9px;
+    color: #333333;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border 0.2s;
+}
+
+.hotel-type-dropdown:hover {
+    border-color: #B5B5B5;
+}
+
+.hotel-type-checkbox {
+    font-size: 10px;
+    color: #555555;
+    line-height: 1;
+}
+
+.hotel-type-checkbox.checked {
+    color: #009C1A;
+}
+
+.hotel-type-value {
+    flex: 1;
+    color: #333333;
+}
+
+.hotel-type-arrow {
+    color: #9CA3AF;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.hotel-type-dropdown.open .hotel-type-arrow {
+    transform: rotate(180deg);
+}
+
+.hotel-select-panel {
+    display: none;
+    width: 618px;
+    max-width: 100%;
+    height: 250px;
+    background: #D9D9D9;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 4px;
+    box-sizing: border-box;
+    z-index: 40;
+}
+
+.hotel-select-panel.show {
+    display: block;
+}
+
+.hotel-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.hotel-search-input {
+    width: 100%;
+    height: 20px;
+    padding: 0 8px;
+    border: none;
+    background: #FFFFFF;
+    border-radius: 3px;
+    font-size: 8px;
+    color: #333333;
+    box-sizing: border-box;
+}
+
+.hotel-search-input:focus {
+    outline: none;
+}
+
+.hotel-search-icon {
+    position: absolute;
+    right: 8px;
+    color: #777777;
+    pointer-events: none;
+}
+
+.hotel-list {
+    margin-top: 6px;
+    height: 170px;
+    overflow-y: auto;
+}
+
+.hotel-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 4px 6px;
+    font-size: 9px;
+    color: #222222;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.hotel-row:hover {
+    background: #F0F0F0;
+}
+
+.hotel-row.selected {
+    background: #D2F2D4;
+    color: #009C1A;
+}
+
+.hotel-row-name {
+    font-weight: 600;
+}
+
+.hotel-row-id {
+    margin-left: auto;
+    color: #222222;
+    white-space: nowrap;
+}
+
+.hotel-destination {
+    margin-top: 6px;
+    font-size: 8px;
+    font-weight: 500;
+    color: #222222;
+    text-align: left;
+}
+
 /* Checkbox Group */
 .checkbox-group {
     margin-top: 8px;

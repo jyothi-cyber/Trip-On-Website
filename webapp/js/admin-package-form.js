@@ -742,3 +742,104 @@ document.addEventListener('click', function (e) {
 
 window.togglePkgFormDropdown = togglePkgFormDropdown;
 window.selectPkgFormDropdown = selectPkgFormDropdown;
+
+// ============================================================================
+// HOTEL TYPE SELECTION
+// ============================================================================
+
+var hotelTypeOptions = [
+    'Budget Hotels',
+    'Economy Hotels',
+    'Premium Hotels',
+    'Luxury Hotels',
+    '5 Star Hotels'
+];
+
+var hotelOptions = [
+    { name: 'Hotel Name', id: '#hotel101' },
+    { name: 'Hotel Name', id: '#hotel101' },
+    { name: 'Hotel Name', id: '#hotel101' },
+    { name: 'Beach Resort', id: '#hotel102' },
+    { name: 'Villa Bay', id: '#hotel103' },
+    { name: 'Ocean View', id: '#hotel104' }
+];
+
+function renderHotels() {
+    var list = document.getElementById('hotelList');
+    if (!list) { return; }
+    list.innerHTML = '';
+    var query = (document.getElementById('hotelSearchInput').value || '').toLowerCase();
+    for (var i = 0; i < hotelOptions.length; i++) {
+        var h = hotelOptions[i];
+        var text = (h.name + ' ' + h.id).toLowerCase();
+        if (query && text.indexOf(query) === -1) { continue; }
+        (function (hotel) {
+            var row = document.createElement('div');
+            row.className = 'hotel-row';
+            row.innerHTML = '<span class="hotel-row-name">' + escapeHtml(hotel.name) + '</span><span class="hotel-row-id">' + escapeHtml(hotel.id) + '</span>';
+            row.addEventListener('click', function () {
+                var hidden = document.getElementById('typeHotels');
+                if (hidden) { hidden.value = hotel.name + ' ' + hotel.id; }
+                document.querySelectorAll('.hotel-row').forEach(function (r) { r.classList.remove('selected'); });
+                row.classList.add('selected');
+                closeHotelTypePanel();
+                var cb = document.getElementById('hotelTypeCheckbox');
+                if (cb) { cb.textContent = '\u2611'; cb.classList.add('checked'); }
+            });
+            list.appendChild(row);
+        })(h);
+    }
+}
+
+function openHotelTypePanel() {
+    var dropdown = document.getElementById('hotelTypeDropdown');
+    var panel = document.getElementById('hotelSelectPanel');
+    var arrow = document.getElementById('hotelTypeArrow');
+    if (dropdown) { dropdown.classList.add('open'); }
+    if (panel) { panel.classList.add('show'); }
+    if (arrow) { arrow.style.transform = 'rotate(0deg)'; }
+    var dest = document.getElementById('pkgDestination');
+    var destVal = document.getElementById('hotelDestinationVal');
+    if (destVal) { destVal.textContent = (dest && dest.value) ? dest.value : 'Andaman'; }
+    renderHotels();
+    var search = document.getElementById('hotelSearchInput');
+    if (search) { search.value = ''; }
+}
+
+function closeHotelTypePanel() {
+    var dropdown = document.getElementById('hotelTypeDropdown');
+    var panel = document.getElementById('hotelSelectPanel');
+    if (dropdown) { dropdown.classList.remove('open'); }
+    if (panel) { panel.classList.remove('show'); }
+}
+
+function toggleHotelTypePanel() {
+    var panel = document.getElementById('hotelSelectPanel');
+    var open = panel && panel.classList.contains('show');
+    if (open) { closeHotelTypePanel(); }
+    else { openHotelTypePanel(); }
+}
+
+function filterHotels() {
+    renderHotels();
+}
+
+document.addEventListener('click', function (e) {
+    if (!e.target.closest('.hotel-type-wrap')) {
+        closeHotelTypePanel();
+    }
+});
+
+window.toggleHotelTypePanel = toggleHotelTypePanel;
+window.filterHotels = filterHotels;
+window.openHotelTypePanel = openHotelTypePanel;
+
+function escapeHtml(text) {
+    if (!text) { return ''; }
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
