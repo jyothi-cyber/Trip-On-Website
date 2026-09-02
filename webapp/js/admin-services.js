@@ -193,13 +193,16 @@ function buildRowHtml(cfg, item, idPrefix) {
             cell = '<td><div class="svc-cat-tags">' + catHtml + '</div></td>';
         } else if (key === 'status') {
             cell = '<td><div class="svc-status-wrap">' +
-                '<div class="svc-status-pill" onclick="toggleStatusMenu(' + item.id + ')"><span>' + escapeHtml(item.status) + '</span>' +
-                '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+                '<button type="button" class="svc-status-pill" onclick="toggleStatusMenu(' + item.id + ')">' +
+                    '<span class="svc-status-dot svc-dot-' + item.status.toLowerCase() + '"></span>' +
+                    '<span>' + escapeHtml(item.status) + '</span>' +
+                    '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                '</button>' +
                 '<div class="svc-status-menu" id="svcStatusMenu_' + item.id + '">' +
-                    '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Static\')">Static</button>' +
-                    '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Popular\')">Popular</button>' +
-                    '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Inactive\')">Inactive</button>' +
-                    '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Featured\')">Featured</button>' +
+                    '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Static\')"><span class="svc-status-dot svc-dot-static"></span>Static</button>' +
+                    '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Popular\')"><span class="svc-status-dot svc-dot-popular"></span>Popular</button>' +
+                    '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Inactive\')"><span class="svc-status-dot svc-dot-inactive"></span>Inactive</button>' +
+                    '<button class="svc-status-option" onclick="setStatus(' + item.id + ',\'Featured\')"><span class="svc-status-dot svc-dot-featured"></span>Featured</button>' +
                 '</div>' +
             '</div></td>';
         } else if (key === 'rating') {
@@ -267,31 +270,62 @@ function openViewModal(tab, id) {
     var cfg = tabConfigFor(tab);
     var idPrefix = cfg.prefix;
 
-    var idLabel = document.querySelector('.svc-view-row .svc-view-label');
-    if (idLabel) { idLabel.textContent = serviceLabelFor(tab) + ' :'; }
-
-    document.getElementById('svcViewId').textContent = '#' + idPrefix + '-' + padZero(item.id);
-    document.getElementById('svcViewTitle').textContent = item.name;
-    document.getElementById('svcViewLocation').textContent = item.location;
-    document.getElementById('svcViewDetails').textContent = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
-    document.getElementById('svcViewCheckIn').textContent = item.checkIn || '25 Mar, Sat 2 PM';
-    document.getElementById('svcViewCheckOut').textContent = item.checkOut || '26 Mar, Sat 2 PM';
-    document.getElementById('svcViewFood').textContent = item.food || 'Breakfast, Dinner';
-    document.getElementById('svcViewRoomSize').textContent = item.roomSize || '5 People';
-    document.getElementById('svcViewBedType').textContent = item.bedType || 'Kings';
-    var inc = document.getElementById('svcViewInclusions');
-    if (inc) {
-        var inclArr = item.inclusions || ['Complimentary Dinner is available.', 'Beach View Reserved Table.'];
-        inc.innerHTML = '';
-        for (var j = 0; j < inclArr.length; j++) {
-            if (j > 0) { inc.appendChild(document.createElement('br')); }
-            inc.appendChild(document.createTextNode(inclArr[j]));
+    // Open hotel-specific modal for hotels tab
+    if (tab === 'hotels') {
+        document.getElementById('svcHotelViewId').textContent = '#' + idPrefix + '-' + padZero(item.id);
+        document.getElementById('svcHotelViewTitle').textContent = item.name;
+        document.getElementById('svcHotelViewLocation').textContent = item.location;
+        document.getElementById('svcHotelViewDetails').textContent = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
+        document.getElementById('svcHotelViewCheckIn').textContent = item.checkIn || '25 Mar, Sat 2 PM';
+        document.getElementById('svcHotelViewCheckOut').textContent = item.checkOut || '26 Mar, Sat 2 PM';
+        document.getElementById('svcHotelViewFood').textContent = item.food || 'Breakfast, Dinner';
+        document.getElementById('svcHotelViewRoomSize').textContent = item.roomSize || '5 People';
+        document.getElementById('svcHotelViewBedType').textContent = item.bedType || 'Kings';
+        
+        var hotelInc = document.getElementById('svcHotelViewInclusions');
+        if (hotelInc) {
+            var inclArr = item.inclusions || ['Complimentary Dinner is available.', 'Beach View Reserved Table.'];
+            hotelInc.innerHTML = '';
+            for (var j = 0; j < inclArr.length; j++) {
+                if (j > 0) { hotelInc.appendChild(document.createElement('br')); }
+                hotelInc.appendChild(document.createTextNode(inclArr[j]));
+            }
         }
+        
+        renderHotelViewImages(item);
+        openViewOverlay('svcHotelViewModal');
+    } else {
+        // Activity modal
+        var idLabel = document.querySelector('.svc-view-row .svc-view-label');
+        if (idLabel) { idLabel.textContent = serviceLabelFor(tab) + ' :'; }
+
+        document.getElementById('svcViewId').textContent = '#' + idPrefix + '-' + padZero(item.id);
+        document.getElementById('svcViewTitle').textContent = item.name;
+        document.getElementById('svcViewLocation').textContent = item.location;
+        document.getElementById('svcViewDetails').textContent = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
+        
+        // Update type field for activities
+        var typeEl = document.getElementById('svcViewType');
+        if (typeEl) {
+            typeEl.textContent = item.status || 'Feature';
+        }
+
+        renderViewImages(item);
+        openViewOverlay('svcViewModal');
     }
+}
 
-    renderViewImages(item);
-
-    openViewOverlay('svcViewModal');
+function renderHotelViewImages(item) {
+    var wrap = document.getElementById('svcHotelViewImages');
+    if (!wrap) { return; }
+    wrap.innerHTML = '';
+    var n = item.imageCount || 1;
+    for (var i = 0; i < n; i++) {
+        var placeholder = document.createElement('div');
+        placeholder.className = 'svc-view-img-placeholder';
+        placeholder.innerHTML = '<svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/><path d="M3 15l4-4 3 2.5 5-5L18 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+        wrap.appendChild(placeholder);
+    }
 }
 
 function renderViewImages(item) {
@@ -365,31 +399,97 @@ function openEditModal() {
     var cfg = tabConfigFor(viewTab);
     var idPrefix = cfg.prefix;
 
-    var idLabel = document.querySelector('.svc-edit-form .svc-edit-label');
-    if (idLabel) { idLabel.textContent = serviceLabelFor(viewTab) + ' :'; }
+    // Open hotel-specific edit modal for hotels
+    if (viewTab === 'hotels') {
+        document.getElementById('svcHotelEditId').textContent = '#' + idPrefix + '-' + padZero(item.id);
+        document.getElementById('svcHotelEditTitle').value = item.name;
+        document.getElementById('svcHotelEditLocation').value = item.location;
+        document.getElementById('svcHotelEditDetails').value = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
+        document.getElementById('svcHotelEditCheckIn').value = item.checkIn || '25 Mar, Sat 2 PM';
+        document.getElementById('svcHotelEditCheckOut').value = item.checkOut || '26 Mar, Sat 2 PM';
+        document.getElementById('svcHotelEditFoodVal').textContent = item.food || 'Breakfast, Dinner';
+        document.getElementById('svcHotelEditRoomVal').textContent = item.roomSize || '5 People';
+        document.getElementById('svcHotelEditBedVal').textContent = item.bedType || 'Kings';
+        document.getElementById('svcHotelEditInclusions').value = (item.inclusions && item.inclusions.length) ? item.inclusions.join('\n') : 'Complimentary Dinner is available.\nBeach View Reserved Table.';
 
-    document.getElementById('svcEditId').textContent = '#' + idPrefix + '-' + padZero(item.id);
-    document.getElementById('svcEditTitle').value = item.name;
-    document.getElementById('svcEditLocation').value = item.location;
-    document.getElementById('svcEditDetails').value = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
-    document.getElementById('svcEditCheckIn').value = item.checkIn || '25 Mar, Sat 2 PM';
-    document.getElementById('svcEditCheckOut').value = item.checkOut || '26 Mar, Sat 2 PM';
-    document.getElementById('svcEditFoodVal').textContent = item.food || 'Breakfast, Dinner';
-    document.getElementById('svcEditRoomVal').textContent = item.roomSize || '5 People';
-    document.getElementById('svcEditBedVal').textContent = item.bedType || 'Kings';
-    document.getElementById('svcEditInclusions').value = (item.inclusions && item.inclusions.length) ? item.inclusions.join('\n') : 'Complimentary Dinner is available.\nBeach View Reserved Table.';
+        renderHotelEditCatTags(item.categories || ['Basic']);
+        renderHotelEditCatMenu();
 
-    renderEditCatTags(item.categories || ['Basic']);
-    renderEditCatMenu();
+        closeViewOverlay('svcHotelViewModal');
+        openEditOverlay('svcHotelEditModal');
+    } else {
+        // Activity edit modal
+        var idLabel = document.querySelector('.svc-edit-form .svc-edit-label');
+        if (idLabel) { idLabel.textContent = serviceLabelFor(viewTab) + ' :'; }
 
-    closeViewOverlay('svcViewModal');
-    openEditOverlay('svcEditModal');
+        document.getElementById('svcEditId').textContent = '#' + idPrefix + '-' + padZero(item.id);
+        document.getElementById('svcEditTitle').value = item.name;
+        document.getElementById('svcEditLocation').value = item.location;
+        document.getElementById('svcEditDetails').value = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
+        
+        // Set type value for activities
+        var typeValEl = document.getElementById('svcEditTypeVal');
+        if (typeValEl) {
+            typeValEl.textContent = item.status || 'Feature';
+        }
+
+        renderEditCatTags(item.categories || ['Basic']);
+        renderEditCatMenu();
+
+        closeViewOverlay('svcViewModal');
+        openEditOverlay('svcEditModal');
+    }
+}
+
+function renderHotelEditCatTags(cats) {
+    editCategories = cats.slice();
+    var wrap = document.getElementById('svcHotelEditCatTags');
+    if (!wrap) { return; }
+    wrap.innerHTML = '';
+    for (var i = 0; i < editCategories.length; i++) {
+        (function (cat) {
+            var tag = document.createElement('span');
+            tag.className = 'svc-edit-cat-tag';
+            tag.innerHTML = '<span>' + escapeHtml(cat) + '</span><button class="svc-edit-cat-tag-remove" onclick="removeEditCategory(\'' + escapeAttr(cat) + '\')">&times;</button>';
+            wrap.appendChild(tag);
+        })(editCategories[i]);
+    }
+    var clearEl = document.getElementById('svcHotelEditCatClear');
+    if (clearEl) { clearEl.style.display = editCategories.length > 0 ? 'inline-block' : 'none'; }
+}
+
+function renderHotelEditCatMenu() {
+    var menu = document.getElementById('svcHotelEditCatMenu');
+    if (!menu) { return; }
+    menu.innerHTML = '';
+    for (var i = 0; i < availableCategories.length; i++) {
+        var cat = availableCategories[i];
+        var selected = editCategories.indexOf(cat) > -1;
+        (function (c, sel) {
+            var btn = document.createElement('button');
+            btn.className = 'svc-edit-cat-option';
+            btn.textContent = c + (sel ? ' ✓' : '');
+            if (sel) { btn.classList.add('svc-selected'); }
+            btn.addEventListener('click', function () {
+                if (sel) {
+                    removeEditCategory(c);
+                } else {
+                    addEditCategory(c);
+                }
+            });
+            menu.appendChild(btn);
+        })(cat, selected);
+    }
 }
 
 function closeEditModal() {
-    closeEditTypeMenu();
-    closeEditCatMenu();
-    closeEditOverlay('svcEditModal');
+    if (viewTab === 'hotels') {
+        closeEditOverlay('svcHotelEditModal');
+    } else {
+        closeEditTypeMenu();
+        closeEditCatMenu();
+        closeEditOverlay('svcEditModal');
+    }
 }
 
 /* ─── Edit type dropdown ─── */
@@ -397,9 +497,9 @@ function toggleEditTypeMenu() {
     var menu = document.getElementById('svcEditTypeMenu');
     var already = menu ? menu.classList.contains('svc-open') : false;
     closeEditTypeMenu();
-    if (!already) {
+    if (!already && menu) {
         menu.classList.add('svc-open');
-        var trigger = document.getElementById('svcEditType');
+        var trigger = document.getElementById('svcEditTypeBtn');
         if (trigger) { trigger.classList.add('svc-open'); }
     }
 }
@@ -407,7 +507,7 @@ function toggleEditTypeMenu() {
 function closeEditTypeMenu() {
     var menu = document.getElementById('svcEditTypeMenu');
     if (menu) { menu.classList.remove('svc-open'); }
-    var trigger = document.getElementById('svcEditType');
+    var trigger = document.getElementById('svcEditTypeBtn');
     if (trigger) { trigger.classList.remove('svc-open'); }
 }
 
@@ -517,29 +617,49 @@ function saveEditChanges() {
     }
     if (!item) { return; }
 
-    var title = document.getElementById('svcEditTitle').value.trim();
-    if (!title) {
-        showToast('Title is required');
-        return;
-    }
+    if (viewTab === 'hotels') {
+        var title = document.getElementById('svcHotelEditTitle').value.trim();
+        if (!title) {
+            showToast('Title is required');
+            return;
+        }
 
-    item.name = title;
-    item.location = document.getElementById('svcEditLocation').value.trim();
-    item.categories = editCategories.slice();
-    item.details = document.getElementById('svcEditDetails').value;
-    item.checkIn = document.getElementById('svcEditCheckIn').value;
-    item.checkOut = document.getElementById('svcEditCheckOut').value;
-    item.food = document.getElementById('svcEditFoodVal').textContent;
-    item.roomSize = document.getElementById('svcEditRoomVal').textContent;
-    item.bedType = document.getElementById('svcEditBedVal').textContent;
-    var inclusionsRaw = document.getElementById('svcEditInclusions').value;
-    var inclusions = [];
-    var parts = inclusionsRaw.split('\n');
-    for (var bi = 0; bi < parts.length; bi++) {
-        var p = parts[bi].trim();
-        if (p) { inclusions.push(p); }
+        item.name = title;
+        item.location = document.getElementById('svcHotelEditLocation').value.trim();
+        item.categories = editCategories.slice();
+        item.details = document.getElementById('svcHotelEditDetails').value;
+        item.checkIn = document.getElementById('svcHotelEditCheckIn').value;
+        item.checkOut = document.getElementById('svcHotelEditCheckOut').value;
+        item.food = document.getElementById('svcHotelEditFoodVal').textContent;
+        item.roomSize = document.getElementById('svcHotelEditRoomVal').textContent;
+        item.bedType = document.getElementById('svcHotelEditBedVal').textContent;
+        
+        var inclusionsRaw = document.getElementById('svcHotelEditInclusions').value;
+        var inclusions = [];
+        var parts = inclusionsRaw.split('\n');
+        for (var bi = 0; bi < parts.length; bi++) {
+            var p = parts[bi].trim();
+            if (p) { inclusions.push(p); }
+        }
+        item.inclusions = inclusions.length ? inclusions : [];
+    } else {
+        var title = document.getElementById('svcEditTitle').value.trim();
+        if (!title) {
+            showToast('Title is required');
+            return;
+        }
+
+        item.name = title;
+        item.location = document.getElementById('svcEditLocation').value.trim();
+        item.categories = editCategories.slice();
+        item.details = document.getElementById('svcEditDetails').value;
+        
+        // Save type for activities
+        var typeValEl = document.getElementById('svcEditTypeVal');
+        if (typeValEl) {
+            item.status = typeValEl.textContent;
+        }
     }
-    item.inclusions = inclusions.length ? inclusions : [];
 
     saveServicesData(servicesData);
     closeEditModal();
@@ -549,59 +669,62 @@ function saveEditChanges() {
 
 /* ─── Edit Food / Room / Bed dropdowns ─── */
 function toggleEditFoodMenu() {
-    var dd = document.getElementById('svcEditFood');
-    var menu = document.getElementById('svcEditFoodMenu');
+    var dd = viewTab === 'hotels' ? document.getElementById('svcHotelEditFood') : document.getElementById('svcEditFood');
+    var menu = viewTab === 'hotels' ? document.getElementById('svcHotelEditFoodMenu') : document.getElementById('svcEditFoodMenu');
     if (!menu) { return; }
     var already = menu.classList.contains('svc-open');
     closeEditFoodMenu();
     if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
 }
 function closeEditFoodMenu() {
-    var menu = document.getElementById('svcEditFoodMenu');
+    var menu = viewTab === 'hotels' ? document.getElementById('svcHotelEditFoodMenu') : document.getElementById('svcEditFoodMenu');
     if (menu) { menu.classList.remove('svc-open'); }
-    var dd = document.getElementById('svcEditFood');
+    var dd = viewTab === 'hotels' ? document.getElementById('svcHotelEditFood') : document.getElementById('svcEditFood');
     if (dd) { dd.classList.remove('svc-open'); }
 }
 function setEditFood(val) {
-    document.getElementById('svcEditFoodVal').textContent = val;
+    var valEl = viewTab === 'hotels' ? document.getElementById('svcHotelEditFoodVal') : document.getElementById('svcEditFoodVal');
+    if (valEl) { valEl.textContent = val; }
     closeEditFoodMenu();
 }
 
 function toggleEditRoomMenu() {
-    var dd = document.getElementById('svcEditRoom');
-    var menu = document.getElementById('svcEditRoomMenu');
+    var dd = viewTab === 'hotels' ? document.getElementById('svcHotelEditRoom') : document.getElementById('svcEditRoom');
+    var menu = viewTab === 'hotels' ? document.getElementById('svcHotelEditRoomMenu') : document.getElementById('svcEditRoomMenu');
     if (!menu) { return; }
     var already = menu.classList.contains('svc-open');
     closeEditRoomMenu();
     if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
 }
 function closeEditRoomMenu() {
-    var menu = document.getElementById('svcEditRoomMenu');
+    var menu = viewTab === 'hotels' ? document.getElementById('svcHotelEditRoomMenu') : document.getElementById('svcEditRoomMenu');
     if (menu) { menu.classList.remove('svc-open'); }
-    var dd = document.getElementById('svcEditRoom');
+    var dd = viewTab === 'hotels' ? document.getElementById('svcHotelEditRoom') : document.getElementById('svcEditRoom');
     if (dd) { dd.classList.remove('svc-open'); }
 }
 function setEditRoom(val) {
-    document.getElementById('svcEditRoomVal').textContent = val;
+    var valEl = viewTab === 'hotels' ? document.getElementById('svcHotelEditRoomVal') : document.getElementById('svcEditRoomVal');
+    if (valEl) { valEl.textContent = val; }
     closeEditRoomMenu();
 }
 
 function toggleEditBedMenu() {
-    var dd = document.getElementById('svcEditBed');
-    var menu = document.getElementById('svcEditBedMenu');
+    var dd = viewTab === 'hotels' ? document.getElementById('svcHotelEditBed') : document.getElementById('svcEditBed');
+    var menu = viewTab === 'hotels' ? document.getElementById('svcHotelEditBedMenu') : document.getElementById('svcEditBedMenu');
     if (!menu) { return; }
     var already = menu.classList.contains('svc-open');
     closeEditBedMenu();
     if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
 }
 function closeEditBedMenu() {
-    var menu = document.getElementById('svcEditBedMenu');
+    var menu = viewTab === 'hotels' ? document.getElementById('svcHotelEditBedMenu') : document.getElementById('svcEditBedMenu');
     if (menu) { menu.classList.remove('svc-open'); }
-    var dd = document.getElementById('svcEditBed');
+    var dd = viewTab === 'hotels' ? document.getElementById('svcHotelEditBed') : document.getElementById('svcEditBed');
     if (dd) { dd.classList.remove('svc-open'); }
 }
 function setEditBed(val) {
-    document.getElementById('svcEditBedVal').textContent = val;
+    var valEl = viewTab === 'hotels' ? document.getElementById('svcHotelEditBedVal') : document.getElementById('svcEditBedVal');
+    if (valEl) { valEl.textContent = val; }
     closeEditBedMenu();
 }
 
@@ -641,7 +764,11 @@ function doDeleteActivity() {
 
 function closeViewModal() {
     closeViewTypeMenu();
-    closeViewOverlay('svcViewModal');
+    if (viewTab === 'hotels') {
+        closeViewOverlay('svcHotelViewModal');
+    } else {
+        closeViewOverlay('svcViewModal');
+    }
 }
 
 /* ─── New item modal ─── */
@@ -651,23 +778,80 @@ function openNewItemModal() {
     var cfg = tabConfigFor(servicesTab);
     var idPrefix = cfg.prefix;
 
-    var labelEl = document.getElementById('svcNewIdLabel');
-    if (labelEl) { labelEl.textContent = serviceLabelFor(servicesTab) + ' :'; }
-    document.getElementById('svcNewId').textContent = '#' + idPrefix + '-AUTO';
-    document.getElementById('svcItemName').value = '';
-    document.getElementById('svcItemLocation').value = '';
-    document.getElementById('svcItemDetails').value = '';
-    document.getElementById('svcItemCheckIn').value = '';
-    document.getElementById('svcItemCheckOut').value = '';
-    document.getElementById('svcNewFoodVal').textContent = 'Select Food Provided';
-    document.getElementById('svcNewRoomVal').textContent = 'Select No. of People';
-    document.getElementById('svcNewBedVal').textContent = 'Select Bed Type';
-    document.getElementById('svcItemInclusions').value = '';
+    if (servicesTab === 'hotels') {
+        document.getElementById('svcHotelNewId').textContent = '#' + idPrefix + '-AUTO';
+        document.getElementById('svcHotelItemName').value = '';
+        document.getElementById('svcHotelItemLocation').value = '';
+        document.getElementById('svcHotelItemDetails').value = '';
+        document.getElementById('svcHotelItemCheckIn').value = '';
+        document.getElementById('svcHotelItemCheckOut').value = '';
+        document.getElementById('svcHotelNewFoodVal').textContent = 'Select Food Provided';
+        document.getElementById('svcHotelNewRoomVal').textContent = 'Select No. of People';
+        document.getElementById('svcHotelNewBedVal').textContent = 'Select Bed Type';
+        document.getElementById('svcHotelItemInclusions').value = '';
 
-    newCategories = [];
-    renderNewCatTags();
-    renderNewCatMenu();
-    openNewOverlay('svcNewItemModal');
+        newCategories = [];
+        renderHotelNewCatTags();
+        renderHotelNewCatMenu();
+        openNewOverlay('svcHotelNewModal');
+    } else {
+        var labelEl = document.getElementById('svcNewIdLabel');
+        if (labelEl) { labelEl.textContent = serviceLabelFor(servicesTab) + ' :'; }
+        document.getElementById('svcNewId').textContent = '#' + idPrefix + '-AUTO';
+        document.getElementById('svcItemName').value = '';
+        document.getElementById('svcItemLocation').value = '';
+        document.getElementById('svcItemDetails').value = '';
+        
+        // Set default type for activities
+        var typeValEl = document.getElementById('svcNewTypeVal');
+        if (typeValEl) {
+            typeValEl.textContent = 'Feature';
+        }
+
+        newCategories = [];
+        renderNewCatTags();
+        renderNewCatMenu();
+        openNewOverlay('svcNewItemModal');
+    }
+}
+
+function renderHotelNewCatTags() {
+    var wrap = document.getElementById('svcHotelNewCatTags');
+    var placeholder = document.getElementById('svcHotelNewCatPlaceholder');
+    var clear = document.getElementById('svcHotelNewCatClear');
+    if (!wrap) { return; }
+    wrap.innerHTML = '';
+    for (var i = 0; i < newCategories.length; i++) {
+        (function (cat) {
+            var tag = document.createElement('span');
+            tag.className = 'svc-new-cat-tag';
+            tag.innerHTML = escapeHtml(cat) + '<button class="svc-new-cat-tag-remove" onclick="removeNewCategory(\'' + escapeAttr(cat) + '\')">&times;</button>';
+            wrap.appendChild(tag);
+        })(newCategories[i]);
+    }
+    if (placeholder) { placeholder.style.display = newCategories.length > 0 ? 'none' : 'inline-block'; }
+    if (clear) { clear.style.display = newCategories.length > 0 ? 'inline-block' : 'none'; }
+}
+
+function renderHotelNewCatMenu() {
+    var menu = document.getElementById('svcHotelNewCatMenu');
+    if (!menu) { return; }
+    menu.innerHTML = '';
+    for (var i = 0; i < availableCategories.length; i++) {
+        var cat = availableCategories[i];
+        var selected = newCategories.indexOf(cat) > -1;
+        (function (c, sel) {
+            var btn = document.createElement('button');
+            btn.className = 'svc-new-cat-option';
+            btn.textContent = c + (sel ? ' ✓' : '');
+            if (sel) { btn.classList.add('svc-selected'); }
+            btn.addEventListener('click', function () {
+                if (sel) { removeNewCategory(c); }
+                else { addNewCategory(c); }
+            });
+            menu.appendChild(btn);
+        })(cat, selected);
+    }
 }
 
 function closeNewModal() {
@@ -676,7 +860,11 @@ function closeNewModal() {
     closeNewFoodMenu();
     closeNewRoomMenu();
     closeNewBedMenu();
-    closeNewOverlay('svcNewItemModal');
+    if (servicesTab === 'hotels') {
+        closeNewOverlay('svcHotelNewModal');
+    } else {
+        closeNewOverlay('svcNewItemModal');
+    }
 }
 
 /* ─── New type dropdown ─── */
@@ -684,9 +872,9 @@ function toggleNewTypeMenu() {
     var menu = document.getElementById('svcNewTypeMenu');
     var already = menu ? menu.classList.contains('svc-open') : false;
     closeNewTypeMenu();
-    if (!already) {
+    if (!already && menu) {
         menu.classList.add('svc-open');
-        var trigger = document.getElementById('svcNewType');
+        var trigger = document.getElementById('svcNewTypeBtn');
         if (trigger) { trigger.classList.add('svc-open'); }
     }
 }
@@ -694,14 +882,14 @@ function toggleNewTypeMenu() {
 function closeNewTypeMenu() {
     var menu = document.getElementById('svcNewTypeMenu');
     if (menu) { menu.classList.remove('svc-open'); }
-    var trigger = document.getElementById('svcNewType');
+    var trigger = document.getElementById('svcNewTypeBtn');
     if (trigger) { trigger.classList.remove('svc-open'); }
 }
 
 function setNewType(status) {
     var valEl = document.getElementById('svcNewTypeVal');
     if (valEl) { valEl.textContent = status; }
-    var pill = document.getElementById('svcNewType');
+    var pill = document.getElementById('svcNewTypeBtn');
     if (pill) { pill.classList.add('svc-has-value'); }
     closeNewTypeMenu();
 }
@@ -788,43 +976,76 @@ function closeNewCatMenu() {
 
 /* ─── Save new activity ─── */
 function saveNewItem() {
-    var name = document.getElementById('svcItemName').value.trim();
-    if (!name) {
-        showToast('Title is required');
-        return;
+    if (servicesTab === 'hotels') {
+        var name = document.getElementById('svcHotelItemName').value.trim();
+        if (!name) {
+            showToast('Title is required');
+            return;
+        }
+
+        if (newCategories.length === 0) { newCategories = ['Basic']; }
+
+        var list = servicesData[servicesTab];
+        var nextId = 1;
+        for (var j = 0; j < list.length; j++) {
+            if (list[j].id >= nextId) { nextId = list[j].id + 1; }
+        }
+
+        var inclusionsRaw = document.getElementById('svcHotelItemInclusions').value;
+        var inclusions = [];
+        var parts = inclusionsRaw.split('\n');
+        for (var bi = 0; bi < parts.length; bi++) {
+            var p = parts[bi].trim();
+            if (p) { inclusions.push(p); }
+        }
+
+        list.push({
+            id: nextId,
+            image: 'new-image.png',
+            imageCount: 1,
+            name: name,
+            location: document.getElementById('svcHotelItemLocation').value.trim() || '—',
+            categories: newCategories.slice(),
+            details: document.getElementById('svcHotelItemDetails').value,
+            checkIn: document.getElementById('svcHotelItemCheckIn').value.trim() || '25 Mar, Sat 2 PM',
+            checkOut: document.getElementById('svcHotelItemCheckOut').value.trim() || '26 Mar, Sat 2 PM',
+            food: document.getElementById('svcHotelNewFoodVal').textContent,
+            roomSize: document.getElementById('svcHotelNewRoomVal').textContent,
+            bedType: document.getElementById('svcHotelNewBedVal').textContent,
+            inclusions: inclusions,
+            rating: '3 Star',
+            status: 'Static'
+        });
+    } else {
+        var name = document.getElementById('svcItemName').value.trim();
+        if (!name) {
+            showToast('Title is required');
+            return;
+        }
+
+        if (newCategories.length === 0) { newCategories = ['Basic']; }
+
+        var list = servicesData[servicesTab];
+        var nextId = 1;
+        for (var j = 0; j < list.length; j++) {
+            if (list[j].id >= nextId) { nextId = list[j].id + 1; }
+        }
+
+        // Get type value
+        var typeValEl = document.getElementById('svcNewTypeVal');
+        var typeStatus = typeValEl ? typeValEl.textContent : 'Feature';
+
+        list.push({
+            id: nextId,
+            image: 'new-image.png',
+            imageCount: 1,
+            name: name,
+            location: document.getElementById('svcItemLocation').value.trim() || '—',
+            categories: newCategories.slice(),
+            details: document.getElementById('svcItemDetails').value,
+            status: typeStatus
+        });
     }
-
-    if (newCategories.length === 0) { newCategories = ['Basic']; }
-
-    var list = servicesData[servicesTab];
-    var nextId = 1;
-    for (var j = 0; j < list.length; j++) {
-        if (list[j].id >= nextId) { nextId = list[j].id + 1; }
-    }
-
-    var inclusionsRaw = document.getElementById('svcItemInclusions').value;
-    var inclusions = [];
-    var parts = inclusionsRaw.split('\n');
-    for (var bi = 0; bi < parts.length; bi++) {
-        var p = parts[bi].trim();
-        if (p) { inclusions.push(p); }
-    }
-
-    list.push({
-        id: nextId,
-        image: 'new-image.png',
-        imageCount: 1,
-        name: name,
-        location: document.getElementById('svcItemLocation').value.trim() || '—',
-        categories: newCategories.slice(),
-        details: document.getElementById('svcItemDetails').value,
-        checkIn: document.getElementById('svcItemCheckIn').value.trim() || '25 Mar, Sat 2 PM',
-        checkOut: document.getElementById('svcItemCheckOut').value.trim() || '26 Mar, Sat 2 PM',
-        food: document.getElementById('svcNewFoodVal').textContent,
-        roomSize: document.getElementById('svcNewRoomVal').textContent,
-        bedType: document.getElementById('svcNewBedVal').textContent,
-        inclusions: inclusions
-    });
 
     saveServicesData(servicesData);
     closeNewModal();
@@ -834,59 +1055,62 @@ function saveNewItem() {
 
 /* ─── New Food / Room / Bed dropdowns ─── */
 function toggleNewFoodMenu() {
-    var dd = document.getElementById('svcNewFood');
-    var menu = document.getElementById('svcNewFoodMenu');
+    var dd = servicesTab === 'hotels' ? document.getElementById('svcHotelNewFood') : document.getElementById('svcNewFood');
+    var menu = servicesTab === 'hotels' ? document.getElementById('svcHotelNewFoodMenu') : document.getElementById('svcNewFoodMenu');
     if (!menu) { return; }
     var already = menu.classList.contains('svc-open');
     closeNewFoodMenu();
     if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
 }
 function closeNewFoodMenu() {
-    var menu = document.getElementById('svcNewFoodMenu');
+    var menu = servicesTab === 'hotels' ? document.getElementById('svcHotelNewFoodMenu') : document.getElementById('svcNewFoodMenu');
     if (menu) { menu.classList.remove('svc-open'); }
-    var dd = document.getElementById('svcNewFood');
+    var dd = servicesTab === 'hotels' ? document.getElementById('svcHotelNewFood') : document.getElementById('svcNewFood');
     if (dd) { dd.classList.remove('svc-open'); }
 }
 function setNewFood(val) {
-    document.getElementById('svcNewFoodVal').textContent = val;
+    var valEl = servicesTab === 'hotels' ? document.getElementById('svcHotelNewFoodVal') : document.getElementById('svcNewFoodVal');
+    if (valEl) { valEl.textContent = val; }
     closeNewFoodMenu();
 }
 
 function toggleNewRoomMenu() {
-    var dd = document.getElementById('svcNewRoom');
-    var menu = document.getElementById('svcNewRoomMenu');
+    var dd = servicesTab === 'hotels' ? document.getElementById('svcHotelNewRoom') : document.getElementById('svcNewRoom');
+    var menu = servicesTab === 'hotels' ? document.getElementById('svcHotelNewRoomMenu') : document.getElementById('svcNewRoomMenu');
     if (!menu) { return; }
     var already = menu.classList.contains('svc-open');
     closeNewRoomMenu();
     if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
 }
 function closeNewRoomMenu() {
-    var menu = document.getElementById('svcNewRoomMenu');
+    var menu = servicesTab === 'hotels' ? document.getElementById('svcHotelNewRoomMenu') : document.getElementById('svcNewRoomMenu');
     if (menu) { menu.classList.remove('svc-open'); }
-    var dd = document.getElementById('svcNewRoom');
+    var dd = servicesTab === 'hotels' ? document.getElementById('svcHotelNewRoom') : document.getElementById('svcNewRoom');
     if (dd) { dd.classList.remove('svc-open'); }
 }
 function setNewRoom(val) {
-    document.getElementById('svcNewRoomVal').textContent = val;
+    var valEl = servicesTab === 'hotels' ? document.getElementById('svcHotelNewRoomVal') : document.getElementById('svcNewRoomVal');
+    if (valEl) { valEl.textContent = val; }
     closeNewRoomMenu();
 }
 
 function toggleNewBedMenu() {
-    var dd = document.getElementById('svcNewBed');
-    var menu = document.getElementById('svcNewBedMenu');
+    var dd = servicesTab === 'hotels' ? document.getElementById('svcHotelNewBed') : document.getElementById('svcNewBed');
+    var menu = servicesTab === 'hotels' ? document.getElementById('svcHotelNewBedMenu') : document.getElementById('svcNewBedMenu');
     if (!menu) { return; }
     var already = menu.classList.contains('svc-open');
     closeNewBedMenu();
     if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
 }
 function closeNewBedMenu() {
-    var menu = document.getElementById('svcNewBedMenu');
+    var menu = servicesTab === 'hotels' ? document.getElementById('svcHotelNewBedMenu') : document.getElementById('svcNewBedMenu');
     if (menu) { menu.classList.remove('svc-open'); }
-    var dd = document.getElementById('svcNewBed');
+    var dd = servicesTab === 'hotels' ? document.getElementById('svcHotelNewBed') : document.getElementById('svcNewBed');
     if (dd) { dd.classList.remove('svc-open'); }
 }
 function setNewBed(val) {
-    document.getElementById('svcNewBedVal').textContent = val;
+    var valEl = servicesTab === 'hotels' ? document.getElementById('svcHotelNewBedVal') : document.getElementById('svcNewBedVal');
+    if (valEl) { valEl.textContent = val; }
     closeNewBedMenu();
 }
 
