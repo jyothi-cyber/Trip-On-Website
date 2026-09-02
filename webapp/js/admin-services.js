@@ -247,23 +247,6 @@ function saveNewItem() {
     showToast('Added successfully');
 }
 
-/* ─── Ticket modal ─── */
-function openNewTicketModal() {
-    document.getElementById('svcTicketTitle').value = '';
-    document.getElementById('svcTicketDesc').value = '';
-    openModal('svcNewTicketModal');
-}
-
-function saveTicket() {
-    var title = document.getElementById('svcTicketTitle').value.trim();
-    if (!title) {
-        showToast('Ticket title is required');
-        return;
-    }
-    closeModal('svcNewTicketModal');
-    showToast('Ticket created: ' + title);
-}
-
 /* ─── Modal helpers ─── */
 function openModal(id) {
     var modal = document.getElementById(id);
@@ -297,26 +280,7 @@ function profilePlaceholder(e) {
     showToast('Coming soon');
 }
 
-/* ─── Sidebar ─── */
-function toggleSidebar() {
-    var dash = document.getElementById('svcDashboard');
-    if (dash) { dash.classList.toggle('svc-collapsed'); }
-}
-
-/* ─── Navigation ─── */
-function goToDashboard() {
-    window.location.href = 'admin-dashboard.html';
-}
-
-function goHome() {
-    window.location.href = 'admin-dashboard.html';
-}
-
-function pagePlaceholder(e) {
-    if (e && e.preventDefault) { e.preventDefault(); }
-    showToast('Page not implemented yet');
-}
-
+/* ─── Sidebar / Navigation ─── */
 function closeProfileMenu() {
     var menu = document.getElementById('svcProfileMenu');
     if (menu) { menu.classList.remove('svc-open'); }
@@ -370,7 +334,6 @@ document.addEventListener('click', function (e) {
 
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-        closeModal('svcNewTicketModal');
         closeModal('svcNewItemModal');
         closeModal('svcViewModal');
         closeAllStatusMenus();
@@ -379,7 +342,7 @@ document.addEventListener('keydown', function (e) {
 });
 
 /* open modals on overlay click */
-var overlayIds = ['svcNewTicketModal', 'svcNewItemModal', 'svcViewModal'];
+var overlayIds = ['svcNewItemModal', 'svcViewModal'];
 for (var oi = 0; oi < overlayIds.length; oi++) {
     (function (id) {
         document.getElementById(id).addEventListener('click', function (e) {
