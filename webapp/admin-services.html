@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Activities | Trip On Admin</title>
+    <link rel="stylesheet" href="admin-services-styles.css?v=20260902a">
+</head>
+
+<body>
+
+    <!-- Breadcrumb -->
+    <div class="svc-breadcrumb">
+        <span class="svc-breadcrumb-link" onclick="goToDashboard()">Admin</span>
+        <span class="svc-breadcrumb-sep">-</span>
+        <span class="svc-breadcrumb-item">Services</span>
+        <span class="svc-breadcrumb-sep">|</span>
+        <span class="svc-breadcrumb-item">Activities</span>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div class="svc-dashboard" id="svcDashboard">
+
+        <!-- ─── Left Sidebar ─── -->
+        <aside class="svc-sidebar" id="svcSidebar">
+            <div class="svc-sidebar-top">
+                <div class="svc-brand">
+                    <button class="svc-hamburger" id="svcToggleSidebar" onclick="toggleSidebar()" title="Toggle sidebar">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <line x1="2" y1="4" x2="16" y2="4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                            <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                            <line x1="2" y1="14" x2="16" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                    <span class="svc-logo" onclick="goHome()" title="Go to dashboard">
+                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                            <path d="M4 13L13 4l9 9" stroke="#147D5E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13 6v14" stroke="#147D5E" stroke-width="2.4" stroke-linecap="round" />
+                            <path d="M9 13.5l4 3 4-3" stroke="#64C4A5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="svc-logo-text">Tripon</span>
+                    </span>
+                </div>
+
+                <button class="svc-new-ticket-btn" onclick="openNewTicketModal()">
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                        <line x1="6" y1="2" x2="6" y2="10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                        <line x1="2" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                    </svg>
+                    New Ticket
+                </button>
+            </div>
+
+            <nav class="svc-nav">
+                <a href="admin-dashboard.html" class="svc-nav-item">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L8 3l5 5.5V13a1 1 0 0 1-1 1H9v-3.5h-2V14H4a1 1 0 0 1-1-1V8.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                    <span>Tickets</span>
+                </a>
+                <a href="admin-packages.html" class="svc-nav-item">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M2 6h12" stroke="currentColor" stroke-width="1.4"/></svg>
+                    <span>Itinerary Packs</span>
+                </a>
+                <a href="admin-packages.html" class="svc-nav-item">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l6 2.5v3c0 3.5-2.6 6.4-6 7.5-3.4-1.1-6-4-6-7.5V4l6-2.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                    <span>Website Packs</span>
+                </a>
+                <a href="admin-services.html" class="svc-nav-item svc-nav-active">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 2h5v5H2V2zM9 2h5v5H9V2zM2 9h5v5H2V9zM9 9h5v5H9V9z" stroke="currentColor" stroke-width="1.4"/></svg>
+                    <span>Services</span>
+                </a>
+                <a href="admin-packages.html" class="svc-nav-item">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 6l2 3-2 3-2-3 2-3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/></svg>
+                    <span>Collections</span>
+                </a>
+                <a href="#" class="svc-nav-item" onclick="pagePlaceholder(event)">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 7h11" stroke="currentColor" stroke-width="1.4"/></svg>
+                    <span>Hotel Vouchers</span>
+                </a>
+
+                <div class="svc-nav-divider"></div>
+
+                <a href="#" class="svc-nav-item" onclick="pagePlaceholder(event)">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2l6 3v6l-6 3-6-3V5l6-3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                    <span>Blogs</span>
+                </a>
+                <a href="#" class="svc-nav-item" onclick="pagePlaceholder(event)">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 13.5c.8-2.3 2.6-3.5 4.5-3.5s3.7 1.2 4.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                    <span>Team Members</span>
+                </a>
+                <a href="#" class="svc-nav-item" onclick="pagePlaceholder(event)">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L8 13l6-4.5L8 4 2 8.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M4.5 6.5v4l3.5 2 3.5-2v-4L8 4.5 4.5 6.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                    <span>Company</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- ─── Main Content ─── -->
+        <main class="svc-main" id="svcMain">
+
+            <!-- Content Header -->
+            <header class="svc-header">
+                <h1 class="svc-title">Services</h1>
+                <div class="svc-profile" onclick="toggleProfileMenu()">
+                    <span class="svc-avatar">VA</span>
+                    <div class="svc-profile-text">
+                        <span class="svc-profile-name">Vikram A</span>
+                        <span class="svc-profile-role">Admin</span>
+                    </div>
+                    <div class="svc-profile-menu" id="svcProfileMenu">
+                        <a href="admin-profile.html" class="svc-profile-menu-item">My Profile</a>
+                        <a href="#" class="svc-profile-menu-item" onclick="profilePlaceholder(event)">Account Settings</a>
+                        <a href="admin-login.html" class="svc-profile-menu-item">Logout</a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Services Tabs -->
+            <div class="svc-tabs" id="svcTabs">
+                <button class="svc-tab svc-tab-active" id="svcTabActivities" onclick="switchServiceTab('activities')">Activities</button>
+                <button class="svc-tab" id="svcTabHotels" onclick="switchServiceTab('hotels')">Hotels</button>
+                <button class="svc-tab" id="svcTabSightseeings" onclick="switchServiceTab('sightseeings')">Sight Seeings</button>
+            </div>
+
+            <!-- Activities Info -->
+            <section class="svc-info" id="svcInfoSection">
+                <h2 class="svc-info-title">Activities</h2>
+                <p class="svc-info-desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+            </section>
+
+            <!-- Table Section -->
+            <section class="svc-table-section">
+                <div class="svc-table-head">
+                    <h3 class="svc-table-title">Most Liked Activities</h3>
+                    <button class="svc-table-add-btn" onclick="openNewItemModal()">
+                        <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                            <line x1="6" y1="2" x2="6" y2="10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                            <line x1="2" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                        </svg>
+                        New Activity
+                    </button>
+                </div>
+
+                <div class="svc-table-wrap">
+                    <table class="svc-table">
+                        <thead>
+                            <tr>
+                                <th class="svc-th-id">Activity ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="svcTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="svc-toast" id="svcToast">
+        <span class="svc-toast-msg" id="svcToastMsg">Saved</span>
+    </div>
+
+    <!-- New Ticket Modal -->
+    <div class="svc-modal-overlay" id="svcNewTicketModal">
+        <div class="svc-modal">
+            <div class="svc-modal-header">
+                <h3 class="svc-modal-title">New Ticket</h3>
+                <button class="svc-modal-close" onclick="closeModal('svcNewTicketModal')">&times;</button>
+            </div>
+            <div class="svc-modal-body">
+                <div class="svc-field">
+                    <label class="svc-field-label">Ticket Title *</label>
+                    <input type="text" id="svcTicketTitle" class="svc-input" placeholder="Enter ticket title">
+                </div>
+                <div class="svc-field">
+                    <label class="svc-field-label">Description</label>
+                    <textarea id="svcTicketDesc" class="svc-input" rows="4" placeholder="Describe the ticket"></textarea>
+                </div>
+            </div>
+            <div class="svc-modal-footer">
+                <button class="svc-btn-cancel" onclick="closeModal('svcNewTicketModal')">Cancel</button>
+                <button class="svc-btn-primary" onclick="saveTicket()">Create Ticket</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Item Modal (Activity / Hotel / Sightseeing) -->
+    <div class="svc-modal-overlay" id="svcNewItemModal">
+        <div class="svc-modal">
+            <div class="svc-modal-header">
+                <h3 class="svc-modal-title" id="svcNewItemTitle">New Activity</h3>
+                <button class="svc-modal-close" onclick="closeModal('svcNewItemModal')">&times;</button>
+            </div>
+            <div class="svc-modal-body">
+                <div class="svc-field">
+                    <label class="svc-field-label">Name *</label>
+                    <input type="text" id="svcItemName" class="svc-input" placeholder="Enter name">
+                </div>
+                <div class="svc-field">
+                    <label class="svc-field-label">Image URL / File</label>
+                    <input type="text" id="svcItemImage" class="svc-input" placeholder="e.g. image.png">
+                </div>
+                <div class="svc-field">
+                    <label class="svc-field-label">Location</label>
+                    <input type="text" id="svcItemLocation" class="svc-input" placeholder="Enter location">
+                </div>
+                <div class="svc-field">
+                    <label class="svc-field-label">Category</label>
+                    <input type="text" id="svcItemCategory" class="svc-input" placeholder="e.g. Basic, Couple">
+                </div>
+                <div class="svc-field">
+                    <label class="svc-field-label">Status</label>
+                    <div class="svc-select-wrap">
+                        <select id="svcItemStatus" class="svc-input">
+                            <option>Static</option>
+                            <option>Popular</option>
+                            <option>Inactive</option>
+                            <option>Featured</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="svc-modal-footer">
+                <button class="svc-btn-cancel" onclick="closeModal('svcNewItemModal')">Cancel</button>
+                <button class="svc-btn-primary" onclick="saveNewItem()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Details Modal -->
+    <div class="svc-modal-overlay" id="svcViewModal">
+        <div class="svc-modal svc-view-modal">
+            <div class="svc-modal-header">
+                <h3 class="svc-modal-title">Activity Details</h3>
+                <button class="svc-modal-close" onclick="closeModal('svcViewModal')">&times;</button>
+            </div>
+            <div class="svc-modal-body">
+                <div class="svc-view-banner">
+                    <span class="svc-view-badge" id="svcViewStatus">Static</span>
+                </div>
+                <div class="svc-view-field">
+                    <span class="svc-view-label">Activity ID</span>
+                    <span class="svc-view-value" id="svcViewId">#ACT-001</span>
+                </div>
+                <div class="svc-view-field">
+                    <span class="svc-view-label">Name</span>
+                    <span class="svc-view-value" id="svcViewName">Havelock Beach</span>
+                </div>
+                <div class="svc-view-field">
+                    <span class="svc-view-label">Location</span>
+                    <span class="svc-view-value" id="svcViewLocation">Havelock</span>
+                </div>
+                <div class="svc-view-field">
+                    <span class="svc-view-label">Category</span>
+                    <span class="svc-view-value" id="svcViewCategory">Basic, Couple</span>
+                </div>
+                <div class="svc-view-field">
+                    <span class="svc-view-label">Description</span>
+                    <span class="svc-view-value" id="svcViewDesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus.</span>
+                </div>
+            </div>
+            <div class="svc-modal-footer">
+                <button class="svc-btn-cancel" onclick="closeModal('svcViewModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-services.js?v=20260902a"></script>
+</body>
+
+</html>
