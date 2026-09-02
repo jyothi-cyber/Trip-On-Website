@@ -840,3 +840,262 @@
         padding: 12px;
     }
 }
+
+/* ── Form Grid (2-column rows) ── */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+/* ── New Package Heading ── */
+.new-package-heading {
+    margin-bottom: 20px;
+}
+
+.new-package-heading h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.new-package-heading p {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* ── Section Description ── */
+.section-desc {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0 0 14px;
+}
+
+/* ── Top header action buttons ── */
+.btn-save-draft {
+    padding: 10px 20px;
+    background: white;
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-save-draft:hover {
+    background: #f9fafb;
+}
+
+/* ── Image thumb controls ── */
+.image-thumb-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0 4px;
+}
+
+.img-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #F2F2F2;
+    border: 1px solid #D9D9D9;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.img-thumb:hover {
+    background: #E6E6E6;
+}
+
+.img-thumb.active {
+    background: #D2F2D4;
+    border-color: #0e5a36;
+    color: #0e5a36;
+}
+
+.img-thumb.img-add {
+    border-style: dashed;
+    color: #0e5a36;
+}
+
+/* ── Upload button ── */
+.btn-upload {
+    padding: 10px 20px;
+    background: #0e5a36;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 4px;
+}
+
+.btn-upload:hover {
+    background: #0c4a2d;
+}
+
+/* ── Why This Package ── */
+.why-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.why-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-add-reason {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    background: #0e5a36;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-reason:hover {
+    background: #0c4a2d;
+}
+
+/* ── Add Day button ── */
+.btn-add-day {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #0e5a36;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-day:hover {
+    background: #0c4a2d;
+}
+
+/* ── Collapsible header (Cancellation / Instructions) ── */
+.collapsible-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.collapsible-header .section-title {
+    margin-bottom: 0;
+}
+
+/* ── Form footer ── */
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid #e8f0eb;
+    margin-top: 8px;
+}
+
+.btn-cancel {
+    padding: 12px 28px;
+    background: white;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background: #f9fafb;
+}
+
+.btn-submit-final {
+    padding: 12px 32px;
+    background: #0e5a36;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit-final:hover {
+    background: #0c4a2d;
+    box-shadow: 0 4px 12px rgba(14, 90, 54, 0.3);
+}
+
+/* ── Responsive for new controls ── */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Day itinerary accordion ── */
+.day-item-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.day-arrow {
+    display: inline-flex;
+    align-items: center;
+    color: #0e5a36;
+    transition: transform 0.3s ease;
+}
+
+.day-item.open .day-arrow {
+    transform: rotate(180deg);
+}
+
+.day-item .day-fields {
+    display: none;
+}
+
+.day-item.open .day-fields {
+    display: flex;
+}
+
+.btn-remove {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    justify-content: center;
+    background: #FEE2E2;
+    color: #EF4444;
+    flex-shrink: 0;
+}
+
+.btn-remove:hover {
+    background: #FECACA;
+}

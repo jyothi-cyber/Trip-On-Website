@@ -147,20 +147,26 @@ function initializeDefaultDays() {
     document.getElementById('daysContainer').innerHTML = '';
     dayCounter = 0;
     
-    // Day 1 with default structure
-    addDayItemWithStructure(1);
+    // Day 1 open by default, Days 2-4 collapsed
+    addDayItemWithStructure(1, true);
     
-    // Day 2 with default structure  
-    addDayItemWithStructure(2);
+    addDayItemWithStructure(2, false);
+
+    addDayItemWithStructure(3, false);
+
+    addDayItemWithStructure(4, false);
 }
 
-function addDayItemWithStructure(dayNum) {
+function addDayItemWithStructure(dayNum, isOpen) {
     dayCounter++;
     const container = document.getElementById('daysContainer');
     
     const dayItem = document.createElement('div');
     dayItem.className = 'day-item';
     dayItem.id = `day-${dayCounter}`;
+    if (isOpen) {
+        dayItem.classList.add('open');
+    }
     
     let dayTitle = '';
     let dayActivities = '';
@@ -172,77 +178,66 @@ function addDayItemWithStructure(dayNum) {
         dayDetails = `
 <div class="day-expanded-section">
     <div class="day-subsection">
-        <h4>Choose Roadtrip 3 Seater - AC</h4>
-        <p>Comfortable air-conditioned vehicle for your journey</p>
+        <h4>Day / Activity Title</h4>
+        <input type="text" class="form-input" placeholder="e.g., Arrival & Check-in" value="Day 1 - Arrival & Check-in">
     </div>
-    
+
     <div class="day-subsection">
-        <h4>Economy Level</h4>
-        <div class="economy-grid">
+        <h4>Activity / Service Details</h4>
+        <div class="form-grid">
             <div class="economy-item">
-                <label>Staying</label>
-                <input type="text" class="form-input-sm" value="Hotel/Resort" placeholder="Accommodation type">
+                <label>Activity Name</label>
+                <input type="text" class="form-input-sm" value="On-Ground Assistance by Tour Manager - 1hr" placeholder="Activity name">
             </div>
             <div class="economy-item">
-                <label>Transfer</label>
-                <input type="text" class="form-input-sm" value="Private AC Vehicle" placeholder="Transfer details">
+                <label>Location</label>
+                <input type="text" class="form-input-sm" placeholder="Location">
+            </div>
+        </div>
+        <div class="form-grid">
+            <div class="economy-item">
+                <label>Timing</label>
+                <input type="text" class="form-input-sm" placeholder="e.g., 10:00 AM - 2:00 PM">
             </div>
             <div class="economy-item">
-                <label>Activity</label>
-                <input type="text" class="form-input-sm" value="Sightseeing" placeholder="Activities included">
+                <label>Description</label>
+                <input type="text" class="form-input-sm" placeholder="Short activity description">
             </div>
         </div>
         <div class="economy-description">
             <label>Additional Details</label>
-            <textarea class="form-textarea-sm" rows="2" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.">Economy package includes standard accommodation, meals, and transportation.</textarea>
+            <textarea class="form-textarea-sm" rows="2" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."></textarea>
         </div>
     </div>
-    
+
     <div class="day-subsection">
-        <h4>On-Ground Assistance for Tour Packages - AC</h4>
-        <textarea class="form-textarea-sm" rows="3" placeholder="Describe on-ground assistance details...">24/7 customer support, local guide assistance, emergency contact available throughout the trip.</textarea>
+        <h4>Day 1 Description</h4>
+        <textarea class="form-textarea-sm" rows="3" placeholder="Describe what happens during the day, activities included, instructions and timing information...">On arrival, meet your tour manager who assists with the check-in process. Afternoon at leisure, followed by a welcome dinner.</textarea>
     </div>
 </div>`;
-    } else if (dayNum === 2) {
-        dayTitle = 'Day 2';
+    } else {
+        dayTitle = 'Day ' + dayNum;
         dayActivities = '';
         dayDetails = `
 <div class="day-expanded-section">
     <div class="day-subsection">
-        <h4>Sightseeing & Activities</h4>
-        <textarea class="form-textarea-sm" rows="3" placeholder="Describe day 2 activities...">Visit popular tourist attractions, local markets, and cultural sites. Includes guided tour with experienced guide.</textarea>
+        <h4>Day / Activity Title</h4>
+        <input type="text" class="form-input" placeholder="e.g., Sightseeing & Exploration">
     </div>
-    
     <div class="day-subsection">
-        <h4>Meals Included</h4>
-        <div class="meals-grid">
-            <div class="meal-item">
-                <label>
-                    <input type="checkbox" checked>
-                    <span>Breakfast</span>
-                </label>
-            </div>
-            <div class="meal-item">
-                <label>
-                    <input type="checkbox">
-                    <span>Lunch</span>
-                </label>
-            </div>
-            <div class="meal-item">
-                <label>
-                    <input type="checkbox" checked>
-                    <span>Dinner</span>
-                </label>
-            </div>
-        </div>
+        <h4>Day ${dayNum} Description</h4>
+        <textarea class="form-textarea-sm" rows="3" placeholder="Describe the activities and itinerary details for this day..."></textarea>
     </div>
 </div>`;
     }
     
     dayItem.innerHTML = `
-        <div class="day-item-header">
+        <div class="day-item-header" onclick="toggleDayAccordion(${dayCounter})">
+            <span class="day-arrow">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
             <span class="day-number">${dayTitle}</span>
-            <button type="button" class="btn-remove-day" onclick="removeDayItem(${dayCounter})">Remove</button>
+            <button type="button" class="btn-remove-day" onclick="event.stopPropagation();removeDayItem(${dayCounter})">Remove</button>
         </div>
         <div class="day-fields">
             <div class="form-group">
@@ -438,9 +433,12 @@ function addDayItem(title = '', activities = '') {
     dayItem.id = `day-${dayCounter}`;
     
     dayItem.innerHTML = `
-        <div class="day-item-header">
+        <div class="day-item-header" onclick="toggleDayAccordion(${dayCounter})">
+            <span class="day-arrow">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
             <span class="day-number">Day ${dayCounter}</span>
-            <button type="button" class="btn-remove-day" onclick="removeDayItem(${dayCounter})">Remove</button>
+            <button type="button" class="btn-remove-day" onclick="event.stopPropagation();removeDayItem(${dayCounter})">Remove</button>
         </div>
         <div class="day-fields">
             <div class="form-group">
@@ -485,6 +483,42 @@ function toggleSection(sectionId) {
     if (parent) {
         parent.classList.toggle('collapsed');
     }
+}
+
+// Toggle the day itinerary accordion open/closed
+function toggleDayAccordion(dayId) {
+    const dayItem = document.getElementById(`day-${dayId}`);
+    if (dayItem) {
+        dayItem.classList.toggle('open');
+    }
+}
+
+// Toggle a plain collapsible section by id
+function toggleCollapsible(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.classList.toggle('collapsed');
+    }
+}
+
+// Add a "Why This Package" reason input row
+function addWhyItem() {
+    const container = document.getElementById('whyListContainer');
+    if (!container) { return; }
+    const item = document.createElement('div');
+    item.className = 'why-item';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'form-input';
+    input.placeholder = 'e.g., Special experiences, unique benefits, included services';
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'btn-add-reason btn-remove';
+    removeBtn.textContent = '×';
+    removeBtn.onclick = function() { item.remove(); };
+    item.appendChild(input);
+    item.appendChild(removeBtn);
+    container.appendChild(item);
 }
 
 // ============================================================================
@@ -674,6 +708,9 @@ window.updateCategoryTitle = updateCategoryTitle;
 window.addDay = addDayItem;
 window.removeDayItem = removeDayItem;
 window.toggleSection = toggleSection;
+window.toggleDayAccordion = toggleDayAccordion;
+window.toggleCollapsible = toggleCollapsible;
+window.addWhyItem = addWhyItem;
 window.submitPackage = submitPackage;
 window.saveDraft = function() {
     if (!validateForm()) {

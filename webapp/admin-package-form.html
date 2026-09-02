@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Package Form - Trip On Admin</title>
     <link rel="stylesheet" href="admin-styles.css">
-    <link rel="stylesheet" href="admin-package-form-styles.css?v=20260902u">
+    <link rel="stylesheet" href="admin-package-form-styles.css?v=20260902w">
 </head>
 <body>
     <!-- Mobile Header -->
@@ -76,7 +76,7 @@
 
             <!-- Package Form Container -->
             <div class="package-form-container">
-                <!-- Form Header -->
+                <!-- New Package Header -->
                 <div class="form-header">
                     <button class="btn-back" onclick="goBack()">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -86,23 +86,25 @@
                     </button>
                     <div class="form-header-right">
                         <button class="btn-save-draft" onclick="saveDraft()">Save as Draft</button>
-                        <button class="btn-submit" onclick="submitPackage()" id="submitBtn">Submit</button>
+                        <button class="btn-submit" onclick="submitPackage()" id="submitBtn">Save / Publish</button>
                     </div>
                 </div>
 
-                <form id="packageForm" class="package-form">
-                    <!-- Left Column: 3N4D Economy -->
-                    <div class="form-left-info">
-                        <h3 id="formCategoryTitle">3N4D Economy</h3>
-                    </div>
+                <div class="new-package-heading">
+                    <h2 id="formCategoryTitle">New Package</h2>
+                    <p>Create and manage your travel package. Fill in the details below and publish when ready.</p>
+                </div>
 
-                    <!-- Image Upload Section -->
+                <form id="packageForm" class="package-form">
+                    <!-- Package Image Section -->
                     <div class="form-section">
-                        <h3 class="section-title">Package Image</h3>
+                        <div class="section-header-with-btn">
+                            <h3 class="section-title">Package Image</h3>
+                        </div>
                         <div class="image-upload-area" id="imageUploadArea">
                             <div class="image-preview" id="imagePreview" style="position: relative;">
-                                <img id="previewImg" src="" alt="Package Image" style="display: none; width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid #e0e0e0;">
-                                <div class="image-overlay" id="imageOverlay" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;">
+                                <img id="previewImg" src="" alt="Package Image" style="display: none; width: 100%; height: 220px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid #e0e0e0;">
+                                <div class="image-overlay" id="imageOverlay" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); border-radius: 8px; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;">
                                     <span style="color: white; font-size: 14px; padding: 8px 16px; background: rgba(0,0,0,0.7); border-radius: 20px;">Click to view package details</span>
                                 </div>
                                 <div class="upload-placeholder" id="uploadPlaceholder">
@@ -111,9 +113,26 @@
                                         <circle cx="16" cy="18" r="3" fill="#9ca3af"/>
                                         <path d="M6 32l10-10 8 8 6-6 12 12" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
-                                    <p>Upload Package Image</p>
+                                    <p>Add image</p>
                                     <span>Drag and drop or click to browse</span>
                                 </div>
+                            </div>
+                            <div class="image-thumb-controls">
+                                <button type="button" class="img-thumb active" title="Main image">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 5h18v14H3z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                                </button>
+                                <button type="button" class="img-thumb" title="Image 2">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                                </button>
+                                <button type="button" class="img-thumb" title="Image 3">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                                </button>
+                                <button type="button" class="img-thumb" title="Image 4">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                                </button>
+                                <button type="button" class="img-thumb img-add" onclick="document.getElementById('packageImageFile').click()" title="Add more">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                </button>
                             </div>
                             <input type="file" id="packageImageFile" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
                             <button type="button" class="btn-upload" onclick="document.getElementById('packageImageFile').click()">
@@ -123,9 +142,9 @@
                         </div>
                     </div>
 
-                    <!-- Basic Information -->
+                    <!-- Basic Package Information -->
                     <div class="form-section">
-                        <h3 class="section-title">Basic Information</h3>
+                        <h3 class="section-title">Package Information</h3>
                         <div class="form-group">
                             <label>Destination *</label>
                             <div class="custom-form-dropdown" id="pkgDestinationDropdown">
@@ -142,7 +161,7 @@
                         </div>
                         <div class="form-grid">
                             <div class="form-group">
-                                <label>Package Name *</label>
+                                <label>Package Title *</label>
                                 <input type="text" id="packageName" class="form-input" placeholder="Enter package name" required>
                             </div>
                             <div class="form-group">
@@ -175,23 +194,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Price (INR) *</label>
-                                <input type="number" id="packagePrice" class="form-input" placeholder="e.g., 45000" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Status *</label>
-                                <select id="packageStatus" class="form-input" required>
-                                    <option value="active">Active</option>
-                                    <option value="inactive">Inactive</option>
-                                    <option value="draft">Draft</option>
-                                </select>
-                            </div>
-                        </div>
+                    </div>
+
+                    <!-- Package Description -->
+                    <div class="form-section">
+                        <h3 class="section-title">Package Description</h3>
                         <div class="form-group">
-                            <label>Package Description *</label>
-                            <textarea id="packageDescription" class="form-textarea" rows="4" placeholder="Brief description of the package..." required></textarea>
+                            <textarea id="packageDescription" class="form-textarea" rows="5" placeholder="Provide a detailed description of the package, including what the customer can expect from the trip..." required></textarea>
                         </div>
                         <div class="form-group checkbox-group">
                             <label class="checkbox-label">
@@ -201,23 +210,42 @@
                         </div>
                     </div>
 
-                    <!-- Package Type Details -->
+                    <!-- Package Details / Pricing -->
                     <div class="form-section">
-                        <h3 class="section-title">Package Type</h3>
+                        <h3 class="section-title">Package Details &amp; Pricing</h3>
                         <div class="form-grid">
                             <div class="form-group">
-                                <label>Category</label>
-                                <input type="text" id="typeCategory" class="form-input" placeholder="e.g., Romantic, Adventure">
+                                <label>Package Price (INR) *</label>
+                                <input type="number" id="packagePrice" class="form-input" placeholder="e.g., 45000" required>
                             </div>
                             <div class="form-group">
-                                <label>Staying</label>
-                                <input type="text" id="typeStaying" class="form-input" placeholder="e.g., 3 Hotels">
+                                <label>Number of People</label>
+                                <input type="text" id="typePerson" class="form-input" placeholder="e.g., 4 Adults / 2 Child">
                             </div>
                         </div>
                         <div class="form-grid">
                             <div class="form-group">
-                                <label>Person</label>
-                                <input type="text" id="typePerson" class="form-input" placeholder="e.g., 4 Adults / 2 Child">
+                                <label>Status *</label>
+                                <select id="packageStatus" class="form-input" required>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="draft">Draft</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <input type="text" id="typeCategory" class="form-input" placeholder="e.g., Romantic, Adventure">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package Information / Additional Details -->
+                    <div class="form-section">
+                        <h3 class="section-title">Package Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Staying</label>
+                                <input type="text" id="typeStaying" class="form-input" placeholder="e.g., 3 Hotels">
                             </div>
                             <div class="form-group">
                                 <label>Other</label>
@@ -249,10 +277,30 @@
                         </div>
                     </div>
 
-                    <!-- Day Wise Schedule -->
+                    <!-- Why This Package -->
                     <div class="form-section">
-                        <div class="section-header">
-                            <h3 class="section-title">Day Wise Schedule</h3>
+                        <div class="section-header-with-btn">
+                            <h3 class="section-title">Why This Package</h3>
+                            <button type="button" class="btn-add-reason" onclick="addWhyItem()">
+                                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                                    <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                Add
+                            </button>
+                        </div>
+                        <p class="section-desc">Add reasons or highlights explaining why customers should choose this package.</p>
+                        <div id="whyListContainer" class="why-list">
+                            <div class="why-item">
+                                <input type="text" class="form-input" placeholder="e.g., Unique cultural experiences">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day Wise Itinerary -->
+                    <div class="form-section">
+                        <div class="section-header-with-btn">
+                            <h3 class="section-title">Day Wise Itinerary</h3>
                             <button type="button" class="btn-add-day" onclick="addDay()">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                     <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -262,23 +310,33 @@
                             </button>
                         </div>
                         <div id="daysContainer">
-                            <!-- Day items will be dynamically added -->
+                            <!-- Day items dynamically generated by JS -->
                         </div>
                     </div>
 
                     <!-- Cancellation Policy -->
-                    <div class="form-section">
-                        <h3 class="section-title">Cancellation policy</h3>
-                        <div class="form-group">
-                            <textarea id="cancellationPolicy" class="form-textarea" rows="4" placeholder="Enter cancellation policy details..."></textarea>
+                    <div class="form-section collapsible-section" id="cancellationSection">
+                        <div class="collapsible-header" onclick="toggleCollapsible('cancellationSection')">
+                            <h3 class="section-title">Cancellation Policy</h3>
+                            <svg class="collapse-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <textarea id="cancellationPolicy" class="form-textarea" rows="4" placeholder="Enter cancellation rules, refund conditions and time limits..."></textarea>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Instructions -->
-                    <div class="form-section">
-                        <h3 class="section-title">Instructions</h3>
-                        <div class="form-group">
-                            <textarea id="instructions" class="form-textarea" rows="4" placeholder="Enter instructions for travelers..."></textarea>
+                    <div class="form-section collapsible-section" id="instructionsSection">
+                        <div class="collapsible-header" onclick="toggleCollapsible('instructionsSection')">
+                            <h3 class="section-title">Instructions</h3>
+                            <svg class="collapse-icon" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="section-content">
+                            <div class="form-group">
+                                <textarea id="instructions" class="form-textarea" rows="4" placeholder="Enter instructions for travelers such as what to carry, meeting points, arrival instructions..."></textarea>
+                            </div>
                         </div>
                     </div>
 
@@ -295,6 +353,6 @@
     </div>
 
     <script src="js/packages-data.js"></script>
-    <script src="js/admin-package-form.js?v=20260902u"></script>
+    <script src="js/admin-package-form.js?v=20260902w"></script>
 </body>
 </html>
