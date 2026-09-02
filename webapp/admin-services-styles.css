@@ -361,7 +361,8 @@ body {
 .svc-status-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 6px);
+    top: auto;
+    bottom: calc(100% + 6px);
     left: 0;
     min-width: 170px;
     background-color: #FFFFFF;
