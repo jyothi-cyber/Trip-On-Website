@@ -542,6 +542,7 @@ function collectFormData() {
     // Basic info
     const name = document.getElementById('packageName').value.trim();
     const location = document.getElementById('packageLocation').value.trim();
+    const destination = document.getElementById('pkgDestination') ? document.getElementById('pkgDestination').value : '';
     const duration = document.getElementById('packageDuration').value;
     const type = document.getElementById('packageType').value;
     const price = parseInt(document.getElementById('packagePrice').value);
@@ -601,6 +602,7 @@ function collectFormData() {
     return {
         name,
         location,
+        destination,
         duration: durationMap[duration] || duration,
         category: duration,
         type,
@@ -696,3 +698,47 @@ window.saveDraft = function() {
 };
 window.previewPackage = previewPackage;
 window.goBack = goBack;
+
+// ============================================================================
+// DESTINATION CUSTOM DROPDOWN
+// ============================================================================
+
+function togglePkgFormDropdown(fieldId) {
+    var menu = document.getElementById(fieldId + 'Menu');
+    var triggerEl = document.getElementById(fieldId + 'Dropdown');
+    var trigger = triggerEl ? triggerEl.querySelector('.custom-form-dropdown-trigger') : null;
+    var isOpen = menu && menu.classList.contains('show');
+    document.querySelectorAll('.custom-form-dropdown-menu.show').forEach(function (m) { m.classList.remove('show'); });
+    document.querySelectorAll('.custom-form-dropdown-trigger.open').forEach(function (t) { t.classList.remove('open'); });
+    if (!isOpen && menu && trigger) {
+        menu.classList.add('show');
+        trigger.classList.add('open');
+    }
+}
+
+function selectPkgFormDropdown(fieldId, value) {
+    var valueEl = document.getElementById(fieldId + 'Value');
+    var menu = document.getElementById(fieldId + 'Menu');
+    var triggerEl = document.getElementById(fieldId + 'Dropdown');
+    var trigger = triggerEl ? triggerEl.querySelector('.custom-form-dropdown-trigger') : null;
+    var hidden = document.getElementById(fieldId);
+    if (valueEl) { valueEl.textContent = value; }
+    if (menu) { menu.classList.remove('show'); }
+    if (trigger) { trigger.classList.remove('open'); }
+    if (menu) {
+        menu.querySelectorAll('.custom-form-dropdown-item').forEach(function (item) {
+            item.classList.toggle('active', item.textContent === value);
+        });
+    }
+    if (hidden) { hidden.value = value; }
+}
+
+document.addEventListener('click', function (e) {
+    if (!e.target.closest('.custom-form-dropdown')) {
+        document.querySelectorAll('.custom-form-dropdown-menu.show').forEach(function (m) { m.classList.remove('show'); });
+        document.querySelectorAll('.custom-form-dropdown-trigger.open').forEach(function (t) { t.classList.remove('open'); });
+    }
+});
+
+window.togglePkgFormDropdown = togglePkgFormDropdown;
+window.selectPkgFormDropdown = selectPkgFormDropdown;

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Package Form - Trip On Admin</title>
     <link rel="stylesheet" href="admin-styles.css">
-    <link rel="stylesheet" href="admin-package-form-styles.css">
+    <link rel="stylesheet" href="admin-package-form-styles.css?v=20260902t">
 </head>
 <body>
     <!-- Mobile Header -->
@@ -126,6 +126,20 @@
                     <!-- Basic Information -->
                     <div class="form-section">
                         <h3 class="section-title">Basic Information</h3>
+                        <div class="form-group">
+                            <label>Destination *</label>
+                            <div class="custom-form-dropdown" id="pkgDestinationDropdown">
+                                <button type="button" class="custom-form-dropdown-trigger" onclick="togglePkgFormDropdown('pkgDestination')">
+                                    <span id="pkgDestinationValue">Select destination</span>
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </button>
+                                <div class="custom-form-dropdown-menu" id="pkgDestinationMenu">
+                                    <div class="custom-form-dropdown-item" onclick="selectPkgFormDropdown('pkgDestination','Bali')">Bali</div>
+                                    <div class="custom-form-dropdown-item" onclick="selectPkgFormDropdown('pkgDestination','Andaman')">Andaman</div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="pkgDestination" />
+                        </div>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label>Package Name *</label>
@@ -266,6 +280,6 @@
     </div>
 
     <script src="js/packages-data.js"></script>
-    <script src="js/admin-package-form.js"></script>
+    <script src="js/admin-package-form.js?v=20260902t"></script>
 </body>
 </html>
