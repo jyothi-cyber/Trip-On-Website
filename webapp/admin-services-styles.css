@@ -774,10 +774,453 @@ body {
     line-height: 11px;
 }
 
+/* ─── Edit modal ─── */
+.svc-edit-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(31, 31, 31, 0.6);
+    z-index: 940;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.svc-edit-overlay.svc-show {
+    display: flex;
+}
+
+.svc-edit-card {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    margin: 16px;
+    padding: 12px 16px;
+    width: 520px;
+    max-width: 100%;
+}
+
+/* top action bar */
+.svc-edit-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.svc-edit-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #FFFFFF;
+    border: 1px solid #ECECEC;
+    border-radius: 5px;
+    padding: 8px 14px;
+    font-size: 8px;
+    color: #555555;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s;
+}
+
+.svc-edit-back:hover {
+    background-color: #F5F5F5;
+}
+
+.svc-edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.svc-edit-cancel {
+    background: none;
+    border: none;
+    font-size: 8px;
+    color: #222222;
+    cursor: pointer;
+    padding: 4px 6px;
+    transition: color 0.2s;
+}
+
+.svc-edit-cancel:hover {
+    color: #555555;
+}
+
+.svc-edit-save {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #68C6A7;
+    border: 1px solid #68C6A7;
+    border-radius: 5px;
+    padding: 6px 14px;
+    font-size: 8px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.svc-edit-save:hover {
+    background-color: #59b797;
+}
+
+.svc-edit-delete {
+    display: inline-flex;
+    align-items: center;
+    background-color: #FF6B59;
+    border: 1px solid #FF6B59;
+    border-radius: 5px;
+    padding: 4px 12px;
+    font-size: 7px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.svc-edit-delete:hover {
+    background-color: #f05a47;
+}
+
+/* edit form */
+.svc-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.svc-edit-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.svc-edit-field-inline {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.svc-edit-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #222222;
+    min-width: 70px;
+}
+
+.svc-edit-val-id {
+    font-size: 9px;
+    font-weight: 600;
+    color: #28765F;
+}
+
+.svc-edit-input {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #D0D0D0;
+    border-radius: 6px;
+    font-size: 10px;
+    color: #333333;
+    font-family: inherit;
+    height: 27px;
+}
+
+.svc-edit-input:focus {
+    outline: none;
+    border-color: #68C6A7;
+}
+
+.svc-edit-textarea {
+    width: 100%;
+    min-height: 57px;
+    padding: 6px 10px;
+    border: 1px solid #D0D0D0;
+    border-radius: 6px;
+    font-size: 10px;
+    color: #333333;
+    font-family: inherit;
+    line-height: 1.4;
+    resize: vertical;
+}
+
+.svc-edit-textarea:focus {
+    outline: none;
+    border-color: #68C6A7;
+}
+
+/* type pill */
+.svc-edit-type-wrap {
+    position: relative;
+}
+
+.svc-edit-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #FFFFFF;
+    border: 1px solid #D9E9E2;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 8px;
+    color: #287D65;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.svc-edit-type:hover {
+    background-color: #F0FAF6;
+}
+
+.svc-edit-type-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    min-width: 110px;
+    padding: 4px;
+    z-index: 60;
+}
+
+.svc-edit-type-menu.svc-open {
+    display: block;
+}
+
+.svc-edit-type-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 5px 9px;
+    border: none;
+    background: none;
+    font-size: 11px;
+    color: #333333;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.svc-edit-type-option:hover {
+    background-color: #F0FAF6;
+    color: #287D65;
+}
+
+/* images add button */
+.svc-edit-img-add {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: #F2F2F2;
+    border: 1px solid #D9D9D9;
+    color: #555555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.svc-edit-img-add:hover {
+    background-color: #E6E6E6;
+}
+
+/* category selector */
+.svc-edit-cat {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    min-height: 30px;
+    padding: 3px 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.svc-edit-cat:focus-within {
+    border-color: #68C6A7;
+}
+
+.svc-edit-cat-tags {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.svc-edit-cat-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #F0F0F0;
+    color: #333333;
+    font-size: 8px;
+    border-radius: 4px;
+    padding: 2px 7px;
+}
+
+.svc-edit-cat-tag-remove {
+    background: none;
+    border: none;
+    font-size: 10px;
+    color: #555555;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.svc-edit-cat-clear {
+    font-size: 8px;
+    color: #287D65;
+    cursor: pointer;
+    white-space: nowrap;
+    display: none;
+}
+
+.svc-edit-cat-arrow {
+    background: none;
+    border: none;
+    color: #555555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.svc-edit-cat-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    padding: 4px;
+    z-index: 60;
+}
+
+.svc-edit-cat-menu.svc-open {
+    display: block;
+}
+
+.svc-edit-cat-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 6px 10px;
+    border: none;
+    background: none;
+    font-size: 11px;
+    color: #333333;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.svc-edit-cat-option:hover {
+    background-color: #F0FAF6;
+}
+
+.svc-edit-cat-option.svc-selected {
+    color: #287D65;
+    font-weight: 600;
+}
+
+/* delete confirm */
+.svc-confirm-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(31, 31, 31, 0.6);
+    z-index: 970;
+    align-items: center;
+    justify-content: center;
+}
+
+.svc-confirm-overlay.svc-show {
+    display: flex;
+}
+
+.svc-confirm-box {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    width: 360px;
+    max-width: 90%;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    padding: 18px 20px;
+}
+
+.svc-confirm-header {
+    font-size: 14px;
+    font-weight: 700;
+    color: #222222;
+    margin-bottom: 10px;
+}
+
+.svc-confirm-text {
+    font-size: 12px;
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.svc-confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.svc-confirm-cancel {
+    padding: 8px 16px;
+    background-color: #F0F0F0;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #444444;
+    cursor: pointer;
+}
+
+.svc-confirm-cancel:hover {
+    background-color: #E2E2E2;
+}
+
+.svc-confirm-ok {
+    padding: 8px 16px;
+    background-color: #FF6B59;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.svc-confirm-ok:hover {
+    background-color: #f05a47;
+}
+
 @media (max-width: 480px) {
     .svc-view-card {
         margin: 8px;
         width: auto;
+    }
+
+    .svc-edit-card {
+        margin: 8px;
+        width: auto;
+    }
+
+    .svc-edit-topbar {
+        flex-wrap: wrap;
+        gap: 8px;
     }
 }
 

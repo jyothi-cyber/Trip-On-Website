@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Activities | Trip On Admin</title>
-    <link rel="stylesheet" href="admin-styles.css?v=20260902e">
-    <link rel="stylesheet" href="admin-services-styles.css?v=20260902e">
+    <link rel="stylesheet" href="admin-styles.css?v=20260902f">
+    <link rel="stylesheet" href="admin-services-styles.css?v=20260902f">
 </head>
 
 <body>
@@ -196,9 +196,9 @@
                     <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M8 1L2 5l6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     Back
                 </button>
-                <button class="svc-view-edit" id="svcViewEditBtn" onclick="toggleViewEdit()">
+                <button class="svc-view-edit" id="svcViewEditBtn" onclick="openEditModal()">
                     <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M7.3 1.2a1 1 0 0 1 1.4 1.4L3.2 8.1l-2 .5.5-2 5.6-5.4z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
-                    <span id="svcViewEditLabel">Edit</span>
+                    Edit
                 </button>
             </div>
 
@@ -244,7 +244,100 @@
         </div>
     </div>
 
-    <script src="js/admin-services.js?v=20260902e"></script>
+    <!-- Activity Edit Modal -->
+    <div class="svc-edit-overlay" id="svcEditModal">
+        <div class="svc-edit-card">
+
+            <!-- top action bar -->
+            <div class="svc-edit-topbar">
+                <button class="svc-edit-back" onclick="closeEditModal()">
+                    <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M8 1L2 5l6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Back
+                </button>
+                <div class="svc-edit-actions">
+                    <button class="svc-edit-cancel" onclick="closeEditModal()">Cancel</button>
+                    <button class="svc-edit-save" onclick="saveEditChanges()">
+                        Save
+                        <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8 8.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="svc-edit-delete" onclick="confirmDeleteActivity()">Delete For Ever</button>
+                </div>
+            </div>
+
+            <!-- edit form -->
+            <div class="svc-edit-form">
+                <div class="svc-edit-field svc-edit-field-inline">
+                    <span class="svc-edit-label">Activity :</span>
+                    <span class="svc-edit-val-id" id="svcEditId">#ACT-001</span>
+                </div>
+
+                <div class="svc-edit-field svc-edit-field-inline">
+                    <span class="svc-edit-label">Type :</span>
+                    <div class="svc-edit-type-wrap">
+                        <div class="svc-edit-type" id="svcEditType" onclick="toggleEditTypeMenu()">
+                            <span id="svcEditTypeVal">Popular</span>
+                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="svc-edit-type-menu" id="svcEditTypeMenu">
+                            <button class="svc-edit-type-option" onclick="setEditType('Static')">Static</button>
+                            <button class="svc-edit-type-option" onclick="setEditType('Popular')">Popular</button>
+                            <button class="svc-edit-type-option" onclick="setEditType('Inactive')">Inactive</button>
+                            <button class="svc-edit-type-option" onclick="setEditType('Featured')">Featured</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-edit-field svc-edit-field-inline">
+                    <span class="svc-edit-label">Images :</span>
+                    <button class="svc-edit-img-add" title="Upload images" onclick="addImagePrompt()">
+                        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M7 4v6M4 7h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    </button>
+                </div>
+
+                <div class="svc-edit-field">
+                    <span class="svc-edit-label">Title :</span>
+                    <input type="text" id="svcEditTitle" class="svc-edit-input" placeholder="Activity title">
+                </div>
+
+                <div class="svc-edit-field">
+                    <span class="svc-edit-label">Location :</span>
+                    <input type="text" id="svcEditLocation" class="svc-edit-input" placeholder="Location">
+                </div>
+
+                <div class="svc-edit-field">
+                    <span class="svc-edit-label">Category :</span>
+                    <div class="svc-edit-cat" id="svcEditCat">
+                        <div class="svc-edit-cat-tags" id="svcEditCatTags"></div>
+                        <div class="svc-edit-cat-clear" id="svcEditCatClear" onclick="clearEditCategories()">Clear All</div>
+                        <button class="svc-edit-cat-arrow" onclick="toggleEditCatMenu()">
+                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="svc-edit-cat-menu" id="svcEditCatMenu"></div>
+                    </div>
+                </div>
+
+                <div class="svc-edit-field">
+                    <span class="svc-edit-label">Details:</span>
+                    <textarea id="svcEditDetails" class="svc-edit-textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.</textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Delete confirm overlay -->
+    <div class="svc-confirm-overlay" id="svcDeleteConfirm">
+        <div class="svc-confirm-box">
+            <div class="svc-confirm-header">Delete Activity</div>
+            <div class="svc-confirm-text">Are you sure you want to permanently delete this activity? This action cannot be undone.</div>
+            <div class="svc-confirm-actions">
+                <button class="svc-confirm-cancel" onclick="closeDeleteConfirm()">Cancel</button>
+                <button class="svc-confirm-ok" onclick="doDeleteActivity()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-services.js?v=20260902f"></script>
 </body>
 
 </html>
