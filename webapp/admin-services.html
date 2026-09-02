@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Activities | Trip On Admin</title>
-    <link rel="stylesheet" href="admin-styles.css?v=20260902f">
-    <link rel="stylesheet" href="admin-services-styles.css?v=20260902f">
+    <link rel="stylesheet" href="admin-styles.css?v=20260902g">
+    <link rel="stylesheet" href="admin-services-styles.css?v=20260902g">
 </head>
 
 <body>
@@ -143,46 +143,87 @@
         <span class="svc-toast-msg" id="svcToastMsg">Saved</span>
     </div>
 
-    <!-- New Item Modal (Activity / Hotel / Sightseeing) -->
-    <div class="svc-modal-overlay" id="svcNewItemModal">
-        <div class="svc-modal">
-            <div class="svc-modal-header">
-                <h3 class="svc-modal-title" id="svcNewItemTitle">New Activity</h3>
-                <button class="svc-modal-close" onclick="closeModal('svcNewItemModal')">&times;</button>
+    <!-- New Activity Modal -->
+    <div class="svc-new-overlay" id="svcNewItemModal">
+        <div class="svc-new-card">
+
+            <!-- top action bar -->
+            <div class="svc-new-topbar">
+                <button class="svc-new-back" onclick="closeNewModal()">
+                    <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M8 1L2 5l6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Back
+                </button>
+                <div class="svc-new-actions">
+                    <button class="svc-new-cancel" onclick="closeNewModal()">Cancel</button>
+                    <button class="svc-new-save" onclick="saveNewItem()">
+                        Save
+                        <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8 8.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
             </div>
-            <div class="svc-modal-body">
-                <div class="svc-field">
-                    <label class="svc-field-label">Name *</label>
-                    <input type="text" id="svcItemName" class="svc-input" placeholder="Enter name">
+
+            <!-- new form -->
+            <div class="svc-new-form">
+                <div class="svc-new-field svc-new-field-inline">
+                    <span class="svc-new-label">Activity :</span>
+                    <span class="svc-new-val-id" id="svcNewId">#ACT-AUTO</span>
                 </div>
-                <div class="svc-field">
-                    <label class="svc-field-label">Image URL / File</label>
-                    <input type="text" id="svcItemImage" class="svc-input" placeholder="e.g. image.png">
-                </div>
-                <div class="svc-field">
-                    <label class="svc-field-label">Location</label>
-                    <input type="text" id="svcItemLocation" class="svc-input" placeholder="Enter location">
-                </div>
-                <div class="svc-field">
-                    <label class="svc-field-label">Category</label>
-                    <input type="text" id="svcItemCategory" class="svc-input" placeholder="e.g. Basic, Couple">
-                </div>
-                <div class="svc-field">
-                    <label class="svc-field-label">Status</label>
-                    <div class="svc-select-wrap">
-                        <select id="svcItemStatus" class="svc-input">
-                            <option>Static</option>
-                            <option>Popular</option>
-                            <option>Inactive</option>
-                            <option>Featured</option>
-                        </select>
+
+                <div class="svc-new-field svc-new-field-inline">
+                    <span class="svc-new-label">Type :</span>
+                    <div class="svc-new-type-wrap">
+                        <div class="svc-new-type" id="svcNewType" onclick="toggleNewTypeMenu()">
+                            <span id="svcNewTypeVal">Select</span>
+                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="svc-new-type-menu" id="svcNewTypeMenu">
+                            <button class="svc-new-type-option" onclick="setNewType('Static')">Static</button>
+                            <button class="svc-new-type-option" onclick="setNewType('Popular')">Popular</button>
+                            <button class="svc-new-type-option" onclick="setNewType('Inactive')">Inactive</button>
+                            <button class="svc-new-type-option" onclick="setNewType('Featured')">Featured</button>
+                        </div>
                     </div>
                 </div>
+
+                <div class="svc-new-field svc-new-field-inline">
+                    <span class="svc-new-label">Images :</span>
+                    <div class="svc-new-images">
+                        <button class="svc-new-img-slot" title="Upload image 1" onclick="addImagePrompt()"></button>
+                        <button class="svc-new-img-slot" title="Upload image 2" onclick="addImagePrompt()"></button>
+                        <button class="svc-new-img-slot" title="Upload image 3" onclick="addImagePrompt()"></button>
+                        <button class="svc-new-img-slot" title="Upload image 4" onclick="addImagePrompt()"></button>
+                    </div>
+                </div>
+
+                <div class="svc-new-field">
+                    <span class="svc-new-label">Title :</span>
+                    <input type="text" id="svcItemName" class="svc-new-input" placeholder="Enter Title">
+                </div>
+
+                <div class="svc-new-field">
+                    <span class="svc-new-label">Location :</span>
+                    <input type="text" id="svcItemLocation" class="svc-new-input" placeholder="Enter Location">
+                </div>
+
+                <div class="svc-new-field">
+                    <span class="svc-new-label">Category :</span>
+                    <div class="svc-new-cat" id="svcNewCat">
+                        <div class="svc-new-cat-tags" id="svcNewCatTags"></div>
+                        <span class="svc-new-cat-placeholder" id="svcNewCatPlaceholder">Select categories</span>
+                        <div class="svc-new-cat-clear" id="svcNewCatClear" onclick="clearNewCategories()">Clear All</div>
+                        <button class="svc-new-cat-arrow" onclick="toggleNewCatMenu()">
+                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="svc-new-cat-menu" id="svcNewCatMenu"></div>
+                    </div>
+                </div>
+
+                <div class="svc-new-field">
+                    <span class="svc-new-label">Details:</span>
+                    <textarea id="svcItemDetails" class="svc-new-textarea" placeholder="Enter Activity Details"></textarea>
+                </div>
             </div>
-            <div class="svc-modal-footer">
-                <button class="svc-btn-cancel" onclick="closeModal('svcNewItemModal')">Cancel</button>
-                <button class="svc-btn-primary" onclick="saveNewItem()">Add</button>
-            </div>
+
         </div>
     </div>
 
@@ -337,7 +378,7 @@
         </div>
     </div>
 
-    <script src="js/admin-services.js?v=20260902f"></script>
+    <script src="js/admin-services.js?v=20260902g"></script>
 </body>
 
 </html>

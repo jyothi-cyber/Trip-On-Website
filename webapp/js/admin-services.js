@@ -74,10 +74,6 @@ function switchServiceTab(tab) {
     if (tableTitle) { tableTitle.textContent = titles[tab]; }
     if (addBtn) { addBtn.textContent = 'New ' + labels[tab].replace('Sight Seeings', 'Sightseeing'); }
 
-    /* update modal title */
-    var newItemTitle = document.getElementById('svcNewItemTitle');
-    if (newItemTitle) { newItemTitle.textContent = 'New ' + labels[tab].replace('Sight Seeings', 'Sightseeing'); }
-
     renderTable();
 }
 
@@ -442,34 +438,143 @@ function closeViewModal() {
 }
 
 /* ─── New item modal ─── */
+var newCategories = [];
+
 function openNewItemModal() {
-    var labels = { activities: 'Activity', hotels: 'Hotel', sightseeings: 'Sightseeing' };
-    document.getElementById('svcNewItemTitle').textContent = 'New ' + labels[servicesTab];
+    var prefix = { activities: 'ACT', hotels: 'HTL', sightseeings: 'STG' };
+    var idPrefix = prefix[servicesTab] || 'ACT';
+
+    document.getElementById('svcNewId').textContent = '#' + idPrefix + '-AUTO';
+    document.getElementById('svcNewTypeVal').textContent = 'Select';
     document.getElementById('svcItemName').value = '';
-    document.getElementById('svcItemImage').value = '';
     document.getElementById('svcItemLocation').value = '';
-    document.getElementById('svcItemCategory').value = '';
-    document.getElementById('svcItemStatus').value = 'Static';
-    openModal('svcNewItemModal');
+    document.getElementById('svcItemDetails').value = '';
+
+    newCategories = [];
+    renderNewCatTags();
+    renderNewCatMenu();
+    openNewOverlay('svcNewItemModal');
 }
 
+function closeNewModal() {
+    closeNewTypeMenu();
+    closeNewCatMenu();
+    closeNewOverlay('svcNewItemModal');
+}
+
+/* ─── New type dropdown ─── */
+function toggleNewTypeMenu() {
+    var menu = document.getElementById('svcNewTypeMenu');
+    if (menu) {
+        closeNewTypeMenu();
+        menu.classList.add('svc-open');
+    }
+}
+
+function closeNewTypeMenu() {
+    var menu = document.getElementById('svcNewTypeMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+}
+
+function setNewType(status) {
+    var valEl = document.getElementById('svcNewTypeVal');
+    if (valEl) { valEl.textContent = status; }
+    var pill = document.getElementById('svcNewType');
+    if (pill) { pill.classList.add('svc-has-value'); }
+    closeNewTypeMenu();
+}
+
+/* ─── New categories ─── */
+function renderNewCatTags() {
+    var wrap = document.getElementById('svcNewCatTags');
+    var placeholder = document.getElementById('svcNewCatPlaceholder');
+    var clear = document.getElementById('svcNewCatClear');
+    if (!wrap) { return; }
+    wrap.innerHTML = '';
+    for (var i = 0; i < newCategories.length; i++) {
+        (function (cat) {
+            var tag = document.createElement('span');
+            tag.className = 'svc-new-cat-tag';
+            tag.innerHTML = escapeHtml(cat) + '<button class="svc-new-cat-tag-remove" onclick="removeNewCategory(\'' + escapeAttr(cat) + '\')">&times;</button>';
+            wrap.appendChild(tag);
+        })(newCategories[i]);
+    }
+    if (placeholder) { placeholder.style.display = newCategories.length > 0 ? 'none' : 'inline-block'; }
+    if (clear) { clear.style.display = newCategories.length > 0 ? 'inline-block' : 'none'; }
+}
+
+function renderNewCatMenu() {
+    var menu = document.getElementById('svcNewCatMenu');
+    if (!menu) { return; }
+    menu.innerHTML = '';
+    for (var i = 0; i < availableCategories.length; i++) {
+        var cat = availableCategories[i];
+        var selected = newCategories.indexOf(cat) > -1;
+        (function (c, sel) {
+            var btn = document.createElement('button');
+            btn.className = 'svc-new-cat-option';
+            btn.textContent = c + (sel ? ' ✓' : '');
+            if (sel) { btn.classList.add('svc-selected'); }
+            btn.addEventListener('click', function () {
+                if (sel) { removeNewCategory(c); }
+                else { addNewCategory(c); }
+            });
+            menu.appendChild(btn);
+        })(cat, selected);
+    }
+}
+
+function addNewCategory(cat) {
+    if (newCategories.indexOf(cat) > -1) { return; }
+    newCategories.push(cat);
+    renderNewCatTags();
+    renderNewCatMenu();
+}
+
+function removeNewCategory(cat) {
+    var idx = newCategories.indexOf(cat);
+    if (idx > -1) {
+        newCategories.splice(idx, 1);
+        renderNewCatTags();
+        renderNewCatMenu();
+    }
+}
+
+function clearNewCategories() {
+    newCategories = [];
+    renderNewCatTags();
+    renderNewCatMenu();
+}
+
+function toggleNewCatMenu() {
+    renderNewCatMenu();
+    var menu = document.getElementById('svcNewCatMenu');
+    if (menu) {
+        if (menu.classList.contains('svc-open')) { menu.classList.remove('svc-open'); }
+        else { menu.classList.add('svc-open'); }
+    }
+}
+
+function closeNewCatMenu() {
+    var menu = document.getElementById('svcNewCatMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+}
+
+/* ─── Save new activity ─── */
 function saveNewItem() {
     var name = document.getElementById('svcItemName').value.trim();
     if (!name) {
-        showToast('Name is required');
+        showToast('Title is required');
         return;
     }
 
-    var categoriesRaw = document.getElementById('svcItemCategory').value.trim();
-    var categories = [];
-    if (categoriesRaw) {
-        var parts = categoriesRaw.split(',');
-        for (var i = 0; i < parts.length; i++) {
-            var p = parts[i].trim();
-            if (p) { categories.push(p); }
-        }
+    var type = document.getElementById('svcNewTypeVal').textContent;
+    if (type === 'Select') {
+        showToast('Please select a Type');
+        return;
     }
-    if (categories.length === 0) { categories = ['Basic']; }
+
+    if (newCategories.length === 0) { newCategories = ['Basic']; }
 
     var list = servicesData[servicesTab];
     var nextId = 1;
@@ -479,36 +584,19 @@ function saveNewItem() {
 
     list.push({
         id: nextId,
-        image: document.getElementById('svcItemImage').value.trim() || 'new-image.png',
+        image: 'new-image.png',
         imageCount: 1,
         name: name,
         location: document.getElementById('svcItemLocation').value.trim() || '—',
-        categories: categories,
-        status: document.getElementById('svcItemStatus').value
+        categories: newCategories.slice(),
+        status: type,
+        details: document.getElementById('svcItemDetails').value
     });
 
     saveServicesData(servicesData);
-    closeModal('svcNewItemModal');
+    closeNewModal();
     renderTable();
-    showToast('Added successfully');
-}
-
-/* ─── Modal helpers ─── */
-function openModal(id) {
-    var modal = document.getElementById(id);
-    if (modal) {
-        modal.classList.add('svc-show');
-        modal.style.display = 'flex';
-    }
-}
-
-function closeModal(id) {
-    var modal = document.getElementById(id);
-    if (modal) {
-        modal.classList.remove('svc-show');
-        modal.style.display = 'none';
-    }
-    closeAllStatusMenus();
+    showToast('Activity added');
 }
 
 /* ─── Profile menu ─── */
@@ -607,6 +695,24 @@ function closeEditOverlay(id) {
     closeEditCatMenu();
 }
 
+function openNewOverlay(id) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.classList.add('svc-show');
+        el.style.display = 'flex';
+    }
+}
+
+function closeNewOverlay(id) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.classList.remove('svc-show');
+        el.style.display = 'none';
+    }
+    closeNewTypeMenu();
+    closeNewCatMenu();
+}
+
 /* ─── Global events ─── */
 document.addEventListener('click', function (e) {
     var target = e.target;
@@ -632,6 +738,16 @@ document.addEventListener('click', function (e) {
         closeEditCatMenu();
     }
 
+    /* close new type menu on outside click */
+    if (!target.closest('.svc-new-type-menu') && !target.closest('.svc-new-type')) {
+        closeNewTypeMenu();
+    }
+
+    /* close new category menu on outside click */
+    if (!target.closest('.svc-new-cat-menu') && !target.closest('.svc-new-cat') && !target.closest('.svc-new-cat-arrow')) {
+        closeNewCatMenu();
+    }
+
     /* close profile menu on outside click */
     if (!target.closest('.svc-profile')) {
         closeProfileMenu();
@@ -640,7 +756,7 @@ document.addEventListener('click', function (e) {
 
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-        closeModal('svcNewItemModal');
+        closeNewModal();
         closeViewModal();
         closeEditModal();
         closeDeleteConfirm();
@@ -648,18 +764,18 @@ document.addEventListener('keydown', function (e) {
         closeViewTypeMenu();
         closeEditTypeMenu();
         closeEditCatMenu();
+        closeNewTypeMenu();
+        closeNewCatMenu();
         closeProfileMenu();
     }
 });
 
-/* open modals on overlay click */
-var overlayIds = ['svcNewItemModal'];
-for (var oi = 0; oi < overlayIds.length; oi++) {
-    (function (id) {
-        document.getElementById(id).addEventListener('click', function (e) {
-            if (e.target === this) { closeModal(id); }
-        });
-    })(overlayIds[oi]);
+/* open new activity modal on overlay click */
+var newOverlay = document.getElementById('svcNewItemModal');
+if (newOverlay) {
+    newOverlay.addEventListener('click', function (e) {
+        if (e.target === this) { closeNewModal(); }
+    });
 }
 
 /* open view modal on overlay click */
