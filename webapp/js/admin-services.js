@@ -16,8 +16,8 @@ var defaultServicesData = {
         { id: 4, image: 'Parasailing.png', imageCount: 4, name: 'Parasailing', location: 'Andaman', categories: ['Adventure'], status: 'Featured' }
     ],
     hotels: [
-        { id: 1, image: 'hotel-pictures114.png', imageCount: 3, name: 'Hotel Name', location: 'Havelock', categories: ['Premium', 'Couple'], status: 'Static', rating: '3 Star' },
-        { id: 2, image: 'hotel-pictures124.png', imageCount: 3, name: 'Hotel Name', location: 'Havelock', categories: ['Luxury'], status: 'Popular', rating: '3 Star' }
+        { id: 1, image: 'hotel-pictures114.png', imageCount: 3, name: 'Over Beach Hotel - Sunday Selections', location: 'Govind Nagar', categories: ['Premium', 'Couple'], status: 'Static', rating: '3 Star', checkIn: '25 Mar, Sat 2 PM', checkOut: '26 Mar, Sat 2 PM', food: 'Breakfast, Dinner', roomSize: '5 People', bedType: 'Kings', inclusions: ['Complimentary Dinner is available.', 'Beach View Reserved Table.'], details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.' },
+        { id: 2, image: 'hotel-pictures124.png', imageCount: 3, name: 'Hotel Name', location: 'Havelock', categories: ['Luxury'], status: 'Popular', rating: '3 Star', checkIn: '25 Mar, Sat 2 PM', checkOut: '26 Mar, Sat 2 PM', food: 'Breakfast, Dinner', roomSize: '5 People', bedType: 'Kings', inclusions: ['Complimentary Dinner is available.', 'Beach View Reserved Table.'], details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.' }
     ],
     sightseeings: [
         { id: 1, image: 'SunsetPoint.png', imageCount: 2, name: 'Sunset Point', location: 'Havelock', categories: ['Couple'], status: 'Static' },
@@ -259,14 +259,30 @@ function openViewModal(tab, id) {
     viewTab = tab;
     viewItemId = id;
 
-    var prefix = { activities: 'ACT', hotels: 'HTL', sightseeings: 'STG' };
-    var idPrefix = prefix[tab] || 'ACT';
+    var cfg = tabConfigFor(tab);
+    var idPrefix = cfg.prefix;
+
+    var idLabel = document.querySelector('.svc-view-row .svc-view-label');
+    if (idLabel) { idLabel.textContent = serviceLabelFor(tab) + ' :'; }
 
     document.getElementById('svcViewId').textContent = '#' + idPrefix + '-' + padZero(item.id);
-    document.getElementById('svcViewTypeVal').textContent = item.status;
     document.getElementById('svcViewTitle').textContent = item.name;
     document.getElementById('svcViewLocation').textContent = item.location;
-    document.getElementById('svcViewDetails').textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
+    document.getElementById('svcViewDetails').textContent = item.details || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.';
+    document.getElementById('svcViewCheckIn').textContent = item.checkIn || '25 Mar, Sat 2 PM';
+    document.getElementById('svcViewCheckOut').textContent = item.checkOut || '26 Mar, Sat 2 PM';
+    document.getElementById('svcViewFood').textContent = item.food || 'Breakfast, Dinner';
+    document.getElementById('svcViewRoomSize').textContent = item.roomSize || '5 People';
+    document.getElementById('svcViewBedType').textContent = item.bedType || 'Kings';
+    var inc = document.getElementById('svcViewInclusions');
+    if (inc) {
+        var inclArr = item.inclusions || ['Complimentary Dinner is available.', 'Beach View Reserved Table.'];
+        inc.innerHTML = '';
+        for (var j = 0; j < inclArr.length; j++) {
+            if (j > 0) { inc.appendChild(document.createElement('br')); }
+            inc.appendChild(document.createTextNode(inclArr[j]));
+        }
+    }
 
     renderViewImages(item);
 
@@ -325,7 +341,8 @@ function setViewType(status) {
         }
     }
     saveServicesData(servicesData);
-    document.getElementById('svcViewTypeVal').textContent = status;
+    var valEl = document.getElementById('svcViewTypeVal');
+    if (valEl) { valEl.textContent = status; }
     closeViewTypeMenu();
     showToast('Type updated to ' + status);
 }

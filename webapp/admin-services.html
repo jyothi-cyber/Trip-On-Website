@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Activities | Trip On Admin</title>
-    <link rel="stylesheet" href="admin-styles.css?v=20260902m">
-    <link rel="stylesheet" href="admin-services-styles.css?v=20260902m">
+    <link rel="stylesheet" href="admin-styles.css?v=20260902p">
+    <link rel="stylesheet" href="admin-services-styles.css?v=20260902p">
 </head>
 
 <body>
@@ -238,39 +238,52 @@
             <!-- details body (read mode) -->
             <div class="svc-view-body" id="svcViewBody">
                 <div class="svc-view-row">
-                    <span class="svc-view-label">Activity :</span>
-                    <span class="svc-view-val svc-view-val-id" id="svcViewId">#ACT-001</span>
-                </div>
-                <div class="svc-view-row">
-                    <span class="svc-view-label">Type :</span>
-                    <div class="svc-view-type-wrap">
-                        <div class="svc-view-type" id="svcViewType" onclick="toggleViewTypeMenu()">
-                            <span id="svcViewTypeVal">Popular</span>
-                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </div>
-                        <div class="svc-view-type-menu" id="svcViewTypeMenu">
-                            <button class="svc-view-type-option" onclick="setViewType('Static')">Static</button>
-                            <button class="svc-view-type-option" onclick="setViewType('Popular')">Popular</button>
-                            <button class="svc-view-type-option" onclick="setViewType('Inactive')">Inactive</button>
-                            <button class="svc-view-type-option" onclick="setViewType('Featured')">Featured</button>
-                        </div>
-                    </div>
+                    <span class="svc-view-label">Hotel :</span>
+                    <span class="svc-view-val svc-view-val-id" id="svcViewId">#HotelID</span>
                 </div>
                 <div class="svc-view-row svc-view-row-images">
-                    <span class="svc-view-label">Images* :</span>
+                    <span class="svc-view-label">Images :</span>
                     <div class="svc-view-images" id="svcViewImages"></div>
                 </div>
                 <div class="svc-view-row">
                     <span class="svc-view-label">Title :</span>
-                    <span class="svc-view-val" id="svcViewTitle">Deep Sea Diving</span>
+                    <span class="svc-view-val svc-view-val-lg" id="svcViewTitle">Over Beach Hotel - Sunday Selections</span>
                 </div>
                 <div class="svc-view-row">
                     <span class="svc-view-label">Location :</span>
-                    <span class="svc-view-val" id="svcViewLocation">Havelock</span>
+                    <span class="svc-view-val svc-view-val-lg" id="svcViewLocation">Govind Nagar</span>
                 </div>
                 <div class="svc-view-row svc-view-row-details">
                     <span class="svc-view-label">Details:</span>
                     <span class="svc-view-val svc-view-details" id="svcViewDetails">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac metus volutpat, venenatis erat eu, vehicula velit. Duis lobortis tempus felis, et finibus justo mattis ac. Praesent pellentesque fermentum mattis.</span>
+                </div>
+                <div class="svc-view-pair">
+                    <div class="svc-view-fgroup">
+                        <span class="svc-view-label">Check In :</span>
+                        <span class="svc-view-val svc-view-val-lg" id="svcViewCheckIn">25 Mar, Sat 2 PM</span>
+                    </div>
+                    <div class="svc-view-fgroup">
+                        <span class="svc-view-label">Check Out :</span>
+                        <span class="svc-view-val svc-view-val-lg" id="svcViewCheckOut">26 Mar, Sat 2 PM</span>
+                    </div>
+                </div>
+                <div class="svc-view-pair">
+                    <div class="svc-view-fgroup">
+                        <span class="svc-view-label">Food :</span>
+                        <span class="svc-view-val svc-view-val-lg" id="svcViewFood">Breakfast, Dinner</span>
+                    </div>
+                    <div class="svc-view-fgroup">
+                        <span class="svc-view-label">Room Size :</span>
+                        <span class="svc-view-val svc-view-val-lg" id="svcViewRoomSize">5 People</span>
+                    </div>
+                </div>
+                <div class="svc-view-row">
+                    <span class="svc-view-label">Bed Type :</span>
+                    <span class="svc-view-val svc-view-val-lg" id="svcViewBedType">Kings</span>
+                </div>
+                <div class="svc-view-row svc-view-row-details">
+                    <span class="svc-view-label">Inclusions:</span>
+                    <span class="svc-view-val svc-view-inclusions" id="svcViewInclusions">Complimentary Dinner is available.<br>Beach View Reserved Table.</span>
                 </div>
             </div>
 
@@ -370,7 +383,7 @@
         </div>
     </div>
 
-    <script src="js/admin-services.js?v=20260902m"></script>
+    <script src="js/admin-services.js?v=20260902p"></script>
 </body>
 
 </html>

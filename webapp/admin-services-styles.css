@@ -620,15 +620,17 @@ body {
 .svc-view-back {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
     background-color: #FFFFFF;
     border: 1px solid #ECECEC;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 7px;
-    color: #444444;
+    border-radius: 6px;
+    width: 90px;
+    height: 30px;
+    font-size: 10px;
+    color: #555555;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: background 0.2s;
 }
 
@@ -639,12 +641,14 @@ body {
 .svc-view-edit {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
     background-color: #176B52;
     border: 1px solid #176B52;
-    border-radius: 4px;
-    padding: 4px 10px;
-    font-size: 7px;
+    border-radius: 6px;
+    width: 90px;
+    height: 29px;
+    font-size: 10px;
     color: #FFFFFF;
     cursor: pointer;
     transition: background 0.2s;
@@ -658,13 +662,13 @@ body {
 .svc-view-body {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
 }
 
 .svc-view-row {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
 }
 
 .svc-view-row-details {
@@ -672,17 +676,17 @@ body {
 }
 
 .svc-view-label {
-    font-size: 8px;
+    font-size: 11px;
     font-weight: 700;
     color: #222222;
     flex-shrink: 0;
-    min-width: 60px;
+    min-width: 72px;
     padding-top: 3px;
 }
 
 .svc-view-val {
-    font-size: 8px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
     color: #333333;
     line-height: 1.4;
     flex: 1;
@@ -695,9 +699,38 @@ body {
 }
 
 .svc-view-details {
-    font-size: 8px;
+    font-size: 14px;
     color: #555555;
-    line-height: 11px;
+    line-height: 18px;
+}
+
+.svc-view-val-lg {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.svc-view-inclusions {
+    font-size: 14px;
+    color: #555555;
+    line-height: 18px;
+}
+
+.svc-view-pair {
+    display: flex;
+    gap: 20px;
+}
+
+.svc-view-fgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.svc-view-fgroup .svc-view-label {
+    min-width: 0;
+    padding-top: 0;
 }
 
 /* type pill dropdown */
@@ -785,19 +818,28 @@ body {
 
 .svc-view-images {
     display: flex;
-    gap: 6px;
     flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 8px;
     flex: 1;
+    min-height: 110px;
+    padding: 10px;
+    background-color: #FAFAFA;
+    border: 1px dashed #D9D9D9;
+    border-radius: 6px;
 }
 
 .svc-view-img {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 88px;
     background-color: #F4F4F4;
     border: 1px solid #E5E5E5;
-    border-radius: 4px;
-    padding: 3px 8px;
-    font-size: 7px;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 10px;
     color: #555555;
 }
 
