@@ -353,3 +353,49 @@ for (var oi = 0; oi < overlayIds.length; oi++) {
 
 /* ─── Init ─── */
 switchServiceTab('activities');
+initializeMobileMenu();
+
+/* ─── Mobile menu ─── */
+function initializeMobileMenu() {
+    var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function () {
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+            if (sidebar) { sidebar.classList.toggle('active'); }
+            if (overlay) { overlay.classList.toggle('active'); }
+        });
+    }
+
+    var sidebarOverlay = document.getElementById('sidebarOverlay');
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', function () {
+            var sidebar = document.getElementById('sidebar');
+            if (sidebar) { sidebar.classList.remove('active'); }
+            this.classList.remove('active');
+        });
+    }
+
+    var mobileProfileBtn = document.getElementById('mobileProfileBtn');
+    if (mobileProfileBtn) {
+        mobileProfileBtn.addEventListener('click', function () {
+            if (window.confirm('Do you want to logout?')) {
+                window.location.href = 'admin-login.html';
+            }
+        });
+    }
+
+    var navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+    for (var i = 0; i < navItems.length; i++) {
+        (function (item) {
+            item.addEventListener('click', function () {
+                if (window.innerWidth <= 768) {
+                    var sidebar = document.getElementById('sidebar');
+                    var overlay = document.getElementById('sidebarOverlay');
+                    if (sidebar) { sidebar.classList.remove('active'); }
+                    if (overlay) { overlay.classList.remove('active'); }
+                }
+            });
+        })(navItems[i]);
+    }
+}

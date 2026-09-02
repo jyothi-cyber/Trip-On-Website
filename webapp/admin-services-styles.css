@@ -28,8 +28,13 @@ body {
 /* ─── Main ─── */
 .svc-main {
     flex: 1;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    min-height: calc(100vh - 70px);
     padding: 14px 20px 20px;
     min-width: 0;
+    overflow: hidden;
 }
 
 .svc-header {
