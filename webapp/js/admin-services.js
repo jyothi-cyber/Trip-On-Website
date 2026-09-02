@@ -643,16 +643,21 @@ function closeViewModal() {
 var newCategories = [];
 
 function openNewItemModal() {
-    var prefix = { activities: 'ACT', hotels: 'HTL', sightseeings: 'STG' };
-    var idPrefix = prefix[servicesTab] || 'ACT';
+    var cfg = tabConfigFor(servicesTab);
+    var idPrefix = cfg.prefix;
 
+    var labelEl = document.getElementById('svcNewIdLabel');
+    if (labelEl) { labelEl.textContent = serviceLabelFor(servicesTab) + ' :'; }
     document.getElementById('svcNewId').textContent = '#' + idPrefix + '-AUTO';
-    document.getElementById('svcNewTypeVal').textContent = 'Select';
-    var pill = document.getElementById('svcNewType');
-    if (pill) { pill.classList.remove('svc-has-value'); }
     document.getElementById('svcItemName').value = '';
     document.getElementById('svcItemLocation').value = '';
     document.getElementById('svcItemDetails').value = '';
+    document.getElementById('svcItemCheckIn').value = '';
+    document.getElementById('svcItemCheckOut').value = '';
+    document.getElementById('svcNewFoodVal').textContent = 'Select Food Provided';
+    document.getElementById('svcNewRoomVal').textContent = 'Select No. of People';
+    document.getElementById('svcNewBedVal').textContent = 'Select Bed Type';
+    document.getElementById('svcItemInclusions').value = '';
 
     newCategories = [];
     renderNewCatTags();
@@ -663,6 +668,9 @@ function openNewItemModal() {
 function closeNewModal() {
     closeNewTypeMenu();
     closeNewCatMenu();
+    closeNewFoodMenu();
+    closeNewRoomMenu();
+    closeNewBedMenu();
     closeNewOverlay('svcNewItemModal');
 }
 
@@ -781,18 +789,20 @@ function saveNewItem() {
         return;
     }
 
-    var type = document.getElementById('svcNewTypeVal').textContent;
-    if (type === 'Select') {
-        showToast('Please select a Type');
-        return;
-    }
-
     if (newCategories.length === 0) { newCategories = ['Basic']; }
 
     var list = servicesData[servicesTab];
     var nextId = 1;
     for (var j = 0; j < list.length; j++) {
         if (list[j].id >= nextId) { nextId = list[j].id + 1; }
+    }
+
+    var inclusionsRaw = document.getElementById('svcItemInclusions').value;
+    var inclusions = [];
+    var parts = inclusionsRaw.split('\n');
+    for (var bi = 0; bi < parts.length; bi++) {
+        var p = parts[bi].trim();
+        if (p) { inclusions.push(p); }
     }
 
     list.push({
@@ -802,14 +812,77 @@ function saveNewItem() {
         name: name,
         location: document.getElementById('svcItemLocation').value.trim() || '—',
         categories: newCategories.slice(),
-        status: type,
-        details: document.getElementById('svcItemDetails').value
+        details: document.getElementById('svcItemDetails').value,
+        checkIn: document.getElementById('svcItemCheckIn').value.trim() || '25 Mar, Sat 2 PM',
+        checkOut: document.getElementById('svcItemCheckOut').value.trim() || '26 Mar, Sat 2 PM',
+        food: document.getElementById('svcNewFoodVal').textContent,
+        roomSize: document.getElementById('svcNewRoomVal').textContent,
+        bedType: document.getElementById('svcNewBedVal').textContent,
+        inclusions: inclusions
     });
 
     saveServicesData(servicesData);
     closeNewModal();
     renderTable();
-    showToast('Activity added');
+    showToast(serviceLabelFor(servicesTab) + ' added');
+}
+
+/* ─── New Food / Room / Bed dropdowns ─── */
+function toggleNewFoodMenu() {
+    var dd = document.getElementById('svcNewFood');
+    var menu = document.getElementById('svcNewFoodMenu');
+    if (!menu) { return; }
+    var already = menu.classList.contains('svc-open');
+    closeNewFoodMenu();
+    if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
+}
+function closeNewFoodMenu() {
+    var menu = document.getElementById('svcNewFoodMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+    var dd = document.getElementById('svcNewFood');
+    if (dd) { dd.classList.remove('svc-open'); }
+}
+function setNewFood(val) {
+    document.getElementById('svcNewFoodVal').textContent = val;
+    closeNewFoodMenu();
+}
+
+function toggleNewRoomMenu() {
+    var dd = document.getElementById('svcNewRoom');
+    var menu = document.getElementById('svcNewRoomMenu');
+    if (!menu) { return; }
+    var already = menu.classList.contains('svc-open');
+    closeNewRoomMenu();
+    if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
+}
+function closeNewRoomMenu() {
+    var menu = document.getElementById('svcNewRoomMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+    var dd = document.getElementById('svcNewRoom');
+    if (dd) { dd.classList.remove('svc-open'); }
+}
+function setNewRoom(val) {
+    document.getElementById('svcNewRoomVal').textContent = val;
+    closeNewRoomMenu();
+}
+
+function toggleNewBedMenu() {
+    var dd = document.getElementById('svcNewBed');
+    var menu = document.getElementById('svcNewBedMenu');
+    if (!menu) { return; }
+    var already = menu.classList.contains('svc-open');
+    closeNewBedMenu();
+    if (!already) { menu.classList.add('svc-open'); if (dd) { dd.classList.add('svc-open'); } }
+}
+function closeNewBedMenu() {
+    var menu = document.getElementById('svcNewBedMenu');
+    if (menu) { menu.classList.remove('svc-open'); }
+    var dd = document.getElementById('svcNewBed');
+    if (dd) { dd.classList.remove('svc-open'); }
+}
+function setNewBed(val) {
+    document.getElementById('svcNewBedVal').textContent = val;
+    closeNewBedMenu();
 }
 
 /* ─── Profile menu ─── */
@@ -966,6 +1039,13 @@ document.addEventListener('click', function (e) {
     /* close new category menu on outside click */
     if (!target.closest('.svc-new-cat-menu') && !target.closest('.svc-new-cat') && !target.closest('.svc-new-cat-arrow')) {
         closeNewCatMenu();
+    }
+
+    /* close new food/room/bed dropdowns on outside click */
+    if (!target.closest('.svc-new-dropdown-menu') && !target.closest('.svc-new-dropdown')) {
+        closeNewFoodMenu();
+        closeNewRoomMenu();
+        closeNewBedMenu();
     }
 
     /* close profile menu on outside click */

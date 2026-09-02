@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Activities | Trip On Admin</title>
-    <link rel="stylesheet" href="admin-styles.css?v=20260902q">
-    <link rel="stylesheet" href="admin-services-styles.css?v=20260902q">
+    <link rel="stylesheet" href="admin-styles.css?v=20260902r">
+    <link rel="stylesheet" href="admin-services-styles.css?v=20260902r">
 </head>
 
 <body>
@@ -146,35 +146,16 @@
                     Back
                 </button>
                 <div class="svc-new-actions">
-                    <button class="svc-new-cancel" onclick="closeNewModal()">Cancel</button>
-                    <button class="svc-new-save" onclick="saveNewItem()">
-                        Save
-                        <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8 8.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
+                    <button class="svc-new-cancel" onclick="closeNewModal()">× Cancel</button>
+                    <button class="svc-new-save" onclick="saveNewItem()">Save ✓</button>
                 </div>
             </div>
 
             <!-- new form -->
             <div class="svc-new-form">
                 <div class="svc-new-field svc-new-field-inline">
-                    <span class="svc-new-label">Activity :</span>
-                    <span class="svc-new-val-id" id="svcNewId">#ACT-AUTO</span>
-                </div>
-
-                <div class="svc-new-field svc-new-field-inline">
-                    <span class="svc-new-label">Type :</span>
-                    <div class="svc-new-type-wrap">
-                        <div class="svc-new-type" id="svcNewType" onclick="toggleNewTypeMenu()">
-                            <span id="svcNewTypeVal">Select</span>
-                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </div>
-                        <div class="svc-new-type-menu" id="svcNewTypeMenu">
-                            <button class="svc-new-type-option" onclick="setNewType('Static')">Static</button>
-                            <button class="svc-new-type-option" onclick="setNewType('Popular')">Popular</button>
-                            <button class="svc-new-type-option" onclick="setNewType('Inactive')">Inactive</button>
-                            <button class="svc-new-type-option" onclick="setNewType('Featured')">Featured</button>
-                        </div>
-                    </div>
+                    <span class="svc-new-label" id="svcNewIdLabel">Hotel :</span>
+                    <span class="svc-new-val-id" id="svcNewId">#HotelID</span>
                 </div>
 
                 <div class="svc-new-field svc-new-field-inline">
@@ -201,7 +182,7 @@
                     <span class="svc-new-label">Category :</span>
                     <div class="svc-new-cat" id="svcNewCat">
                         <div class="svc-new-cat-tags" id="svcNewCatTags"></div>
-                        <span class="svc-new-cat-placeholder" id="svcNewCatPlaceholder">Select categories</span>
+                        <span class="svc-new-cat-placeholder" id="svcNewCatPlaceholder" style="white-space: nowrap;">Select Category of the Hotel</span>
                         <div class="svc-new-cat-clear" id="svcNewCatClear" onclick="clearNewCategories()">Clear All</div>
                         <button class="svc-new-cat-arrow" onclick="toggleNewCatMenu()">
                             <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -212,7 +193,82 @@
 
                 <div class="svc-new-field">
                     <span class="svc-new-label">Details:</span>
-                    <textarea id="svcItemDetails" class="svc-new-textarea" placeholder="Enter Activity Details"></textarea>
+                    <textarea id="svcItemDetails" class="svc-new-textarea" placeholder="Describe few Details about the hotel"></textarea>
+                </div>
+
+                <div class="svc-new-pair">
+                    <div class="svc-new-fgroup">
+                        <span class="svc-new-label">Check In :</span>
+                        <div class="svc-new-selectwrap">
+                            <input type="text" id="svcItemCheckIn" class="svc-new-input svc-new-input-sm" placeholder="Select Date and Time">
+                            <span class="svc-new-ico">
+                                <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="2.5" width="11" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5.5h11M4 1v3M10 1v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="svc-new-fgroup">
+                        <span class="svc-new-label">Check Out :</span>
+                        <div class="svc-new-selectwrap">
+                            <input type="text" id="svcItemCheckOut" class="svc-new-input svc-new-input-sm" placeholder="Select Date and Time">
+                            <span class="svc-new-ico">
+                                <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="2.5" width="11" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5.5h11M4 1v3M10 1v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-new-pair">
+                    <div class="svc-new-fgroup">
+                        <span class="svc-new-label">Food :</span>
+                        <div class="svc-new-selectwrap">
+                            <div class="svc-new-dropdown" id="svcNewFood" onclick="toggleNewFoodMenu()">
+                                <span id="svcNewFoodVal">Select Food Provided</span>
+                                <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="svc-new-dropdown-menu" id="svcNewFoodMenu">
+                                <button class="svc-new-dropdown-option" onclick="setNewFood('Breakfast')">Breakfast</button>
+                                <button class="svc-new-dropdown-option" onclick="setNewFood('Breakfast, Dinner')">Breakfast, Dinner</button>
+                                <button class="svc-new-dropdown-option" onclick="setNewFood('Dinner')">Dinner</button>
+                                <button class="svc-new-dropdown-option" onclick="setNewFood('All Included')">All Included</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="svc-new-fgroup">
+                        <span class="svc-new-label">Room Size:</span>
+                        <div class="svc-new-selectwrap">
+                            <div class="svc-new-dropdown" id="svcNewRoom" onclick="toggleNewRoomMenu()">
+                                <span id="svcNewRoomVal">Select No. of People</span>
+                                <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="svc-new-dropdown-menu" id="svcNewRoomMenu">
+                                <button class="svc-new-dropdown-option" onclick="setNewRoom('2 People')">2 People</button>
+                                <button class="svc-new-dropdown-option" onclick="setNewRoom('3 People')">3 People</button>
+                                <button class="svc-new-dropdown-option" onclick="setNewRoom('5 People')">5 People</button>
+                                <button class="svc-new-dropdown-option" onclick="setNewRoom('7 People')">7 People</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-new-field">
+                    <span class="svc-new-label">Bed Type:</span>
+                    <div class="svc-new-selectwrap">
+                        <div class="svc-new-dropdown" id="svcNewBed" onclick="toggleNewBedMenu()">
+                            <span id="svcNewBedVal">Select Bed Type</span>
+                            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5 8 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div class="svc-new-dropdown-menu" id="svcNewBedMenu">
+                            <button class="svc-new-dropdown-option" onclick="setNewBed('Kings')">Kings</button>
+                            <button class="svc-new-dropdown-option" onclick="setNewBed('Queen')">Queen</button>
+                            <button class="svc-new-dropdown-option" onclick="setNewBed('Twin')">Twin</button>
+                            <button class="svc-new-dropdown-option" onclick="setNewBed('Single')">Single</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svc-new-field">
+                    <span class="svc-new-label">Inclusions:</span>
+                    <textarea id="svcItemInclusions" class="svc-new-textarea svc-new-textarea-sm" placeholder="Enter what are the inclusions in this hotel"></textarea>
                 </div>
             </div>
 
@@ -454,7 +510,7 @@ Beach View Reserved Table.</textarea>
         </div>
     </div>
 
-    <script src="js/admin-services.js?v=20260902q"></script>
+    <script src="js/admin-services.js?v=20260902r"></script>
 </body>
 
 </html>

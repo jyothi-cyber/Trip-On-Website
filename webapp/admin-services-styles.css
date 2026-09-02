@@ -1457,8 +1457,9 @@ body {
     background-color: #FFFFFF;
     border: 1px solid #ECECEC;
     border-radius: 5px;
-    padding: 8px 14px;
-    font-size: 8px;
+    width: 80px;
+    height: 28px;
+    font-size: 10px;
     color: #555555;
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -1478,7 +1479,7 @@ body {
 .svc-new-cancel {
     background: none;
     border: none;
-    font-size: 8px;
+    font-size: 9px;
     color: #222222;
     cursor: pointer;
     padding: 4px 6px;
@@ -1492,12 +1493,14 @@ body {
 .svc-new-save {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
     background-color: #68C6A7;
     border: 1px solid #68C6A7;
     border-radius: 5px;
-    padding: 6px 14px;
-    font-size: 8px;
+    width: 78px;
+    height: 26px;
+    font-size: 9px;
     color: #FFFFFF;
     cursor: pointer;
     transition: background 0.2s;
@@ -1527,14 +1530,14 @@ body {
 }
 
 .svc-new-label {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     color: #222222;
     min-width: 70px;
 }
 
 .svc-new-val-id {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 600;
     color: #28765F;
 }
@@ -1544,10 +1547,11 @@ body {
     padding: 6px 10px;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 10px;
+    font-size: 11px;
     color: #333333;
     font-family: inherit;
-    height: 27px;
+    height: 29px;
+    box-sizing: border-box;
 }
 
 .svc-new-input::-webkit-input-placeholder {
@@ -1565,15 +1569,16 @@ body {
 
 .svc-new-textarea {
     width: 100%;
-    min-height: 58px;
+    min-height: 64px;
     padding: 6px 10px;
     border: 1px solid #D0D0D0;
     border-radius: 6px;
-    font-size: 10px;
+    font-size: 11px;
     color: #333333;
     font-family: inherit;
     line-height: 1.4;
     resize: vertical;
+    box-sizing: border-box;
 }
 
 .svc-new-textarea::-webkit-input-placeholder {
@@ -1695,6 +1700,129 @@ body {
 
 .svc-new-img-slot:hover {
     background-color: #E6E6E6;
+}
+
+/* two-column pairs */
+.svc-new-pair {
+    display: flex;
+    gap: 16px;
+}
+
+.svc-new-fgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+}
+
+.svc-new-fgroup .svc-new-label {
+    min-width: 0;
+}
+
+/* select wrap with icon/dropdown */
+.svc-new-selectwrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.svc-new-input-sm {
+    width: 100%;
+    height: 27px;
+    padding-right: 28px;
+    font-size: 11px;
+    box-sizing: border-box;
+}
+
+.svc-new-ico {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.svc-new-textarea-sm {
+    min-height: 54px;
+}
+
+.svc-new-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    height: 27px;
+    padding: 0 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #D0D0D0;
+    border-radius: 6px;
+    font-size: 11px;
+    color: #333333;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 0.2s, border 0.2s;
+}
+
+.svc-new-dropdown svg {
+    color: #9CA3AF;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.svc-new-dropdown:hover {
+    background-color: #F9FAFB;
+}
+
+.svc-new-dropdown.svc-open {
+    border-color: #68C6A7;
+}
+
+.svc-new-dropdown.svc-open svg {
+    transform: rotate(180deg);
+}
+
+.svc-new-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #E1E5EA;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 4px;
+    z-index: 70;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.svc-new-dropdown-menu.svc-open {
+    display: block;
+}
+
+.svc-new-dropdown-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 6px 10px;
+    border: none;
+    background: none;
+    font-size: 11px;
+    color: #374151;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.svc-new-dropdown-option:hover {
+    background-color: #D2F2D4;
+    color: #009C1A;
 }
 
 /* category selector */
